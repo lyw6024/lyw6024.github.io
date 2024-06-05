@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2020 秋招笔试编程题小记</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2315.html" rel="bookmark"
+         title="Permalink to 2020 秋招笔试编程题小记">2020 秋招笔试编程题小记</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>启动机器</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>工厂中的机器需要花费1时间启动它，每台机器在工作\( t \)时间后会停止，即对于一台机器，启动它之后，它将在\( [x+1,x+t] \)时间内工作。当然，也可以对正在工作着的机器进行“维持启动”，同样花费1时间。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有n个任务需要这些机器来生产，每次生产需要至少有m台机器在工作。现在给出n个任务的到达时间，计算并输出最少需要启动机器的次数。如果无论如何也不能让至少m台机器同时工作，则任务无法完成，此时输出"-1"。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\(  1 \leq n,m \leq 1000 \)</li><li>\( 1 \leq t,w \leq 10^9 \)</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"level":3} -->
+<h3>测试用例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>输入1</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">2 5 2
+1 2</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出1</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">2</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输入2</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">1 1 10
+1</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出2</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">-1</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading -->
+<h2>渡河</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>阿强一行有N人，第i人的体重为\(a_i\) ，现在阿强一队人面前有一条河挡住了去路，不过他们可以利用小船把大家送到河对岸。这艘船的运动有这样的特性：船最多只能运两人，并且渡河时间（秒）恰等于是两人的体重较大者。现给出阿强一队人的体重，计算阿强最短可能用多久渡河。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>输入T组数据，每组数据包含N个正整数，表示这一队人的体重。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>测试用例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>输入数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">2
+4
+2 11 9 12
+4
+2 3 8 7</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">37
+19</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>[collapse title="分析"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果船会自动摆渡，也就是把人运过去之后船会自动返回到岸边，不难想到每次从未过河的队伍中挑两个当前最重的运过去，这样都是最重的和次重的一趟。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>不过船并不会自动摆渡，必须有人把船开回岸边，这样就是运过两个去再回来一个，如果让回来的那个尽量小，体重最小的那个人就当了“舵手”，一直在船上，每次运一个人，总的时间便是除体重最轻的人之外的体重之和，再加舵手多次往返的时间。<br />如果我们用a[0]表示一队人中最轻的，ow表示未过河中最重的，那么一趟船的来回是这样的形式：<strong>a[0] + ow过去, a[0]回来</strong>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当然，如果有两个非常轻的人都可以当“舵手”来用，我们可以先把两个最轻的“舵手”运到对岸，然后其中一个开船回来，这时若将两个最重的运过去，对岸还有一个“舵手”仍能将船开回来。这样一个周期使用了两个舵手，实现了让最重的两人同一趟船渡河。<br />如果用a[0]和a[1]分别表示一队人中最轻的和次轻的，ow和ow1表示未过河中最重的和次重的，那么运一次是这样的形式：<strong>a[0]+a[1]过去，a[0]回来，ow+o1过去，a[1]回来</strong>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>可能不太容易预先判断两种方案中哪个更快，由于算法仅是\( O(N) \)的时间复杂度，所以每次可以把数据都用两个方案算一下，输出其最小值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>二叉树计数</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>一个二叉树有N个结点，给出每个结点所在的深度（根结点的深度为0），计算结点数满足给出的数据的二叉树有多少，由于数据可能较大，输出对\( 10^9 + 7\) 取余的结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="分析"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>虽然题目没有说数据合法性，但一般编程考试不需要做防御式的编程，假定数据都是合理的。首先将输入数据（所在节点的深度）转化为每一层节点的个数，使用一个map结构即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于是二叉树，若第\(k\)层有\(N\)个节点，那么第\(k+1\)层最多可以有\(2 N\)个节点，由于我们已经统计出了各层节点的数量，我们知道第\(k+1\)层实际有多少个节点\( m \)，于是，第\(k+1\)层的方案数就有\( \begin{pmatrix} 2N \\ m \end{pmatrix} \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样的话，我们就可以将已经统计好的所有\(H\)层的节点数：\( (a_0,a_1,...,a_H)\)，将相邻两层计算上式。结果即计算如下表达式：\[ \prod^{H-1}_{i=0} \begin{pmatrix}2a_{i} \\ a_{i+1} \end{pmatrix} = \begin{pmatrix}2a_{0} \\ a_{1} \end{pmatrix} \times  \begin{pmatrix}2a_{1} \\ a_{2} \end{pmatrix} \times \cdots \times  \begin{pmatrix}2a_{H-1} \\ a_{H} \end{pmatrix}  \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>组合数的计算要小心数据的溢出。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>车辆调度</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Alice是某城市的汽车调度员，现在Alice所负责的派车点将为城市A,B两区域派车，每辆车派去A地和B地对于Alice的收益是不同的。Alice的派车点有N辆车，现在分别给出每辆车派去两地的收益，计算向A地派去a辆车以及B地派去b辆车的最大收益。\( 0 \lt a+b \leq N \leq 2000 \).<br />输入第一行给出N,a,b，接下来N行，每行两个数字分别表示这辆车派去A和派去B的收益。输出一个数字，表示将a+b辆车派至目的地能获得的最大收益。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>测试用例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>输入数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">5 2 2
+4 2
+3 3
+5 4
+5 3
+1 5</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">18</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>本题与<a href="https://vjudge.net/contest/353795#problem/D" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">2020热身赛04的D题</a>类似。但N,a,b最大可能达<code>MAXN=2000</code>，如果直接开三维int的数组则远远超出允许内存，所以可以将一个维度滚动来用，开一个大小为[2][MAXN][MAXN]的int数组。然后就是推导动态规划的转移方程。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>编码协议</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>某种编码协议将数据编为十六进制0-9及A-F，但是'0010'是特殊字串在这种协议中不允许出现，现在给出一串十六进制的数字，判断最少删除几个字符才能使这一串十六进制数中不含有非法字串"0010"</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>插广告</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有N段视频，每段视频长度为\( L_i \)秒，现在要向这N段视频中共计插入M条广告，而两次广告之间不能出现的太频繁否则会降低用户体验，可以在开始前和结束后各插一条广告。计算如何使相邻两条广告出现时间间隔最小值尽可能大，输出这个最大秒数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>数字之和取余</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给定n(\( n \leq 35 \))个数字的数组，从中任选k个求和，计算k个数字之和与给定常数m取余可能的最大值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>s % n</code>可能的最大值是<code>n-1</code>，但n最大是35，枚举的话会达到\( 2^{35}\)的数量级，肯定会<code>Time Limited Exceeded</code>，此题暂时没想到什么好算法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>旅行路线</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Alice在暑假游玩了好多地方，但不记得旅行了多少次，根据Alice给出的火车票起始城市，认为城市能首尾相接成为一个闭环则完成一次旅行，计算Alice在暑假中进行了几次旅行。数据保证所有城市都在一个闭环中出现。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>测试用例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>输入数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">6
+beijing nanjing
+nanjing guangzhou
+guangzhou shanghai
+shanghai beijing
+fuzhou beijing
+beijing fuzhou</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">2</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>基础的有向图统计环路问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>送外卖</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Alice是区域外卖调配员，为了让整个区域的外卖员能高效配送，Alice将订单按以小区为单位分组，尽量使外卖员在同一小区多送几份外卖。Alice根据外卖寄送可以知道a订单和b订单是同一小区的。现在Alice有N个小区以及M组数据，统计一下这M组数据中哪些订单都是一个小区，按订单号从小到大输出。这些组中按首个订单号递增的顺序输出。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>测试用例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>输入数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">5 5
+1 2
+2 2
+3 1
+4 2
+5 4</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":4} -->
+<h4>输出数据</h4>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">1
+1 2 3 4 5</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>[collapse title=""]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>常规的并查集问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-19T14:14:22+09:00">
+      水 19 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

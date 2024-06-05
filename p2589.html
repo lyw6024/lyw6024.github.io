@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX中图表公式编号问题及计数器</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2589.html" rel="bookmark"
+         title="Permalink to LaTeX中图表公式编号问题及计数器">LaTeX中图表公式编号问题及计数器</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\( \LaTeX \)不仅对章节进行编号，同时也能够自动对图、表、公式，以及脚注等进行编号，其中图、表、公式的编号是在<code>\begin{}\end{}</code>对应的块中加入<code>\label{}</code>，这样编译出来的文档就会自动按照出现顺序将之分别编号。其底层实现是调用了内置的计数器。LaTeX中内置计数器的名称与相应环境名是一致的（除enum的四层计数器）</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2597,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-154.png" alt="[Image]" class="wp-image-2597"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>例如</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{equation}
+a^2+b^2=c^2
+\label{pythagoras}
+\end{equation}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>则会展现为如下图示的形式</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2590,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-151.png" alt="[Image]" class="wp-image-2590"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>若将documentclass设为book格式，那么公式标号将会以章为单位分隔：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass{book}
+\usepackage{ctex}
+\begin{document}
+\chapter{三角形}
+\section{面积}
+\begin{equation}
+    S=\frac{1}{2} ab \sin{C}
+\label{triangleArea}
+\end{equation}
+\section{直角三角形}
+\subsection{面积}
+\begin{equation}
+    S=\frac{1}{2} HL
+\label{rtriangleArea}
+\end{equation}
+\subsection{勾股定理}
+\begin{equation}
+    a^2+b^2=c^2
+\label{pythagoras}
+\end{equation}
+\end{document}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":2591,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-152.png" alt="[Image]" class="wp-image-2591"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>如果要将公式编号的格式进行调整，比如像word的公式编号默认格式那样，为<code>(C-E)</code>的形式，当然LaTeX也可以实现。公式的编号计数器名为<code>equation</code>，在每个公式之后出现时可以使用<code>\theequation</code>命令显式表示，使用\renewcommand命令将\theequation改为需要的格式，例如在导言区加入</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\renewcommand{\theequation}{\arabic{chapter}-\arabic{equation}}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>则编译出来的公式就是(C-E)形式：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2592,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-153.png" alt="[Image]" class="wp-image-2592"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>类似地，可以将<code>\thefigure</code>和<code>\thetable</code>进行renewcommand，从而将默认的<code>C.F</code>与<code>C.T</code>标号分别改为了<code>C-F</code>,<code>C-T</code>形式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+\renewcommand{\theequation}{\arabic{chapter}-\arabic{equation}}
+\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>自定义计数器</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有些情况下可能自己定义了一些环境，而默认的计数器不足以支持自定义的功能，这时可以使用自定义计数，使用<code>\newcounter{}</code>命令会新增一个计数器。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>不论是自定义计数器还是默认的，都可以使用如下命令操作计数器：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2598,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-155.png" alt="[Image]" class="wp-image-2598"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>计数器的显示形式</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>计数器存在默认的形式，除enumii和mpfootnote是小写英文字母，enumiv是大写英文字母，其它的默认计数器格式都是阿拉伯数字，可以使用如下命令指定计数器的显示方式：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2599,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-156.png" alt="[Image]" class="wp-image-2599"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-11-19T10:54:14+09:00">
+      木 19 11月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C#中的HTTP操作</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1593.html" rel="bookmark"
+         title="Permalink to C#中的HTTP操作">C#中的HTTP操作</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <a href="https://docs.microsoft.com/zh-cn/dotnet/api/system.net.http?view=netcore-2.2">System.Net.Http</a>&nbsp;命名空间提供用于现代 HTTP 应用程序的编程接口，可以用来开发桌面应用程序。如果要进行网络信息收集分析也离不开HTTP操作。最常用的操作就是发送GET和POST请求，以及POST上传内容。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>发送GET请求</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>GET请求是最常用的访问方式，是直接通过URL发送的。如果有参数，则在url最后以<code>?key1=value1&amp;key2=value2&amp;key3=value3</code>这样的格式传递。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先引入命名空间 <code>using System.Net;</code> 。接下来先要设计一个函数<code>CreateGetHttpResponse()</code>用来获取GET请求的HTTP响应。GET方法的参数写在URL中，所以如果有参数我们将之加在URL之后，然后创建请求。如果未能成功连接，就返回null，成功连接则返回HttpResponse。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class HttpFunctions
+{
+public static HttpWebResponse CreateGetHttpResponse(
+    string url,
+    IDictionary&lt;string, string&gt; parameters=null,
+    string token = null)
+{
+    string urlWithGetParam = url;
+    if (!(parameters == null || parameters.Count == 0))
+    {
+        StringBuilder buffer = new StringBuilder();
+        int i = 0;
+        foreach (string key in parameters.Keys)
+        {
+            if (i &gt; 0)
+            {
+                urlWithGetParam += String.Format(&quot;&amp;{0}={1}&quot;, key, parameters[key]);
+            }
+            else
+            {
+                urlWithGetParam += String.Format(&quot;?{0}={1}&quot;, key, parameters[key]);
+                i++;
+            }
+        }
+    }
+    HttpWebRequest request = null;
+    request = WebRequest.Create(urlWithGetParam) as HttpWebRequest;
+    request.Method = &quot;GET&quot;;
+    //设置代理UserAgent和超时
+    //request.UserAgent = userAgent;
+    //request.Timeout = timeout;
+    if (token != null)
+    {
+        request.Headers.Add(HttpRequestHeader.Authorization, &quot;Bearer &quot; + token);
+    }
+    try
+    {
+        return request.GetResponse() as HttpWebResponse;
+    }
+    catch
+    {
+        return null;
+    }
+}
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样获得了HttpResponse。例如我们在主调中，用必应搜索传入q=搜索词的参数，来搜索"C#"这个关键词</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary&lt;string, string&gt; myParams = new Dictionary&lt;string, string&gt;();
+        myParams[&quot;q&quot;] = &quot;C#&quot;;
+        var h1 = HttpFunctions.CreateGetHttpResponse(&quot;http://cn.bing.com/search&quot;,myParams);
+        Console.WriteLine(h1.StatusCode);
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>可以看到状态码为200，说明HTTP响应正常。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样有了HttpResponse，但还没能获取到HTTP的内容。要获取HTTP的内容，最好使用流式传输。在HttpFunctions类当中设计一个读取stream中文本的函数：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public static string responseText(HttpWebResponse h)
+{
+    if(h!=null)
+    {
+        System.IO.Stream receiveStream = h.GetResponseStream();
+        Encoding encode = System.Text.Encoding.GetEncoding(&quot;utf-8&quot;);
+        System.IO.StreamReader readStream = new System.IO.StreamReader(receiveStream, encode);
+        Char[] read = new Char[256];
+        // Reads 256 characters at a time.
+        int count = readStream.Read(read, 0, 256);
+        string ret = &quot;&quot;;
+        while (count &gt; 0)
+        {
+            String str = new String(read, 0, count);
+            ret += str;
+            count = readStream.Read(read, 0, 256);
+        }
+        readStream.Close();
+        return ret;
+    }
+    else
+    {
+        return &quot;&quot;;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>我们请求的是HTML页面，内容往往会很多，我们在主调函数中测试可以只看一下前100个字符：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary&lt;string, string&gt; myParams = new Dictionary&lt;string, string&gt;();
+        myParams[&quot;q&quot;] = &quot;C#&quot;;
+        var h1 = HttpFunctions.CreateGetHttpResponse(&quot;http://cn.bing.com/search&quot;,myParams);
+        Console.WriteLine(h1.StatusCode);
+        Console.WriteLine(HttpFunctions.responseText(h1).Substring(0,100));
+        h1.Dispose();
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>输出了一行HTML结果，说明也成功读取到了HTML的内容</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;zh&quot; xml:lang=&quot;zh&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xmlns:Web=&quot;http://</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>发送POST请求进行登录操作</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>URL传递有长度限制，如果数据比较长，则使用GET方法传参数就不合适了。 GET方法明文传输，并且可以被缓存，其安全性较差。像登录系统这种敏感数据的操作不适合使用GET方法。而POST请求将数据与URL分离，在传输数据时更常用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在使用POST方法提交数据到服务端时，有多种编码供选择，默认是<code>application/x-www-form-urlencoded</code>,此时所有非字母数字类型的字符都需要转换为十六进制的ASCII值。但是如果表单中包含大量非字母数字时，这种编码的效率就非常低，比如处理二进制文件上传时就存在该问题，此时就需要定义<code>multipart/form-data</code>作为编码类型，使用这种类型时不会对输入进行编码，而是使用MIME协议将之作为多个部分进行发送，和邮件传输的标准相同。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如网址<code> <a href="https://www.runoob.com/try/ajax/demo_post2.php">https://www.runoob.com/try/ajax/demo_post2.php</a> </code>接收POST方法的两个参数fname和lname，将返回一句问候语。创建POST的HttpResponse与GET方法类似，只是参数parameters需要用Stream的方法以字节写入。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public static HttpWebResponse CreatePostHttpResponse(
+    string url,
+    IDictionary&lt;string, string&gt; parameters=null)
+{
+    HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+    request.Method = &quot;POST&quot;;
+    request.ContentType = &quot;application/x-www-form-urlencoded&quot;;
+    if (!(parameters == null || parameters.Count == 0))
+    {
+        var paraString = &quot;&quot;;
+        int i = 0;
+        foreach(var it in parameters)
+        {
+            if(i&gt;0)
+            {
+                paraString += &quot;&amp;&quot;;
+            }
+            paraString += String.Format(&quot;{0}={1}&quot;, it.Key,it.Value);
+            i += 1;
+        }
+        byte[] byteArray = Encoding.Default.GetBytes(paraString);
+        System.IO.Stream stream1 = request.GetRequestStream();
+        stream1.Write(byteArray, 0, byteArray.Length);//写入参数
+                stream1.Close();
+    }
+    try
+    {
+        return request.GetResponse() as HttpWebResponse;
+    }
+    catch
+    {
+        return null;
+    }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>主函数中调用</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Dictionary&lt;string, string&gt; myParams = new Dictionary&lt;string, string&gt;();
+string url = &quot;https://www.runoob.com/try/ajax/demo_post2.php&quot;;
+myParams[&quot;fname&quot;] = &quot;Henry&quot;;
+myParams[&quot;lname&quot;] = &quot;Lord&quot;;
+var h1 = HttpFunctions.CreatePostHttpResponse(url, myParams);
+var htContent = HttpFunctions.responseText(h1);
+Console.WriteLine(htContent);
+h1.Dispose();</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>则可以看到结果</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;p style='color:red;'&gt;你好，Henry Lord，今天过得怎么样？&lt;/p&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>利用COOKIES模拟登录</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>接下来为了演示POST请求的方法，将以《用Python编写网络爬虫》一书提供的测试网站 ：<code><a href="http://example.webscraping.com/places/default/user/login">http://example.webscraping.com/places/default/user/login</a> </code> 为示例，自己注册后，进行模拟登录系统。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1596,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-108.png" alt="[Image]" class="wp-image-1596"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>进入我们要登入的网站，检查这个登录的表单，可以发现除了图中有的这些条目，还有display:none;的一组数据，这些是网站用来验证用户的，如果C#模拟登录只传输电子邮件和密码，是不能登录成功的，我们需要把form中所有input条目都撮出来。在C#中，我们可以先请求到这个网页，用正则表达式将&lt;input /&gt;字段的内容提取出来：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private static List&lt;string&gt; showMatch(string text, string expr)
+{
+    System.Text.RegularExpressions.MatchCollection mc = System.Text.RegularExpressions.Regex.Matches(text, expr);
+    List&lt;string&gt; ret = new List&lt;string&gt;();
+    foreach (System.Text.RegularExpressions.Match m in mc)
+    {
+        ret.Add(m.ToString());
+    }
+    return ret;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;input class=&quot;string&quot; id=&quot;auth_user_email&quot; name=&quot;email&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;
+&lt;input class=&quot;password&quot; id=&quot;auth_user_password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot; /&gt;
+&lt;input class=&quot;boolean&quot; id=&quot;auth_user_remember_me&quot; name=&quot;remember_me&quot; type=&quot;checkbox&quot; value=&quot;on&quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Log In&quot; /&gt;
+&lt;input name=&quot;_next&quot; type=&quot;hidden&quot; value=&quot;/places/default/index&quot; /&gt;
+&lt;input name=&quot;_formkey&quot; type=&quot;hidden&quot; value=&quot;fe10396d-3a5f-4d8c-b03e-2960a2820cac&quot; /&gt;
+&lt;input name=&quot;_formname&quot; type=&quot;hidden&quot; value=&quot;login&quot; /&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>除了type=submit的提交按钮，另外6个name-type键值对则是我们需要post发送的数据。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private static Dictionary&lt;string,string&gt; getinputParameters(string message)
+{
+    Dictionary&lt;string, string&gt; ret = new Dictionary&lt;string, string&gt;();
+    var r = showMatch(message, @&quot;&lt;input .*?/&gt;&quot;);
+    foreach (var it in r)
+    {
+        System.Text.RegularExpressions.MatchCollection lineMatchKey =
+            System.Text.RegularExpressions.Regex.Matches(it, &quot;name=\\\&quot;.*?\\\&quot;&quot;);
+        if (lineMatchKey.Count &gt; 0)
+        {
+            System.Text.RegularExpressions.MatchCollection lineMatchValue =
+                System.Text.RegularExpressions.Regex.Matches(it, &quot;value=\\\&quot;.*?\\\&quot;&quot;);
+            if (lineMatchValue.Count &gt; 0)
+            {
+                ret[lineMatchKey[0].ToString().Substring(6, lineMatchKey[0].Length - 7)]
+                    = lineMatchValue[0].ToString().Substring(7, lineMatchValue[0].Length - 8);
+            }
+        }
+    }
+    return ret;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样得到了所有的参数，就可以发送POST请求了</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"elegant"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary&lt;string, string&gt; myParams = new Dictionary&lt;string, string&gt;();
+        string url = &quot;http://example.webscraping.com/places/default/user/login&quot;;
+        var h1 = HttpFunctions.CreateGetHttpResponse(url);
+        var htContent = HttpFunctions.responseText(h1);
+        h1.Dispose();
+        myParams = getinputParameters(htContent);
+        myParams[&quot;email&quot;] = &quot;com0@malic.xyz&quot;;
+        myParams[&quot;password&quot;] = &quot;88888888&quot;;
+        var h2 = HttpFunctions.CreatePostHttpResponse(url, myParams);
+        htContent = HttpFunctions.responseText(h2);
+        Console.WriteLine(htContent);
+        h2.Dispose();
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>传的参数都是正确的，但是返回的HTML内容却没有登录信息（登录处的HTML仍显示的Log In而不是用户名），这是因为网页会话信息保存在Cookies中，当前的程序并没有为网页的头部信息添加Cookies，这就不能保持登录状态。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>针对我们要登录的网站，可以看到它有两个cookie字段。我们就编写函数读取cookie</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public static string getCookies(HttpWebResponse h1)
+{
+    if(h1!=null)
+    {
+        string ret = &quot;&quot;;
+        ret += h1.Headers.GetValues(&quot;Set-Cookie&quot;)[0].Split(';')[0];
+        ret += &quot;; &quot;;
+        ret += h1.Headers.GetValues(&quot;Set-Cookie&quot;)[1].Split(';')[0];
+        return ret;
+    }
+    else
+    {
+        return &quot;&quot;;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>然后在刚才post方法的函数添加参数<code> string cookies=null</code>，函数中添加</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>if (cookies != null)
+{
+        request.Headers.Add(HttpRequestHeader.Cookie, cookies);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>就能在POST时将COOKIES发送过去。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这里<code>getCookies(HttpWebResponse h1)</code>方法因服务端而异，并不具通用性，换到其它网站上进行操作就要重要分析HTML结构并根据其结构来提取字段。这里只是用于展示添加cookie的方法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>读取图片内容</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>HTTP的返回结果在C#中都以stream形式展示，例如使用url表示的是服务端的一张图片，我们只需要使用Image.FromStream()即可：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"neat"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public static void downloadPicture(string url)
+{
+  var h1 = CreateGetHttpResponse(url);
+  if (h1 != null)
+  {
+    System.Drawing.Image image = System.Drawing.Image.FromStream(h1.GetResponseStream());
+    image.Save(&quot;download.png&quot;,System.Drawing.Imaging.ImageFormat.Png);
+  }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>如果URL正确，就可以看到在程序的路径下保存下了<code>download.png</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>如果进行的是C#控制台程序设计，那么是没有<code>System.Drawing</code>的，需要手动添加对<code>System.Drawing.Common.dll</code>的引用</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:heading -->
+<h2>上传图片</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>向服务端发送文件往往采用Content-type为"multipart/form-data"的post方法，添加POST参数时按照 multipart/form-data 类型的规范进行编写。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public static string Sys_uploadStudentPhoto(
+        string url,
+        string imageName,
+        IDictionary&lt;string, string&gt; stringDict)
+{
+    return HttpPostData(url,
+        &quot;file&quot;,
+        imageName,
+        stringDict);
+}
+private static string HttpPostData(
+        string url,
+        string fileKeyName,
+        string filePath,
+        IDictionary&lt;string, string&gt; stringDict)
+{
+    string responseContent;
+    var memStream = new MemoryStream();
+    var request = (HttpWebRequest)WebRequest.Create(url);
+    var boundary = &quot;---------------&quot; + DateTime.Now.Ticks.ToString(&quot;x&quot;);
+    var beginBoundary = Encoding.ASCII.GetBytes(&quot;--&quot; + boundary + &quot;\r\n&quot;);
+    var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+    var endBoundary = Encoding.ASCII.GetBytes(&quot;--&quot; + boundary + &quot;--\r\n&quot;);
+    request.Method = &quot;POST&quot;;
+    request.ContentType = &quot;multipart/form-data; boundary=&quot; + boundary;
+    const string filePartHeader =
+        &quot;Content-Disposition: form-data; name=\&quot;{0}\&quot;; filename=\&quot;{1}\&quot;\r\n&quot; +
+         &quot;Content-Type: application/octet-stream\r\n\r\n&quot;;
+    var header = string.Format(filePartHeader, fileKeyName, filePath);
+    var headerbytes = Encoding.UTF8.GetBytes(header);
+    memStream.Write(beginBoundary, 0, beginBoundary.Length);
+    memStream.Write(headerbytes, 0, headerbytes.Length);
+    var buffer = new byte[1024];
+    int bytesRead; // =0
+    while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+    {
+        memStream.Write(buffer, 0, bytesRead);
+    }
+    var stringKeyHeader = &quot;\r\n--&quot; + boundary +
+                           &quot;\r\nContent-Disposition: form-data; name=\&quot;{0}\&quot;&quot; +
+                           &quot;\r\n\r\n{1}\r\n&quot;;
+    foreach (byte[] formitembytes in from string key in stringDict.Keys
+                                     select string.Format(stringKeyHeader, key, stringDict[key])
+                                         into formitem
+                                     select Encoding.UTF8.GetBytes(formitem))
+    {
+        memStream.Write(formitembytes, 0, formitembytes.Length);
+    }
+    memStream.Write(endBoundary, 0, endBoundary.Length);
+    request.ContentLength = memStream.Length;
+    var requestStream = request.GetRequestStream();
+    memStream.Position = 0;
+    var tempBuffer = new byte[memStream.Length];
+    memStream.Read(tempBuffer, 0, tempBuffer.Length);
+    memStream.Close();
+    requestStream.Write(tempBuffer, 0, tempBuffer.Length);
+    requestStream.Close();
+    responseContent = responseText(request.GetResponse());
+    fileStream.Close();
+    httpWebResponse.Close();
+    request.Abort();
+    return responseContent;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-30T09:00:00+09:00">
+      木 30 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

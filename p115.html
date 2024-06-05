@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Atcoder 比赛D题Handstand解析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p115.html" rel="bookmark"
+         title="Permalink to Atcoder 比赛D题Handstand解析">Atcoder 比赛D题Handstand解析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>题目 <a href="https://atcoder.jp/contests/abc124/tasks/abc124_d?lang=en">https://atcoder.jp/contests/abc124/tasks/abc124_d?lang=en</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>大意：一队人站成一排，所有人不是正立就是倒立，用一个长度等于这队人数的01串表示它们的队。下标为i的字符若为0则表示正立的，为1表示倒立着的人。你可以发K次指令，每次指令是使[l,r]的人状态反过来（正立改倒立，倒立变正立），试求当这样做K次之后，队伍中最多有连续几人处在相同的状态（正立/倒立）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>指示を一度行うたびに、人の状態が切り替わる部分を 2 箇所まで潰すことができます。これを踏まえて、連 続して 1 を並ばせる左端を i 番目としたときにいくつ 1 を並べることができるかを考えます。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>• S<sub>i</sub> = 0 のとき: i 番目以降で S<sub>j</sub> != S<sub>j+1</sub> となる場所を順に最大 2K − 1 箇所潰すのが最適です。  </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>• S<sub>i</sub> = 1 のとき: i 番目以降で S<sub>j</sub>  != S<sub>j+1</sub> となる場所を順に最大 2K 箇所潰すのが最適です。 1 を並べる左端を i としたときの最大値を X<sub>i </sub>とすると、答えは max{X<sub>1</sub>, X<sub>2</sub>, ..., X<sub>N</sub> } となります。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>しかし、 これをナイーブに実装しても O(N^2 ) となり間に合いません。 そこで、何かしら工夫する必要があります。まず、i (連続して 1 を並ばせる左端) として、元の文字列で 0 または 1 が連続する始点のみを探索すれば十分です。例えば、”11000...” の 4 文字目や 5 文字目の 0 を左端と するよりも 3 文字目の 0 を左端とした方が良いでしょう。このような場所を左から順に 1 = i<sub>1</sub> &lt; i<sub>2</sub> &lt; ... &lt; i<sub>r</sub> とします。また、便宜上 k > r なる k について、i<sub>k</sub> = N + 1 とします。このとき、k = 2, 3, ..., r について、 S<sub>i,k</sub> = S<sub>i,k−1</sub> です。よって、k = 1, 2, ..., r について、X<sub>i,k</sub> は </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>• S<sub>i,k</sub> = 0 のとき: X<sub>i,k</sub>
+= i<sub>k+2K</sub> − i<sub>k</sub> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>• S<sub>i,k</sub> = 1 のとき: X<sub>i,k</sub> = i<sub>k+2K+1</sub> − i<sub>k</sub> となり、答えは max{X<sub>i,1</sub> , X<sub>i,2</sub> , ..., X<sub>i,r</sub> } です。これは、O(N) で動作します。 別解として、二分探索を使った O(NlogN) の解法や、しゃくとり法を用いた O(N) の解法もあります。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,k;
+    cin >> n >> k;
+    string S;
+    cin >> S;
+    int res = 0;
+    int l = 0;
+    int cnt = 0;
+    for(int r = 0;r &lt; n; r++){
+                if(S[r]=='0'){
+                        if(r==0 || S[r-1]=='1') cnt++;
+                }
+                if(cnt > k){
+                        while(l &lt; S.size() &amp;&amp; S[l]=='1') l++;
+                        while(l &lt; S.size() &amp;&amp; S[l]=='0') l++;
+                        cnt--;
+                }
+                res=max(res,r-l+1);
+        }
+    cout &lt;&lt; res &lt;&lt; endl;
+    return 0;
+}</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-04-25T13:06:46+09:00">
+      木 25 4月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

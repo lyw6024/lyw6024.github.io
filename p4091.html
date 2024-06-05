@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2019热身赛03</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4091.html" rel="bookmark"
+         title="Permalink to [voj] 2019热身赛03">[voj] 2019热身赛03</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a href="https://vjudge.net/contest/281000" target="_blank" rel="noreferrer noopener">https://vjudge.net/contest/281000</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.Yoda</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>由于从数字的个位开始逐位比较，所以用字符数组保存，从strlen(s)-1开始。对于两个数字，可以将各位上较小的那个用一个非数字符号标记，表示这一位没有数，解析时不对其处理。比较之后再分别对两个数字的字符数组分别解析成数字，如果一位数字都没有，则输出YODA，如果有数字就把数字字符解析成数字再输出。<br><a href="http://p.malic.xyz/UmFe/" target="_blank" rel="noreferrer noopener">查看A题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.幸运数列</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>将数列的各项分成三类：是4的倍数，不是4但是2的倍数，不是2的倍数,每类数的个数分别用a4,a2,a1表示。如果要构成幸运数列，要求相邻的数字相乘是4的倍数，为了尽可能多的利用数字，a1只能与a4相邻，而a2可以与a4也可以与a2相邻。若已经统计出了数列中a4,a2与a1，如何判断数列能否组成幸运数列呢？<br>先解决a1的问题，a1必须配合a4出现，a1的数量比a4多太多则必不是幸运数列（a1只比a4多1个的时候是可能组成幸运数列的）。具体来说，先使a1与a4交替出现，[a1,a4,a1,a4,...]，这时若这一段数列的最后一个数是a1(此时a1=a4+1),那么后边接a2则不能排成幸运数列，所以当a2==0且a4&lt;=a1+1时可以排成幸运数列。<br>如果有这段数列最后一个数是a4(此时a1≤a4),后边可以接a2，又由于a2可以与a2相邻，所以要在a2>0时需要a1≤a4的条件下则可排成幸运数列。<br>其它条件输出"No"<br><a href="http://p.malic.xyz/fEGe/" target="_blank" rel="noreferrer noopener">查看B题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.牛配对</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>抽象成数学模型，就是在N个数的数列中找是否有两个数字之和为K<br>由于数列最多有10<sup>8</sup>项，如果对数组的每一项枚举两个数之和，时间达O(N<sup>2</sup>)肯定会超出时限。需要优化一下，对于数组中的a[i]，我们需要找a[j]满足a[i]+a[j]==K，也就是对于a[i]，检查a[j]=K-a[i]是否在数组a[i+1:N]中。（如果在全数组a[]中查找，可能查到自己，比如K=2*a[i]的时候，若数列里只有一个a[i]，搜K-a[i]能搜到，但此时不应该搜到，若数列里有多个数等于a[i]，则应当可以搜到。所以要从i+1开始的数组中进行搜索可避免搜到自己）<br>读入数据后将数组排序，分别对每个元素a[i]，用二分搜索查找K-a[i]，这样时间复杂度为O(N*logN)，则可顺利解决此问题。<br><a href="http://p.malic.xyz/grpd/" target="_blank" rel="noreferrer noopener">查看C题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.牛产奶</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>开始时间早的牛不一定能挤到更多牛奶，例如极端情况下，有一头牛从0时间开始产奶到1000时间结束，而另一头牛从1时间开始2时间结束，如果还有牛从时间2开始产奶，选开始时间晚的能挤更多牛奶。<br>正确的选法应当是先选结束时间更早的牛，可以为之后选择其它牛留出更多时间从而可能挤到更多牛奶。<br>将牛按结束时间从小到大排序。 首先选一头结束时间最早的牛，并将它的结束时间设为当前时间currTime，对于所有产奶开始时间不早于currTime的牛，继续选择结束时间最早的那个牛，并将此牛的结束时间再记为当前时间currTime，直到没有牛的开始时间更晚。输出挤到牛奶的牛的数量。<br><a href="http://p.malic.xyz/DQt/" target="_blank" rel="noreferrer noopener">查看D题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.牛吃草</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在计算草料品质最大的基础上，需要记录下牛吃草的路径。第[M-1]行与第[0]列是初始的方向确定的：第[M-1]行只有方向R，第[0]列只有方向F。从已经计算出草的品质之和的相邻位置上开始算起，如果下方数值更大，则累加到当前的牧草品质之和，并记录方向为F，否则累加并记录方向为R。位置[M-1][0]是起点，到[0][N-1]是终点，遍历完成则可知牧草的品质之和的最大值。<br>然后确定行走路径：从终点反向记录到起点，从[0][N-1]的开始，若[0][N-1]的方向是R，就保存路径R，并修改位置向左一步再判断方向，否则保存路径F且修改位置向下一步，直到位置到达[M-1][0]。再将保存的路径输出。<br><a href="http://p.malic.xyz/uAR/" target="_blank" rel="noreferrer noopener">查看E题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>F.海景房</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>对于一幢楼，要想使之留下，就要看它左侧比它更高的楼越多，则越可能留下。若用dp[i]表示第i幢楼左边可以有多少幢楼都是海景房。初始时dp[i]=1，对于每幢楼，搜索它左侧比它高的楼的最大dp[j]，从而dp[i]=dp[j]+1。则dp数组中最大值就是可以留下海景房的数量。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>此题抽象出数学模型就是最长递减子数列，是动态规划的经典问题。<br><a href="http://p.malic.xyz/Ucmc/" data-type="URL" data-id="http://p.malic.xyz/Ucmc/" target="_blank" rel="noreferrer noopener">查看F题参考代码</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T06:23:43+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

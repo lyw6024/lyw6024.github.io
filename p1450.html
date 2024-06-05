@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX的双栏布局与平行双栏对照排版</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1450.html" rel="bookmark"
+         title="Permalink to LaTeX的双栏布局与平行双栏对照排版">LaTeX的双栏布局与平行双栏对照排版</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading -->
+<h2>双栏布局</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>很多出版物都是按文字双栏进行布局，在LaTeX中可以用 <code>\twocolumn </code>表示文档的双栏</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>平行双栏对照</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>在进行翻译文稿时，会需要左右分栏对照进行，在Word中常用的方法是建一个一行两列的大表格，将文字全部放入表格中进行对照。使用LaTeX则可使用<em><code>parallel</code></em>宏包实现这样双栏对照。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>更详细的文档可以参考： <a href="https://mirror.bjtu.edu.cn/CTAN/macros/latex/contrib/parallel/parallel.pdf">https://mirror.bjtu.edu.cn/CTAN/macros/latex/contrib/parallel/parallel.pdf</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass{article}
+\usepackage[a4paper,top=1.27cm,bottom=1.27cm,left=1.27cm,right=1.27cm,%
+            includehead,includefoot]{geometry}
+\usepackage[UTF8]{ctex}
+\usepackage{parallel}
+\begin{document}
+\begin{Parallel}{0.45\textwidth}{0.45\textwidth}
+    \ParallelLText{
+    左侧文字1
+    }
+    \ParallelRText{
+    右侧文字1
+    }
+    \ParallelPar
+    \ParallelLText{
+    左侧文字2
+    }
+    \ParallelRText{
+    右侧文字2
+    }
+    \ParallelPar
+\end{Parallel}
+\end{document}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>其中\ParallelLText与\ParallelRText分别是左右两栏进行对照的文字内容，\ParallelPar是一个分块符，用于对不同的区块进行分隔。如果需要在对照的两栏中间有竖线，则在<code>\begin{Parallel}</code>上添加选项<code>[v]</code>即可</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>就能够实现这样的效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1451,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-77.png" alt="[Image]" class="wp-image-1451"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-18T02:16:23+09:00">
+      土 18 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

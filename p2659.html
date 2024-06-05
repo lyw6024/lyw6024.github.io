@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 随机化算法浅谈(2)</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2659.html" rel="bookmark"
+         title="Permalink to 随机化算法浅谈(2)">随机化算法浅谈(2)</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" aria-label="上一篇（在新窗口打开）" href="https://www.malic.xyz/?p=2615" target="_blank">上一篇</a>我们谈到了求整数的因子的一种随机化的Polland算法，继续随机化算法的话题，我们讨论另外一类随机化算法——蒙特卡洛方法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>二、蒙特卡洛方法：M-R质性测试</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>相对于拉斯维加斯方法，随机化算法中还有一类叫作蒙特卡洛方法，它的基本思想是：每次运行随机生成问题的解，其中有一部分可以判断真假，另一部分不能判断真假，将不能判断的认为是可能错误的。由于每次生成问题的解都是相互独立的，所以生成次数越多，不能判断真假（可能错误的）概率就越小。所以蒙特卡洛方法需要一个描述错误解可接受概率的参数，于是算法的时间复杂度除了由问题实例的规模决定，也受至可接受概率参数的影响。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>判断一个正整数是否是质数，这也是比较常见的问题。要判断N是否为质数，我们可以用\( [2,\sqrt{N}] \)中的所有整数取模，若所有数字都不被整除，则N是质数。有时我们可以跳过大于2偶数，只检查奇数来减少判断次数：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int isPrime(int N)
+{
+    if (N==2)
+        return 1;
+    if (N%2==0)
+        return 0;
+    int k=3;
+    while(k*k &lt;= N)
+    {
+        if (N%k==0)
+            return 0;
+        k+=2;
+    }
+    return 1;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样正整数是否为质数的检验算法的时间复杂度为\(O(\sqrt{N})\)。然而，利用费马小定理，结合蒙特卡洛方法的思想，可以在\( \Theta(\log(n)) \)时间内检验正整数是否为质数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> <strong>费马小定理</strong>：如果\(p\)是一个质数， \(a\) 是小于 \(p\) 的任意正整数，那么 \(a^p\) 与 \(a\) 是模 \(p\) 同余的（\(a^p\)与\(a\)同时对\(p\)取模，所得余数相同）。 </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>也就是说：对于质数\(p\)，有<code>pow(a,p) % p == a % p </code>,两边约去一个<code>a</code>，则为： <code>pow(a,p-1) % p ==1</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们要测试正整数\(N\)是否为质数，就可以利用 <code>pow(a,N-1) % N</code>，若得到不是1的结果，则立即可以断定\(N\)不是质数，但是若此式结果为1并不能下结论N就是质数，这时可以重新随机生成一个a再测试。如此进行多次，如果每次都得到结果为1，虽然此时仍不能下结论N一定是质数，但N是质数的概率已经非常非常高。值得一提的是，存在一类数字叫作<strong>Carmichael数</strong>，无论a取什么值都可以使 <code>pow(a,N-1) % N </code>的值为1，但这类数字均不是质数，在[1,100000000] 之内有255个，其中最小的几个是 561, 1105, 1729, 2465。不过在对大数进行素性检测时，碰到这类Carmichael数的几率是极小的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int fermatCheck(int N)
+{
+    int a=1+rand()%N;
+    return (((long long)pow(a,N-1))%N == 1);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p> Miller与Rabin引入了二次探测定理，不再是每次完全随机生成a。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> 二次探测定理：如果\(p\)是奇素数，则方程\(x^2\)对\(p\)取模等于1的解满足<code>x1=1</code>,<code>x2%p=p-1</code></li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>将费马小定理与二次探测定理结合起来，就是Miller-Rabin质性测试：如果<code>pow(a,N-1)%N==1</code>，首先看<code>N-1</code>是否为偶数，若是则令<code>u=(N-1)/2</code>,并检查是否满足二次探测定理，即<code>pow(a,u)==1</code>或<code>pow(a,u)%N==N-1</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>const int S = 9;
+int MR_check(int N)
+{
+    if (N==2)  return 1;
+    if (N%2==0)  return 0;
+    int u = N-1;
+    while(u%2==0)
+    {
+        u=u/2;
+    }
+    for(int T=0;T&lt;S;T++)
+    {
+        int a= 2+rand()%(N-3);
+        long long x=((long long)pow(a,u))%N;
+        while(u&lt;N)
+        {
+            long long y=x*x %N;
+            if(y==1 &amp;&amp; x!=1 &amp;&amp; x!=N-1) return 0;
+            x=y;
+            u=u*2;
+        }
+        if(x!=1)  return 0;
+    }
+    return 1;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>Miller-Rabin质性测试同样有一定的错误率，经过数学上的分析，单次Miller-Rabin质性测试的错误率为\(1/4\),进行S次的错误概率就是\(4^{-S}\)，这里的S可根据需要自行设定。每次Miller-Rabin时间复杂度为\(O(\log(N))\)，总共进行\(S\)次就是\(O(S \cdot \log(N))\)，当\(S=9\)时，M-R质性测试的错误率已经低于\(0.0004%\)。相较于确定性算法，M-R质性测试的效率提升还是非常明显的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"align":"center"} -->
+<h2 class="has-text-align-center">参考文献</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[1]  Harold Abelson, Julie Sussman . Structure and Interpretation of Computer Programs[M].2004<br />[2]  Joe Hurd. Verification of the Miller-Rabin Probabilistic Primality Test[C].The Journal of Logic and Algebraic Programming.2003.56:3-21<br />[3]  柳银萍 . 华东师大-算法第十四、十五讲_概率算法 [R] .  2011  <br />[4]  Miller Rabin_primality_test [OL] . <a href="https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test">https://en.wikipedia.org/wiki/Miller-Rabin_primality_test</a><br />[5]  Matrix67. 数论部分第一节：素数与素性测试[OL]. 2007.6. <a href="http://www.matrix67.com/blog/archives/234">http://www.matrix67.com/blog/archives/234</a> <br /></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-11-27T06:45:42+09:00">
+      金 27 11月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

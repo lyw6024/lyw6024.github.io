@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C#解决窗体冷却的invoke用例</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p162.html" rel="bookmark"
+         title="Permalink to C#解决窗体冷却的invoke用例">C#解决窗体冷却的invoke用例</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:html -->
+<p>主要参考</p>
+<ol>
+<li><a href="http://blog.sina.com.cn/s/blog_621e24e201015r29.html">http://blog.sina.com.cn/s/blog_621e24e201015r29.html</a></li>
+<li><a href="https://www.cnblogs.com/nsky/p/4436309.html">https://www.cnblogs.com/nsky/p/4436309.html</a></li>
+</ol>
+<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>在做GUI编程时，如果某次动作的运算时间非常长，比如要对大量数据进行加载，或者执行一个运算量很大的计算，或是socket编程在网络速度不理想的时候，窗体会停住无法响应，直到加载完成或运算结束，这对GUI操作来说是不太合适的。比如从外部相机设备读取图像数据时，图片有2048*2048像素*2字节的大小，并且要连续进行加载，虽然图像还在显示，但是整个程序都被加载图像占用，其它的控件几乎无法正常使用。最近在做的一个程序在调用外部批处理，批处理的执行结果显示在程序界面。自批处理调用之始到批处理进行完，程序都会处在无法操作的假死状态。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>为了解决这个问题，就要掌握C#中invoke和delegate的特性。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>先看主要过程</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void button1_Click(object sender, EventArgs e)
+{
+    richTextBox3.Text = &quot;running..,&quot;;
+    //开始执行批处理，这里往往耗时较长
+    String output = &quot;&quot;;
+    RunCmd(&quot;test.bat&quot;, out output);
+    String[] res = output.Split('\n');
+    //批处理执行完毕, 将内容更新到richTextBox3
+    richTextBox3.Text = &quot;&quot;;
+    for (int i = 4; i &amp;lt; res.Length; i++)
+    {
+        this.richTextBox3.Text += res[i];
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>点击button1之后，先让文本框显示"running..."的文字，然后去执行批处理，这时窗体会冷却直到运行完成。这是线程之间出现占用现象，我们启动一个新的线程进行这些操作</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void button1_Click(object sender, EventArgs e)
+{
+    richTextBox3.Text = &quot;compiling...&quot;;
+    new Thread(
+    () =&amp;gt;
+    {
+        String output = &quot;&quot;;
+        RunCmd(&quot;tst.bat&quot;, out output);
+        String[] res = output.Split('\n');
+        richTextBox3.Text = &quot;&quot;;
+        for (int i = 4; i &amp;lt; res.Length; i++)
+        {
+                this.richTextBox3.Text += res[i];
+        }
+    }
+    ).Start();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>可以发现，点击button1之后窗体不再冷却，是可以对其它控件进行操作的。但是突然跳出来 "线程间操作无效: 从不是创建控件“richTextBox3”的线程访问它。"的异常。查阅相关材料发现，是因为官方认为是当有多个并发线程尝试对UI进行读写时，容易造成线程争用资源带来的死锁。所以，默认不允许以非UI线程访问控件。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>但很多情况下我们又确实需要用异步线程对UI进行一些操作。这时就用到Control.Invoke和Control.BeginInvoke。我们用Action&lt;&gt;把原来的语句包装成lambda函数，需要的时候就用invoke调这个lambda函数，就可以解决“不是创建控件*的线程访问”的异常。修改如下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void button1_Click(object sender, EventArgs e)
+{
+    richTextBox3.Text = &quot;compiling...&quot;;
+    new Thread(
+    () =&amp;gt;
+    {
+        String output = &quot;&quot;;
+        RunCmd(&quot;tst.bat&quot;, out output);
+        String[] res = output.Split('\n');
+        Action&amp;lt;int&amp;gt; setNullForRT3  = (data) =&amp;gt; richTextBox3.Text = &quot;&quot;;
+        Invoke(setNullForRT3, 0);
+        for (int i = 4; i &amp;lt; res.Length; i++)
+        {
+            Action&amp;lt;int&amp;gt; act1 = (data) =&amp;gt;
+            {
+                this.richTextBox3.Text += res[i];
+            };
+            Invoke(act1, i);
+        }
+    }).Start();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-12T08:32:14+09:00">
+      木 12 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

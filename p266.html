@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - atcoder abc142 E题Get Everything 题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p266.html" rel="bookmark"
+         title="Permalink to atcoder abc142 E题Get Everything 题解">atcoder abc142 E题Get Everything 题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>终于把ABCD全做出来，可以挑战到E题了</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>题意：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有N个宝箱，标记序号为1到N。商店中有M把钥匙在销售。第i把钥匙售价a<sub>i</sub>，它能开的宝箱子有b<sub>i</sub>个，分别是c<sub>i,1</sub>,c<sub>i,2</sub>,…c<sub>i,bi</sub>,现希望将所有N个箱子都打开，试求买钥匙的最小花费。若不可能打开所有宝箱，则输出-1。数据范围：N不超过12，M不超过1000</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分析：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>不难看出，钥匙可打开的箱子可以用比特位数据节省空间和运算量：钥匙能打开第k（范围从1到N）个箱子，就把这个钥匙的标志位第k-1位二进制上置为1。如果多把钥匙的标志位进行按位或运算结果是二进制N位的1说明这些钥匙可以开启全部宝箱。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用动态规划解可以达到O(M*2^N)的时间复杂度，由于N最大只有12所以运算量还算合理。主要方法是：用dp[signs]记下开signs（sign二进制第k位为1表示第k个宝箱能开）宝箱的最小花费，初始整个列表为一个极大的整数，同时dp[0]=0，表示不开箱时花费为0</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于每一把钥匙，更新它所指的能开的signs所对的最小花费。所有钥匙都更新完成之后，检查dp[(1&lt;&lt;N)-1]是否为初始的极大整数，若是说明没有钥匙能打开所有宝箱，此时输出-1，否则输出 dp[(1&lt;&lt;N)-1] 的值</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>
+class _const:
+    def __init__(self):
+        self.__INT_MAX = 0x7fffffff
+    @property
+    def INT_MAX(self):
+        return self.__INT_MAX
+const=_const()
+N,M=map(int,input().split(" "))
+dp=[ const.INT_MAX for i in range((1&lt;&lt;N)) ]
+dp[0]=0
+for i in range(M):
+    val,T=map(int,input().split(" "))
+    r=list( map(int,input().split(" ")) )
+    now = 0
+    for it in r:
+        now |= (1&lt;&lt;(it-1))
+    for bits in range((1&lt;&lt;N)):
+        dp[bits | now] = min(dp[ bits | now ],dp[bits]+val)
+if dp[-1]==const.INT_MAX:
+    print("-1")
+else:
+    print(dp[-1])</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-29T02:13:49+09:00">
+      日 29 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

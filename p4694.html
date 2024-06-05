@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 编译运行java工程的批处理文件写法</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4694.html" rel="bookmark"
+         title="Permalink to 编译运行java工程的批处理文件写法">编译运行java工程的批处理文件写法</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>编译运行java工程最简单的命令使用javac Main.java将Main编译为Main.class，然后使用java Main可以执行Main.class。但工程稍微复杂一些，需要用到多个类，以及引用了外部jar包的时候，又没有必要构建一个工程，这时就可以利用javac和参数选项以及一些批处理命令，可以比较方便的编译工程，还可以做到仅编译成功时运行程序。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>set packages=package/*;package/lib/*;package/ooxml-lib/*
+set classout=./class/
+erase /Q &quot;%classout%&quot;
+javac -encoding utf-8 -d &quot;%classout%&quot; -cp &quot;%packages%&quot; Main.java dto/*.java
+if %errorlevel% equ 0 (
+java -cp &quot;%classout%;%packages%&quot; Main
+)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>这在javac的-cp参数就可以指定jar包。系统的环境变量<code>CLASSPATH</code>中可以定义之它，但如果不想整个系统通用它，也可以在javac的命令行参数中指定：<br><code>javac -cp PATH</code><br>其中PATH就是存放jar的路径，允许指定jar文件，也可以使用<code>*</code>通配符将路径下全部jar全部引入。PATH之间在windows下用<code>;</code>隔开，IOS下用<code>:</code>分隔。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果编写run.bat是编译完成后也执行它，那么java命令中也会使用同样的路径，于是在bat中可以将PATH定义为常量，既增强了可读性又使命令变得简短：<br><code>set name=value</code><br>在<code>set</code>以后的bat文件中，可以使用<code>%name%</code>来将设定好的<code>name</code>替换为<code>value</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>javac的<code>-d</code>参数选项，是指定将<code>.java</code>文件编译完成后生成的<code>.class</code>文件的路径，默认值是与<code>.java</code>文件的路径相同。为了工程目录的整洁，可以指定一个路径将.class全部生成在指定路径中。若编译成功且要执行，则要在java命令中把生成class的路径也包含，不然java找不到生成的class文件。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在编译失败的情况下，java只会执行上次成功编译的内容。若只希望当编译成功时才执行，可以使用 <code>if %errorlevel% equ 0</code> 来判断编译是否成功。errorlevel的值是获得自上一句命令的执行的返回值（这也是为什么C/C++建议main返回int类型且正常结束返回0），javac如果编译成功时，errorlevel的值即是0。这样%errorlevel%则被替换为0，从而if后的java命令可顺利执行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>关于errorlevel，还有两个相似的命令：<code>if errorlevel n</code>和<code>if not errorlevel n</code>，这分别表示<code>errorlevel</code>大于等于<code>n</code>时与<code>errorlevel</code>小于<code>n</code>时再执行。这两个命令所指的都是范围。例如<code>if errorlevel 1 (echo pass)</code>在<code>errorlevel</code>是0时不执行，只有在<code>errorlevel</code>大于等于1时才有效。而<code>if not errorlevel 0 (echo pass)</code>在<code>errorlevel</code>为<code>0</code>时也不执行，只有errorlevel小于0时才有效。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><!-- wp:list-item -->
+<li> <a href="https://www.sejuku.net/blog/62990">【Java入門】classpathを指定して実行する方法(確認の方法も解説) | 侍エンジニアブログ (sejuku.net)</a></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><a href="https://jj-blues.com/cms/wantto-errorlevelbranch/">errorlevelの値から分岐処理を行う (jj-blues.com)</a></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>还有shell版</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>mkdir ./bin
+
+if [ -f $1/Main.java ]; then
+        javac -d bin $1/Main.java
+        if [ $? -eq 0 ]; then
+                for FL in `ls $1/*.in`
+                do
+                        echo &quot;|=========[ &quot;$FL&quot; ]=========|&quot;
+                        time java -cp bin Main &lt; $FL
+                        echo
+                done
+        fi
+fi
+
+rm -rf ./bin
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2023-12-08T03:05:01+09:00">
+      金 08 12月 2023
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

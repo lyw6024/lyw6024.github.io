@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 为wordpress文章添加折叠区块</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1938.html" rel="bookmark"
+         title="Permalink to 为wordpress文章添加折叠区块">为wordpress文章添加折叠区块</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>在编写文章时，有些内容稍显次要，但仍需要展示在文章中，尤其是占据较长的篇幅的时候，为了保持文章主体结构的完整，我们可能需要将一些内容折叠起来，在希望阅读的时候将之展开，而不需要的时候则保持折叠状态。在Wordpress中可以利用jQuery实现这个功能，而不需要安装复杂的插件，只需要对<code>functions.php</code>进行编辑即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>functions.php</code>在主题的目录下，即<code>wp-content/themes/主题名/functions.php</code>,在其最后添加这样一个函数，并在函数定义之后使用<code>add_shortcode()</code>，使wordpress能通过shortcode方式快速将区域转换成折叠区块</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"php","mime":"text/x-php","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function xcollapse($atts, $content = null) {
+    extract(shortcode_atts(array(&quot;title&quot;=&gt;&quot;&quot;),$atts));
+    return '&lt;div style=&quot;margin: 0.5em 0;&quot;&gt;
+    &lt;hr&gt;
+    &lt;div class=&quot;xControl&quot;&gt;
+    &lt;a href=&quot;javascript:void(0)&quot; class=&quot;collapseButton xButton&quot;&gt;
+        &lt;span class=&quot;collapseIcon&quot;&gt;+&lt;/span&gt;
+        &lt;span class=&quot;collapseIcon&quot; style=&quot;display: none;&quot;&gt;-&lt;/span&gt;
+    &lt;span class=&quot;xTitle&quot;&gt;'.$title.'&lt;/span&gt;&lt;/a&gt;
+    &lt;div style=&quot;clear: both;&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;xContent&quot;&gt;'.$content.'&lt;/div&gt;
+    &lt;hr&gt;
+    &lt;/div&gt;';
+}
+add_shortcode('collapse','xcollapse');
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>其中第8-9行的<code>class="collapseIcon"</code>，是表示折叠和展开的图标，这里简单地使用了 <code>+ / - </code>，当然为了美观也可以利用是font-awesome的折叠与展开图标，或者当前主题使用框架的图标库。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>折叠的响应动作在footer.php中指定，在functions.php同一目录下。在footer.php的&lt;/body&gt;&lt;/html&gt;之前加入这样的script：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;script&gt;
+    jQuery(document).ready(
+        function(jQuery){
+          jQuery(&quot;.xContent&quot;).hide();
+            jQuery('.collapseButton').click(function(){
+                jQuery(this).children('.collapseIcon').toggle();
+                jQuery(this).parent().parent().find('.xContent').slideToggle('fast');
+    });
+    });
+&lt;/script&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>在页面加载之后，会将class含有<code>xContent</code>的<code>div</code>区域隐藏。点击展开按钮，则响应<code>collapseButton</code>事件，查找当前点击按钮的控制下的<code>xContent</code>区域并进行<code>toggle()</code>.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样，在编写文章时，就可以使用如下方式表示一块折叠区域:</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1939,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-130.png" alt="[Image]" class="wp-image-1939"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>使用效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="展开代码"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>（折叠区域内容）</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">while (true)
+ {
+     viewAccessor.ReadArray(0, charsInMMf, 0, BUF_SIZE);
+     for (int i = 0; i &lt; 2048 * 2048; i+=2)
+     {
+         Marshal.WriteByte(imgData,charsInMMf[i]);
+     }
+     worker.ReportProgress(0);
+     frameCount += 1;
+     if (worker.CancellationPending)
+     {
+         break;
+     }
+     Thread.Sleep(20);
+ }</pre>
+<!-- /wp:preformatted -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>while (true)
+{
+    viewAccessor.ReadArray&lt;byte&gt;(0, charsInMMf, 0, BUF_SIZE);
+    for (int i = 0; i &lt; 2048 * 2048; i+=2)
+    {
+        Marshal.WriteByte(imgData,charsInMMf[i]);
+    }
+    worker.ReportProgress(0);
+    frameCount += 1;
+    if (worker.CancellationPending)
+    {
+        break;
+    }
+    Thread.Sleep(20);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>目前存在的已知问题是collapse区域内使用Codemirror Blocks的代码高亮插件区块，首次展开后的代码段的行号和样式需要点击一下才能显示出来。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-15T03:07:20+09:00">
+      水 15 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

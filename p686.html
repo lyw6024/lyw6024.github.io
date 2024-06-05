@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 多元函数微分 习题</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p686.html" rel="bookmark"
+         title="Permalink to 多元函数微分 习题">多元函数微分 习题</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <blockquote>主要是测试一下MathJax功能</blockquote>
+<strong>已知\(f(x+y,x-y)= x^2-y^2+\phi(x+y)\)，且\( f(x,0)=x\)，求\( f(x,y) \)表达式</strong>
+解法1：令\( u=x+y,v=x-y\)
+则，\( x=\frac{u+v}{2},y=\frac{u-v}{2}\)
+所以\( f(u,v)=\frac{1}{4}(u+v)^2+\frac{1}{4}(u-v)^2+\phi(u)=uv+\phi(u)\)
+即\( f(x,y)=xy+\phi(x)\)
+由于\( f(x,0)=x\)，所以\( \phi(x)=x\)
+可知\( f(x,y)=x(y+1)\)
+解法2：\( f(x+y,x-y)=(x+y)(x-y)+\phi(x+y)\)
+可知\( f(x,y)=xy+\phi(x)\)， 下同。
+<strong>求旋转抛物面\( z=x^2+y^2\)与平面\( x+y-2z=2\)之间的最短距离</strong>
+设\( P(x,y,z)\)为抛物面\( z=x^2+y^2 \)上任一点，则点P到平面\( x+y-2z-2=0 \)的距离为：
+[latex] d=\frac{\sqrt{6}}{6}|x+y-2z-2|[/latex]
+即在\( x^2+y^2-z=0\)的约束下求\( (x+y-2z-2)^2\)的最小值。
+构造 \( F(x,y,z)=(x+y-2z-2)^2 + \lambda (z-(x^2+y^2)) \)
+分别求导并令各导数为0，有
+[latex]
+\begin{cases}
+F'_x=2(x+y-2z-2)-2\lambda x = 0\\
+F'_y=2(x+y-2z-2)-2\lambda y = 0\\
+F'_z=2(x+y-2z-2)-\lambda  = 0\\
+z=x^2+y^2\\
+\end{cases}
+[/latex]
+解出此方程唯一驻点\( x=\frac{1}{4},y=\frac{1}{4},z=\frac{1}{8}\)
+由实际意义知最小值存在，为[latex] d_{min}=\frac{\sqrt{6}}{6}|\frac{1}{4}+\frac{1}{4}-\frac{1}{4}-2|=\frac{7\sqrt{6}}{24} [/latex]
+&nbsp;
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-07T08:03:32+09:00">
+      土 07 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 字符串匹配：Z算法</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p272.html" rel="bookmark"
+         title="Permalink to 字符串匹配：Z算法">字符串匹配：Z算法</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:html -->
+<blockquote>
+<p>参考<br />https://www.cnblogs.com/ycx-akioi/p/Z-algorithm.html<br />https://www.cnblogs.com/micrari/p/5585984.html</p>
+</blockquote>
+<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>字符串匹配当中算法很多，对于不同的特征的字符串不同的算法表现也有差异，比如对于字符串中出现的字符种类很少而字串很长（如01序列）的时候，KMP算法表现比较好。这儿介绍的Z算法也是一种与KMP类似的一种字符串匹配算法，Z算法当中有个状态数组，叫作Z-数组，是我们需要计算的关键。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于字符串S，我们有Z-数组z[]，其中z-数组中第i位的数值表示从第i位开始与字符串S的开头能完全匹配的长度。z[0]=strlen(S)是显然的，因为从第1位开始与字符串S匹配，整个串S都能完成匹配。以atbadcatbag为例，Z-数组z[]为{11,0,0,1,0,0,4,0,0,1,0}</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于Z-数组，我们将维护一个区间[lwbd,upbd]，对于lwbd&gt;1的z[lwbd]若不为0，则upbd=lwbd+z[lwbd]-1 .这个区间[lwbd,upbd]所表示的子串就是与原字符串的头部匹配的子串。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Z数组可以对每一位分别与头部比较，但时间为O(|S|<sup>2</sup>)。可以采取一种方法仅用O(|S|)的时间就可以计算出Z-数组。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用类似递推的方法，假定已经知道了z[2,…,i-1]与upbd值最大的区间[lwbd,upbd]，要计算z[i]并且更新[lwbd,upbd]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[1]如果upbd&lt;i，表示之前匹配过的长子串与当前第i位没有关联，就从第i位开始做枚举求z[i]。若z[i]不为0，则lwbd=i, upbd=lwbd+z[i]-1<br />[2]否则，记i’=i-lwbd+1,是区间[lwbd,upbd]跨过i平移到后边i的位置。此时会出现两种情况：<br />[2.1]若i+z[i’]&lt;= upbd，则[i,i+z[i’]]是[lwbd,upbd]的一个真子区间。这样的话，从第i位与a的前缀匹配情况和从第i’位一样，所以z[i]=z[i’],lwbd与upbd不变<br />[2.2]而i+z[i’]&gt;upbd的情况，i到upbd位的匹配与到upbd-lwbd+1位的匹配一样，即z[i]至少为upbd-i+1，就在此基础之上，从upbd+1位开始匹配，完成后lwbd=i,upbd=i+z[i]-1(此时z[i]必然不为0,这样写是可行的)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+void genZBox(char *s)
+{
+        int z[N],lwbd,upbd,len,i,ii;
+        memset(z,0,sizeof(z));
+        lwbd=0;
+        upbd=0;
+        len=strlen(s);
+        z[0]=len;
+        for(i=1;s[i];i++)
+        {
+                if(upbd&lt;i)
+                {
+                        z[i]=0;
+                        while( i+z[i]&lt;len &amp;&amp; s[i+z[i]]==s[z[i]])
+                                z[i]++;
+                        if(z[i]&gt;0)
+                        {
+                                lwbd=i;
+                                upbd=i+z[i]-1;
+                        }
+                }
+                else
+                {
+                        ii=i-lwbd+1;
+                        if(ii&lt;=upbd)
+                                z[i]=z[ii];
+                        else
+                        {
+                                z[i]=upbd-i+1;
+                                while(i+z[i]&lt;len &amp;&amp; s[i+z[i]]== s[z[i]])
+                                        z[i]++;
+                                lwbd=i;
+                                upbd=i+z[i]-1;
+                        }
+                }
+        }
+        for(i=0;i&lt;len;++i)
+        {
+                printf(&quot;%4d&quot;,z[i]);
+        }
+        printf(&quot;\n&quot;);
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-30T10:32:04+09:00">
+      月 30 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 字典序：生成下一个排列</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p953.html" rel="bookmark"
+         title="Permalink to 字典序：生成下一个排列">字典序：生成下一个排列</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> [mathjax] </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用字典序生成排列，一个排列若按字典序，可以设计如下的树，例如N=4，根结点有4个子树，按顺序将这四个树的结点值排好。每个子树又有3个子树，其结点的值是父结点所不含有的那些值。直到将N层建好，则依次就是字典序的排列。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":954,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-10.png" alt="[Image]" class="wp-image-954"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>按照字典序的规则，已知一个N的排列 \( p_1,p_2,...p_N \)，求下一个排列的算法如下描述：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"fontSize":"normal"} -->
+<p class="has-normal-font-size"> STEP 1. 求符合 \( p_{j-1} &lt; p_j \) 的j的最大值，记为i <br />STEP 2. 求符合 \( p_{i-1}&lt;p_k \)的k的最大值，记为h <br />STEP 3. \( p_{i-1} \)与 \( p_{h} \)互换  <br />STEP 4. 将互换后序列的\(p_i\)到\(p_N\)逆转，便得到下一个序列。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>以N=4，序列\( (3,4,2,1) \)为例，  \( p_{j-1} &lt; p_j \) 的最大值为i=2，  \( p_1&lt;p_k \) 的k的最大值h=2。将p[1]与p[2]互换，并将p[2]到p[4]逆序，则得 \( (4,1,2,3) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>若要生成N的全排列，可以从 \( (1,2,...,N) \)  开始，反复使用求下一个排列的方法，直到不存在 \( p_{j-1} &lt; p_{j} \) 为止</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define MAXN 30
+void swap(char *s,int x,int y)
+{
+    char tmp = s[x];
+    s[x] = s[y];
+    s[y] = tmp;
+}
+void reverse(char *s,int lwbd,int upbd)
+{
+    int i;
+    for(i=0;i&lt;(upbd-lwbd)/2;i++)
+    {
+        swap(s,lwbd+i,upbd-i);
+    }
+}
+int next_arrange(char* p,int N)
+{
+    int k,i=-1,h;
+    for(k=N;k&gt;1;k--)
+    {
+        if(p[k-1]&lt;p[k])
+        {
+            i=k;
+            break;
+        }
+    }
+    if(i==-1)
+        return 0;
+    for(k=N;k&gt;1;k--)
+    {
+        if(p[i-1]&lt;p[k])
+        {
+            h=k;
+            break;
+        }
+    }
+    swap(p,i-1,h);
+    reverse(p,i,N);
+    return 1;
+}
+int main(void)
+{
+    int i,h,k,N;
+    char p[MAXN];
+    scanf(&quot;%d&quot;,&amp;N);
+    for(k=1;k&lt;=N;k++)
+    {
+        p[k]=k;
+    }
+    while(1)
+    {
+        int status = next_arrange(p,N);
+        if(status==0)
+            break;
+        for(k=1;p[k];k++)
+        {
+            printf(&quot;%d&quot;,p[k]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-12T06:16:38+09:00">
+      木 12 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

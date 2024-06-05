@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Pay to win - 题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1709.html" rel="bookmark"
+         title="Permalink to Pay to win - 题解">Pay to win - 题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当年陈刀仔只用20块能赢到三千七百万，我今天用A,B,C,D赢到N，不是问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题描述</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>你现在手里只有数字0，但你有非常多的筹码。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>花费A枚筹码将手中的数字变为2倍</li><li>花费B枚筹码将手中的数字变为3倍</li><li>花费C枚筹码将手中的数字变为5倍</li><li>花费D枚筹码将手中的数字增加1或者减少1.</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>你的筹码非常多，但是还是要省着用。这一场给定一个数字N，试计算要将手中的0变为数字N，最少消耗几枚筹码。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>分析</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>我们可以把这个问题反过来想：手中初始是数字N最终变为0。可以采取以下的操作：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>如果\( x \)能被2整除，则用\(\frac{x}{2}\)替代\(x\) 并花费A枚筹码</li><li>如果\( x \)能被3整除，则用\(\frac{x}{3} \)替代\(x\) 并花费B枚筹码</li><li>如果\( x \)能被5整除，则用\(\frac{x}{5} \)替代\(x\) 并花费C枚筹码</li><li>用\(x+1\) 或\(x-1\)替代\(x\) ，花费D枚筹码 </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>一种方法是，我们全用花费D的方法，这样从N到0的花费为\(ND\).另外，我们可以采用这样的策略：<br /> \[ N \stackrel{D}{\longmapsto}…\stackrel{D}{\longmapsto}ky \stackrel{k}{\longmapsto} y\]<br /> 其中\( k \in \{2,3,5\}\).当然要保证 \( y \in \{ \lfloor \frac{N}{k} \rfloor, \lceil \frac{N}{k} \rceil\}\).</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>事实上，如果 \(y&lt;\lfloor \frac{N}{k} \rfloor\)(同样的理由对\(y>\lceil \frac{N}{k} \rceil \)也适用)，就有如下的变换序列，比上述序列的花费更低<br /> \[ N \stackrel{D}{\longmapsto}…\stackrel{D}{\longmapsto} k\lfloor \frac{N}{k} \rfloor \stackrel{k}{\longmapsto}  \lfloor \frac{N}{k} \rfloor \stackrel{D}{\longmapsto}… \stackrel{k}{\longmapsto} y\]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>所以，我们的最优策略是直接用(\pm1)的方式由N到0,或到某个<br /> \( { \lfloor \frac{N}{k} \rfloor, \lceil \frac{N}{k} \rceil})<br /> ((k \in {2,3,5})\)。<br /> 特别地，如果记\( f(n) \)为从\(N\)到0的最小花费，那么如果我们知道了\(f( \lfloor \frac{N}{k} \rfloor)\)和\( f( \lceil \frac{N}{k} \rceil)\)，那么\(f(n)\)便可容易计算出。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上述讨论可以用动态规划方法实现，但是还需要解决从N到0有多少状态的问题。可以证明，可达的数字将由以下两式限定<br />\[ \lfloor \frac{N}{2^a3^b5^c} \rfloor , \lceil \frac{N}{2^a3^b5^c} \rceil \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于\( 0 \leq a \leq 60, 0 \leq b \leq 40 , 0 \leq c \leq 30 \)<br /> \(不然分母将大于分子\)，可达的数字小于\(2\times 61 \times 41 \times 31= 155062\)<br /> (为了Accepted，程序要保证(f(n))总是在n的可达数字以内)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-23T15:05:09+09:00">
+      土 23 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

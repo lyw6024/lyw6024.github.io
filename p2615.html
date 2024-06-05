@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 随机化算法浅谈(1)</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2615.html" rel="bookmark"
+         title="Permalink to 随机化算法浅谈(1)">随机化算法浅谈(1)</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>大家好，今天我们来聊一聊随机化算法。所谓随机化算法，就是将算法中某些关键步骤交给随机数去决定。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>看到这里，可能有的朋友就觉得这太不靠谱了！不过在之前的学习中，大家一定也接触过这种优化思想，例如在快速排序中可以通过随机选择元素作为主元，相比于选首元素作为主元的快速排序对有序序列的\( O(N^2) \)的复杂度来说，它能够保持\( O(N \log(N))\)的时间复杂度。看来在关键步骤引入随机性并没有把事情变得更糟糕。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>实际上，随机化算法由于引入随机数使得算法设计时更加灵活，在时空复杂度上往往小于同类问题的确定性算法。当然缺点也是因为引入了随机性而使算法分析时需要更复杂的数学知识，由于今天我们讨论的是应用，相对复杂的算法分析暂时不论。接下来我们讨论几种常用而简单的随机化算法。这里我们主要介绍两大类：拉斯维加斯方法与蒙特卡洛方法。当然，以下介绍的方法中，假定随机数生成的时空开销是\( O(1) \)的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>一、拉斯维加斯方法： 因数分解Pollard算法</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>拉斯维加斯是美国内达华州最大的城市，以赌博业而闻名。拉斯维加斯方法也有“赌”的成分在其中，它的基本思想是：这种方法有时成功，有时失败，所以要对一个实例反复地运行，直到运行成功则找到问题的解。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用确定性算法求正整数\(N\)的在\( (1,N) \)中的一个因子，可以用试除法，将所有不大于 \(N\) 的整数枚举并测试能否被 \(N\) 整除。其时间复杂度为\( O(N^{1/2}) \)，尤其对于大整数，当\(N\)的十进制有\(m\)位时，其时间复杂度为\( O(10^{m/2}) \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int findFactor(int N)
+{
+    for(int i=2;i&lt;=N;i++)
+    {
+        if(N%i==0)  return i;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>如果 \(N\) 是质数，那么算法要执行\(O(N) \)次。当然稍作改进，先判断\( N \)不是质数再用这个算法，则最差情况当\(N\)是某个质数的平方情况下得到\( O(\sqrt{N}) \)的时间复杂度。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>先给出结论，用随机化算法可以使求因子的算法降至\( O(N^{1/4} \log(N)) \)的时间。一种随机化方法是这样的：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int findFactor(int N)
+{
+    int c;
+    while(1)
+    {
+        c=rand()%N;
+        if(N%c==0) return c;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>虽然确实用了随机数，但这肯定不行，根本就是在瞎猜，如果输入的\(N\)是某个质数\(p\)的平方，那么只有\(1/N\)的概率猜对，当 \(N\) 非常大的时候这几乎不可能猜对。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>怎么提高猜中的概率呢，仍然以\(N\)是某个质数\(p\)的平方的情况为例，当随机出\(x=2p,3p,\cdots,kp(k&lt;p)\)的情况时，虽然<code>N % x</code>不等于0，但最大公因数\(\gcd(N,x)=p \)总是成立，利用最大公因数来判断\(N\)是否存在因子\(p\)，则将猜对的概率变为\((p-1)/N\)。这仅是\(N\)有唯一因数\(p\)的情况。如果N有多个因数， 猜出的概率则会更大 ：对于随机的x，若有 \(\gcd(N,x) &gt;1 \)，则\(\gcd(N,x)  \)就是N的一个因数。这就与Pollard算法比较接近了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在Pollard算法中，并不会逐个生成随机数，而是以一个序列\(x_{n+1} =(x_n \cdot x_n +C) \mod N \) 的递推形式生成，如果生成的\(x_{n+1}\)在之前\(\{x_n\}\)中出现过，那么就重新随机一个\(C\)再生成新序列。每次检查\(x_{i}-x_{j}\)与\(N\)的最小公倍数\(d\)是否大于1，若大于1则\(d\)就是\(N\)的一个因子。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这里判断\(x_{n+1}\)是否在序列 \(\{x_n\}\) 中出现过，运用“同时起跑的兔子与乌龟，兔子会在某一圈与乌龟再相遇”的想法，使变量<code>t</code>每次跑1步，变量<code>r</code>每次跑2步，若t=r时则说明形成数环（当前C下的序列中所有数字已经全部被测试过），于是可以重新生成一个C再次测试。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int gcd(int x,int y)
+{
+    if(x%y==0)
+        return y;
+    else
+        return gcd(y,x%y);
+}
+int pollard(int N)
+{
+    int t,r;
+    while(1)
+    {
+        int c = 1+rand()%(N-1);
+        t=c;
+        r=(c*c+c)%N;
+        while(t!=r)
+        {
+            int d = gcd(t-r,N);
+            if(d&gt;1)  return d;
+            t=(t*t+c)%N;
+            r=(r*r+c)%N;
+            r=(r*r+c)%N; // Floyd判环算法,r要计算2次
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>Pollard算法大体是如此， 还有可优化的地方，篇幅原因，这里就不展开讨论。 不过上边这段程序仍有缺陷：对于\( N=4 \)的情况，无论c取何值均不能找到解，另外在N本身是质数的情况也不能退出，所以需要先进行N的特判。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>而关于判断一个正整数是否为质数，也有一种高效的随机化算法。这将在<a href="https://www.malic.xyz/?p=2659" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">下一篇</a>中进行讨论</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"align":"center"} -->
+<h2 class="has-text-align-center">参考文献</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[1]  柳银萍 . 华东师大-算法第十四、十五讲_概率算法 [R] .  2011<br />[2]  Pecco . 算法学习笔记(55): Pollard-Rho算法[OL] . 2020.10. https://zhuanlan.zhihu.com/p/267884783<br />[3]  ジャスミン . 大数因数分解Pollard_rho 算法详解[OL] . 2020.04.  https://www.cnblogs.com/jaszzz/p/12693526.html <br />[4]  Srirams. A Quick Tutorial on Pollard's Rho Algorithm [OL] .  2014.04 https://www.cs.colorado.edu/~srirams/courses/csci2824-spr14/pollardsRho.html</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-11-27T05:47:55+09:00">
+      金 27 11月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

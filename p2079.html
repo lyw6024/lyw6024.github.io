@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - pixiJS界面渲染与交互动作</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2079.html" rel="bookmark"
+         title="Permalink to pixiJS界面渲染与交互动作">pixiJS界面渲染与交互动作</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>最开始做网页用H5和js做了一些简单的游戏，主要是练习使用js，其界面非常简陋，并且没有专门对移动端进行适配，导致按键盘交互的游戏无法体验。现在逐渐地熟悉了网页开发，想对一些早期的游戏进行重构。前端的游戏框架当然很多，先从2D游戏开始，多方面调查后选择了pixi作为游戏引擎进行开发。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>关于pixi</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Pixi是一个超快的2D渲染引擎。这意味着什么呢？这意味着它会帮助你用JavaScript或者其他HTML5技术来显示媒体，创建动画或管理交互式图像，从而制作一个游戏或应用。它拥有语义化的，简洁的API接口并且加入了一些非常有用的特性。比如支持纹理贴图集和为精灵（交互式图像）提供了一个简单的动画系统。它也提供了一个完备的场景图，你可以在精灵图层里面创建另一个精灵，当然也可以让精灵响应你的鼠标或触摸事件。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>项目地址： <a href="https://github.com/pixijs/pixi.js">https://github.com/pixijs/pixi.js</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>中文教程： <a href="https://github.com/Zainking/learningPixi">https://github.com/Zainking/learningPixi</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>开始</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>创建Application</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> Pixi拥有一个<code>Pixi应用</code>对象来帮助你创建它。它会自动创建一个<code>&lt;canvas&gt;</code>HTML标签并且计算出怎么去让你的图片在这个标签中显示 。 这个<code>舞台</code>对象将会被当作根容器而使用，它将包裹所有你想用Pixi显示的东西。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <code>PIXI.Application</code>算出了应该使用Canvas还是WebGL去渲染图象，它取决于你正在使用的浏览器支持哪一个。它的参数是一个被称作<code>options</code>的对象。在这儿例子中，它的<code>width</code>&nbsp;和&nbsp;<code>height</code>属性已经被设置了，它们决定了canvas的宽和高（单位是像素）。你能够在<code>options</code>对象中使用更多的属性设置 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 如果你需要在你创建canvas标签之后改变它，可以&nbsp;<code>app.renderer</code>对象进行设置。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;!doctype html&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Displaying the canvas&lt;/title&gt;
+&lt;body&gt;
+&lt;script src=&quot;../pixi/pixi.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+//Create a Pixi Application
+let app = new PIXI.Application({
+    width: 256,
+    height: 256,
+    antialiasing: true,
+    transparent: false,
+    resolution: 1
+  }
+);
+//Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view);
+//If you want to make the canvas fill the entire window, you can apply this
+//CSS styling:
+/*
+app.renderer.view.style.position = &quot;absolute&quot;
+app.renderer.view.style.width = window.innerWidth + &quot;px&quot;;
+app.renderer.view.style.height = window.innerHeight + &quot;px&quot;;
+app.renderer.view.style.display = &quot;block&quot;;
+*/
+//The `renderer.view` is just an ordinary `&lt;canvas&gt;` element.
+//Here's how you can reference to add an optional dashed
+//border around the canvas
+app.renderer.view.style.border = &quot;1px dashed black&quot;;
+//To resize the canvas
+app.renderer.resize(512, 512);
+//To change the background color
+app.renderer.backgroundColor = 0x061639;
+&lt;/script&gt;
+&lt;/body&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>放置对象</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 所有你想在画布上显示的东西必须被加进一个被称作&nbsp;<code>stage</code>的Pixi对象中。你能够像这样使用舞台对象 。 Pixi用WebGL和GPU去渲染图像，所以图像需要转化成GPU可以处理的版本。可以被GPU处理的图像被称作&nbsp;<strong>纹理</strong>&nbsp;。在显示图片之前，需要将普通的图片转化成WebGL纹理。 加载后用<code>stage.addChild</code>方法把它放到Pixi的<code>stage</code>上面去。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>//load an image and run the `setup` function when it's done
+PIXI.loader
+  .add(&quot;images/cat.png&quot;)
+  .load(setup);
+//This `setup` function will run when the image has loaded
+function setup() {
+  //Create the cat sprite
+  let cat = new PIXI.Sprite(PIXI.loader.resources[&quot;images/cat.png&quot;].texture);
+  //You can also create the `cat` sprite from the texture, like this:
+  //let cat = new PIXI.Sprite(PIXI.TextureCache[&quot;images/cat.png&quot;]);
+  //Add the cat to the stage
+  app.stage.addChild(cat);
+  //If you ever need to, here's how you can clean out WebGL's GPU
+  //memory manually
+  /*
+  Object.keys(TextureCache).forEach(function(texture) {
+    TextureCache[texture].destroy(true);
+  });
+  */
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样，路径为<code>images/cat.png</code>的图片就可以加载到Application上显示出来。如果想把cat移走，可以使用<code>app.stage.removeChild(cat)</code>, 但是通常，我们都把精灵的<code>visible</code>属性设置成<code>false</code>来让它简单的隐藏。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>要调整它的位置，可以使用<code>cat.position.set(x, y)</code>,也可以为<code>cat.x</code>与<code>cat.y</code>赋值。宽高则分别用width和height属性，或者用scale.x,scle.y的方法按比例调整宽高，也可以使用<code>cat.scale.set(x,y)</code>更改。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>cat.rotation </code>可以指定旋转角度，<code>cat.anchor.set(x,y)</code>可以指定旋转锚点，锚点以0到1的小数表示，<code>cat.anchor.set(0.5,0.5)</code>即为默认值，以图像中心为锚点旋转。相应地，用<code>cat.pivot</code>则以指定像素的方式指定旋转锚点。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>使用别名</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 可以对你使用频繁的Pixi对象和方法设置一些简略的可读性更强的别名 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>//Aliases
+let Application = PIXI.Application,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    Sprite = PIXI.Sprite;
+//Create a Pixi Application
+let app = new Application({
+    width: 256,
+    height: 256,
+    antialias: true,
+    transparent: false,
+    resolution: 1
+  }
+);
+//Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view);
+//load an image and run the `setup` function when it's done
+loader
+  .add(&quot;images/cat.png&quot;)
+  .load(setup);
+//This `setup` function will run when the image has loaded
+function setup() {
+  //Create the cat sprite
+  let cat = new Sprite(resources[&quot;images/cat.png&quot;].texture);
+  //Add the cat to the stage
+  app.stage.addChild(cat);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>预加载的进度条</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> Pixi的加载器有一个特殊的<code>progress</code>事件 ，可以这样绑定到相应函数上：<code>PIXI.loader.on("progress", loadProgressHandler);</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function loadProgressHandler(loader, resource) {
+  //Display the file `url` currently being loaded
+  console.log(&quot;loading: &quot; + resource.url);
+  //Display the percentage of files currently loaded
+  console.log(&quot;progress: &quot; + loader.progress + &quot;%&quot;);
+  //If you gave your files names as the first argument
+  //of the `add` method, you can access them like this
+  //console.log(&quot;loading: &quot; + resource.name);
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>用css sprite加载</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>所谓css sprite就是将所有素材都放在一张大图上，而使用的素材则是这个大图的一块区域，这样只要大图加载完成，那么所有素材也就加载完成。如下图示，为jQuery-ui的图标</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2080,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-131.png" alt="[Image]" class="wp-image-2080"/><figcaption>图片256x240，每个图标为16x16</figcaption></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> Pixi内置了一个通用的<code>Rectangle</code>对象 (<code>PIXI.Rectangle</code>)，他是一个用于定义矩形形状的通用对象。他需要一些参数，前两个参数定义了<code>x</code>&nbsp;和<code>y</code>轴坐标位置，后两个参数定义了矩形的<code>width</code>&nbsp;和&nbsp;<code>height</code> 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> Pixi的纹理中有一个叫做<code>frame</code>的很有用的属性，它可以被设置成任何的<code>Rectangle</code>对象。<code>frame</code>将纹理映射到<code>Rectangle</code>的维度 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>loader
+  .add(&quot;images/ui-icons_cd0a0a_256x240.png&quot;)
+  .load(setup);
+function setup() {
+    let rectangle = new PIXI.Rectangle(0, 0, 16, 16);
+        let texture = TextureCache[&quot;images/ui-icons_cd0a0a_256x240.png&quot;];
+        texture.frame = rectangle;
+        let theIcon = new Sprite(texture);
+        app.stage.addChild(theIcon);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>纹理贴图集</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>要向游戏中一次添加多个对象，一种比较快速有效的方法就是纹理贴图集。，</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 一个纹理贴图集就是一个JSON数据文件，它包含了匹配的PNG雪碧图的子图像的大小和位置。如果你使用了纹理贴图集，那么想要显示一个子图像只需要知道它的名字就行了。你可以任意的排序你的排版，JSON文件会保持他们的大小和位置不变。这非常方便，因为这意味着图片的位置和大小不必写在你的代码里。如果你想要改变纹理贴图集的排版，类似增加图片，修改图片大小和删除图片这些操作，只需要修改那个JSON数据文件就行了，你的游戏会自动给程序内的所有数据应用新的纹理贴图集。你没必要在所有用到它代码的地方修改它。 pixi兼容TexturePacker的JSON格式，类似于如下的json文件：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"application/json"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>{&quot;frames&quot;: {
+&quot;cat.png&quot;:
+{
+        &quot;frame&quot;: {&quot;x&quot;:2,&quot;y&quot;:2,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;rotated&quot;: false,
+        &quot;trimmed&quot;: false,
+        &quot;spriteSourceSize&quot;: {&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;sourceSize&quot;: {&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;pivot&quot;: {&quot;x&quot;:0.5,&quot;y&quot;:0.5}
+},
+&quot;hedgehog.png&quot;:
+{
+        &quot;frame&quot;: {&quot;x&quot;:68,&quot;y&quot;:2,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;rotated&quot;: false,
+        &quot;trimmed&quot;: false,
+        &quot;spriteSourceSize&quot;: {&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;sourceSize&quot;: {&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;pivot&quot;: {&quot;x&quot;:0.5,&quot;y&quot;:0.5}
+},
+&quot;tiger.png&quot;:
+{
+        &quot;frame&quot;: {&quot;x&quot;:134,&quot;y&quot;:2,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;rotated&quot;: false,
+        &quot;trimmed&quot;: false,
+        &quot;spriteSourceSize&quot;: {&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;sourceSize&quot;: {&quot;w&quot;:64,&quot;h&quot;:64},
+        &quot;pivot&quot;: {&quot;x&quot;:0.5,&quot;y&quot;:0.5}
+}},
+&quot;meta&quot;: {
+        &quot;app&quot;: &quot;http://www.codeandweb.com/texturepacker&quot;,
+        &quot;version&quot;: &quot;1.0&quot;,
+        &quot;image&quot;: &quot;animals.png&quot;,
+        &quot;format&quot;: &quot;RGBA8888&quot;,
+        &quot;size&quot;: {&quot;w&quot;:200,&quot;h&quot;:68},
+        &quot;scale&quot;: &quot;1&quot;,
+        &quot;smartupdate&quot;: &quot;$TexturePacker:SmartUpdate:52586866875309c357a59ef94cc3e344:67b70cfeefc06c04b551ab33c8f1fc7a:b00d48b51f56eb7c81e25100fcce2828$&quot;
+}
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>用Pixi的<code>loader</code>来加载纹理贴图集 。setup中创建它们，可以使用TextureCache，也可以用<code>resources["images/treasureHunter.json"].textures["frameId.png"]</code>，为了方便一般给它起别名然后在方括号中再索引它：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>let id = PIXI.loader.resources[&quot;images/treasureHunter.json&quot;].textures;
+frameId = new Sprite(id[&quot;frameId.png&quot;]);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>移动物体</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>为app的ticker注册函数，它将会每秒执行60次。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>app.ticker.add(delta =&gt; gameLoop(delta));
+function gameLoop(delta){
+  //Move the cat 1 pixel
+  cat.x += 1;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p> <code>delta</code>的值代表帧的部分的延迟 ，可以把它添加到cat的位置，让cat的速度和帧率无关 ，它往往只在你的动画没法跟上60帧的速率时候出现（比如游戏运行在很老旧的机器上） 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 也可以用<code>requestAnimationFrame</code>像这样创建 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function gameLoop() {
+  //Call this `gameLoop` function on the next screen refresh
+  //(which happens 60 times per second)
+  requestAnimationFrame(gameLoop);
+  //Move the cat
+  cat.x += 1;
+}
+//Start the loop
+gameLoop();</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>属性<code>cat.vx</code>与<code>cat.vy</code>能够设定物体移动速度，例如可以这样编写让小猫头碰到边界就反弹的效果:</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var cat;
+loader
+  .add(&quot;images/cat.png&quot;)
+  .load(setup);
+function setup() {
+        let texture = TextureCache[&quot;images/cat.png];
+        cat = new Sprite(texture);
+        cat.width=30;
+        cat.height=30;
+        cat.vx = 1;
+        cat.vy = 1;
+        app.stage.addChild(cat);
+        app.ticker.add(delta=&gt;gameLoop(delta));
+}
+function gameLoop(delta)
+{
+        cat.x += cat.vx;
+        if(cat.x+cat.width&gt;app.view.width || cat.x&lt;0)
+        {
+                cat.vx *=-1;
+        }
+        cat.y += cat.vy;
+        if(cat.y+cat.height&gt;app.view.height || cat.y&lt;0)
+        {
+                cat.vy *=-1;
+        }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>键盘动作</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>编写这样一个函数，为相应keyCode的键位构造一个key对象。在使用时，只需要指定press和releas方法即可非常方便的设计键盘动作</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>function keyboard(keyCode) {
+  let key = {};
+  key.code = keyCode;
+  key.isDown = false;
+  key.isUp = true;
+  key.press = undefined;
+  key.release = undefined;
+  //The `downHandler`
+  key.downHandler = event =&gt; {
+    if (event.keyCode === key.code) {
+      if (key.isUp &amp;&amp; key.press) key.press();
+      key.isDown = true;
+      key.isUp = false;
+    }
+    event.preventDefault();
+  };
+  //The `upHandler`
+  key.upHandler = event =&gt; {
+    if (event.keyCode === key.code) {
+      if (key.isDown &amp;&amp; key.release) key.release();
+      key.isDown = false;
+      key.isUp = true;
+    }
+    event.preventDefault();
+  };
+  //Attach event listeners
+  window.addEventListener(
+    &quot;keydown&quot;, key.downHandler.bind(key), false
+  );
+  window.addEventListener(
+    &quot;keyup&quot;, key.upHandler.bind(key), false
+  );
+  return key;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p> 键盘对象也有&nbsp;<code>isDown</code>&nbsp;和&nbsp;<code>isUp</code>&nbsp;的布尔值属性，你可以用它们来检查每个按键的状态。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>鼠标动作</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>1.鼠标左键触发事件：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>click：点击事件</li><li>mousedown：鼠标按下</li><li>mousemove：鼠标移动</li><li>mouseout：鼠标移出</li><li>mouseover：鼠标经过</li><li>mouseup：鼠标松开</li><li>mouseupoutside：鼠标按下，移出对象松开</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>2.鼠标右键触发事件：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>rightclick：点击事件</li><li>rightdown：鼠标按下</li><li>rightup：鼠标松开</li><li>rightupoutside：鼠标按下，移出对象松开</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>3.触摸屏触发事件：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>touchcancel：触摸系统cancels键</li><li>touchend：触摸结束</li><li>touchendoutside：触摸开始，移出对象松开</li><li>touchmove：触摸移动</li><li>touchstart：触摸开始</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>4.兼容鼠标和触摸屏的共同触发：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>pointercancel：触发系统cancels键</li><li>pointerdown：触发按下</li><li>pointermove：触发移动</li><li>pointerout：触发移出</li><li>pointerover：触发经过</li><li>pointertap：触发点击</li><li>pointerup：触发松开 </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>一般在应用时，最好是做兼容鼠标和触摸屏的方式，毕竟现在移动端可能市场更大一些。要使对象能响应鼠标动作，需要指定其<code>interactive</code>为<code>true</code>.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如，编写一个点击猫头让猫头变大的鼠标动作：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var cat;
+loader
+  .add(&quot;images/cat.png&quot;)
+  .load(setup);
+function setup() {
+        let texture = TextureCache[&quot;images/cat.png&quot;];;
+        cat = new Sprite(texture);
+        cat.x=50;
+        cat.y=50;
+        cat.width=30;
+        cat.height=30;
+        cat.on('pointerdown',OnPointerDown)
+                .on('pointerup',OnPointerUp);
+        cat.interactive = true;
+        app.stage.addChild(cat);
+}
+var expandRate = 0.2,absoluteWidth,absoluteHeight;
+function OnPointerDown()
+{
+        absoluteWidth = this.width*expandRate;
+        absoluteHeight = this.height*expandRate;
+        this.x-=absoluteWidth/2;
+        this.y-=absoluteHeight/2;
+        this.width+=absoluteWidth;
+        this.height+=absoluteHeight;
+}
+function OnPointerUp()
+{
+        this.x+=absoluteWidth/2;
+        this.y+=absoluteHeight/2;
+        this.width-=absoluteWidth;
+        this.height-=absoluteHeight;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>另外，对物体的拖动也是非常重要的鼠标交互事件。编写一个拖动猫头中心的鼠标动作：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>var cat;
+loader
+  .add(&quot;images/cat.png&quot;)
+  .load(setup);
+function setup() {
+        let texture = TextureCache[&quot;images/cat.png&quot;];;
+        cat = new Sprite(texture);
+        cat.x=50;
+        cat.y=50;
+        cat.width=30;
+        cat.height=30;
+        cat.on('pointerdown', onDragStart)
+           .on('pointerup', onDragEnd)
+           .on('pointerupoutside', onDragEnd)
+           .on('pointermove', onDragMove);
+        cat.interactive = true;
+        app.stage.addChild(cat);
+}
+function onDragStart(event) {
+        this.data = event.data;
+        this.alpha = 0.5;
+        this.dragging = true;
+}
+function onDragEnd(event) {
+        this.alpha = 1;
+        this.dragging = false;
+        this.data = null;
+}
+function onDragMove(event) {
+        if(this.dragging) {
+                var newPosition = this.data.getLocalPosition(this.parent); //获取鼠标移动的位置
+                this.position.x = newPosition.x-this.width/2;
+                this.position.y = newPosition.y-this.height/2;
+        }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>以上就是使用pixi进行简单地交互所需要的知识。更多更详细的内容可以看pixi的教程。另外，如果要制作复杂的交互游戏或应用，可能仅使用Pixi还不够，这时就可以利用其它的库来丰富交互体验。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-29T03:38:31+09:00">
+      水 29 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

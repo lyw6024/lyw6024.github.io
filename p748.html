@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [Kattis] Chess Tournament 题目分析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p748.html" rel="bookmark"
+         title="Permalink to [Kattis] Chess Tournament 题目分析">[Kattis] Chess Tournament 题目分析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading -->
+<h2>题面：</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>棋牌锦标赛中,有N名选手（编号从0到N-1）参与到M场比赛中。这种棋的运气成分影响非常小，如果棋手的技术水平更高，他就能击败对手。 只有两个玩家的棋力相同时，这一盘棋才会平局。<br />只要所有选手都发挥稳定，比赛结果就会符合预期。但是有些棋手会在比赛过程中出现心理或情绪上的波动而导致可能高手输给菜鸟，或者原本棋力相当的两人应当“和棋”却分出了胜负等等情况。<br />给出这N名选手在M场比赛的战绩，请分析这一组选手是否都是水平稳定的（比赛结果之间不矛盾）。若所有选手都水平稳定，则输出"consistent"，若棋局战绩的前后有矛盾，则输出"inconsistent"</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p><a href="https://open.kattis.com/problems/chesstournament">https://open.kattis.com/problems/chesstournament</a></p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:heading -->
+<h2>分析：</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>所有棋力水平相同的都视作同一个结点，再检查各不同的结点之间是否“矛盾”。<br />可以将所有数据全存下，遍历第1遍建立并查集，将所有相等的放在同一集合中。 遍历第2遍建立有向图，属于同一集合的就认为是同一个结点。为了方便可以对结点重新编号<br />所谓"出现矛盾"可以解释成有向图当中存在环（包括自己指向自己的情况，当然这种情况也可以提前由并查集确定）。 最后只需要检查此有向图是否存在回路（不断删去入度为0的点和所对的边，直到不存在入度为0的点，若图还剩结点则存在回路）， 若存在回路则可以下结论为矛盾的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>完整程序既要实现集合的方法，又要包含有向图的方法，阅读起来可能比较困难。set_开头的函数表示是集合的方法，graph_开头的表示是图的方法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","lineNumbers":true} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#define MAXM 250002
+#define MAXN 50002
+#include &lt;vector&gt;
+using std::vector;
+#include &lt;queue&gt;
+using std::queue;
+#include &lt;map&gt;
+using std::map;
+struct Node
+{
+    int u,v;
+    char op;
+} node[MAXM];
+vector&lt;int&gt; G[MAXN];
+int in_degree[MAXN];
+map&lt;int,int&gt; vertexIdMap;
+int num_vertex=0;
+void graph_add_edge(int u,int v)
+{
+    G[v].push_back(u);
+    in_degree[u]+=1;
+}
+int graph_vertexID(int v)
+{
+    if(vertexIdMap.count(v))
+    {
+        return vertexIdMap[v];
+    }
+    else
+    {
+        vertexIdMap[v] = num_vertex ;
+        num_vertex +=1;
+        return vertexIdMap[v];
+    }
+}
+int set_parent[MAXN];
+int set_findParent(int u);
+void set_union(int u,int v)
+{
+    int x = set_findParent(u);
+    int y = set_findParent(v);
+    if(x!=y)
+    {
+        if(set_parent[x] &lt; set_parent[y])
+        {
+            set_parent[x] += set_parent[y];
+            set_parent[y] = x;
+        }
+        else
+        {
+            set_parent[y] += set_parent[x];
+            set_parent[x] = y;
+        }
+    }
+}
+int set_findParent(int u)
+{
+    if(set_parent[u]&lt;0)
+        return u;
+    else
+    {
+        set_parent[u] = set_findParent(set_parent[u]);
+        return set_parent[u];
+    }
+}
+int main(void)
+{
+    char winFlag = 1;
+    int i,N,M;
+    char msg[5];
+    int x,y;
+    memset(set_parent,0xFF,sizeof(set_parent));
+    memset(in_degree,0,sizeof(in_degree));
+    scanf(&quot;%d%d&quot;,&amp;N,&amp;M);
+    for(i=0;i&lt;M;i++)
+    {
+        scanf(&quot;%d%s%d&quot;,&amp;x,msg,&amp;y);
+        node[i].u = x;
+        node[i].v = y;
+        node[i].op = msg[0];
+        if(node[i].op == '=')
+        {
+            set_union(node[i].u,node[i].v);
+        }
+    }
+    for(i=0;i&lt;M &amp;&amp; winFlag==1;i++)
+    {
+        if(node[i].op == '&gt;')
+        {
+            x = set_findParent(node[i].u);
+            y = set_findParent(node[i].v);
+            if(x==y)
+            {
+                winFlag = 0;
+                break;
+            }
+            else
+            {
+                x=graph_vertexID(x);
+                y=graph_vertexID(y);
+                graph_add_edge(x,y);
+            }
+        }
+    }
+    if(winFlag)
+    {
+        queue&lt;int&gt; Q;
+        int num_deleteVertex = 0;
+        for(i=0;i&lt;num_vertex;i++)
+        {
+            if(in_degree[i]==0)
+            {
+                Q.push(i);
+            }
+        }
+        while(Q.size()&gt;0)
+        {
+            x = Q.front();
+            Q.pop();
+            num_deleteVertex +=1;
+            for(int j=0;j&lt;G[x].size();j++)
+            {
+                y = G[x][j];
+                in_degree[y] -=1;
+                if(in_degree[y]==0)
+                {
+                    Q.push(y);
+                }
+            }
+        }
+        if(num_deleteVertex != num_vertex)
+        {
+            winFlag = 0;
+        }
+    }
+    if(winFlag)
+    {
+        printf(&quot;consistent\n&quot;);
+    }
+    else
+    {
+        printf(&quot;inconsistent\n&quot;);
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-08T13:33:03+09:00">
+      日 08 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

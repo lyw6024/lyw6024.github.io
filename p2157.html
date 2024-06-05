@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Friend Number之打表</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2157.html" rel="bookmark"
+         title="Permalink to Friend Number之打表">Friend Number之打表</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>问题描述： Paula和Tai是夫妻，他们的电话号码是 2200284 ， Tai 告诉 Paula ,220与284是一对"Friend Number"，因为220的所有因子之和恰是284，而284的所有因子之和也恰是220，在小于1000的数字中，只有这一对数字是Friend Number。本题给出区间[a,b]，计算在这个区间内有多少对Friend Number.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>题目链接： <a href="https://vjudge.net/problem/NBUT-1223">https://vjudge.net/problem/NBUT-1223</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于求一个数字的所有因数，只能靠枚举，此题可以在外边先写程序计算出所有小于MAXN的friend number数对，然后此题的程序直接读取常量数组即可。为了把握求所有friend number的计算进度，这里编写一个C#的winForm窗体来观察。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2158,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-134.png" alt="[Image]" class="wp-image-2158"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>计算的核心步骤为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private int allFactorSum(int x)
+{
+    int s = 1;
+    for(int i=2;i*i&lt;=x;i++)
+    {
+        if (x % i == 0)
+            s += i + x/i;
+    }
+    return s;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>主调函数：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>for (int i=0;i&lt;MAXN;i++)
+{
+    int R = allFactorSum(i);
+    if( i==allFactorSum(R) &amp;&amp; i!=R &amp;&amp; i&lt;R)
+    {
+        Console.WriteLine(&quot;{0},{1}&quot;,i,R);
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>但是像这种计算耗时非常长的操作，如果直接是加载窗体时触发，或者通过点击按钮触发，那么界面会卡住，直到计算完成后才恢复，因为计算时窗体的主线程被计算占用，无法响应其它的动作。所以要将主调函数的运算放在新的Task中去运行，将计算线程和界面线程分开。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>为了看到计算进度，在窗体上添加一个progressBar。为了看到计算结果，添加一个ListBox，每当计算出一个结果，就将结果添加到ListBox中。另外，ListBox中的数据不易编辑，在计算之后使Button能够将数据导出为文本文件。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，将主调函数放在 Form_Load方法中，使用<code>new Task().Start();</code>的方式启动，这样窗体能够正常启动，计算过程也在进行。但如果在此时直接修改控件的属性，则会报“不是从创建控件的线程访问”，这个问题在  <a href="https://www.malic.xyz/archives/1957">https://www.malic.xyz/archives/1957</a>  中讨论过，只需要使用delegate指定函数，并使用Invoke将参数传到delegate中，就可以在Task中访问控件。delegate的new要在Form的构造函数中声明，如果在Form构造函数之外直接以初始化的形式，那就要求这个函数必须是static，而static类型要访问控件就又要将控件声明成static。所以为了直接使用控件，不需要将函数声明成static，而是选择在Form构造函数中声明相应的函数委托。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>delegate void changeProgress(int x);
+delegate void addItemToLb(string s);
+delegate void setButtonEnabled(bool f);
+changeProgress changeProgress1;
+addItemToLb addItemTolb1;
+setButtonEnabled setButtonEnabled1;
+public Form1()
+{
+    InitializeComponent();
+    changeProgress1 = new changeProgress(changeProgressFunction);
+    addItemTolb1 = new addItemToLb(addItemToLbFunction);
+    setButtonEnabled1 = new setButtonEnabled(setButtonEnabledFunction);
+}
+private void setButtonEnabledFunction(bool f)
+{
+    button1.Enabled = f;
+}
+private void addItemToLbFunction(string s)
+{
+    listBox1.Items.Add(s);
+}
+private void changeProgressFunction(int x)
+{
+    var t = (int)((1 + x) * 100.0 / MAXN);
+    if (t &gt; progressBar1.Value)
+    {
+        progressBar1.Value = t;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>Form_Load的方法写作：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void Form1_Load(object sender, EventArgs e)
+{
+    new Task(() =&gt;
+    {
+        Invoke(setButtonEnabled1, false);
+        for (int i=0;i&lt;MAXN;i++)
+        {
+            int R = allFactorSum(i);
+            if( i==allFactorSum(R) &amp;&amp; i!=R &amp;&amp; i&lt;R)
+            {
+                Invoke(addItemTolb1,String.Format(&quot;{0},{1}&quot;, i, R));
+            }
+            Invoke(changeProgress1, i);
+        }
+        Invoke(setButtonEnabled1, true);
+        MessageBox.Show(&quot;FINISHED.&quot;,&quot;HINT&quot;,MessageBoxButtons.OK,MessageBoxIcon.Information);
+    }).Start();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>在计算结束之后，使用MessageBox弹出一个提示窗口表示计算已经完成。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>最后再为按钮编写一个click事件，将计算结果输出成文本文件。需要计算完成后再导出，所以设定当计算完成后button的Enable才修改为true。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void button1_Click(object sender, EventArgs e)
+{
+    System.IO.FileStream fp = new System.IO.FileStream(&quot;res&quot;, System.IO.FileMode.OpenOrCreate);
+    System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(fp);
+    foreach (var it in listBox1.Items)
+    {
+        streamWriter.WriteLine(it);
+    }
+    streamWriter.Close();
+    fp.Close();
+    Invoke(setButtonEnabled1, false);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样大概几分钟就将结果全部算出，最后编写C++程序，把已经获得的Friend number当作常量数组编写到代码当中：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+const int tA[] = {
+220,1184,2620,5020,6232,10744,12285,17296,63020,66928,
+67095,69615,79750,100485,122265,122368,141664,142310,171856,176272,185368,196724,
+280540,308620,319550,356408,437456,469028,503056,522405,600392,
+609928,624184,635624,643336,667964,726104,802725,879712,898216,947835,998104,
+1077890,1154450,1156870,1175265,1185376,1280565,1328470,1358595,
+1392368,1466150,1468324,1511930,1669910,1798875,2082464,2236570,2652728,2723792,
+2728726,2739704,2802416,2803580,3276856,3606850,3786904,3805264,
+4238984,4246130,4259750,4482765,4532710,4604776};
+const int tB[] = {
+284,1210,2924,5564,6368,10856,14595,18416,76084,66992,
+71145,87633,88730,124155,139815,123152,153176,168730,176336,180848,203432,202444,
+365084,389924,430402,399592,455344,486178,514736,525915,669688,
+686072,691256,712216,652664,783556,796696,863835,901424,980984,1125765,1043096,
+1099390,1189150,1292570,1438983,1286744,1340235,1483850,
+1486845,1464592,1747930,1749212,1598470,2062570,1870245,2090656,2429030,2941672,2874064,
+3077354,2928136,2947216,3716164,3721544,3892670,4300136,
+4006736,4314616,4488910,4445050,5120595,6135962,5162744};
+const int MAXN = 1000000;
+void solve(int a,int b)
+{
+        int i,N=sizeof(tA)/sizeof(int);
+        int s=0;
+        for(i=0;i&lt;N;i++)
+        {
+                if(tA[i]&gt;=a &amp;&amp; tB[i]&lt;=b)
+                {
+                        s+=1;
+                }
+        }
+        printf(&quot;%d\n&quot;,s);
+}
+int main(void)
+{
+        int a,b;
+        while(scanf(&quot;%d%d&quot;,&amp;a,&amp;b)!=EOF)
+        {
+                solve(a,b);
+        }
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-05T03:16:51+09:00">
+      水 05 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - ICDAR 2019 表格结构识别综述</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1534.html" rel="bookmark"
+         title="Permalink to ICDAR 2019 表格结构识别综述">ICDAR 2019 表格结构识别综述</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>表格作为一种有效的数据组织与展现方法被广泛应用，也成为各类文档中常见的页面对象。随着文档数目的爆炸性增长，如何高效地从文档中找到表格并获取内容与结构信息即表格识别，成为了一个亟待解决的问题。ICDAR是一个专注于文档分析与识别问题的国际学术会议，已经连续多届设置了表格识别专题。在今年的ICDAR 2019会议上，有不少研究者在表格检测与结构识别等领域做出了新的贡献，使其有了新的进展。本课题组梳理了该会议中有关表格识别的16篇论文，总结该领域当前的研究进展与挑战。同时，值得注意的是，该会议也举办了关于表格检测与结构识别的比赛，我们对参赛队伍使用的方法与结果进行了一些讨论。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在ICDAR2019会议中，共有16篇与表格识别相关的论文，其中有5篇针对表格检测任务，有8篇针对表格结构识别任务，有1篇在他们的方法里同时进行了表格检测与结构识别的任务，还有2篇则是发布了新的表格识别相关的数据集。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 表格结构识别任务 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 表格结构识别任务与其他的计算机视觉任务都不大一样，所以深度学习方法在这个任务上的发展与进步要比表格检测任务慢一些。但随着各种方法的创新，近些年来，深度学习方法也越来越多地被应用到表格结构识别任务上来，并取得了很不错的效果。除了常规的视觉方法，如语义分割等，今年的ICDAR2019会议上还诞生了诸如使用图神经网络或者循环神经网络技术进行表格结构识别的方法，都算是为未来的工作指了一些可能的发展道路。在8篇论文中，既有针对手写文档的表格结构识别方法，也有针对电子文档或者电子表格的结构识别方法，其中有2篇基于一些规则和机器学习方法，其余均使用了各种类型的深度学习方法。此外，有一篇论文则是使用语义分割技术同时进行了表格检测与结构识别任务。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3><em>  A Genetic-based Search for Adaptive Table Recognition in Spreadsheets </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8978200">https://ieeexplore.ieee.org/document/8978200</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1550,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-100-1024x212.png" alt="[Image]" class="wp-image-1550"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>在A Genetic-based Search for Adaptive Table Recognition in Spreadsheets一文中，作者对电子表格进行结构识别。首先，作者将电子表格中的单元格分类为不同标签，包括Header、Data和Metadata（忽略），然后相邻单元格根据标签异同组成不同的区域，这些区域根据相邻关系则构成了一个标签区域图。作者正是在这个图的基础上进行表格结构识别任务的，这时，表格结构识别任务仅剩下将图划分为不同的表格区域这一个部分了，变成了子图分割任务，如图8所示。作者定义了10个衡量方法来衡量某一种分割的好坏，并将它们进行加权求和。之后对于每一种分割，使用序列二次规划的方法来自动调节权重，以达到最优。在这里，作者使用了遗传算法来查找边数较多的图的最优分割方案，作者将每一条边视为一个布尔值，真表示这条边存在，假表示不存在，从而得到遗传算法中的个体向量。作者还通过一些启发式方法预先找出一些种子个体向量添加到遗传算法的输入中，将它视为一个比较好的候选解，并参与到迭代过程中，从而减少了迭代代数。对于边数较少的图，作者直接使用穷举搜索来查找。作者最终在从ENRON语料中生成的数据集上进行测试，训练数据集中包含一部分随意选择性标错的噪声数据项，以此保证算法的鲁棒性。作者将预测结果与Ground Truth的IoU超过0.9的表格视为成功识别出的表格，并计算最终的准确率，达到了89.6%的准确率，并验证了遗传算法、预设种子以及故意制造噪声训练数据对性能提升的有效性。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>Table Row Segmentation </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8977976">https://ieeexplore.ieee.org/document/8977976</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1544,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-97.png" alt="[Image]" class="wp-image-1544"/><figcaption> 用文本与分隔符构造的示意图 <br /> 黑细线是表格真实的单元格边界。蓝色框为文本区域，被B、I、O标注。绿实线为候选行分隔符，被圆圈中的S、I、O标注。虚线为它们之间的边。 </figcaption></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p><em>Table Row Segmentation</em>一文针对手写历史文档中的表格进行了行分割，以此对表格结构进行识别。作者首先找出可能的行分隔符候选项，然后再使用机器学习方法从中找出正确的那些候选项，以此对表格进行行分割。作者尝试了三种行分隔符，包括任意生成的水平线组成的“栅格分隔符”，可以将文本区域分为上下两个部分的“二分分隔符”和有一定倾斜角并且不会穿过文本基线的“倾斜分隔符”。作者首先使用基于规则的方法得到上述行分隔符的候选，然后将它们和文本区域构成一个图，文本区域和分隔符作为顶点，文本区域之间如果没有其他文本阻挡，则他们之间存在一条边，而文本区域和分隔符、分隔符和分隔符之间如果距离不超过一个预设的视觉范围，则也存在一条边，顶点和边的特征主要是一些几何特征。最终，作者使用条件随机场来对顶点进行分类，文本区域包括三个标签：B-某个单元格的开始，I-某个单元格的内部内容，O-表格区域外的其他文本；分隔符也包括三个标签：S-真正的行分隔符，I-在表格内部但不是一个合理的分隔符候选，O-表格区域外的分隔符候选。一个构建并标注完成的图如图9所示。在最终实验里，作者在ABP和NAF两个数据集上进行了测试，最终发现倾斜分隔符效果最好，对这些标签分类的F1值大部分均超过90%，甚至接近100%，一个原因是倾斜的文本行在手写文档中出现频率较高。此外，在两个数据集上进行了IoU阈值为0.8/1的行分割性能评测实验，F1值分别达到86%/78%和79%/72%。但作者也阐述了方法的局限性，就是无法处理跨行合并的单元格的情况，以及可以对方法中的超参数进行优化以达到更好的效果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>Deep Splitting and Merging for Table Structure Decomposition </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8977975/">https://ieeexplore.ieee.org/document/8977975/</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1551,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-101-1024x135.png" alt="[Image]" class="wp-image-1551"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>在<em>Deep Splitting and Merging for Table Structure Decomposition</em>一文中，作者提出了一种先自顶向下、再自底向上的两阶段表格结构识别方法SPLERGE，分为Split和Merge两个部分，整体架构如图10所示。Split部分先把整个表格区域分割成表格所具有的网格状结构，该部分由图11所示的深度学习模块组成两个独立的模型，分别预测表格区域的行分割和列分割情况。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1552,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-102-1024x302.png" alt="[Image]" class="wp-image-1552"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> 每个模块中，除了常规的多尺度特征提取部分，作者还提出了投影池化（Projection Pooling）操作，它的输出实际上就是求取每一行或列的平均特征值，用于将每一行或列的整体特征整合到原先的局部特征上。最终，模型预测每一行或列像素是否属于单元格间的分隔符区域。而Merge部分则是对Split的结果中的每对邻接网格对进行预测，判断它们是否应该合并。这里作者尝试了深度学习方法和启发式的方法，发现两者在不同的数据集上各有千秋。该模型最终在ICDAR2013表格竞赛表格结构识别子任务的数据集上取得了State-of-the-art的效果，预测的单元格对与Ground truth匹配的F1值达到95.26%，并在作者准备的非公开数据集上也达到95.92%的效果，远远超过复现的已有方法和商业软件的性能。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>DeepTabStr:Deep Learning based Table Structure Recognition </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8978137">https://ieeexplore.ieee.org/document/8978137</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1553,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-103-1024x330.png" alt="[Image]" class="wp-image-1553"/><figcaption> DeepTabstr中引入可变形卷积后的网络结构 </figcaption></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>在<em>DeepTabStr:Deep Learning based Table Structure Recognition</em>一文中，作者首先提出，文档图片中表格的位置和大小不同，导致表格特征可能在特征的任意区域以任意大小出现，传统的卷积网络在处理时，会遇到问题。因此，作者将变形卷积的概念引入，用来解决表格的检测问题。由于基于FCN的语义分割类方法，最终结果严重依赖于后处理的方案，因此作者舍弃此类方案，将表格结构检测视为一个对象检测问题，将表格的行和列当做是要检测的对象。变形卷积网络加入了各个像素的偏移向量Offset来训练卷积窗口的形状。传统的ROI-pooling层将ROI转换为k*k的固定大小，可变形的ROI-pooling层也引入了额外的偏移量，使得ROI-pooling层也具有了变形的属性，以适应不同区域的对象检测。本文表格结构识别方法的整体结构如图12所示。此外，为了弥补表格结构识别数据的不足，本文提出了一个基于ICDAR2017的表格行列结构数据集TabStructDB。作者分别用Faster R-CNN、FPN、RFCN进行了实验，并在ICDAR2013和TabStructDB上进行了训练和测试，在ICDAR2013数据集上可以达到F1-Score为93%的效果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>ReS2TIM: Reconstruct SyntacticStructures from Table Images</em> </h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8978027/">https://ieeexplore.ieee.org/document/8978027/</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1554,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-104.png" alt="[Image]" class="wp-image-1554"/><figcaption> 单元格关系判别网络结构<br /><br /> </figcaption></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p><em>ReS2TIM: Reconstruct SyntacticStructures from Table Images</em>一文则是重点关注了单元格检测定位后的表格重建工作。作者先将各个单元格之间定义为上下、左右相邻的关系，使用一个单元格关系判别网络来判断任意两个单元格的相邻关系。给定带有单元格边界框的表格图像，关系判别网络将单元格深度数据特征和空间特征进行了连接，作为关系对的联合特征，再判断单元格之间的关系。网络整体结构如图13。而对于一个表格来说，具有相邻关系的单元格占比极少，这会极大地影响网络的效果，因此作者又提出了基于距离的损失权重。在设计损失函数时，按照单元格的距离来设定对应损失权重，距离越远，损失权重越小。在判断完单元格之间的关系之后，根据相邻关系构建出对应的图模型。再根据图模型，按照单元格的上下相邻关系，使用Dijkstra算法确定原表格的行和列的最大数量。之后确定表格内每个单元格的起始的行和列以及跨行跨列的数量。作者在CMDD数据集和ICDAR2017数据集上进行了实验，在CMDD数据集单元格关系的判定任务上，F1-score达到了99.8%的效果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>Rethinking Semantic Segmentation for Table Structure Recognition in Documents</em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8978088">https://ieeexplore.ieee.org/document/8978088</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1555,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-105-1024x323.png" alt="[Image]" class="wp-image-1555"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p><em>Rethinking Semantic Segmentationfor Table Structure Recognition in Documents</em>一文将表格结构的识别定义为语义分割问题，使用FCN网络框架，对表格的行和列分别进行预测。同时基于表格的一致性假设，介绍了一种对预测结果进行切片的方法，降低了表格识别的复杂度。作者使用了FCN的Encoder和Decoder的结构模型，并加载了在ImageNet预训练好的模型。图片经过模型生成了与原图大小相同的特征，切片过程将特征按照行和列进行平均，将H*W*C（高*宽*Channel）的特征合并成了H*C和W*C大小特征，对这些特征进行卷积后，再进行复制，扩展为H*W*C的大小，再通过卷积层得到每个像素点的标签。最后进行后处理得到最终的结果。整体的框架如图14所示。文章在ICDAR2013数据集上进行了实验，在IoU为0.5的情况下，取得了F1-score为93.42%的效果。然而本文假设表格中所有的单元格不存在跨行跨列，每行每列都从表格的最左侧和最上端开始，到最右侧和最下端结束，因此本方法还存在局限。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3><em> Rethinking Table Recognitionusing Graph Neural Networks </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://ieeexplore.ieee.org/document/8978070">https://ieeexplore.ieee.org/document/8978070</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1556,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-106-1024x248.png" alt="[Image]" class="wp-image-1556"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p><em>Rethinking Table Recognitionusing Graph Neural Networks</em>一文则是将GNN应用到了表格结构识别任务中，把视觉特征、位置特征和图中的结构特征进行有效融合。作者使用基于表格区域的建图方法，以OCR识别出的单词区域作为顶点。之后，作者先根据建好的图，从表格图像中提取各个顶点的图像位置特征和CNN提取的视觉特征等特征，然后使用GNN进行特征的交互融合，得到每个顶点的表征特征。作者尝试了两种GNN模型，分别是动态图卷积神经网络DGCNN（Dynamic Graph Convolutional Neural Networks）和GravNet，并且把应用了常规CNN的DenseNet作为基线模型以进行性能对比。训练时随机对顶点对采样，使用DenseNet分别进行是否同行、同列、同单元格的结构关系分类，而在测试时，则对图中每一个顶点对都进行三种分类，得到测试结果。模型整体架构如图15所示。作者将模型在他们自己生成的约有50万个表格的数据集上进行测试，表格被分为4种类别：全线表、无线表、少线表和错切表，其中最后一种是为了模拟由相机等设备获取到的有形变的表格数据而准备的。作者使用完美匹配率来衡量识别效果，模型预测的三种结构关系分类全部正确的表格视为完美匹配表格。最终在4种表格数据上测试最好结果依次为96.9%、94.7%、52.9%和68.5%，均为使用DGCNN得到的结果，可见GNN的确可以产生更好的效果，然而少线表和错切表仍然是难点。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>TableStructure Extraction with Bi-directional Gated Recurrent Unit Networks </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>与大部分的基于CNN的方法不一样，<em>TableStructure Extraction with Bi-directional Gated Recurrent Unit Networks</em>中则是针对单元格在行列上具有重复性的序列特征这个特点，提出使用循环神经网络来进行表格结构识别任务。该文作者同样是使用两个独立的模型来进行行列分割，整体架构如图16所示。针对不同的分割任务，首先使用类似的预处理操作使得表格区域变为一种对于深度学习网络来说更容易处理的形式，包括去除非文本前景对象、二值化和水平或竖直的膨胀操作，膨胀操作是为了使得图像中的行或列特征更明显。然后，将预处理结果按像素行或列放入独立的两个两层双向循环神经网络，以同时将某个像素行或列的相邻两个邻居考虑进去。接着将循环神经网络的输出行列特征分类为是否属于行列分隔符区域，最终把预测分隔区域的中点作为最终的行列分割结果。作者尝试了LSTM和GRU这两个经典循环神经网络模型，发现GRU在实验效果上更有优势。最后，作者在UNLV和ICDAR2013表格竞赛表格结构识别子任务的数据集上进行测试，都超过了之前方法中的最好结果，其中在ICDAR2013数据集上单元格关系匹配F1值达到93.39%。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> <em>TableNet: Deep Learning Model for End-to-end Table Detection and Tabular Data Extraction from Scanned Document Images </em></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://arxiv.org/pdf/2001.01469.pdf">https://arxiv.org/pdf/2001.01469.pdf</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1557,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-107.png" alt="[Image]" class="wp-image-1557"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>最后，在TableNet: Deep Learning Model for End-to-end Table Detection and Tabular Data Extraction from Scanned Document Images一文中，作者则使用深度学习模型同时解决表格检测和表格结构识别两个任务。作者提出了一种端到端的、多任务的、基于编解码器的图像语义分割模型TableNet，整体架构类似于U-Net，</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 编码器阶段使用了ImageNet上预训练的VGG-19模型来提取特征，而解码器阶段则分成两个分支，分别上采样恢复到原图大小并最终得到表格和表格区域中列分割的mask图。下采样中对应大小的特征图被添加到上采样对应层的特征图中，以恢复最终图像中的位置信息。最终，再使用基于规则的方法将列分割结果处理为最终的表格单元格邻接关系结果，得到表格真正的逻辑结构。多任务模型有利于融合表格分割和表格列分割任务中涉及到的信息或特征，以产生相互促进性能提升的效果。此外，作者还尝试将OCR识别出的文本区域的数据类型这种语义特征添加到输入中，采用的做法是使用正则表达式简单对文本区域进行数据类型匹配分类，然后对于不同数据类型的文本区域添加上不同的、独有的颜色高亮背景。作者在Marmot和ICDAR2013表格竞赛数据集上训练，然后在ICDAR2013表格竞赛数据集上进行测试，实验结果也达到了非常好的水平，表格检测和结构识别任务上最好的F1值分别达到96.62%和91.51%，证明了模型的有效性，同时也通过对比实验证明了语义信息和在目标数据集上进一步微调对性能有提升作用。作者最后提出之后可以将行分割任务也结合进来，或者使用更多的其他语义信息。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>E. Koci, M. Thiele, O. Romero, and W.Lehner, "A Genetic-based Search for Adaptive Table Recognition in Spreadsheets," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li><li> J.-L. Meunier and H. Déjean,"Table Rows Segmentation," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> C. Tensmeyer, V. I. Morariu, B. Price,S. Cohen, and T. Martinez, "Deep Splitting and Merging for Table Structure Decomposition," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li><li> S. A. Siddiqui, I. A. Fateh, S. T. R.Rizvi, A. Dengel, and S. Ahmed, "DeepTabStR: Deep Learning based TableStructure Recognition," in the 15th IAPRInternational Conference on Document Analysis and Recognition, 2019.</li><li> W. Xue, Q. Li, and D. Tao,"ReS2TIM: Reconstruct Syntactic Structures from Table Images," in the 15th IAPR International Conference onDocument Analysis and Recognition, 2019.</li><li> S. A. Siddiqui, P. I. Khan, A. Dengel,and S. Ahmed, "Rethinking Semantic Segmentation for Table Structure Recognition in Documents," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> S. R. Qasim, H. Mahmood, and F.Shafait, "Rethinking Table Recognition using Graph Neural Networks,"in the 15th IAPR International Conferenceon Document Analysis and Recognition, 2019.</li><li> S. A. Khan, S. M. D. Khalid, M. A.Shahzad, and F. Shafait, "Table Structure Extraction with Bi-directional Gated Recurrent Unit Networks," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> S. Paliwal, V. D, R. Rahul, M. Sharma,and L. Vig, "TableNet: Deep Learning model for end-to-end Table detectionand Tabular data extraction from Scanned Document Images," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li></ul>
+<!-- /wp:list -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-21T05:16:00+09:00">
+      火 21 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

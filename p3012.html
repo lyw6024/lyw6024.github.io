@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C#操作sqlite</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3012.html" rel="bookmark"
+         title="Permalink to C#操作sqlite">C#操作sqlite</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>在Nuget管理器中找到<code>System.Data.SQLite</code>并导入到项目。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>定义全局变量 <code>SQLiteConnection m_dbConnection</code>指定使用的数据库名，变量<code>SQLiteCommand</code>用来执行相应SQL命令。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如下示例实现了窗体Load事件时的读取数据库相应数值，以及关闭窗体后更新相应数值的操作。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void Form1_Load(object sender, EventArgs e)
+{
+    m_dbConnection = new SQLiteConnection(&quot;Data Source=uiparams.db;Version=3;&quot;);
+    m_dbConnection.Open();
+    Dictionary&lt;string, string&gt; uikvs = new Dictionary&lt;string, string&gt;();
+    string sql = &quot;select * from param &quot;;
+    SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+    SQLiteDataReader reader = command.ExecuteReader();
+    while (reader.Read())
+    {
+        uikvs[ (string)reader[&quot;keyname&quot;] ] = (string)reader[&quot;val&quot;];
+    }
+    numericUpDown1.Value = Convert.ToDecimal(uikvs[&quot;clicktimes&quot;]);
+    numericUpDown2.Value = Convert.ToDecimal(uikvs[&quot;clickperiod&quot;]);
+    numericUpDown3.Value = Convert.ToDecimal(uikvs[&quot;shotdelay&quot;]);
+    leftUpperX.Text = uikvs[&quot;upperleftx&quot;];
+    leftUpperY.Text = uikvs[&quot;upperlefty&quot;];
+    regionWidth.Text = uikvs[&quot;regionwidth&quot;];
+    regionHeight.Text = uikvs[&quot;regionheight&quot;];
+    m_dbConnection.Close();
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+{
+    m_dbConnection = new SQLiteConnection(&quot;Data Source=uiparams.db;Version=3;&quot;);
+    m_dbConnection.Open();
+    Dictionary&lt;string, string&gt; uikvs = new Dictionary&lt;string, string&gt;();
+    string sql = &quot;select * from param &quot;;
+    SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+    SQLiteDataReader reader = command.ExecuteReader();
+    while (reader.Read())
+    {
+        uikvs[(string)reader[&quot;keyname&quot;]] = (string)reader[&quot;val&quot;];
+    }
+    uikvs[&quot;clicktimes&quot;] = numericUpDown1.Value.ToString();
+    uikvs[&quot;clickperiod&quot;] = numericUpDown2.Value.ToString();
+    uikvs[&quot;shotdelay&quot;] = numericUpDown3.Value.ToString();
+    uikvs[&quot;upperleftx&quot;] = leftUpperX.Text;
+    uikvs[&quot;upperlefty&quot;] = leftUpperY.Text;
+    uikvs[&quot;regionwidth&quot;] = regionWidth.Text;
+    uikvs[&quot;regionheight&quot;] = regionHeight.Text;
+    foreach(var it in uikvs.Keys)
+    {
+        sql = String.Format(&quot;update param set val = '{0}' where keyname = '{1}'&quot;, uikvs[it], it);
+        command = new SQLiteCommand(sql, m_dbConnection);
+        command.ExecuteReader();
+    }
+    m_dbConnection.Close();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-02-20T06:12:33+09:00">
+      土 20 2月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

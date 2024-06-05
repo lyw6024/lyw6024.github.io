@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2021年寒假热身赛1</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2900.html" rel="bookmark"
+         title="Permalink to 2021年寒假热身赛1">2021年寒假热身赛1</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A. <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/415343#problem/A" target="_blank">新年计划</a></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bob在一年365天之内，每一天只有玩游戏或不玩游戏，建立一个下标从1到365的数组，初始化均为0，如果Bob这一天有游戏玩，则将相应下标的值改为1。数据全部读取完成之后，统计整个数组中有多少个1，就说明Bob玩了多少天的游戏。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/4LS/" data-type="link" data-id="http://p.malic.xyz/4LS/" target="_blank" rel="noreferrer noopener">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">B. <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/415343#problem/B" target="_blank">配制溶液</a> </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>只需要判断发生化学反应的这几对的出现次数即可，可以利用下标为1至8的数组记录哪些数字被使用了，然后二者之和是否符合相应值即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p> <a href="http://lab.malic.xyz/pastebin/AaGf/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++) </a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">C. <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/415343#problem/B" target="_blank">Backspace</a> </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>准备一个字符数组，最后将会把这个数组作为结果直接输出。从输入数据中逐字符读取，若是普通字符就写到字符数组里，若是<code>'&lt;'</code>符号就将字符数组的读写位置退一个，直到输入数据读取完毕。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/7ZWf/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">D.  <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/415343#problem/D" target="_blank">无法整除</a> </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>按题意直接逐元素取余，时间复杂度在 \( O(N^2) \)，由于N在\(10^5\)数量级，这样大的运算量不能拿到全部的分数。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>类似于质数筛，将\( \{ A \} \)从小到大排序， \( \{ A \} \) 中最大的元素为M，开一个长为M的数组bucket[]，初始值为0。对于每个\( A_i\)，将\(2 A_i,3 A_i,\cdots, k  A_i  \leq M\)置为1，说明数组下标为1的就表示相应数字会被\(A_i\)整除。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最后重新访问数组A，统计bucket[\(A_i\)]==0的就是均不会被其它任何元素整除的。时间复杂度为\( O(M \log(M) + N \log(N)) \)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>同时，要对同一元素出现多次的情况稍作处理：可以用一个set结构，或visited[]数组，若\(A_i\)曾出现过，则直接置bucket[\(A_i\)]=1.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/9wZc/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++)</a> </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">E.  <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/415343#problem/E" target="_blank">数位相加</a> </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>输出最多100位，那么最多就是100个9，也就是各位数之和p最大为900，各位数平方之和q最大是8100，如果输入的p与q超过了其最大值，直接就No solution。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>有解的情况，利用一个dp[p][q]保存数字各位之和为p，各位平方之和为q的数字的<strong>最小位数</strong>，并用sel[p][q]记录是哪个数字得到了最小位数，以便于回溯求其最小解。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>dp[][]与sel[][]的计算只需要做1次。读取N组数据p,q ，每组数据根据dp[p][q]与sel[p][q]得到数字序列，将待输出序列先从小到大排序再逐位输出即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/q2mc/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-01-09T09:02:00+09:00">
+      土 09 1月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

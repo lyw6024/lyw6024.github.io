@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 优选法与黄金分割</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1454.html" rel="bookmark"
+         title="Permalink to 优选法与黄金分割">优选法与黄金分割</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>优选的方法非常常见，易于解决，不太容易引起人们注意。但在研究人员看来，对产品的质量与优选息息相关：蒸馒头时放多少碱好?放多了会发苦，放少了面发不起来。某种高分子材料的改性剂用料比例是多少会达到最好的效果? 抽象成数学问题，其实就是单峰函数求极值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如对于纤维素织物中加入四溴对二甲苯作为改性剂，可以使纤维织物有阻燃的效果，而每1kg纤维素织物中加入多少四溴对二甲苯能起到好的效果呢，是100克还是200克。一种朴素的想法是分别试一下100g,101g,102g,...,200g，但是这样一步步做下来就太浪费试剂了。为了尽可能快地找到这个最优的极值，就可以使用优选法。我们对实验效果进行一个量化，例如用从点火到燃烧的时间表示阻燃效果，时间越长则阻燃效果越好。这样就建立了一个试剂的质量映射到燃烧时间的单变量函数，假定已知试剂用量在\( [100,200] \)内对于阻燃时间有且仅有1个极大值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在试验之前，先直接给出一个数字 \( \phi = 0.618 \)，至于为什么是它，将在后边进行讨论。方法为：首先将测试区间的长度乘以这个因数，得到一个“间隔”，然后分别在距离两端这个间隔的位置进行一次试验，可以对其取整 \( (200-100)\times0.618 =62\)，这样，就在到100和200的距离为62的两点162与138分别进行试验，并将这两个试验结果进行对比，如果138的试验效果好，就将区间缩小为 \( [100,162] \)，若162的效果好，则将区间缩小为 \( [138,200] \) 。重复操作直到区间长度达到了满意的精度，则极值就在区间中。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>那么，为什么是以\( \phi=0.618 \)作为比例进行分割?我们以比例W作为分割比，假定函数在区间\( [0,1] \) 内有唯一极值，那么按W会将区间分为三部分：\( [0,1-W),[1-W,W),[W,1] \) 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1456,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-79.png" alt="[Image]" class="wp-image-1456"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>采取优选法就是为了减少试验次数。如果第1次通过试验舍弃了[W,1]区间，那么接下来将在[0,W]区间中在 \( W(1-W) \) 与 \( W^2 \) 两点进行试验。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1457,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-80.png" alt="[Image]" class="wp-image-1457"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>将上次试验的数据重复利用就能够减少试验次数，即 \( 1-W = W^2 \)。当然如果第1次实验舍弃了\( [0,1-W) \)区间，得到的结论是类似的\(W = 1-W+W(1-W) \)，化简后同样得到方程  \( 1-W = W^2 \) ：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1458,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-81.png" alt="[Image]" class="wp-image-1458"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>这个方程\( 1-W = W^2 \)的大于0的解就是\( \frac{\sqrt{5}-1}{2}\)，\( \phi = 0.618 \) 就是 \( \frac{\sqrt{5}-1}{2}\) 的三位小数近似。在应用时可根据需要，取0.6, 0.62, 0.618等值。采取这个“黄金分割比”的原因就是它可以利用上次试验的结果，从而减少了总试验的次数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样我们也可以编写程序来求解区间内的最大最小值。例如\( f(x) = \frac{3}{x}+x \)在\( (0,+\infty) \)上有且仅有一个最小值，编写程序求解：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme","theme":"seti"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define (f x) (+ (/ 3  x) x ))
+(define (peakValue f)
+  (define (good-enough? l r)
+    (&lt; (- r l) 0.000001 )
+  )
+  (define (shrink f lwbd upbd)
+    (define pleft (- upbd (* (- upbd lwbd) 0.618 )))
+    (define pright (+ lwbd (* (- upbd lwbd) 0.618 )))
+    (define rleft (f pleft))
+    (define rright (f pright))
+    (if (good-enough? lwbd upbd)
+        lwbd
+        (if (&lt; rleft rright)
+            (shrink f lwbd pright)
+            (shrink f pleft upbd)))
+    )
+  (shrink f 0.1 100)
+)
+(define x_min (peakValue f))
+(display x_min)
+(newline)
+(display (f x_min))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"erlang-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+double f(double x)
+{
+    return 3/x+x;
+}
+int main(void)
+{
+    const double phi = 0.618;
+    const double epsilon = 0.00000001;
+    double lwbd=0.1,upbd = 10.0;
+    double pleft,pright,rleft,rright;
+    while(upbd-lwbd&gt;epsilon)
+    {
+        pleft = upbd-(upbd - lwbd)*phi;
+        pright= lwbd+(upbd - lwbd)*phi;
+        rleft = f(pleft);
+        rright= f(pright);
+        if(rleft&lt;rright)
+        {
+            upbd=pright;
+        }
+        else
+        {
+            lwbd=pleft;
+        }
+    }
+    printf(&quot;f_min(%lf)=&quot;,lwbd);
+    printf(&quot;%lf\n&quot;,f(lwbd));
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>运行得到结果在1.732051处取得最小值，为3.464102。不难验证，\( f(x)=\frac{3}{x}+x\)大于0的最小值在\( x=\sqrt{3} \)处取得，最小值是\(\frac{3}{\sqrt{3}}+\sqrt{3}=2\sqrt{3} \)，这与我们计算结果是相符的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-18T15:05:08+09:00">
+      土 18 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

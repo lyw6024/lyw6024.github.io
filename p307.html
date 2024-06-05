@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 测试CFL的成员性</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p307.html" rel="bookmark"
+         title="Permalink to 测试CFL的成员性">测试CFL的成员性</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> 上下文无关文法是一种强大的描述语言的方法。  编写一段程序，用于测试字符串在上下文无关文法中的成员性，即由此文法是否可以生成这个字符串。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&lt;自动机理论、语言与计算理论&gt;一书中有这样一节： <a href="http://layout.malic.xyz/%E6%B5%8B%E8%AF%95CFL%E7%9A%84%E6%88%90%E5%91%98%E6%80%A7.pdf">http://layout.malic.xyz/%E6%B5%8B%E8%AF%95CFL%E7%9A%84%E6%88%90%E5%91%98%E6%80%A7.pdf</a>，介绍了CYK算法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>python实现：</p>
+<!-- /wp:paragraph -->
+<!-- wp:code {"className":"sh_python"} -->
+<pre class="wp-block-code sh_python"><code>import sys
+sys.stdin=open("_in","r")
+grammarTable={}
+while True:
+    msg=input()
+    if msg=='#':
+        break
+    wd,pt=msg.split("->")
+    grammarTable[wd]=pt.split("|")
+def judge(msg):
+    CYK_Table = [ ["" for _ in range(len(msg)+1)] for __ in range(len(msg)+1)]
+    for i in range(len(msg)):
+        s=""
+        for wd in grammarTable:
+            if msg[i] in grammarTable[wd]:
+                s+=wd
+        CYK_Table[i+1][i+1]=s
+    for gap in range(1,len(msg)):
+        i=1
+        while i+gap&lt;=len(msg):
+            s=""
+            for k in range(i,i+gap+1):
+                for w1 in CYK_Table[i][k]:
+                    for w2 in CYK_Table[k+1][i+gap]:
+                        for wd in grammarTable:
+                            if w1+w2 in grammarTable[wd] and wd not in s:
+                                s+=wd
+            CYK_Table[i][i+gap]=s
+            i+=1
+    if 'S' in CYK_Table[1][len(msg)]:
+        return True
+    else:
+        return False
+while True:
+    try:
+        msg=input()
+    except:
+        break
+    print(judge(msg))
+</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-12-31T02:54:41+09:00">
+      火 31 12月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

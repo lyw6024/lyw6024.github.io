@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - django：数据收集与统计可视化的简单设计</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1250.html" rel="bookmark"
+         title="Permalink to django：数据收集与统计可视化的简单设计">django：数据收集与统计可视化的简单设计</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>在<strong>あつまれ　どうぶつの森</strong>中，每周日的上午（12:00前）可以购买大头菜，而周一到周六可在卖出大头菜。大头菜的价值是会浮动的，每天闭店时和中午12:00分别更新一次，也就是每周有12次的价格变动，如果在一周之内没有把菜卖掉，那么周日这些菜就会变成烂菜，不能再卖。</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<p>大头菜实际上就是芜菁，日语中叫作 カブ ，与日语中的股份一词“<ruby>株<rt>かぶ</rt></ruby>” 同音，这个游戏机制确实有点像只有1支股的股票交易。</p>
+<!-- /wp:html -->
+<!-- wp:image {"align":"center","id":1253,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/无标题.png" alt="[Image]" class="wp-image-1253"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>switch肯定没有API，数据只能手动输入。现在要设计一个统计系统，就是将历来的大头菜数据都收集起来，每周日进行归档。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于服务运行在本地，就没有连接数据库，数据都存储在文件当中。处理逻辑是这样的：主页显示了本周和上周的购入价格和卖出价格曲线。如果检查到当前时段的价格还没有填入，表单就处于显示状态，可以填写当前的价格，填写后保存数据并跳转回主页。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>效果展示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1302,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-49-1024x517.png" alt="[Image]" class="wp-image-1302"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>django是MVC开发模式，初始化一个django项目之后，urls.py当中定义的是各种url访问入口，views.py定义的是各种处理函数代表控制器(C)，Models.py当中定义的是数据模型(M)，一般在template文件夹下的各个模板文件代表视图(V).</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>创建一个项目，起名为Brassica（大头菜），并在 Brassica/下建立文件夹template和data，template存放HTML模板，data存放数据。项目Brassica/下打开settings.py，将其中的TEMPLATES=['DIRS':[]...]改为</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>TEMPLATES=[...
+        'DIRS': [BASE_DIR+&quot;/Brassica/templates/&quot;],
+           ...]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样程序可以在这个路径下找到我们的模板文件。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在urls.py中，修改为如下形式，这样就可以执行跳转。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>from django.conf.urls import url
+from . import index,fillData
+urlpatterns = [
+    url(r'^fillNewData',fillData.saveData),
+    url(r'', index.home),
+]
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>接下来就设计index.py中的home()函数和fillData.py中的saveData函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>新建一个index.py用于控制主页的显示</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>from django.shortcuts import render
+import os
+import datetime
+def saveThisPeriodData(request,price):
+    pass
+def isNeedToInputData(theData,fName):
+    fp = open(fName)
+    msg = fp.read().split(&quot;\n&quot;)
+    if (theData.weekday()==6):
+        if msg[0]==&quot;0&quot;:
+            return True
+    else:
+        idx = 2*theData.weekday()
+        if(theData.hour&gt;=12):
+            idx+=1
+        r = eval(msg[1])
+        if(len(r)==0):
+            return True
+        elif idx != r[-1][0]:
+            return True
+    return False
+def home(request):
+    nowData = datetime.datetime.now()
+    def getThisSunday(now):
+        if(nowData.weekday()==6):
+            return nowData
+        else:
+            return  nowData-datetime.timedelta(days=1+nowData.weekday())
+    def getLastSunday(thisSunday):
+        return thisSunday-datetime.timedelta(days=7)
+    thisSunday = getThisSunday(nowData)
+    lastSunday = getLastSunday(thisSunday)
+    fName = &quot;Brassica/data/&quot;+&quot;{:04d}{:02d}{:02d}&quot;.format(thisSunday.year,thisSunday.month,thisSunday.day)
+    if not (os.path.exists(fName)):
+        with open(fName,&quot;w&quot;) as fp:
+            fp.write(&quot;0\n[]\n&quot;)
+    fp=open(fName)
+    msg = fp.read().split(&quot;\n&quot;)
+    ctx = {}
+    if not isNeedToInputData(nowData,fName):
+        ctx[&quot;inputFrame&quot;]=&quot;none&quot;
+    ctx[&quot;BoughtPrice&quot;]=msg[0]
+    ctx[&quot;priceList&quot;]=msg[1]
+    fp.close()
+    ctx[&quot;currTime&quot;] =  nowData
+    weekdayToChar = &quot;一二三四五六日&quot;
+    ctx[&quot;weekDay&quot;] = weekdayToChar[datetime.datetime.now().weekday()]
+    fName = &quot;Brassica/data/&quot;+&quot;{:04d}{:02d}{:02d}&quot;.format(lastSunday.year,lastSunday.month,lastSunday.day)
+    fp=open(fName)
+    msg =fp.read().split(&quot;\n&quot;)
+    ctx[&quot;lastSundayBoughtPrice&quot;] = msg[0]
+    ctx[&quot;lastWeekPriceList&quot;] = msg[1]
+    fp.close()
+    return render(request,&quot;index&quot;,ctx)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>以及用于存储数据的post响应</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>from django.shortcuts import render
+from django.views.decorators import csrf
+import datetime
+def saveData(request):
+    nowData = datetime.datetime.now()
+    if request.method==&quot;POST&quot; and request.POST:
+        def getThisSunday(theData):
+            if(theData.weekday()==6):
+                return theData
+            else:
+                return  theData-datetime.timedelta(days=1+theData.weekday())
+        thisSunday = getThisSunday(nowData)
+        fName = &quot;Brassica/data/&quot;+&quot;{:04d}{:02d}{:02d}&quot;.format(thisSunday.year,thisSunday.month,thisSunday.day)
+        fp = open(fName,&quot;r&quot;)
+        msg = fp.read().split(&quot;\n&quot;)
+        fp.close()
+        print(msg)
+        fp=open(fName,&quot;w&quot;)
+        if(nowData.weekday()==6):
+            fp.write(request.POST['price']+&quot;\n[]&quot;)
+        else:
+            idx = 2*nowData.weekday()
+            if(nowData.hour&gt;=12):
+                idx+=1
+            r = eval(msg[1])
+            r.append( [idx,int(request.POST[&quot;price&quot;])] )
+            fp.write(msg[0]+&quot;\n&quot;+str(r))
+        fp.close()
+    return render(request,&quot;post&quot;)
+    </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>主页对应的模板：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;title&gt;菜价&lt;/title&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;script src=&quot;https://code.highcharts.com.cn/highcharts/highcharts.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://code.highcharts.com.cn/highcharts/highcharts-more.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://code.highcharts.com.cn/highcharts/modules/exporting.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://code.highcharts.com.cn/highcharts/themes/grid-light.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+{{currTime}}&lt;br&gt; 星期{{weekDay}}
+&lt;br&gt;
+&lt;form style=&quot;display:{{inputFrame}}&quot; action=&quot;/fillNewData&quot; method=&quot;post&quot;&gt;
+    {% csrf_token %}
+    &lt;p&gt;当前菜价
+        &lt;input type=&quot;text&quot; name=&quot;price&quot;/&gt;
+    &lt;/p&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+   &lt;div id=&quot;container&quot; style=&quot;width: 1200px; height: 600px; margin: 0 auto&quot;&gt;&lt;/div&gt;
+   &lt;script language=&quot;JavaScript&quot;&gt;
+      var chart = Highcharts.chart('container', {
+    chart: {
+         type:'spline',
+        plotBorderWidth: 1,
+        zoomType: 'xy'
+    },
+    legend: {
+        enabled: false
+    },
+    title: {
+        text: '大头菜价格统计'
+    },
+                legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                },
+    xAxis: {
+        gridLineWidth: 1,
+        title: {
+            text: '时间'
+        },
+        categories: ['Mon A.M.', 'Mon P.M.', 'Tue A.M.', 'Tue P.M.', 'Wed A.M.', 'Wed P.M.',
+                     'Thu A.M', 'Thu P.M.', 'Fri A.M.', 'Fri P.M', 'Sat A.M.', 'Sat P.M.']
+    },
+    yAxis: {
+        startOnTick: false,
+        endOnTick: false,
+        title: {
+            text: '菜价'
+        },
+        maxPadding: 0.2,
+        plotLines: [{
+            color: 'red',
+            dashStyle: 'ShortDash',
+            width: 2,
+            value: {{BoughtPrice}},
+            label: {
+                align: 'right',
+                text:'周日购入价格:{{BoughtPrice}}',
+                x: -10
+            },
+            zIndex: 3
+        },
+        {
+            color: 'black',
+            dashStyle: 'dot',
+            width: 2,
+            value: {{BoughtPrice}},
+            label: {
+                align: 'left',
+                text:'上周日购入价格:{{lastSundayBoughtPrice}}',
+                x: 10
+            },
+            zIndex: 3
+        }
+        ]
+    },
+    plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }
+    },
+    series: [{
+        name:&quot;本周&quot;,
+        data:
+        {{priceList}}
+    },
+    {
+        name:&quot;上周&quot;,
+        data:
+        {{lastWeekPriceList}}
+    }]
+});
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>POST请求对应的模板只需要1句话，跳转回主页即可</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;script &gt;window.location.href=&quot;/&quot;&lt;/script &gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样，回到上一级目录，运行</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>python manage.py runserver 8809</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>就可以在端口8809运行程序</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-03T03:31:32+09:00">
+      金 03 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

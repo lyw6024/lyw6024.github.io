@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 解读Blind Image Blur Estimation via DL</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3977.html" rel="bookmark"
+         title="Permalink to 解读Blind Image Blur Estimation via DL">解读Blind Image Blur Estimation via DL</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading {"level":1,"className":"md-end-block md-heading"} -->
+<h1 class="md-end-block md-heading"><span class="md-expand">Blind Image Blur Estimation via DL</span></h1>
+<!-- /wp:heading -->
+<!-- wp:html -->
+<div><span class="md-expand">论文下载：<a href="https://ueaeprints.uea.ac.uk/62878/1/Accepted_manuscript.pdf">https://ueaeprints.uea.ac.uk/62878/1/Accepted_manuscript.pdf</a></span></div>
+<!-- /wp:html -->
+<!-- wp:html -->
+<div>&nbsp;</div>
+<!-- /wp:html -->
+<!-- wp:html -->
+<div><span class="md-expand">&nbsp;</span></div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">对图像进行去模糊处理，分为Blind型和Non-blind型。Blind型只有采集到的图像而没有其它的信息。这是比较常见的，也是非常符合实际的应用场景。Non-blind型去模糊知道Blur kernal的情况下进行恢复，主要研究在保持细节时抑制噪声。以往研究Non-Blind Image deconvolution也非常多，也有了不少很实用的方法，比如维纳滤波， Richardson-Lucy方法。后来有些方法是基于去噪方法的，比如傅立叶，小波，Curvelet，和TV方法。Non-blind Image deconvolution是基础，如果有某种</span><span class="">方法将Blur kernal估计出来，就可以应用这些方法解决去模糊问题。</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"className":"md-end-block md-heading"} -->
+<h2 class="md-end-block md-heading">Introduction</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>图像的模糊是图像劣化的主要来源，主要有</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li><p class="md-end-block" contenteditable="true">Gauss blur 比如大气湍流等影响</p></li><li><p class="md-end-block" contenteditable="true">motion blur 运动模糊，</p></li><li><p class="md-end-block" contenteditable="true">defocus blur 失焦散焦模糊</p> </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">要恢复原来清晰图像，主要是要解决在图像劣化模型的信息不足的问题。现有的方法通常是将整个图像的模糊核建立一个统一模型，先执行核估计，再进行非盲去卷积。这是一种标准的过程了。 有一种经典盲去卷积方法涉及在最大后验估计中改进图像先验，在文献中常使用的有稀疏先验和边缘先验。这些算法通常是用期望最大化步骤，进一步更新模糊核的估计，再更新清晰图像。虽然这种基于图像先验的方法可以成功的估计模糊核并计算清晰图像，但它存在一定的限制，稀疏先验主要是它能应用在小区域。边缘先验是取决于图像内容，如果图像同质的就很容易失败。本文提出基于FFT的学习先验用于Blur Kernal 估计，频域特征和深层体系结构解决了一些自然图像块中没有边缘的。另外，本文提出的方法虽然是基于patch,但相比稀疏先验，此法也仍可以处理更大的patch。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/uk8H-heqpwqz2414339.jpg" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/BXVM-heqpwqz2414465.jpg" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">另外，图像的局部模糊的可能更常见<span class="md-image md-img-loaded" contenteditable="false" data-src="http://n.sinaimg.cn/translate/80/w440h440/20180629/uk8H-heqpwqz2414339.jpg"></span><span class="md-image md-img-loaded" contenteditable="false" data-src="http://n.sinaimg.cn/translate/80/w440h440/20180629/BXVM-heqpwqz2414465.jpg"></span></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">最近在深度学习神经网络模仿哺乳动物视觉皮层的性质，已经应用于许多视觉任务。 测试时神经网络中的参数充当劣化图像的先验信息。这比最先进的去噪方法可以得到更好的结果。另一个是神经网络的多特征分类器开发的模糊范围度量，结合学习功能比大多单独的手工功能更好。大多数深度网络和卷积网络在随机初始化的权重训练上会接近局部最优，但受初始化形态影响大，有可能产生对全局较差的局部最优解。用Deep belief network进行初始化预训练会对深度神经网络有帮助。 本文用两段结构，一是模糊类型分类，另一个是参数识别。 这里的主要难点有：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"ol-list"} -->
+<ul class="ol-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">来自模糊图像的盲参数估计，而不进行去模糊。为此提出了两阶段框架：</p>
+<ol class="ol-list" start="">
+<li class="md-list-item">
+<p class="md-end-block" contenteditable="true">用预训练DNN完成特征提取和分类以确定模糊类型</p>
+</li>
+<li class="md-list-item">
+<p class="md-end-block" contenteditable="true">将相同模糊类型的不同样本发送到相应GRNN进行参数估计。DBN只是起初始化的作用。DNN是确保训练的有效性</p>
+</li>
+</ol>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">the pixel-based blur segmentation using classified blur types. Similar to the first step in the above method, the proposed pre-trained DNN is applied for identifying blur types of all the patches within the same image.</p>
+</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">本文的5点贡献：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"ul-list"} -->
+<ul class="ul-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">这是首次将 predict DNN应用于模糊分析问题</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">提出了使用FFT进行特征判断，从而来预处理</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">提出了两段框架进行判断模糊类型和参数</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">首次将GRNN作为参数估计回归工具进行探索</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">对局部模糊的图像效果的表现也非常好</p>
+</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"className":"md-end-block md-heading"} -->
+<h2 class="md-end-block md-heading">相关工作</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">A. 以前的基于学习的模糊处理</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">B. Restricted Boltzmann Machines</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">限制Boltzmann机器（RBM）是一种生成随机人工神经网络，可以学习其输入集合的概率分布。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">RBM最初是由Paul Smolensky于1986年以Harmonium的名称发明的，并且在Geoffrey Hinton和合作者在2000年中期为他们发明快速学习算法之后突显出来。 RBM已经在降维，分类，协同过滤，特征学习和主题建模等方面得到了应用。根据任务的不同，他们可以采用监督或无人监督的方式进行培训。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">顾名思义，RBM是Boltzmann机器的变体，其限制是它们的神经元必须形成二分图：来自两组单元中的每一组的一对节点（通常称为“可见”和“隐藏”）单元）可以在它们之间具有对称连接;并且组内的节点之间没有连接。相比之下，“不受限制的”Boltzmann机器可能在隐藏单元之间有连接。这种限制允许比一般类别的玻尔兹曼机器更有效的训练算法，特别是基于梯度的对比发散算法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">受限制的玻尔兹曼机器也可用于深度学习网络。特别是，深层置信网络可以通过“堆叠”RBM形成，并可选择通过梯度下降和反向传播微调产生的深层网络。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block md-focus"} -->
+<p class="md-end-block md-focus">受限制的玻尔兹曼机RBM,是一种无向图形模型。包含有输入层（观察）和隐藏层（表示特征）之间的无向对称连接。每层内的节点之间没有连接。 输出层为h<sup>k-1</sup>，隐藏层为h<sup>k</sup>, k=2,3,4,...,概率表示每层之间由输入层和输出层的联合配置的能量决定。</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n47" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?E(h^{k-1},h^k;\theta)=-\sum_{i=1}^{H_{k-1}}{\sum_{j=1}^{H_k}{w_{ij}h_i^{k-1}h_j^k%20}}-\sum_{i=1}^{H_{k-1}}{b_ih_i^{k-1}}-\sum_{j=1}^{H_k}{c_jh_j^k}"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>其中theta=(w,b,c)，表示模型的参数，w[i,j] 表示第i单元对应h<sup>k-1</sup>层到第j单元对应h<sup>k</sup> 层的对称交互项，。b[i]和c[j]是i,j的bias，偏移值。 在RBM中， 输出单元在输入状态下是条件独立的，所以</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n49" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?P(h|v)=\prod_{i}%20{P(h_i|v)}"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">概率分布</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n51" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?p(h_j^k=1|h^{k-1};\theta)=\sigma(\sum_{i=1}^{H^{k-1}}{w_{ij}h_i^{k-1}+c_j})\\%20p(h_i^{k-1}=1|h^k;\theta)=\sigma(\sum_{j=1}^{H^{k}}{w_{ij}h_j^{k}+b_j})"></figure></div>
+<div tabindex="-1">&nbsp;</div>
+</div>
+<!-- /wp:html -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?%20\frac{1}{1+e^{-t}}" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>其中sigma是 <span class="md-inline-math"><span id="MathJax-Element-16-Frame" class="MathJax_SVG" tabindex="-1"></span><span class="md-math-after-sym">​</span></span></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">RBM训练过程是对比Contrastive Divergence(CD)。直观来看，CD就是输入层是训练向量，来推断输出层，输出层的单位之间的连接已更新。另一部分从输入层到输出层更新权重。直到构建出有代表性的模型。</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"className":"md-end-block md-heading"} -->
+<h2 class="md-end-block md-heading"><span class="">实验方法 methodology</span></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">本节里将为模糊图的参数估计提出一种两阶段的框架，将在sec A中将问题摆清楚，sec B阐释模糊特征，在sec C中训练DNN，在sec D中讲GRNN的结构</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading"><span class="">sec A. 问题的公式化</span></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">图像模糊可以建模为从高曝光图到观察图的降级过程</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n58" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?g(x)=q(x)*f(x)+n(x)"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">其中x={x1,x2}表示图像的坐标，g是模糊图像，f是潜像的强度，q表示模糊核。q与f的运算是卷积运算，n是附加噪声。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="md-expand">在盲去卷积操作中，PSF不容易得到。根据模糊区域相应将每块模糊区进行分类成不同类型，然后估计每个模糊区块的模糊参数。本文主要考虑了3种模糊参数，</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">一是高斯模糊的PSF</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n62" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?q(x,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{x_1^2+x_2^2}{2\sigma^2})"></figure></div>
+<div tabindex="-1">&nbsp;</div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>其中sigma是估算出的模糊半径，R是支持区域。R一般取在[-3sigma,3sigma]，由gaussian分布.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另一种模糊PSF是线性运动造成的，</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n64" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?q(x)=%20\begin{cases}%20\frac{1}{M}%20&amp;%20\text{%20if%20}%20(x_1,x2_)\binom{sin\omega}{cos\omega}=0%20,\text{%20and%20}%20x_1^2+x_2^2%3C\frac{M^2}{4}%20\\%20%200%20&amp;%20\text{%20otherwise%20}%20%20\end{cases}"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">M是描述运动的像素长，omega描述运动关于x轴的角度。这些参数是需要系统估计的</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">还有就是失焦，可以由cylinder function建模</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n67" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?q(x)=%20\begin{cases}%20\frac{1}{\pi%20r^2}%20&amp;%20\text{%20if%20}%20\sqrt{x_1^2+x_2^2}%3C=r%20\\%200%20&amp;%20\text{%20otherwise%20}%20\end{cases}"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">模糊半径r与散焦程序成比例。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">以往用Bayes分类器，总是仅限于单个或多个模糊核。本文用类似于曾应用成功的deep belief network的DNN作为特征提取器。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">sec B.模糊特征</h3>
+<!-- /wp:heading -->
+<!-- wp:list {"ordered":true,"className":"ol-list"} -->
+<ol class="ol-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">运动和失焦模糊的特征 如果对</p>
+</li></ol>
+<!-- /wp:list -->
+<!-- wp:html -->
+<div id="mathjax-n74" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?g(x)=q(x)*f(x)+n(x)"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">使用 FT，可以得到</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n77" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?G(u)=Q(u)*F(u)+N(u)"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">其中u是{u1,u2}，对于失焦模糊，Q(u)为</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n79" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?Q(u)=\frac{J_i(\pi%20R%20r%20)}{\pi%20R%20r}\\%20r=\sqrt{u_1^2+u_2^2}"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">J1是贝塞尔函数的一阶导，是R为周期的转，FFT取值为0. 对于运动模糊，则是<span spellcheck="false"><code>sinc</code></span>函数</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n81" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?Q(u)=\frac{sin(\pi%20M%20\omega)}{\pi%20M%20\omega}%20\\%20\omega=\pm\frac{1}{M},\pm%20\frac{2}{M},..."></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:list {"ordered":true,"className":"ol-list"} -->
+<ol class="ol-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">高斯模糊的特征。高斯FFT还是Gaussian函数，并且频域中并没有显著的模式变化。从(6)中可以看出，高斯核函数作用低通滤波器，当滤波器的sigma较大，会传入更多高频信息，但根据观察，若sigma大于2，对数光谱2时，对数光谱图案没变化，只有强度发生变化。边缘检测不能显著地改善结果。</p>
+</li></ol>
+<!-- /wp:list -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">sec C. 深度神经网络(DNN)的训练过程</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">以往都是用DBF进行特征学习的生成模型，其中DBN的表现是优于DNN和DCNN等各种深度学习模型。然而将它应用在图像分类的时候DCNN的表现更好。图像对象或类别之间存在的细微差别学习图像的语义是非常重要的。CNN擅长捕捉小领域的像素相关性，这对于图像分类的任务非常有用。但我们没有必要对模糊图找语义。任务难点实际在于当我们提取模糊分类的时候捕获精确的细节。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"ol-list"} -->
+<ul class="ol-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">正则化</p>
+</li></ul>
+<!-- /wp:list -->
+<!-- wp:html -->
+<div id="mathjax-n89" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1">&nbsp;</div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">训练集合就是h<sup>{k-1}[1],h</sup>{k-1}[2],...,h^{k-1}[m],正则项为减小过拟合的可能</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n92" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1">&nbsp;</div>
+</div>
+<!-- /wp:html -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">其中E是条件期望，t是控制隐藏层单位h[k]的稀疏性的常数，lambda是正则化常数。这样隐藏单元被限制为具有接近t的平均值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"className":"ol-list"} -->
+<ul class="ol-list"><li class="md-list-item">预训练DNNDNN训练过程可由下算法描述</li></ul>
+<!-- /wp:list -->
+<!-- wp:preformatted {"className":"md-fences md-end-block ty-contain-cm modeLoaded"} -->
+<pre class="wp-block-preformatted md-fences md-end-block ty-contain-cm modeLoaded"><span role="presentation">## <span class="cm-variable">input</span><span class="cm-bracket">:</span></span>
+<span role="presentation">    <span class="cm-variable">training</span> <span class="cm-variable">dataset</span> <span class="cm-variable">X</span>, <span class="cm-variable">corresponding</span> <span class="cm-variable">labels</span> <span class="cm-atom">set</span> <span class="cm-variable">L</span></span>
+<span role="presentation">    <span class="cm-variable">Inital</span> <span class="cm-variable">bias</span> <span class="cm-variable">parameters</span> <span class="cm-variable">b</span> <span class="cm-keyword">and</span> <span class="cm-variable">a</span></span>
+<span role="presentation">    <span class="cm-variable">Munber</span> <span class="cm-keyword">of</span> <span class="cm-variable">Layers</span> <span class="cm-variable">N</span>, <span class="cm-atom">Number</span> <span class="cm-keyword">of</span> <span class="cm-variable">epochs</span> <span class="cm-variable">P</span></span>
+<span role="presentation">    <span class="cm-variable">Weights</span> <span class="cm-variable">between</span> <span class="cm-variable">layers</span> <span class="cm-variable">W</span></span>
+<span role="presentation">    <span class="cm-variable">Momentum</span> <span class="cm-variable">M</span> <span class="cm-keyword">and</span> <span class="cm-variable">learning</span> <span class="cm-variable">rate</span> <span class="cm-variable">epsilon_a</span>, <span class="cm-variable">epsilon_b</span></span>
+<span role="presentation">## <span class="cm-variable">output</span><span class="cm-bracket">:</span></span>
+<span role="presentation">    <span class="cm-variable">the</span> <span class="cm-variable">parameter</span> <span class="cm-variable">W</span>,<span class="cm-variable">b</span>,<span class="cm-variable">a</span></span>
+<span role="presentation">​</span>
+<span role="presentation"><span class="cm-keyword">for</span> <span class="cm-variable">i</span><span class="cm-operator">=</span><span class="cm-number">1</span> <span class="cm-variable">to</span> <span class="cm-variable">N</span></span>
+<span role="presentation">    <span class="cm-keyword">for</span> <span class="cm-variable">j</span><span class="cm-operator">=</span><span class="cm-number">1</span> <span class="cm-variable">to</span> <span class="cm-variable">P</span> </span>
+<span role="presentation">        <span class="cm-keyword">if</span> <span class="cm-variable">i</span><span class="cm-operator">=</span><span class="cm-number">1</span> <span class="cm-keyword">then</span></span>
+<span role="presentation">            <span class="cm-variable">h</span><span class="cm-operator">^</span><span class="cm-variable">i</span> <span class="cm-operator">=</span><span class="cm-variable">X</span></span>
+<span role="presentation">        <span class="cm-keyword">else</span></span>
+<span role="presentation">            <span class="cm-keyword">for</span> <span class="cm-variable">l</span><span class="cm-operator">=</span><span class="cm-number">1</span> <span class="cm-variable">to</span> <span class="cm-variable">L</span> </span>
+<span role="presentation">                <span class="cm-variable">h</span><span class="cm-operator">^</span><span class="cm-variable">i_l</span><span class="cm-operator">=</span><span class="cm-variable">sigma</span><span class="cm-bracket">(</span><span class="cm-variable">h_l</span><span class="cm-operator">^</span><span class="cm-bracket">{</span><span class="cm-variable">i</span><span class="cm-operator">-</span><span class="cm-number">1</span><span class="cm-bracket">}</span><span class="cm-variable">W</span><span class="cm-operator">^</span><span class="cm-bracket">{</span><span class="cm-variable">i</span><span class="cm-operator">-</span><span class="cm-number">1</span><span class="cm-bracket">}</span><span class="cm-operator">+</span><span class="cm-variable">a</span><span class="cm-operator">^</span><span class="cm-bracket">{</span><span class="cm-variable">i</span><span class="cm-operator">-</span><span class="cm-number">1</span><span class="cm-bracket">})</span></span>
+<span role="presentation">            <span class="cm-keyword">end</span></span>
+<span role="presentation">        <span class="cm-keyword">end</span> <span class="cm-keyword">if</span></span>
+<span role="presentation">        <span class="cm-variable">calculate</span> <span class="cm-variable">the</span> <span class="cm-variable">state</span> <span class="cm-keyword">of</span> <span class="cm-variable">the</span> <span class="cm-variable">next</span> <span class="cm-variable">layer</span></span>
+<span role="presentation">        <span class="cm-keyword">while</span> <span class="cm-bracket">(</span><span class="cm-variable">not</span> <span class="cm-variable">convergence</span><span class="cm-bracket">)</span></span>
+<span role="presentation">            <span class="cm-variable">update</span> <span class="cm-variable">weight</span> <span class="cm-keyword">and</span> <span class="cm-variable">biases</span></span>
+<span role="presentation">            <span class="cm-variable">update</span> <span class="cm-variable">the</span> <span class="cm-variable">parameters</span> <span class="cm-variable">using</span> <span class="cm-variable">the</span> <span class="cm-variable">gradient</span> <span class="cm-keyword">of</span> <span class="cm-variable">the</span> <span class="cm-variable">sparse</span> <span class="cm-variable">regulazation</span> <span class="cm-variable">term</span></span>
+<span role="presentation">        <span class="cm-keyword">end</span> </span>
+<span role="presentation">    <span class="cm-keyword">end</span></span>
+<span role="presentation"><span class="cm-keyword">end</span></span>
+<span role="presentation">​</span></pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">sec D. General Regression Neural Network</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>分类之后就可以补丁模糊类型，两段结构已经成功预测了类型，从整体上已经获得了blur kernal的粗略值，如果要获得精确值，就需要进行回归。 GRNN认为是RBFN(Radial Basis Function Networks) 和PNN(Probablitistic Neural Networks)的推广，在结果上优于RBFN和反向传播神经网络。GRNN主要是估计输入自变量和输出的联合概率密度函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如图示，GNN由输入层，隐藏层，非标准化输出单元，求和单元和归一化输出组成。GRNN使用one-pass学习算法进行训练，不需要迭代。训练聚类质心作为求和单元的权重的一部分。假设训练向量是X，训练目标是Y，在pattern层中每个隐藏单元对应于输入样本。从图案层到求和层，每个权重是输入样本的目标。目标求和式可以表达为</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?\hat{Y}=\frac%20{\sum_{i=1}^{n}{Y_i%20exp({-\frac{D_i^2}{2\sigma^2}}})}%20{\sum_{i=1}^{n}{%20exp({-\frac{D_i^2}{2\sigma^2}}})}" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:html -->
+<div id="mathjax-n100" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1">&nbsp;</div>
+</div>
+<!-- /wp:html -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?D_i^2=(X-X_i)^T(X-X_i)" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">其中<span class="md-inline-math"><span id="MathJax-Element-17-Frame" class="MathJax_SVG" tabindex="-1"></span><span class="md-math-after-sym">​</span></span>, sigma是扩散参数</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">sec E. 组织两段结构</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">先用输入的模糊补丁的对数spectra 获取识别，这阶段输出的是标签：gaussian blur, motion blur or defocus blur.有了标签信息，分类后的blur vector就可以用于第二阶段参数估计。此阶段 motion blur和defocus blur将在训练前先送入edge detector，而Gasussian blur将直接送入训练器。这个阶段的输出是各种估计的为GRNN使用的参数，送入GRNN做回归运算可输出结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"className":"md-end-block md-heading"} -->
+<h2 class="md-end-block md-heading">实验过程</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">A. 数据集</h3>
+<!-- /wp:heading -->
+<!-- wp:list {"className":"ul-list"} -->
+<ul class="ul-list"><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">训练 ：Oxford Image classification and Caltech 101 dataset，每个里随机出5000图 大小是32*32和128*128的。</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true"><span class="">测试数据集 Berkeley segmentation dataset 的200图，已经用过去噪算法。Pascal VOC 2007 ，随机选500图。</span></p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">模糊特征：canny探测器应用于自动低阈值和高阈值的图像块的对数功率谱。选半径为3像素。</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">DBN训练参数： 训练轮数50，学习率0.1，初始momentum=0.5,在5轮迭代后变为0.9。最终总不超过30轮就收敛</p>
+</li><li class="md-list-item">
+<p class="md-end-block" contenteditable="true">GRNN训练: 平滑度参数sigma=0.2</p>
+</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">B.图像模糊类型分类</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输入可见层有1024个节点，输出层有3个节点代码3个标签。整体的组成是 1024 -&gt;500 -&gt; 30 -&gt;10 -&gt;3 每个隐藏层中的这些节点号是根据经验选择的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分类率，用于评估程序的性能</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div id="mathjax-n119" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
+<div class="md-rawblock-container md-math-container" tabindex="-1"><figure><img src="http://latex.codecogs.com/gif.latex?CR=100%20\frac{N_C}{N_a}(\%)"></figure></div>
+</div>
+<!-- /wp:html -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">C.模糊核参数估计</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block">用不同的模糊核估计不同参数。 在PSNR，SSIM，GMSD和GS上的结果表明，比back-propagationg Neural Network, SVR，pre-trained DNN等其它方法要好。这表明GRNN是用于模糊分析的更好的回归量。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading">D.用估计值 综合测试去模糊</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">估计出模糊类型和模糊核的参数，就更容易使用EPLL来恢复原图。</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3,"className":"md-end-block md-heading"} -->
+<h3 class="md-end-block md-heading"><span class="">E.真实图像的应用</span></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="">从Flickr.com上选择200个部分模糊的图。一半训练，一半测试。与同类论文相比，主观来看，即使有显著运动本文提出的分类也更可靠。直接去论文看原图的结果</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"className":"md-end-block md-heading"} -->
+<h2 class="md-end-block md-heading"><span class="">结论</span></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"md-end-block"} -->
+<p class="md-end-block"><span class="md-expand">本文中提出了一种基于学习的模糊估计方法用于盲模糊分析。 在傅里叶变换和我们设计的边缘检测之后，我们的训练样本由来自丰富数据集的补丁生成。 在训练阶段，用有监督学习预训练的DNN。 也就是说，通过使用DBN以无监督的方式训练整个网络，然后反向传播微调权重。 以这种方式，可以训练辨别分类器。 在参数估计阶段，提出了一个强回归GRNN来处理我们的盲参数估计问题。 实验结果证明了我们提出的方法与最先进的方法相比，例如盲图像去模糊和模糊区域分割对于真实模糊图像的优越性。</span></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-11-27T01:09:37+09:00">
+      火 27 11月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2019热身赛04</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4093.html" rel="bookmark"
+         title="Permalink to [voj] 2019热身赛04">[voj] 2019热身赛04</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="https://vjudge.net/contest/282221" target="_blank">https://vjudge.net/contest/282221</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.A+B+C </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>要会计算最大公因数和最小公倍数。<br><br>三个分数之和为  \[  \frac{a_1}{b_1} + \frac{a_2}{b_2} +\frac{a_3}{b_3} = \frac{a_1b_2b_3+a_2b_1b_3+a_3b_1b_2}{b_1b_2b_3} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>注意分子和分母最大可能达10<sup>6</sup>，所以它们相乘肯定会超过int类型的范围，将分子（记为n）分母（记为d）设为long long类型。计算分子与分母的最大公因数g，按照n/g输出分子，d/g输出分母即可。<br><a rel="noreferrer noopener" href="http://p.malic.xyz/FFcf/" data-type="URL" data-id="http://p.malic.xyz/FFcf/" target="_blank">查看A题参考代码（C++）</a> <a rel="noreferrer noopener" href="http://p.malic.xyz/Jwvb/" target="_blank">code（Python）</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.更换电池</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>如果有一根超级电池，除它之外的所有电池的总和都不如这个超级电池的电量多，那么就把超级电池一直放在收音机里，让其余的电池陪跑，这种情况下Bob收听广播的时长就是除了最长电池之外的其它所有电池的时长之和。而这个“超级电池”的资格是，它的可用电量不小于其余所有电池电量之和。如果只有两节电池，时间长的那个必然是“超级电池”<br>而如果没有这种超级电池，所有电池的可用时长都相差没有那么悬殊，总是选当前剩余时间最长的两节电池来用。可以归纳地得出，最终电池的情况总可以变为(2,1,1)，或(1,1,0)或(1,1,1)。而这三种情况都可以不浪费，也就是说最长电池的时长不超过其余电池时长之和的时候，全部电池都可以完全利用，此时听广播的时间则是所有电池时长之和除以2（因为同时要用2节电池）。<br><a rel="noreferrer noopener" href="http://p.malic.xyz/vJTc/" data-type="URL" data-id="http://p.malic.xyz/vJTc/" target="_blank">查看B题参考代码（C++）</a> <a rel="noreferrer noopener" href="http://p.malic.xyz/VQd/" target="_blank"> 参考code（Python）</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.掉苹果 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>按题意直接写，一种方法是：对于每一列，从下向上遍历，记录当前的坐标用来放苹果，在发现'#'或者出上边界之前把目前看到的苹果数量记下来，然后将苹果再依次堆在放苹果坐标之上，并将苹果数清零。<br><a rel="noreferrer noopener" href="http://p.malic.xyz/CH2d/" target="_blank">参考代码(C++)</a> <a href="http://p.malic.xyz/rhQe/">code(Python)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.23点游戏</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>解法很多，数据量不是特别大，所以直接搜索解空间（生成数组的全排列，然后遍历所有的运算）也能正确解答。<br>使用递归解决：给出了5个数，假设它的某个排列是[x1,x2,x3,x4,x5]，要判断用这5个数计算23，只需要判断用[x1,x2,x3,x4]能否计算出23-x5,或能否算出23+x5，或者在23被x5整除的情况下能否算出23/x5（这分别代表[..]+5=23,[..]-5=23与[..]×5=23），这样问题的规模就减小到4个数。<br>再递归的做下去：用[x1,x2,x3]能否算出(23-x5)-x1，或者能否算出(23-x5)+x1,或是(23-x5)被x1整除的情况下能否算出(23-x5)/x1...最后当数组规模只剩1的时候，直接判断要计算的目标是不是数组里的这个数字即可，并且对初始的5个数的所有排列形式都分别递归。只要有任何一个递归函数最终达到了[x1]==计算目标，就返回true，将所有递归结果用“逻辑或”相连接。<br><a href="http://p.malic.xyz/TgWb/" target="_blank" rel="noreferrer noopener">D题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.翻译单词</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>先写能够计算最长公共子序列的函数，然后对每种切分方式（遍历所有可切分的点），分别计算两串的最长公共子序列，记下最长的长度和序列，然后输出最长的那个序列即可。此题思路不难，关键在于如何输出最长公共子序列以及如何适当的存储中间数据。<br>最长公共子序列是动态规划的经典问题。<br><a href="http://p.malic.xyz/rRed/" target="_blank" rel="noreferrer noopener">E题参考代码</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T06:32:51+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

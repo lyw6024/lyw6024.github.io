@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - spring実戦：ユーザーの名前の更新する</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3818.html" rel="bookmark"
+         title="Permalink to spring実戦：ユーザーの名前の更新する">spring実戦：ユーザーの名前の更新する</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>今回の実装を予定している概要を記載します：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"vivid-purple","fontSize":"medium"} -->
+<p class="has-vivid-purple-color has-text-color has-medium-font-size">[fa tag="fa-check-square-o"] (1). ログイン後の画面左にあるメニューに「ログイン名更新」のリンクを追加する</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="解決策"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"black"} -->
+<p class="has-black-color has-text-color"><code>LoginServiceImpl</code>クラスの中で、メソッド<code>public List&lt;MenuItems&gt;(Integer userRoleSum)</code>の戻り値は<code>List&lt;MenuItemDto&gt;</code>で、DBからデータだ。各<code>MenuItem</code>は<code>RoleGroup</code>から取得されしてから，<code>RoleGroup</code>クラスのコードについて、データは<code>role_group</code>というのTableから読み取る。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"black"} -->
+<p class="has-black-color has-text-color">そして、<code>MenuItem</code>にアイテムを追加するには、データベースにこのようなSQLを実行し：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"sql","mime":"text/x-sql"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>INSERT INTO role_group VALUES
+('RG00006',
+ 'ログイン名更新',
+ '/user/rename',
+ 100,
+ 6,
+ '2021-10-4 0:00:00',
+ '2030-11-01 00:00:00',
+ 1);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>この後、ページを更新して、ログイン後の画面左にあるメニューに「ログイン名更新」のリンクを追加した。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083301.png" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"vivid-purple","fontSize":"medium"} -->
+<p class="has-vivid-purple-color has-text-color has-medium-font-size">[fa tag="fa-check-square-o"](2).「ログイン名更新」画面を新規に作成して、テキスト入力フィールドと［更新］ボタンを表示する<br />初期表示では、DBからログインしているユーザーの名前をテキスト入力フィールドに設定する</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="解決策"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>/src/main/resources/templates/user</code>で、テンプレートとして"<code>rename.html</code>"ファイルを作成する。まず、3つのフィールドがある<code>form</code>のは：提示文字「ログイン名」，id=txtUserNameというのinput，id=btnUserRenameというのボタン。そして、scriptで、このページの見出しと、フェードアウト(fade out)効果のプロンプトバーを実現した。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;div class=&quot;menuzonediv container&quot;&gt;
+&lt;form id=&quot;frmUserCondition&quot;&gt;
+&lt;div id=&quot;renameAlertSuccess&quot; class=&quot;alert alert-success&quot; role=&quot;alert&quot; style=&quot;display:none;&quot;&gt;
+「&lt;span id=&quot;getNewName&quot;&gt;&lt;/span&gt;」に更新しました。
+&lt;/div&gt;
+&lt;div class=&quot;row mt-2&quot;&gt;
+        &lt;div class=&quot;col-2 text-right&quot;&gt;ログイン名&lt;/div&gt;
+        &lt;div class=&quot;col-3 text-left&quot;&gt;
+          &lt;input class=&quot;useraddinputstyle&quot; type=&quot;text&quot; name=&quot;txtUserName&quot; id=&quot;txtUserName&quot; autocomplete=&quot;off&quot; th:value=&quot;${userInfo.userName}&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-1 px-0&quot;&gt;
+        &lt;input type=&quot;button&quot; class=&quot;conditionbutton1&quot; id=&quot;btnUserRename&quot; value=&quot;更新&quot; /&gt;
+        &lt;/div&gt;
+&lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function() {
+    $(&quot;#topDispTitle&quot;).html(&quot;ログイン名更新&quot;);
+    $(&quot;#dispTitleArea&quot;).removeClass(&quot;d-none&quot;);
+});
+  // just for testing
+$(document).on('click', '#btnUserRename', function() {
+        showSuccessAlert();
+});
+  // delete this function when this function at index.js was complete.
+function showSuccessAlert()
+{
+        document.getElementById('getNewName').innerHTML =document.getElementById('txtUserName').value;
+        $(&quot;#renameAlertSuccess&quot;).show();
+        setTimeout('$(&quot;#renameAlertSuccess&quot;).fadeOut();',1200);
+}
+&lt;/script&gt;
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>UserCnlr.java</code>で、新メソッドが作成し、このメソッドは<code>/user/rename</code>にマッピングした。既存のメソッド<code>UserCnlr.init</code>にならう，今のログインしているのユーザーのUserInfoを読み取る。もし<code>UserInfo</code>が<code>Null</code>ならば，ユーザーはログインしないし，ログイン画面に戻る。UserInfoがNull以外の場合、テンプレート"/user/rename"に戻る。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>戻り前に，今のユーザーの名前を表示したほうがいい。そして、modelで、UserInfoのaddAttributeが添加して、id=txtUserNameの&lt;input&gt;で、<code>th:value="${userInfo.userName}"</code>のタグが加える（line 11）と，このvalueは<code>userInfo.userName</code>が表示しできた。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>/**
+ * user rename
+ */
+    @RequestMapping(value = &quot;/user/rename&quot;)
+    @Role(roles = {BaseRole.R16384, BaseRole.R32768})
+    public String rename(Model model) {
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute(SysConstants.LOGIN_USER);
+        if (Objects.isNull(userInfo)) {
+            return &quot;user/login&quot;;
+        }
+        model.addAttribute(&quot;userInfo&quot;,userInfo);
+        return &quot;user/rename&quot;;
+    }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>これに、このHTMLテンプレートをテストしできる。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>ここに「文字化け」がある場合は、通常、エンコードの問題だ。このとき、「rename.html」を右クリックし、propertiesを選択して、[Text file encoding]で[Other : UTF-8]を選択する。 [Apply and Close]をクリックして解決する。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","width":760,"height":146,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083317.png" alt="[Image]" width="760" height="146"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:image {"align":"center","width":744,"height":171,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083342.png" alt="[Image]" width="744" height="171"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"vivid-purple","fontSize":"medium"} -->
+<p class="has-vivid-purple-color has-text-color has-medium-font-size">[fa tag="fa-check-square-o"](3).［更新］ボタンを押された後、DBの名前をテキスト入力フィールドの入力文字に更新して、［更新］ボタンの上に「（※入力された名前）に更新しました。」を表示する      <br />※（※入力された名前）は、テキスト入力フィールドの入力文字を設定してください</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="解決策"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>既存のUserCtlrクラスの中、タグ「@ResponseBody」が付きメソッドにならう、メソッドupdateNameがコーディングし：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>/**
+     * update name action
+     */
+    @RequestMapping(value = &quot;/user/updateName&quot;, method = RequestMethod.POST)
+    @ResponseBody
+    @Role(roles = {BaseRole.R16384, BaseRole.R32768})
+    public String updateName(@RequestBody String newName) {
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute(SysConstants.LOGIN_USER);
+        userInfo.setUserName(newName);
+        return usersService.renameById(userInfo.getUserId(),newName);
+    };</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>ここで、POST方法でnewNameというのStringを受けると、今のuserInfoのuserNameがnewNameになる、そのあと、userServiceでのrenameByIdメソッドを利用する。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>userService インタフェース クラスで、このrenameByIdが添加し</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>    /**
+     * ユーザーIDでユーザーの名前を更新する
+     *
+     * @param userId
+     * @param newName
+     * @return
+     */
+    String renameById(String userId,String newName);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>このメソッドを実装するには、<code>userService</code>に対応する<code>UserServiceImpl</code>を見る。 似てるのメソッドに従って、<code>renameById</code>メソッドを作成する。 現在のユーザー名に従って、userInfoを取得し、userInfoのuserNameを新しく設定した値に変更して、<code>userInfoRepository.renameById</code>のメソッドに渡した。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>     @Override
+        public String renameById(String userId,String newName) {
+                Optional&lt;UserInfo&gt; userOptional = userInfoRepository.findById(userId);
+        if (!userOptional.isPresent()) {
+            return null;
+        }
+        UserInfo userInfo = userOptional.get();
+        userInfo.setUserName(newName);
+        userInfoRepository.renameById(userInfo);
+        return &quot;success&quot;;
+        }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>userInfoRepositoryは、UserInfoMapperタイプのオブジェクトだ。UserInfoMapperクラスを見つけて、void renameById（UserInfo userinfo）とういのメソッドを追加します。 このメソッドの実現はSQLステートメントを実行することであり、SQLステートメントはXMLファイルで記述されます。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>UserInfoMapperのupdateとdeleteById、およびその他の関連メソッドから、resources / mapperの下で関連ステートメントを検索できる。ユーザー名を更新するロジックを実装するには、<code>UPDATE</code>ステートメントを実行し、同様のメソッドとSQL実装にならう、メソッド名renameByIdとしてIDを指定し、XMLコンテンツに設定する必要のあるフィールドを記述し：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"xml","mime":"application/xml"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>    &lt;update id=&quot;renameById&quot; parameterType=&quot;jp.co.basenet.trial.jpa.model.UserInfo&quot;&gt;
+        update user_info set
+            user_name=#{userName},
+                        update_datetime=#{updateDatetime},
+                        update_user_id=#{updateUserId}
+        where user_id = #{userId}
+    &lt;/update&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>サーバーの機能が完了した。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>次に、ウェブページのアクションとサーバーを操作する。「ユーザ情報管理」ページの「検索」にならいて、ファンクションは<code>resources / assets / js / pages / index.js</code>に実装されている。送信されるデータは、IDがtxtUserNameで、タイプが「application / text」の入力で、 POSTで「/ user / updateName」に渡す：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>$(document).on('click', '#btnUserRename', function() {
+                var transData=$(&quot;#txtUserName&quot;).val();
+                $.ajax({
+                        url: TRIAL_CONTEXT_PATH + '/user/updateName',
+                        data: transData,
+                        type: 'post',
+                        contentType: &quot;application/text&quot;
+                }).done(function(data) {
+                        //通信成功時の処理
+                        showSuccessAlert();
+                }).fail(function(xhr) {
+                        //通信失敗時の処理
+                        showErrorModal(&quot;更新に異常が発生しました。&quot;, $('#errorMessage'), $('#modalMsgBox'));
+                });
+        });</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>問題（２）のrename.htmlにボタンのテストアクションを記述したことを忘れないでください（正常な変更プロンプトバーをポップアップする）。ここに添加した後、rename.htmlのこの部分を削除する（もちろん、ここのファンクションは rename.htmlに統合しても大丈夫ですが、構造化のために <code>index.js</code>に実装しておくほうがいい。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>このようにして、ユーザー名の変更が実現された。検索ページで検索して確認できる。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112303.png" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112327.png" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-10-04T12:29:43+09:00">
+      月 04 10月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

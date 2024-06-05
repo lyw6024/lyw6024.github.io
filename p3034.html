@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Binary Search Tree in Haskell</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3034.html" rel="bookmark"
+         title="Permalink to Binary Search Tree in Haskell">Binary Search Tree in Haskell</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>二叉搜索树是一种递归数据结构，其基本概念不再赘述，在Haskell中用代数数据类型，先声明树类型：一个二叉搜索树Tree要么是空树，要么是包含一个值且有左右子树</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这里<code>Tree</code>就是BinSearchTree，在建树的时候我们通过取一个值和一棵树并将这个值加入到这棵树当中来做。过程中会将此值与树的结点进行数值比较，若小于根则向左，若大于则向右，重复这个过程，直到达到空树。在C语言中我们会通过修改指针并调整树的数据来进行，但Haskell作为纯函数式，不能对树作修改，只能在修改后，返回一棵全新的树。我们的函数签名大概是 <code>(Ord a)=>a -> Tree a->Tree a</code>类型的，取一个可比较的<code>a</code>类型与一棵树作为参数，返回一棵插入过相应元素的新树。这样虽然看起来有点低效，但是<strong>Haskell对此类操作进行了专门优化，允许新树与旧树共享大部分子树</strong>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有了<code>Tree a</code>的类，首先编写插入函数：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>singleton :: a -&gt; Tree a
+singleton x = Node x EmptyTree EmptyTree
+treeInsert :: (Ord a) =&gt; a -&gt; Tree a -&gt; Tree a
+treeInsert x EmptyTree = singleton x
+treeInsert x (Node a left right)
+    | x==a = Node a left right
+    | x&lt;a  = Node a (treeInsert x left) right
+    | x&gt;a  = Node a left (treeInsert x right)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>singleton</code>是辅助函数，它表示一个单结点树。根据搜索树的定义，向空树中插入值时就将当前值插入当前结点，如果插入值小于根结点，就继续向左子树中插入，大于则向右子树中插入。如果相等则将树原样返回。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>检查元素的存在性，同样利用树的定义，如果是空树则元素不存在树中，若等于根结点则说明存在于树中，小于则继续在左子树中找，大于则在右子树中找。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>treeElem :: (Ord a) =&gt; a -&gt; Tree a -&gt; Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+    | x==a = True
+    | x&lt;a  = treeElem x left
+    | x&gt;a  = treeElem x right</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>编写一个main测试一下这个二叉搜索树：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main = do
+    let t = foldr treeInsert EmptyTree [1,5,3,11,6,7,4,2]
+    print t
+    print $ treeElem 3 t
+    print $ treeElem 13 t</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>输出</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Node 2 (Node 1 EmptyTree EmptyTree) (Node 4 (Node 3 EmptyTree EmptyTree) (Node 7 (Node 6 (Node 5 EmptyTree EmptyTree) EmptyTree) (Node 11 EmptyTree EmptyTree)))
+True
+False</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>将第1行树的输出格式化一下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Node 2
+        (Node 1
+                EmptyTree
+                EmptyTree
+        )
+        (Node 4
+                (Node 3
+                        EmptyTree
+                        EmptyTree
+                )
+                (Node 7
+                        (Node 6
+                                (Node 5
+                                        EmptyTree
+                                        EmptyTree
+                                )
+                                EmptyTree
+                        )
+                        (Node 11
+                                EmptyTree
+                                EmptyTree
+                        )
+                )
+        )</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>根据二叉搜索树的知识，这个构建是正确的，2是首个元素，比2小的元素（仅有1）是其左子树，比2大的都在右子树。可以编写一个中序遍历这个树，二叉搜索树的中序遍历是有序（去重）的，可以再次验证二叉搜索树构造的正确性：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>postOrder :: Tree a -&gt; [a]
+postOrder EmptyTree = []
+postOrder (Node a left right) = postOrder left ++ [a] ++ postOrder right</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>将<code>[1,5,3,11,6,7,4,2]</code>为序列<code>foldr</code>插入建树，树的中序遍历为<code>[1,2,3,4,5,6,7,11]</code>，确实是有序的序列。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-02-23T02:54:37+09:00">
+      火 23 2月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

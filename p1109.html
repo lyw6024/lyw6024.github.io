@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX基本文档组件：标题、章节、目录、页面版式</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1109.html" rel="bookmark"
+         title="Permalink to LaTeX基本文档组件：标题、章节、目录、页面版式">LaTeX基本文档组件：标题、章节、目录、页面版式</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>先从基本文档开始，就像程序工程师学习大多数编程语言第一句就是向控制台输出"Hello, world!"，使用LaTeX排版的第1步也是要能成功生成一份文档，就让这个文档上写一个内容：Hello,LaTeX! 吧。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在配置好LaTeX环境的编辑器中，输入这样四行</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass[UTF8]{ctexart}
+\begin{document}
+    Hello, \LaTeX !
+\end{document}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>首行\documentclass[]{}表示文档类和参数，其中在花括号中声明文档类，方括号中声明参数。常用的文档类有 article, book, beamer, ctexart, ctexbook。文档类必须选一种，并且只能选一种。不同的文档类对应了不同的默认版式，如beamer就是幻灯片版式，article就是文章版式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>。这儿的LaTeX前边加了一个back-slash符号'\'，由于它本身是关键字，LaTeX就会将之转换成相应格式。如果不加'\'符号而是直接使用单词LaTeX，生成的就是字母LaTeX。<br />在配好的环境中生成文档，就可以看到现在已经有了一个只有Hello,LaTeX的文档。（使用pdflatex和xelatex都可以）</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1110,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-33.png" alt="[Image]" class="wp-image-1110"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>段落</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>文档最基础的组件就是段落，LaTeX中的段落不需要用什么包起来（不像HTML需要用&lt;p&gt;把HTML的段落包起来），直接写在document中的就是段落。但有一点需要注意的是，源码中的折行不会分段，需要一个空白行才可以表示分段。如：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass[UTF8]{ctexart}
+\begin{document}
+病梅馆记
+江宁之龙蟠，苏州之邓尉，杭州之西溪，皆产梅。
+或曰：&quot;梅以曲为美，直则无姿；以欹为美，正则无景；
+以疏为美，密则无态。&quot;固也。此文人画士，心知其意，
+未可明诏大号以绳天下之梅也；
+又不可以使天下之民斫直，删密，锄正，以夭梅病梅为业以求钱也。
+梅之欹之疏之曲，又非蠢蠢求钱之民能以其智力为也。
+有以文人画士孤癖之隐明告鬻梅者，斫其正，养其旁条，
+删其密，夭其稚枝，锄其直，遏其生气，以求重价，而江浙之梅皆病。
+文人画士之祸之烈至此哉！
+予购三百盆，皆病者，无一完者。
+既泣之三日，乃誓疗之：纵之顺之，毁其盆，悉埋于地，解其棕缚；
+以五年为期，必复之全之。
+予本非文人画士，甘受诟厉，辟病梅之馆以贮之。
+呜呼！安得使予多暇日，又多闲田，
+以广贮江宁、杭州、苏州之病梅，穷予生之光阴以疗梅也哉！
+\end{document}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>第5至13行，虽然一句一行，但编译出的文档只占了1段，与Word不同，并不是分别一句一段。在一个空白行之后才会分段</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1111,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-34.png" alt="[Image]" class="wp-image-1111"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>标题</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>文档标题一般有题名、作者、日期等等信息，可以在文档头部指定：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\title{病梅馆记}
+\date{清代}
+\author{龚自珍}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>指定之后只生成标题信息，并不在文档中真正生成标题，生成标题需要在其后使用<code>\maketitle</code>命令</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass[UTF8]{ctexart}
+\begin{document}
+\title{病梅馆记}
+\date{清代}
+\author{龚自珍}
+\maketitle
+江宁之龙蟠，苏州之邓尉，杭州之西溪，皆产梅。
+（中略）
+呜呼！安得使予多暇日，又多闲田，
+以广贮江宁、杭州、苏州之病梅，穷予生之光阴以疗梅也哉！
+\end{document}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1112,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-35.png" alt="[Image]" class="wp-image-1112"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>分节和目录</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>在一空白行，使用 \part, \chapter, \section, \subsection, \subsubsection, \paragraph, \subparagraph 进行分节 。article文档类下是没有\chapter的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如做按唐宋清分成三个部分，按作者分节，每个作者下的题名为子节名生成的文档：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>documentclass[UTF8]{ctexart}
+\begin{document}
+\title{古典文学}
+\date{ }
+\maketitle
+\part {唐代}
+\section{李白}
+\subsection{将进酒}
+君不见黄河之水
+\subsection{梦游天姥吟留别}
+海客谈瀛洲，烟涛微茫信难求；
+\part{宋代}
+\section{辛弃疾}
+\subsection{青玉案·元夕}
+东风夜放花千树，更吹落，星如雨。
+\section{苏轼}
+\subsection{水调歌头·明月几时有}
+丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。
+\section{范仲淹}
+\subsection{岳阳楼记}
+庆历四年春，滕子京谪守巴陵郡。
+\part {清代}
+\section{龚自珍}
+\subsection{病梅馆记}
+江宁之龙蟠，苏州之邓尉，杭州之西溪，皆产梅。
+\end{document}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1113,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-36.png" alt="[Image]" class="wp-image-1113"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>这样就可以开始进行多层次分节文档编辑了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>若要生成目录，可以使用命令 \tableofcontents 生成一个目录，这只对当前自动编号的章节起作用。<strong>注意，要正确生成目录需要编译两次！</strong><br /></p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1114,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-37.png" alt="[Image]" class="wp-image-1114"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>页面布局与版式</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>使用\setlength{字段}{值}可以对页面布局进行设定。例如对页面宽高和偏移量进行设置：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\setlength{\textwidth}{14cm}
+\setlength{\textheight}{25cm}
+\setlength{\hoffset}{-0.5cm}
+\setlength{\voffset}{-2cm}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>用  \pagestyle{版式}, \thispagestyle{ 版式 } 对页面版式进行设置，一般可设置的有plain,empty,headings.<br />plain是默认值，无页眉，页码在页脚中间。empty无页眉页脚页码，headings带页眉和页脚。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>最基本的文档结构已经有了，这样就可以进行简单的文字排版。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-18T07:21:31+09:00">
+      水 18 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

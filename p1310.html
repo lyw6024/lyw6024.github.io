@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - ZFNet:卷积神经网络的理解和可视化</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1310.html" rel="bookmark"
+         title="Permalink to ZFNet:卷积神经网络的理解和可视化">ZFNet:卷积神经网络的理解和可视化</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>一、ZFNet简介</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>1.1 为什么起名ZFnetwork</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>ILSVRC 2013获胜者是来自Matthew Zeiler和Rob Fergus的卷积网络。它被称为ZFNet（Zeiler＆Fergus Net的简称）。这是对AlexNet的改进，通过调整架构超参数，特别是通过扩展中间卷积层的大小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>        ZFNet是用人的名字命名的，那他到底出自哪篇论文呢？它出自Matthew D.Zeiler 和 Rob Fergus （纽约大学）2013年撰写的论文： 《<a href="https://arxiv.org/abs/1311.2901">Visualizing and Understanding Convolutional Networks</a>》，转讲解“卷积神经网络的理解和可视化”</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>1.2 ILSVRC历届冠军网络介绍以及CNN的大致演化过程</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>LeNet: 最早用于数字识别的CNN</li><li>AlexNet: 比LeNet层数多，用多层小卷积叠加来替换单个的大卷积</li><li>ZF Net: 2013 ILSVRC冠军</li><li>GoogleNet: 2014 ILSVRC 冠军</li><li>VGG Net: 2014 ILSVRC赛中的一个算法模型，效率比GoogleNet低</li><li>ResNet: 2015 ILSVRC冠军。结构修正以适应更深层次的CNN训练</li></ul>
+<!-- /wp:list -->
+<!-- wp:image {"align":"center","id":1315,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-50.png" alt="[Image]" class="wp-image-1315"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>1.3 ZFNet最大研究意义</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp;ZFNet是在AlexNet基础上进行了一些细节的改动，网络结构上并没有太大的突破，只是在卷积核和步幅上面做了一些改动。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>按照以前的观点，一个卷积神经网络的好坏我们只能通过不断地训练去判断，我也没有办法知道每一次卷积、每一次池化、每一次经过激活函数到底发生了什么，也不知道神经网络为什么取得了如此好的效果，那么只能靠不停的实验来寻找更好的模型。ZFNet所做的工作不少，但是最核心的其实就是一个。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>核心意义：</strong>通过使用可视化技术揭示了神经网络各层到底在干什么，起到了什么作用。一旦知道了这些，如何调整我们的神经网络，往什么方向优化，就有了较好的依据。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>主要工作：</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"ordered":true} -->
+<ol><li>使用一个多层的反卷积网络来可视化训练过程中特征的演化及发现潜在的问题；</li><li>同时根据遮挡图像局部对分类结果的影响来探讨对分类任务而言到底那部分输入信息更重要。</li></ol>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>总而言之，《Visualizing and Understanding Convolutional Networks》，可以说是CNN领域可视化理解的开山之作，这篇文献告诉我们CNN的每一层到底学习到了什么特征，然后作者通过可视化进行调整网络，提高了精度。最近两年深层的卷积神经网络，进展非常惊人，在计算机视觉方面，识别精度不断的突破，CVPR上的关于CNN的文献一大堆。然而很多学者都不明白，为什么通过某种调参、改动网络结构等，精度会提高。可能某一天，我们搞CNN某个项目任务的时候，你调整了某个参数，结果精度飙升，但如果别人问你，为什么这样调参精度会飙升呢，你所设计的CNN到底学习到了什么牛逼的特征？</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp;这篇文献的目的，就是要通过特征可视化，告诉我们如何通过可视化的角度，查看你的精度确实提高了，你设计CNN学习到的特征确实比较牛逼。<br />&nbsp;</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>1.4 论文研究的贡献</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>（1）特征可视化</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>使用反卷积、反池化、反激活函数去反可视化feature map ，通过feature map可以看出，特征分层次体系结构 ，以及我们可以知道前面的层学习的是物理轮廓、边缘、颜色、纹理等特征，后面的层学习的是和类别相关的抽象特征。这一个非常重要的结论，我们后面很多的微调手段都是基于此理论成果。再次强调这个结论：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>结论一：</strong>CNN网络前面的层学习的是物理轮廓、边缘、颜色、纹理等特征，后面的层学习的是和类别相关的抽象特征</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>结论二：</strong>CNN学习到的特征具有平移和缩放不变性，但是，没有旋转不变性</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>（2）特征提取的通用性</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>作者通过实验说明了，将使用ImageNet2012数据集训练得到的CNN,在保持前面七层不变的情况，只在小数据集上面重新训练softmax层，通过这样的实验，说明了使用ImageNet2012数据集训练得到的CNN的特征提取功能就有通用性。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>结论三：</strong>CNN网络的特征提取具有通用性，这是后面微调的理论支持</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>（3）对于遮挡的敏感性</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>通过遮挡，找出了决定图像类别的关键部位当，在输入图片中遮挡了学习到的特征时，分类效果会很差。同时根据遮挡图像局部对分类结果的影响来探讨对分类任务而言到底那部分输入信息更重要。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>（4）特征的层次分析</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>作者通过实验证明了，不同深度的网络层学习到的特征对于分类的作用，说明了深度结构确实能够获得比浅层结构更好的效果。&nbsp;通过实验，说明了深度增加时，网络可以学习到更具区分的特征。&nbsp;底层特征在迭代次数比较少时就能收敛，高层需要的迭代次数比较多&nbsp;越是高层的特征，其用来做分类的性能越好</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>（5）对于CNN结构的改进</h4>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>（6）特征结构选择</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; 作者通过可视化AlexNet第一层和第二层的特征，发现比较大的stride和卷积核提取的特征不理想，所以作者将第一层的卷积核从11*11减小到7*7，将stride从4减小到2，实验说明，这样有助于分类性能的提升。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>        这个改进方案是建立在（1）的基础之上的，上述结论中的（2）、（3）、（4）、（5）、（6）均是建立在（1）的基础之上的，因为我们知道了网络各个层到底发生了什么，自然也就知道了优化的方向。<br />       通过特征可视化可以知道，Krizhevsky的CNN结构学习到的第一层特征只对于高频和低频信息有了收敛，但是对于中层信息却还没有收敛；同时，第二层特征出现了混叠失真，这个主要是因为第一个卷积层的层的步长设置为4引起的，为了解决这个问题，作者不仅将第一层的卷积核的大小设置为7*7,同时，也将步长设置为2（对AlexNet的改进）</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>二、ZFNet所涉及的几个核心原理</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; 其实上面所罗列出来的5个贡献，不管是对于遮挡的敏感性、特征的层析分析、还是特征提取的通用性，都是建立在“特征可视化”的基础之上的，因此特征可视化就是论文的核心所在了，要想能够看到每一个卷积层之后，到底提取到了原始图像什么样的特征，则需要经过几个核心步骤，反池化、反激活、反卷积。反卷积可视化以各层得到的特征图作为输入，进行反卷积，得到反卷积结果，用以验证显示各层提取到的特征图。举个例子：假如你想要查看Alexnet&nbsp;的conv5提取到了什么东西，我们就用conv5的特征图后面接一个反卷积网络，然后通过：反池化、反激活、反卷积，这样的一个过程，把本来一张13*13大小的特征图(conv5大小为13*13)，放大回去，最后得到一张与原始输入图片一样大小的图片(227*227)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下面就来看一下实现feature map可视化的几个核心思想。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>2.1 反池化过程</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp;我们知道，池化是不可逆的过程，然而我们可以通过记录池化过程中，最大激活值得坐标位置。然后在反池化的时候，只把池化过程中最大激活值所在的位置坐标的值激活，其它的值置为0，当然这个过程只是一种近似，因为我们在池化的过程中，除了最大值所在的位置，其它的值也并不是为0的。刚好最近几天看到文献：《Stacked What-Where Auto-encoders》，里面有个反卷积示意图画的比较好，所有就截下图，用这篇文献的示意图进行讲解：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1316,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-51.png" alt="[Image]" class="wp-image-1316"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>以上面的图片为例，上面的图片中左边表示pooling过程，右边表示unpooling过程。假设我们pooling块的大小是3*3，采用max&nbsp;pooling后，我们可以得到一个输出神经元其激活值为9，pooling是一个下采样的过程，本来是3*3大小，经过pooling后，就变成了1*1大小的图片了。而upooling刚好与pooling过程相反，它是一个上采样的过程，是pooling的一个反向运算，当我们由一个神经元要扩展到3*3个神经元的时候，我们需要借助于pooling过程中，记录下最大值所在的位置坐标(0,1)，然后在unpooling过程的时候，就把(0,1)这个像素点的位置填上去，其它的神经元激活值全部为0。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; 再来一个例子：在max&nbsp;pooling的时候，我们不仅要得到最大值，同时还要记录下最大值得坐标（-1，-1），然后再unpooling的时候，就直接把(-1-1)这个点的值填上去，其它的激活值全部为0。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp;当然了，实际上在池化之前，除了（0,1）位置上的那个9以外，其他地方的数字并不是0，所以反池化并没有真正意义上的完全还原，只是一种近似而已。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>2.2 反激活</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>我们在Alexnet中，relu函数是用于保证每层输出的激活值都是正数，因此对于反向过程，我们同样需要保证每层的特征图为正值，也就是说这个反激活过程和激活过程没有什么差别，都是直接采用relu函数。这里需要；了解什么是relu激活函数，当然这也只是一种近似，只是保证了每一个经过激活函数的输出值始终为正值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>2. 3 反卷积</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 对于反卷积过程，采用卷积过程转置后的滤波器(参数一样，只不过把参数矩阵水平和垂直方向翻转了一下)，反卷积实际上应该叫<strong>卷积转置</strong>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 这里我打算下一篇博客仔细讲一下卷积转置。最后可视化网络结构如下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1319,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-52.png" alt="[Image]" class="wp-image-1319"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 网络的整个过程，从右边开始：输入图片-》卷积-》Relu-》最大池化-》得到结果特征图-》反池化-》Relu-》反卷积。到了这边，可以说我们的算法已经学习完毕了，其实很好理解，我们可以用两个过程来描述：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>过程一：</strong>特征提取过程，输入图像-》卷积-》Relu激活-》最大化池化-》feature map</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>过程二：</strong>特征还原过程，feature map-》反池化-》反Relu激活-》反卷积-》可视化（原始）图像</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>2.4 ZFNet网络的结构</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上面2.3中的图片并不是ZFNet网络的结构，上面的2.3是进行特征可视化的步骤图，特征可视化的目的就是为了改进原来的网络，适当调整原来的CNN网络（论文中是适当调整AlexNet）。原来的ZFNet是下图所示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1320,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-53-1024x504.png" alt="[Image]" class="wp-image-1320"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>从上面可以看出，ZFNet相较于AlexNet的改进主要在两点：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>（1）第一个卷积层的大小从11*11改为了7*7，步长从4改为了2.</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 作出这样调整的依据就是通过特征图可视化来实现的，作者通过可视化AlexNet第一层和第二层的特征，发现比较大的stride和卷积核提取的特征不理想，所以作者将第一层的卷积核从11*11减小到7*7，实验说明，这样有助于分类性能的提升。另外通过特征可视化可以知道，Krizhevsky的CNN结构学习到的第一层特征只对于高频和低频信息有了收敛，但是对于中层信息却还没有收敛；同时，第二层特征出现了混叠失真，这个主要是因为第一个卷积层的层的步长设置为4引起的，为了解决这个问题，作者不仅将第一层的卷积核的大小设置为7*7,同时，也将步长设置为2（对AlexNet的改进）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>（2）将3、4、5层卷积核的数量由384、384、256调整为512、1024、512，</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>总结：</strong>从上面的这个网络改进过程可以发现，虽然在设计卷积核的大小、步长、卷积核的数量等方面都是认为自己设置的，依然还带有一定的盲目性，需要多次试验寻求最佳的设计，但是相较于之前已经有了一些进步，因为我至少可以通过feature map的可视化分析一下大致的原因，找寻一个大致的优化方向，是该调整大一点还是小一点呢？虽然不能很快确定，但是有了一定的参考依据。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>三、 原始论文中的feature map可视化结果分析</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>我们现在来看一下原始论文是如何对可视化的特征图进行分析，进而找出网络调整的依据的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>3.1 特征可视化</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 每个特征单独投影到像素空间揭露了不同的结构能刺激不同的一个给定的特征图，因此展示了它对于变形的输入内在的不变性。下图即在一个已经训练好的网络中可视化后的图。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1332,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p3.png" alt="[Image]" class="wp-image-1332"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>由上图可以看到第二层应对角落和其他边缘或者颜色的结合；</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第三层有更加复杂的不变性，捕捉到了相似的纹理；</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第四层显示了特定类间显著的差异性；</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第五层显示了有显著构成变化的整个物体。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 总的来说，通过CNN学习后，我们学习到的特征，是具有辨别性的特征，比如要我们区分人脸和狗头，那么通过CNN学习后，背景部位的激活度基本很少，我们通过可视化就可以看到我们提取到的特征忽视了背景，而是把关键的信息给提取出来了。从layer 1、layer 2学习到的特征基本上是颜色、边缘等低层特征；layer 3则开始稍微变得复杂，学习到的是纹理特征，比如上面的一些网格纹理；layer 4学习到的则是比较有区别性的特征，比如狗头；layer 5学习到的则是完整的，具有辨别性关键特征。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>3.2 特征演变过程</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>外表突然的变化导致图像中的一个变换即产生了最强烈的激活。模型的底层在少数几个epoches就能收敛聚集，然而上层在一个相当多的epoches(40-50)之后才能有所变化，这显示了让模型完全训练到完全收敛的必要性。可以由下图看到颜色对比度都逐步增强。作者给我们显示了，在网络训练过程中，每一层学习到的特征是怎么变化的，上面每一整张图片是网络的某一层特征图，然后每一行有8个小图片，分别表示网络epochs次数为：1、2、5、10、20、30、40、64的特征图：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1321,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-54-1024x173.png" alt="[Image]" class="wp-image-1321"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>结果：(1)仔细看每一层，在迭代的过程中的变化，出现了sudden&nbsp;jumps;(2)从层与层之间做比较，我们可以看到，低层在训练的过程中基本没啥变化，比较容易收敛，高层的特征学习则变化很大。这解释了低层网络的从训练开始，基本上没有太大的变化，因为梯度弥散嘛。(3)从高层网络conv5的变化过程，我们可以看到，刚开始几次的迭代，基本变化不是很大，但是到了40~50的迭代的时候，变化很大，因此我们以后在训练网络的时候，不要着急看结果，看结果需要保证网络收敛。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>总结：</strong>卷积神经网络前面的及各层很快就收敛了，二上层收敛较慢，因此我们以后在训练网络的时候，不要着急看结果，看结果需要保证网络收敛。&nbsp;</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> 3.3特征不变性</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp;一般来说，小的变化对于模型的第一层都有非常大的影响，但对于最高层的影响却几乎没有。对于图像的平移、尺度、旋转的变化来说，网络的输出对于平移和尺度变化都是稳定的，但却不具有旋转不变性，除非目标图像时旋转对称的。下图为分别对平移，尺度，旋转做的分析图。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1322,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-55-1024x172.png" alt="[Image]" class="wp-image-1322"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:image {"align":"center","id":1323,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-56-1024x168.png" alt="[Image]" class="wp-image-1323"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:image {"align":"center","id":1324,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-57-1024x173.png" alt="[Image]" class="wp-image-1324"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上图按行顺序分别为对5类图像进行不同程度的垂直方向上的平移、尺度变换、旋转对输出结果影响的分析图。按列顺序分别为原始变换图像，第一层中原始图片和变换后的图片的欧氏距离，第7层中原始图片和变换后的图片的欧氏距离，变换后图片被正确分类的概率图。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 可视化不仅能够看到一个训练完的模型的内部操作，而且还能帮助选择好的网络结构。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>3.4 ZFNet与AlexNet的对比</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp;前面说了ZFNet的结构与AlexNet基本一致，只不过做了稍微的更改，改变了第一层卷积核的大小和步幅，现在来看一下这个第一层卷积层改变前后，特征到底发生了什么变化。在稍微更改了第一层之后，分类性能提升了，下图为两个网络结构可视化特征图。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>（a）为没有经过裁剪的图片经过第一个卷积层后的特征可视化图，注意到有一个特征全白，</li><li>（b）为AlexNet中第一个卷积层特征可视化图，</li><li>（c）为ZFNet中第一个卷积层可视化图，可以看到相比前面有更多的独特的特征以及更少的无意义的特征，如第3列的第3到6行，</li><li>（d）为AlexNet中第二个卷积层特征可视化图，</li><li>（e）为ZFNet中的第二个卷积层特征可视化图，可以看到（e）中的特征更加干净，清晰，保留了更多的第一层和第二层中的信息。</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"level":3} -->
+<h3>3.5 遮挡图像来判断网络是否知道对象在原图中的位置</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; 可能看到现在，我们一直存在一个疑问，那就是，整个模型它自己清楚目标在图像中的具体位置吗？可以用实验来证明一下，即用一个灰色小方块来挡住图像中的目标，然后再观测输出的分类情况来分析，如下图：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1328,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p1-1024x585.png" alt="[Image]" class="wp-image-1328"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; 上图为对三个不同的测试图片中的不同位置用灰色小方块进行掩盖后，观测分类输出的改变情况。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第一列（a）为原始测试图片，</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第二列（b）为某个区域被灰色小方块掩盖后的网络结构中第五层的特征图，</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>第三列（c）为将第五层的特征图投影到输入图像的可视化图像，第一行表明最强烈的特征表现在狗狗的面部区域，（d）为正确分类概率的图，（e）为最有可能的标签。<br /> &nbsp; &nbsp;上述结果表明，如果图像中的目标被遮挡，那么被正确分类的概率会显著降低，这表明这种可视化与激发特征图的图像结构式真正对应上的。即大概能知道位置。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>3.6 图像的一致性分析</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>&nbsp; &nbsp; &nbsp; &nbsp;为了更进一步探究在深度模型中如何对同一类物体的不同图像进行一致性分析。对五张小狗（同一类）的不同图片的不同区域进行掩盖，然后进行分析观察探究深度模型是对一类物体的那部分进行一致性分析的过程。如下图</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1329,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p2-1024x572.png" alt="[Image]" class="wp-image-1329"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[latex]\epsilon^l_i = x^l_i- \bar x ^l _i[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上图中按列的顺序都是依次遮挡住左眼，右眼，鼻子等对于每幅图像i，计算：，其中和各自代表第l层中原始和被遮挡的图像，然后计算成对的图像</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>  [latex] \Delta l = \sum^{5}_{i,j=1,i \neq j} {H(\epsilon^l_i, \epsilon^l_j)} [/latex]    </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>为<strong>汉明距离</strong>，即汉明距离是一个概念，它表示两个（相同长度）字对应位不同的数量，我们以d（x,y）表示两个字x,y之间的汉明距离。对两个字符串进行异或运算，并统计结果为1的个数，那么这个数就是汉明距离。所以得到的值越小，则有更好的一致性。下图对第5层和第7层的特征图中为2，3，4列以及其他随机遮挡情况进行分析的Delta的得分情况，得分越低代表有更好的一致性。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1325,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-58-1024x342.png" alt="[Image]" class="wp-image-1325"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>由上图可以观察到，在第5层随机遮挡的情况比其他眼睛鼻子被遮挡的情况一致性分析较差，而第7层中，这四类却都差不多，<strong>那是因为底层判别的是一类物体共有的部分，而高层判别的是类别中不同的品种这种更高维的部分了</strong>。<br />&nbsp;</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>四、总结</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>提出了一种可视化方法——核心<strong>“三反”</strong>；<br />发现学习到的特征远不是无法解释的，而是特征间存在层次性，层数越深，特征不变性越强，类别的判别能力越强；<br />通过可视化模型中间层，在alexnet基础上进一步提升了分类效果；<br />遮挡实验表明分类时模型和局部块的特征高度相关；<br />模型的深度很关键；<br />预训练模型可以在其他数据集上fine-tuning得到很好的结果。<br />&nbsp;</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-09T09:33:48+09:00">
+      木 09 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Haskell解题集：PAT (Basic Level) Practice （中文）</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p181.html" rel="bookmark"
+         title="Permalink to Haskell解题集：PAT (Basic Level) Practice （中文）">Haskell解题集：PAT (Basic Level) Practice （中文）</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>开个project，长期更新，目标是用纯函数式的Haskell语言把PAT基础级做完...</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>P1001 角谷猜想</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main= do
+    line&lt;-getLine
+    let p = read line::Int
+    print $ halistone p 0
+haliOp:: Int-&gt;Int
+haliOp x
+    | mod x 2 ==0 = div x 2
+    | otherwise = div ((3*x)+1) 2
+halistone :: Int-&gt; Int -&gt; Int
+halistone 1 p = p
+halistone x p =  halistone (haliOp x) (p+1)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>P1002 写出这个数</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给出一串数字，各位加和之后用拼音输出和的各位上的数字</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import Data.Char
+main=do
+    line&lt;-getLine
+    let s =  show $ sum $ map (\x -&gt; ord x - ord '0') line
+    output 0 s
+output :: Int-&gt;[Char] -&gt; IO()
+output _ [] = return ()
+output 0 (x:xs) = do
+    putStr $ pinyin x
+    output 1 xs
+output 1 (x:xs)= do
+    putStr &quot; &quot;
+    putStr  (pinyin x)
+    output 1 xs
+pinyin :: Char -&gt; String
+pinyin w
+    | w=='0' =&quot;ling&quot;
+    | w=='1' = &quot;yi&quot;
+    | w=='2' = &quot;er&quot;
+    | w=='3' = &quot;san&quot;
+    | w=='4' = &quot;si&quot;
+    | w=='5' = &quot;wu&quot;
+    | w=='6' = &quot;liu&quot;
+    | w=='7' = &quot;qi&quot;
+    | w=='8' = &quot;ba&quot;
+    | w=='9' = &quot;jiu&quot;
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1004:</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给出学生信息，输出成绩最高与最低的学生姓名与学号</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+data Person = Person String String Int
+score :: Person -&gt; Int
+score ( Person _ _ x) = x
+name :: Person -&gt; String
+name (Person s _ _ ) = s
+idNum :: Person -&gt; String
+idNum (Person _ s _ ) = s
+main=do
+    line&lt;-getLine
+    ctx&lt;-getContents
+    let p = [Person (c!!0) (c!!1) (read (c!!2) ::Int)|c&lt;-[words c|c&lt;-lines ctx]]
+    output (rec cMax p)
+    output (rec cMin p)
+rec :: (Person-&gt; Person-&gt; Person) -&gt; [Person]-&gt;Person
+rec _ [x] = x
+rec f (x:xs) = f x (rec f xs)
+cMax :: Person-&gt; Person-&gt; Person
+cMax x y = if score x &gt; score y then x else y
+cMin :: Person-&gt; Person-&gt; Person
+cMin x y = if score x &lt; score y then x else y
+output :: Person -&gt; IO()
+output x = putStrLn $ (name x) ++ &quot; &quot; ++ (idNum x)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1006 简单的字符串处理</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main=do
+    line&lt;-getLine
+    let n=read line ::Int
+    let huns = div n 100
+    let tens = div (mod n 100) 10
+    let ones = mod n 10
+    repStr &quot;B&quot; huns
+    repStr &quot;S&quot;tens
+    repArr [1..ones]
+    putStrLn &quot;&quot;
+repStr :: String -&gt; Int -&gt; IO()
+repStr _ 0 = return ()
+repStr s x = do
+    putStr s
+    repStr s (x-1)
+repArr :: [Int]-&gt;IO()
+repArr [] = return ()
+repArr (x:xs) = do
+    putStr (show x)
+    repArr xs
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1007 素数对猜想,素数处理</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main=do
+        line&lt;-getLine
+        let p = read line :: Integer
+        let u = primes p
+        let prGap = zipWith (-) (tail u) u
+        print $ howmany 2 prGap
+primes :: Integer -&gt; [Integer]
+primes 1 = []
+primes 2 = [2]
+primes n = qs ++ [x | x &lt;- [sqrtn..n], and [mod x y /= 0 | y &lt;- qs]] where
+  qs =  primes sqrtn
+  sqrtn = floor $ sqrt $  fromInteger n + 1
+howmany :: Integer -&gt; [Integer] -&gt; Integer
+howmany _ [] = 0
+howmany v (x:xs)
+        | v==x = 1 + howmany v xs
+        | otherwise = howmany v xs</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1008  <strong>数组元素循环右移问题</strong>  ：基本数组操作</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import Data.List
+main=do
+    line&lt;-getLine
+    let n = [read x::Int|x&lt;-words line]!!1
+    line&lt;-getLine
+    let p = [read x::Int|x&lt;-words line]
+    putStrLn $ intercalate &quot; &quot; [show x|x&lt;-rightShift n p]
+rightShift :: Int-&gt;[Int]-&gt;[Int]
+rightShift 0 p = p
+rightShift n p =rightShift (n-1) (last p : init p)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1009   <strong>说反话</strong> : 简单的字符操作 </h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import Data.List
+main=do
+    line&lt;-getLine
+    let p = [x|x&lt;-words line]
+    putStrLn $ intercalate &quot; &quot; (reverse p)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>1012 数字分类：多种的基本数据操作与格式化输出</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import Data.List
+import Text.Printf
+main=do
+    line&lt;-getLine
+    let p = tail [read x::Int | x&lt;-words line]
+    let a1= filter (\x -&gt; mod x 10 ==0 ) p
+    let a2= filter (\x -&gt; mod x 5 ==1 ) p
+    let a3= filter (\x -&gt; mod x 5 ==2 ) p
+    let a4= filter (\x -&gt; mod x 5 ==3 ) p
+    let a5= filter (\x -&gt; mod x 5 ==4 ) p
+    let r1= if length a1 &gt;0 then sum a1 else -1
+    let r2= if length a2&gt;0 then interlaceAdd a2 else -1
+    let r3= if length a3&gt;0 then length a3 else -1
+    let r4= if length a4&gt;0 then average a4 else -1
+    let r5= if length a5&gt;0 then maxL a5 else -1
+    if r1/=(-1) then printf &quot;%d&quot; r1 else printf &quot;N&quot;
+    printf &quot; &quot;
+    if r2/=(-1) then printf &quot;%d&quot; r2 else printf &quot;N&quot;
+    printf &quot; &quot;
+    if r3/=(-1) then printf &quot;%d&quot; r3 else printf &quot;N&quot;
+    printf &quot; &quot;
+    if r4/=(-1) then printf &quot;%.1f&quot; r4 else printf &quot;N&quot;
+    printf &quot; &quot;
+    if r5/=(-1) then printf &quot;%d&quot; r5 else printf &quot;N&quot;
+    printf &quot;\n&quot;
+interlaceAdd :: [Int] -&gt; Int
+interlaceAdd [] = 0
+interlaceAdd (x:xs) = x - (interlaceAdd  xs)
+maxL :: [Int]-&gt;Int
+maxL [x] = x
+maxL (x:xs) = max x (maxL xs)
+average :: [Int]-&gt;Float
+average p = s/l where
+    s = read (show (sum p))::Float
+    l =  read (show (length p))::Float
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>P1061</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main=do
+        line&lt;-getLine
+        line&lt;-getLine
+        let scoreWeight=[read x::Int| x&lt;-words line]
+        line&lt;-getLine
+        let rightAnswer=[read x::Int| x&lt;-words line]
+        ctx&lt;-getContents
+        let p=[ [ read x :: Int |x&lt;-words z] | z&lt;-[s | s&lt;- lines ctx]]
+        solve scoreWeight rightAnswer p
+solve :: [Int]-&gt;[Int] -&gt; [[Int]] -&gt; IO()
+solve _ _ [] = return ()
+solve scoreWeight rightAnswer (phd:pList) = do
+        print $ givenScore scoreWeight rightAnswer phd
+        solve scoreWeight rightAnswer pList
+givenScore :: [Int]-&gt; [Int]-&gt;[Int] -&gt; Int
+givenScore [] _ _ = 0
+givenScore (sh:sList) (rh:rList) (ph:pList)
+        | rh == ph = sh + givenScore sList rList pList
+        | rh /= ph = givenScore sList rList pList
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2><strong>P1079</strong>  <strong>延迟的回文数</strong> </h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+main=do
+    line&lt;-getLine
+    let z = findNext line 10
+    output $ z
+    putStrLn $ if isPali (last z) then ((last z) ++&quot; is a palindromic number.&quot;) else &quot;Not found in 10 iterations.&quot;
+isPali :: [Char] -&gt; Bool
+isPali [] = True
+isPali [x]= True
+isPali x = (head x == last x) &amp;&amp; (isPali $ init (tail x))
+genNext :: [Char] -&gt;  [Char]
+genNext x  =  show $ (read x::Integer) + (read (reverse x) ::Integer)
+findNext :: [Char] -&gt; Int -&gt;[[Char]]
+findNext s 0 = [s]
+findNext s x = if isPali s then [s] else s:(findNext (genNext s) (x-1))
+output :: [[Char]] -&gt; IO()
+output [x] = return ()
+output (x:y:xs) = do
+    putStrLn (x ++&quot; + &quot; ++(reverse x) ++&quot; = &quot; ++ y)
+    output (y:xs)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>P1086</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main=do
+    line&lt;-getLine
+    let p=[read x::Int|x&lt;-words line]
+    putStrLn $ show (read ( reverse $ show (product p))::Int)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>P1091</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main=do
+    line&lt;-getLine
+    line&lt;-getLine
+    let r=[read x::Int| x&lt;-words line]
+    ana r
+ana :: [Int]-&gt;IO()
+ana [] = return ()
+ana (x:xs) = do
+    solve 1 x
+    ana xs
+backword :: Int -&gt; [Char] -&gt;[Char]
+backword 0 x=[]
+backword s x= (backword (s-1) $ init x )++[ last x]
+solve :: Int-&gt;Int-&gt;IO()
+solve 10 x = putStrLn &quot;No&quot;
+solve a x = do
+    let digits = length $ show x
+    if (backword digits (show (a*(x^2)))) == show x
+        then putStrLn ((show a)++&quot; &quot;++(show (a*(x^2))))
+        else solve (a+1) x
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-16T03:38:50+09:00">
+      月 16 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

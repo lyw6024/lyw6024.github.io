@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Atcoder [Sep.7th] D题 Face Produces Unhappiness</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p135.html" rel="bookmark"
+         title="Permalink to Atcoder [Sep.7th] D题 Face Produces Unhappiness">Atcoder [Sep.7th] D题 Face Produces Unhappiness</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>这类题见过好多次，刚总是不能很快做出来，要不然就是有几个测试点超出时限。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>问题大意：有N人排成一队，队伍中的人不是面向左就是面向右，用长为N的字符串表示，字符串中仅含L与R，L表示这个人面向左，R表示这个人面向右。如果一个人面前的这个人和自己是同向的，那么他会感到happy。你在队伍外可以指挥这一队人，每次选取连续的小队，你可以将这些人旋转180度。比如让三个人LRR反转就是LLR。现给出这个队伍以及你可以指挥的次数，试问最后可以让愉快的人最大值是多少?</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分析</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>建个模型，在下图中人的方向用箭头表示。图中，连续的同向的人我们用1个箭头表示。同时为了省去对边界的特别处理，再假设待计算的N人左侧有无数个面向右的人，而右侧有无数个面向左的人。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":249} -->
+<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/pDA-1024x131.png" alt="[Image]" class="wp-image-249"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>此题目标是计算愉快的人，但我们反其道而行之，计算那些不愉快的有几人（相邻两人面对面的情况）。也就是说，我们的优化目标是上图中红点更少。每个红点上都有两个不愉快的人。当然，若这个红点位于最左边或最右边，则就只有一个不愉快的人（因为在队伍外边的人不进行计算）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当选择区间（l，r）并反转它时，这些红点和蓝点如何变化呢？</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>不在反转区间两顶点上的红点和蓝点并不会增减，并且仍保持原来的红蓝色。因此，一次操作就选择一个红点和一个蓝点分别作为选择区间的两端，这样可以删去一个红点。除此之外的选择方法不能把红点消去。 由我们假设左侧有无数个朝右的人，右侧有无数个朝左的人，因此红色或蓝色虚线的总数总是奇数，会按照[红、蓝、红、蓝、…、红]的排列出现。由此可以看出，若有M个红点，就有M-1个蓝点；因此，无论操作执行多少次，总会留下一个红点。这样的话，就可以先通过M-1次操作擦除M-1个红点。因此，尽可能地消去内部（不在队伍端点的）红点（这样每次可以增加2个快乐的人），如果最后剩下的红点在队内，则从红点到队伍端点全反转，则可以增加1个快乐的人。这是因为，一次操作中，愉快的人只能增加2个，而实际上对所全队来说每两个人都可能是待增加的。即，最后问题就转化为愉快人数+2可执行X次，使愉快人数+1可执行Y次，在K次操作中增加了多少愉快的人数。其中，X和Y由红点的数量确定，即，在S中出现的'RL'的数量，可由S1和SN确定。该解决方案的时间复杂度为O（N）。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另一种解法。把字符串分解为LL ... L，RR ... R，...，LL ... L，其中有奇数段RR ... R，通过从前面依次按顺序反转来计算最后的愉快人数，这同样是O（N）的时间复杂度。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include&lt;bits/stdc++.h&gt;
+#include &lt;iostream&gt;
+using namespace std;
+int main(void){
+    int N,K; cin &gt;&gt; N &gt;&gt; K;
+    string S;
+    cin &gt;&gt; S;
+    int score = 0;
+    for(int i = 0; i &lt; N-1; i++){
+        if(S[i] == S[i+1]) score++;
+    }
+    int ans = min(score+2*K, N-1);
+    cout &lt;&lt; ans &lt;&lt; &quot;\n&quot;;
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p> </p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-10T02:36:01+09:00">
+      火 10 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

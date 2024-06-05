@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 用DOT画流程图</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1806.html" rel="bookmark"
+         title="Permalink to 用DOT画流程图">用DOT画流程图</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>graphviz会进行各类关系图的绘制。图使用DOT描述，具体可参考：<a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="http://graphviz.org/pdf/dotguide.pdf" target="_blank">http://graphviz.org/pdf/dotguide.pdf</a>。下载graphviz后，使用bin文件夹下的dot程序，可以将编写的*.gv转为图片或ps,svg等格式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>开源的LivizJS能够进行精简版的DOT实现工具，它可以直接运行在浏览器中。不过年久失修的LivizJS不支持HTML5标准，只能在IE中运行。我将其修改后，现在已可以在Chrome, Edge中运行。链接： <a href="http://lab.malic.xyz/liviz/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">http://lab.malic.xyz/liviz/</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如新建文本graph1.gv，并写入如下三行。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+a-&gt;b;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>接下来将文本graph1.gv转为graph1.png。将dot设置在PATH中并运行如下命令，其中-T参数表示输出引擎，一般与输出格式扩展名一致，-K参数表示布局模式（默认为dot，所以不加-Kdot也可以，其它布局模式查看 <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="http://graphviz.org/about/" target="_blank">http://graphviz.org/about/</a> ）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>dot -Kdot -Tpng graph1.gv -o graph1.png</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样就生成了graph1.png如下图示。如graph1.gv所示描述的，就是a指向b的一个图。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1809,"width":83,"height":155,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized">
+<img src="https://www.malic.xyz/wp-content/uploads/output.png" alt="[Image]" class="wp-image-1809" width="83" height="155"/>
+</figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>多加几个结点：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+main -&gt; parse -&gt; execute;
+main -&gt; init;
+main -&gt; cleanup;
+execute -&gt; make_string;
+execute -&gt; printf
+init -&gt; make_string;
+main -&gt; printf;
+execute -&gt; compare;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>就得到了这样的图</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1810,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-1.png" alt="[Image]" class="wp-image-1810"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>再复杂一点，结点可以变换一下格式，即添加参数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在编写dot的时候，可以先声明结点名，在结点名后加一方括号，使用"参数=属性"的方法为结点添加说明。默认情况下，结点<code>shape="ellipse",width=.75, height=.5 ,label=结点名</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>结点之间使用<code>'-&gt;'</code>连接表示一条有向边，在这条边之后加一对方括号则为这条边添加属性。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外，node添加的参数可以作为所有结点的公共声明，以及edge的参数会作为边的公共声明。公共声明的优先级低于结点上的声明。在dot直接使用中文会出现小黑框或者不显示，这时就需要在node和edge上声明中文字体，以正确地显示文字。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+node[shape=&quot;box&quot;,fontname=&quot;Microsoft YaHei&quot;];
+a[shape=&quot;ellipse&quot;];
+b[label=&quot;label-b&quot;];
+c[shape=&quot;circle&quot;];
+a-&gt;b [style=&quot;dashed,bold&quot;,color=&quot;red&quot;];
+b-&gt;a [style=&quot;dotted&quot;];
+a-&gt;c [label=&quot;a to c&quot;];
+ }
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":1812,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-2.png" alt="[Image]" class="wp-image-1812"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>对于结点有一种特殊的shape，即record(和Mrecord，区别在于Mrecord是圆角的）,它可以表示一组数据。当shape=record(或Mrecord)时，label需要为以下格式: 由竖线分开的标签，其中标签可以直接是文本，也可以是带<code>'&lt;&gt;'</code>标记的文本。如果带有<code>'&lt;&gt;'</code>标记，若绘制边时明确指定标记指向，可以使用<code>结点名:标记</code>表示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+node[shape=&quot;record&quot;];
+root[label=&quot;&lt;L&gt;L|Null|&lt;R&gt;R&quot;];
+L1[shape=&quot;Mrecord&quot;,label=&quot;Null|&lt;tree&gt;T|&lt;R&gt;R&quot;];
+R1[shape=&quot;Mrecord&quot;,label=&quot;&lt;L&gt;L|&lt;tree&gt;T|&lt;R&gt;R&quot;];
+R12[label=&quot;Null|&lt;tree&gt;T|Null&quot;];
+L21[label=&quot;Null|&lt;tree&gt;T|Null&quot;];
+R21[label=&quot;Null|&lt;tree&gt;T|Null&quot;];
+root:L -&gt; L1:tree;
+root:R - &gt;R1:tree;
+L1:R -&gt; R12:tree;
+R1:L -&gt; L21:tree;
+R1:R -&gt; R21:tree;
+ }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":1813,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-3.png" alt="[Image]" class="wp-image-1813"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>上图绘制的是一个树的数据结构示意图，它是从上向下布局的。如果要变换一下方式，比如从左开始布局，或者从底向上布局，则可以通过声明<code>rankdir</code>,属性值有TB,BT,LR,RL，分别为自上向下(默认)、从底向上、从左到右、从右到左。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如要绘制一个时间轴，从左向右画。时间轴结点的类型是纯文本，并且需要将同一年的结点<code>e</code>放在同一层级，这时可以使用<code>{}</code>表示一个范围，并指定<code>rank=same</code>表示这些结点是处在同一层次的（比如rankdir=LR时同一rank就处在同一水平位置，rankdir=TB时则处在同一高度）</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+rankdir=LR;
+{
+node[shape=&quot;plaintext&quot;];
+past-&gt;1998-&gt;2008-&gt;future[style=&quot;bold&quot;,color=&quot;red&quot;];
+e1;e2;e3;e4;e11;e21;e32;e42;e51;e52;e53;
+}
+{
+rank=same;past;e1,e2,e3;
+}
+{
+rank=same;1998;e11;e21;
+}
+{
+rank=same;2008;e32;e42;
+}
+{
+rank=same;future;e51;e52;e53;
+}
+e1-&gt;e11-&gt;e51;
+e2-&gt;e21-&gt;{e32;e42}-&gt;e52;
+e3-&gt;e53;
+ }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":1814,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-4.png" alt="[Image]" class="wp-image-1814"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>使用subgraph将声明一个子图，可以作为一个局部使用，subgraph的图名必须以cluster为前缀，使用方法相似，不再赘述。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>digraph G {
+rankdir=LR;
+node[shape=&quot;box&quot; fontname=&quot;Microsoft YaHei&quot;];
+edge[fontname=&quot;Microsoft YaHei&quot;];
+root[shape=&quot;record&quot; label=&quot;&lt;f0&gt; 内存|&lt;f1&gt; 设备|&lt;f2&gt; 文件|&lt;f3&gt; 进程&quot;];
+memtable[label=&quot;内存表&quot;];
+devtable[label=&quot;设备表&quot;];
+filetable[label=&quot;文件表&quot;];
+root:f0 -&gt; memtable;
+root:f1 -&gt; devtable;
+root:f2 -&gt; filetable;
+process[shape=&quot;record&quot; label=&quot;&lt;f0&gt; 进程1| &lt;f1&gt; 进程2|&lt;f3&gt; ...|&lt;f4&gt; 进程n&quot;];
+subgraph cluster0{
+fontname=&quot;Microsoft YaHei&quot;;
+label=&quot;进程实体及所用资源列表&quot;;
+style=&quot;filled&quot;;
+color=&quot;lightgrey&quot;;
+proc1[label=&quot;进程1&quot;];
+procn[label=&quot;进程n&quot;];
+}
+root:f3-&gt;process:f0-&gt;proc1;
+process:f4 -&gt; procn;
+ }
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":1807,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/p3-1.png" alt="[Image]" class="wp-image-1807"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>以上就是DOT画图的基本方法。更多具体的参数及用法可以参考<a href="http://graphviz.org/pdf/dotguide.pdf" target="_blank" rel="noreferrer noopener" aria-label="dotguide文档（在新窗口打开）">dotguide文档</a>。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-06-15T11:52:29+09:00">
+      月 15 6月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

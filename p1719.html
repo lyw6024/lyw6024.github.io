@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - GEE第一段程序：沙洲面积提取</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1719.html" rel="bookmark"
+         title="Permalink to GEE第一段程序：沙洲面积提取">GEE第一段程序：沙洲面积提取</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>打开GEE，先选定一块区域（使用ROI在地图上选定）可以看到此时代码框中出现了<code>Imports (1 entry) </code> ，我们可以对这个变量<code>var geometry</code>改名，例如这里我们将之改为<code>roi</code>,执行下边的代码：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript","theme":"monokai"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Map.centerObject(roi, 13);
+var Area_roi=roi.area().divide(1000000);
+print(Area_roi);
+var bounds= ee.Image().toByte()
+ .paint({
+     featureCollection:
+    ee.FeatureCollection([ee.Feature(roi)]),
+     color: null,
+     width: 1
+ });
+Map.addLayer(bounds, {palette: &quot;red&quot;}, &quot;bounds&quot;);
+// 选择遥感影像的时间段（startDate 包含输入时间，endDate 不包含输入时
+//间。下图中的遥感影像选择时段实际上是 2018 年 12 月 28 日-2019 年 5 月 26
+//日）
+var startDate = ee.Date(&quot;2018-12-28&quot;);
+var endDate =ee.Date(&quot;2019-5-27&quot;);
+// 引入所有遥感影像源（这些遥感影像已经经过了预处理，可以直接利用）
+var l5col=ee.ImageCollection(&quot;LANDSAT/LT05/C01/T1_SR&quot;);
+var l7col= ee.ImageCollection(&quot;LANDSAT/LE07/C01/T1_SR&quot;);
+var l4col=ee.ImageCollection(&quot;LANDSAT/LT04/C01/T1_SR&quot;);
+var l8col =ee.ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;);
+//选择某一遥感影像源，进行影像的区域，云量筛选，并进行去云处理,计算
+// MNDWI(即影像二值化).
+var Col=ee.ImageCollection(l8col)
+    .filterBounds(roi)
+    .filterDate(startDate, endDate)
+    .filter(ee.Filter.lte(&quot;CLOUD_COVER&quot;, 20))
+    .map(
+        function(image) {
+         var cloudShadowBitMask = 1 &lt;&lt; 3;
+         var cloudsBitMask = 1 &lt;&lt; 5;
+         var snowBitMask = 1 &lt;&lt; 4;
+         var qa = image.select('pixel_qa');
+         var mask = qa.bitwiseAnd(cloudShadowBitMask).eq(0)
+            .and(qa.bitwiseAnd(cloudsBitMask).eq(0))
+            .and(qa.bitwiseAnd(snowBitMask).eq(0));
+         return image.updateMask(mask);
+ }
+ )
+ .map(function(image) {
+ var time_start = image.get(&quot;system:time_start&quot;);
+ image = image.multiply(0.0001);
+ image = image.set(&quot;system:time_start&quot;, time_start);
+ return image;
+ })
+ .map(function(image) {
+ return image.addBands(image.normalizedDifference([&quot;B3&quot;, &quot;B6&quot;])
+ .rename(&quot;MNDWI&quot;));
+ })
+ .select(&quot;MNDWI&quot;);
+print(&quot;Col&quot;, Col);
+//大津算法（otsu）选择最优阈值方法，并进行影像的分割，水体和陆地分
+// 离，提取陆地面积。
+function otsu(histogram) {
+     var counts = ee.Array(ee.Dictionary(histogram).get('histogram'));
+     var means = ee.Array(ee.Dictionary(histogram).get('bucketMeans'));
+     var size = means.length().get([0]);
+     var total = counts.reduce(ee.Reducer.sum(), [0]).get([0]);
+     var sum = means.multiply(counts).reduce(ee.Reducer.sum(),
+    [0]).get([0]);
+     var mean = sum.divide(total);
+     var indices = ee.List.sequence(1, size);
+     var bss = indices.map(function(i) {
+     var aCounts = counts.slice(0, 0, i);
+     var aCount = aCounts.reduce(ee.Reducer.sum(), [0]).get([0]);
+     var aMeans = means.slice(0, 0, i);
+     var aMean = aMeans.multiply(aCounts)
+     .reduce(ee.Reducer.sum(), [0]).get([0])
+     .divide(aCount);
+     var bCount = total.subtract(aCount);
+     var bMean = sum.subtract(aCount.multiply(aMean)).divide(bCount);
+     return aCount.multiply(aMean.subtract(mean).pow(2)).add(
+     bCount.multiply(bMean.subtract(mean).pow(2)));
+ });
+ return means.sort(bss).get([-1]);
+}
+var sCol1 = Col.map(function(image) {
+         var histogram = image.reduceRegion({
+         reducer: ee.Reducer.histogram(),
+         geometry: roi,
+         scale: 2,
+         maxPixels: 1e13,
+         tileScale: 10
+         });
+         var threshold = otsu(histogram.get(&quot;MNDWI&quot;));
+         var mask = image.lte(threshold);
+         var water = mask.updateMask(mask).rename(&quot;water&quot;);
+         var newWater = water.addBands(image);
+        //转矢量
+         var vectors = newWater.reduceToVectors({
+         geometry: roi,
+         scale: 2,
+         geometryType: 'polygon',
+         reducer: ee.Reducer.mean(),
+         maxPixels: 1e13,
+         tileScale: 10
+     });
+     vectors = vectors.filterBounds(roi);
+     water = water.clip(vectors);
+     //计算陆地面积
+     var areaImage = water.multiply(ee.Image.pixelArea());
+     //统计指定区域中所有陆地像素和，也就是沙体的面积
+     var dict = areaImage.reduceRegion({
+         reducer: ee.Reducer.sum(),
+         geometry: vectors.geometry(),
+         scale: 2,
+         maxPixels: 1e13,
+         tileScale: 10
+     });
+     water = water.set(&quot;area&quot;,
+    ee.Number(dict.get(&quot;water&quot;)).divide(1000000));
+     water = water.set(&quot;threshold&quot;, threshold);
+     return water.toByte();
+});
+ print(&quot;sCol1&quot;, sCol1);
+ Map.addLayer(sCol1.first(), {palette: &quot;red&quot;}, &quot;BAR&quot;);
+// 整合所有影像的时间和计算出的沙洲面积并输出
+Export.table.toDrive({collection: sCol1,
+     description: &quot;guanzhou&quot;,
+     fileNamePrefix: &quot;guanzhou&quot;,
+     selectors:[&quot;system:index&quot;,&quot;area&quot;]
+ });
+ </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-26T03:26:00+09:00">
+      火 26 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

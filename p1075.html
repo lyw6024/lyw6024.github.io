@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 人脸68特征点定位</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1075.html" rel="bookmark"
+         title="Permalink to 人脸68特征点定位">人脸68特征点定位</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>dlib库是C++中包含一些机器学习场景的库。使用C++或Python进行开发可以通过阅读官网  <a href="http://dlib.net/">http://dlib.net/</a> 文档了解使用方法。在C#当然可以用DllImport导入用C++版本的动态链接库，不过有更方便的方法，在Nuget程序包管理中安装DlibDotNet，直接在C#中使用dlib库。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>主要的识别流程都是在dlib库函数中执行的，所以我们自己的程序只需要读入数据，将数据传到dlib中，然后输出运算结果即可。C#中在Nuget程序管理包中安装好DlibDotNet之后，先引入命名空间 <code>using DlibDotNet;</code> Dlib的图片是<code>Array2D&lt;DlibDotNet.RgbPixel&gt;</code>格式，使用函数<code> Dlib.LoadImage&lt;RgbPixel&gt;(filePath);</code>读入图片。接下来就开始检测：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>img = Dlib.LoadImage&lt;RgbPixel&gt;(filePath);
+var detector = Dlib.GetFrontalFaceDetector();
+var sp = ShapePredictor.Deserialize(&quot;shape_predictor_68_face_landmarks.dat&quot;);
+Dlib.PyramidUp(img);
+var dets = detector.Operator(img);
+shapes = new List&lt;FullObjectDetection&gt;();
+foreach (var rect in dets)
+{
+  shape = sp.Detect(img, rect);
+  Console.WriteLine($&quot;number of parts: {shape.Parts}&quot;);
+  if (shape.Parts &gt; 2)
+  {
+    shapes.Add(shape);
+  }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>其中<code>"shape_predictor_68_face_landmarks.dat"</code>就是模型文件，可以在dlib官网下载到。这样操作后在名为shapes的列表中就存储着shape，每个shape是一个包含68个特征点的FullObjectDetection对象。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>每个FullObjectDetection对象的Parts属性表示了特征点的个数（当前任务当然是68个），对象的GetPart(i)方法可以获得第i个对象的平面坐标。我们将之画在pictureBox1上：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void drawPoint(ref Graphics gr,string msg,double x,double y)
+{
+  // gr.DrawString(msg, this.Font, Brushes.White, (float)x+2, (float)y - 4);
+  float _w = 3;
+  gr.DrawLine(Pens.White, (float)x - _w, (float)y, (float)x + _w, (float)y);
+  gr.DrawLine(Pens.White, (float)x , (float)y- _w, (float)x , (float)y+ _w);
+}
+private void draw68points()
+{
+  var gr = pictureBox1.CreateGraphics();
+  for(int i=0;i&lt;shape.Parts;i++)
+  {
+    var p = shape.GetPart((uint)i);
+    drawPoint(ref gr, (i + 1).ToString(),
+              p.X* pictureBox1.Width * 1.0/ img.Columns,
+              p.Y* pictureBox1.Height * 1.0/img.Rows);
+  }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>数据集（第1和2张）来自 <a href="http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces/">http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces/</a> <br />第3和4张来自影视剧《地下交通站》截图..</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>效果如图示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1076,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-25.png" alt="[Image]" class="wp-image-1076"/></figure>
+<!-- /wp:image -->
+<!-- wp:image {"id":1081,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-29.png" alt="[Image]" class="wp-image-1081"/><figcaption> （这张图的判定存在问题，由于此图不是完全正脸，所以右侧外轮廓定位在了错误的位置。） </figcaption></figure>
+<!-- /wp:image -->
+<!-- wp:image {"id":1079,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-27.png" alt="[Image]" class="wp-image-1079"/></figure>
+<!-- /wp:image -->
+<!-- wp:image {"id":1080,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-28.png" alt="[Image]" class="wp-image-1080"/></figure>
+<!-- /wp:image -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-17T14:09:37+09:00">
+      火 17 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

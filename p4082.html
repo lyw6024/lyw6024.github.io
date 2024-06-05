@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2019热身赛01</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4082.html" rel="bookmark"
+         title="Permalink to [voj] 2019热身赛01">[voj] 2019热身赛01</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="https://vjudge.net/contest/277361" target="_blank">https://vjudge.net/contest/277361</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>A.质数的最大乘积</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>根据简单的数学原理，两个数的和为S，二者之差越小，则乘积越大。所以要找两个和为S的数字的最大乘积，我们从S/2附近开始找。如果S/2恰能整除，并且S/2是个质数，S/2*S/2就是结果。如果不是，我们再试(S/2)+1与(S/2)-1是否为质数，以此直到试验到一个数最小为2（题目保证有解），或者可以试验到3为止，由于2是质数当中唯一的偶数，可以拿出来单独判断它。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>总结此题思路，就是从S/2开始向两边顺序搜索，假设下界lowerbound记为lwbd,上界upperbound叫作upbd,则lwbd=S/2（lwbd是S/2的整除）,upbd=S-lwbd,这样lwbd+upbd==s，再定义一个距离S/2距离的变量d，我们希望尽快找到解，对可能的d，从0开始，遍历到S/2，一旦发现lwbd-d与upbd+d同为质数时，就找到了结果，输出(lwbd-d)*(upbd+d).如果一个输入S是奇数，就不需要遍历求解，S是奇数只可能是偶数+奇数，而质数中只有2是偶数，所以直接输出2*(S-2)就是结果.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>此题需要反复判断数字是否为质数，如果写一个函数用以判断数字是否为质数，假设有M个数字待判断，那么M次判断都要花费判断质数的函数开销。在参考代码中初始用一个bool数组isPrime[]表示数字i是否为质数，若是质数则isPrime[i]=1,否则isPrime[i]=0，而初始化isPrime[]数组的函数只运行了1次，后续每次判断一个数字是否为质数只需要O(1)的时间，仅需要取得isPrime[]的值就可以了.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码（C++）：<a href="http://p.malic.xyz/kPSe/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>B.连接竹竿</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>题面虽然说是长度的组合，但实际并不需要计算组合数。抽象成数学表述就是，当N&gt;1的情形，有N个整数，这N个整数均属于区间[A,B]，那么这N个数的和的最小可能是A+A+...+A+B=(N-1)A+B，最大可能是A+B+B+...+B=A+(N-1)B.而除了A和B不能变，其它的整数数值不知道，我们总可以调整其中的一个数字+1而使总和+1,这就说明在最小值(N-1)A+B到最大值A+(N-1)B之间的每个数都可能是这N个数的和，所以要计算的结果就是[(N-1)A+B,A+(N-1)B]之间整数的个数，即((N-1)B+A)+1-((N-1)A+B)=(B-A)(N-2)+1</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>其它情况N=1时A=B就输出1,此时只能拼成长为A+B的竹竿.其它如A&gt;B，或N=1时A不等于B,均输出0</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码（C++）：<a href="http://p.malic.xyz/3A8/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>C.搬家&nbsp;</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>用程序模仿问题，很多问题没有规律没有公式就只能按照题给的过程进行模拟。车上空间总能容纳我们的所有箱子，当搬一只箱子的时候，我们去前边已经堆好的那些垛里看看这只箱子能否堆在它们上边，若能就堆到上边，若不能就另开一堆。每次只需要关注已经堆好的箱子的最上层，我们就可以只用一个数组，数组的每一位表示一个堆最上层的重量。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>初始设定一个值比如为0，表示没有这一堆没有堆过箱子。我们依次检查所有顶层非0的箱子a[j]，如果当前箱子x比顶层a[j]更轻，说明可以将x堆在a[j]之上。否则遍历到a[j]==0时说明当前箱子x比之前所有箱子的顶层都重，只好堆在新的一堆上，将a[j]=0更新为a[j]=x并增加堆的计数，所有箱子全遍历之后，输出堆的计数.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码（C++）：<a href="http://p.malic.xyz/nTLf/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>D.量子能力猫&nbsp;</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>一般找最短方案都是用广度优先搜索，不只是图算法里有广度优先算法，对解空间进行遍历也可以使用BFS进行搜索。<br>简单情形，猫初始在X号箱子，它想去的Y号箱子比X的号码小，这时它只能逐个箱子的走过去，这时直接输出X-Y.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>其它情形，就进行广度优先搜索，第k次移动处于位置x的时候，第k+1次移动可能处于x+1,x-1或2x，为节省时间，要保证x+1,x-1和2x以前没走过，这儿加个数组判断这个点x+1，x-1，2x以前是否没走到，若没走到的话就走过去。可以设定一个结构体记下当前的移动次数level和坐标data，初始data=X,level=0放入队列，从队列出取一个数，检查x+1,x-1,2x是否没有被访问过，没访问过的就以level=level+1和相应data入队，直到发现data=Y的时候，输出移动步数level并终止程序.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码（C++）：<a href="http://p.malic.xyz/CXNf/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>E.找饭友</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>可以看作并查集。也可以直接保存，因为本题M和N不大，可以直接开两个一维数组。一个数组user[]用以保存用户指向哪种食品，一个数组food[]用以保存此类食品共有多少人选择。最终，所有被选过的食品都是user[]数组中的值，food[user[i]]表示第i名用户喜欢的食品所选择的人数，若这个数值大于1，则food[user[i]]-1就是他的饭友个数，若这个值是1就输出"BeiJu".</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码（C++）：<a href="http://p.malic.xyz/XVRc/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T06:08:58+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Cartesian Tree - PAT_A</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p291.html" rel="bookmark"
+         title="Permalink to Cartesian Tree - PAT_A">Cartesian Tree - PAT_A</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>问题描述：<strong>  Cartesian tree，笛卡尔树。</strong>从一个各数值均不同的序列建一棵笛卡尔树，这棵树的中序遍历与这个序列一致，同时，笛卡尔树符合一个小顶堆的结构（父结点的值均小于子结点）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>给出一个各数值均不同的序列，根据此序列建一棵笛卡尔树，并输出它的层序遍历。  </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>问题分析：给定序列与树的中序遍历一致，并且树是个小顶堆。那么大方向是向右加结点，如果初始有1个笛卡尔树，序列的下一个数字比当前树根的值还小，则这下一个数字就是新的根，原树成为其左子结点。如果下个数字比树根的值大，若右子树为空，则直接插入成右子树，右子树不为空则在右子树上找一个合适的位置插入。由于要求中序必须与原序列一致，所以右子树不空的情况下，新插入的必须在最右，新插入位置原有的树是新插入结点的左子树即可。建好了树对此树层序遍历即可出结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>参考程序</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>N=int(input())
+class Tree:
+    def __init__(self,v):
+        self.value=v
+        self.lChild=None
+        self.rChild=None
+def transTree(t):
+    def __tran(t):
+        if t!=None:
+            __tran(t.lChild)
+            print(t.value,end=" ")
+            __tran(t.rChild)
+    __tran(t)
+    print()
+def Enqueue(Q,v):
+    Q.append(v)
+def Dequeue(Q):
+    return Q.pop(0)
+def levelOrder(t):
+    queue1=[]
+    print(t.value,end="")
+    if t.lChild!=None:
+        Enqueue(queue1,t.lChild)
+    if t.rChild!=None:
+        Enqueue(queue1,t.rChild)
+    while len(queue1)>0:
+        print(" ",end="")
+        node=Dequeue(queue1)
+        if node.lChild!=None:
+            Enqueue(queue1,node.lChild)
+        if node.rChild!=None:
+            Enqueue(queue1,node.rChild)
+        print(node.value,end="")
+a=map(int,input().split())
+t=Tree(a.__next__())
+for it in a:
+    if it &lt; t.value:
+        nt=Tree(it)
+        nt.lChild=t
+        t=nt
+    else:
+        # it > t.value
+        # if it.rchild is none, insert it
+        if t.rChild==None:
+            t.rChild=Tree(it)
+        # else
+        #  go through tha path and find correct position and insert
+        else:
+            prev=t
+            curr=t.rChild
+            while curr!=None:
+                if prev.value&lt;it and it&lt;curr.value:
+                    break
+                prev=curr
+                curr=curr.rChild
+            newNode=Tree(it)
+            newNode.lChild=curr
+            prev.rChild=newNode
+levelOrder(t)
+</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-12-07T14:44:24+09:00">
+      土 07 12月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

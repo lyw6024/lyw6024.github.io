@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Android studio的Gradle环境配置</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2745.html" rel="bookmark"
+         title="Permalink to Android studio的Gradle环境配置">Android studio的Gradle环境配置</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>没做过Java的工程，做Java系的项目的时候首先要搞依赖管理，不管是Maven还是Gradle，由于国内局域网众所周知的原因要配置很多东西才能正常使用，十分麻烦。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先是项目的Gradle，在<code>gradle/wrapper/gradle-wrapper.properties</code>中将<strong>distributionUrl</strong>字段改为本地的<code>file:///C://*/gradle-*-all.zip</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>然后在<code>build.gradle</code>当中，将<code>buildscript</code>和<code>allprojects</code>的<code>repositories</code>字段都要改为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>    repositories {
+            maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+            maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+            maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+            maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+            maven { url'https://maven.google.com' }
+//          google()
+//          jcenter()
+        }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这时，重新启动Android studio则在Log窗口中会显示下载链接。这时有可能有<code>ERROR: Could not GET 'https://</code>的报错，就点击这个网址能否访问，若浏览器能访问而Android studio不能访问，可能存在代理的问题。去<code>.gradle/gradle.properties</code>文件（在<code>.gradle/</code>下，不是当前工程中的 gradle.properties ）中检查是否有<code>systemProp.https.proxyHost</code>和<code>Port</code>,若有就注释掉，再重新启动Android studio。这样Grandle就可以开始下载了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下载到中途也可能出现<code>ERROR: SSL peer shut down incorrectly</code>的问题，在设置中Appearence &amp; Behavior -> System Settings -> Android SDK -> SDK Update sites，下方的“Force https:// sources to be fetched using http://”复选框进行选中，确认此修改，等待下载完成，则将Gradle中所带的依赖包完成了同步。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-12-01T02:34:37+09:00">
+      火 01 12月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

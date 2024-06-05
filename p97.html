@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 753数[AtCoder-4276]简析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p97.html" rel="bookmark"
+         title="Permalink to 753数[AtCoder-4276]简析">753数[AtCoder-4276]简析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>题意：从1到N，有多少个数字含有且仅含有3,5,7，程序输出这个数量</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 数学模型就是小于等于T的正整数中，有多少个数字仅含7,5,3并且7,5,3三个数都有。最小的一个显然是357，次大的是375。给具有这种性质的数字起个名字就叫“357数”。如果一个数字仅含3,5,7，但可能不全含有，我们给这种性质的数字称为“偏357数”。如果k是357数，那么给k后边续一位3，或者5，或者7的时候，它们仍然是357数。如果k是“偏357数”,也是可能形成357数的，比如3335，后续一位7仍然能形成"357数"。<br />我们记下一个“偏357数”的三个状态：含有3，含有5，含有7。函数f(int k,bool r3,bool r5,bool r7) 表示一个"偏357数"或"357数"k,当r3与r5与r7都是true时,k是357数，否则是偏357数。<br />如果k不大于T，为它后续一个3并令r3=true，后续5并令r5=true,后续7并令r7=true，这样新得到的数k*10+3，k*10+5,k*10+7就是新的"偏357数"或"357数"，就是调用要f(k*10+3,true,r5,r7),f(k*10+5,r3,true,r7),f(k*10+7,r3,r5,true).每次调用f()先看k的三个标志位是否全为true，若是则增加计数。直到当k超过T时结束判断，输出357数的计数结果。<br />除了用三个变量分别标明状态，还可以用一个数字作为标志位。r3,r5,r7表示分别用二进数001B，010B，100B表示，每次得到新的数就用标志进行按位或运算flag|1,flag|2,flag|4，当标志位flag是111B=7的时候说明此数是357数。&nbsp; </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>递归写法比较简短</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>[Python 3]
+def dfs(s,flag):
+    if s>N:
+        return 0
+    ret =1 if flag==7 else 0
+    ret+=dfs(s*10+3,flag|1)
+    ret+=dfs(s*10+5,flag|2)
+    ret+=dfs(s*10+7,flag|4)
+    return ret
+N=int(input())
+print(dfs(0,0)</code></pre>
+<!-- /wp:code -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>[C++]
+#include &lt;cstdio>
+int N,count=0;
+void dfs(long long,unsigned char);
+int main(void)
+{
+    scanf("%d",&amp;N);
+    dfs(0,0);
+    printf("%d\n",count);
+    return 0;
+}
+void dfs(long long nextNum,unsigned char flag357)
+{
+    if(nextNum&lt;=N)
+    {
+        if(flag357==07)    // 07 is BIN 111
+            count++;
+        dfs(nextNum*10+3,flag357|01); // BIN 001
+        dfs(nextNum*10+5,flag357|02); // BIN 010
+        dfs(nextNum*10+7,flag357|04); // BIN 100
+    }
+}</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p>不用递归的话，可以用一个队列模拟这个过程</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;cstdio>
+#include &lt;utility>
+#include &lt;vector>
+#include &lt;queue>
+int main(void)
+{
+    int N,x,flag,count;
+    std::queue&lt;std::pair&lt;int,int>> Q;
+    std::pair&lt;int,int> p;
+    scanf("%d",&amp;N);
+    x=0;
+    flag=0;
+    p.first=x;
+    p.second=flag;
+    count=0;
+    Q.push(p);
+    while(!Q.empty())
+    {
+        p=Q.front();
+        Q.pop();
+        x=p.first;
+        flag=p.second;
+        if(flag==7)
+            count++;
+        if(((long long)x)*10+3&lt;=N)
+        {
+            p.first=x*10+3;
+            p.second=flag|01;
+            Q.push(p);
+        }
+        if(((long long)x)*10+5&lt;=N)
+        {
+            p.first=x*10+5;
+            p.second=flag|02;
+            Q.push(p);
+        }
+        if(((long long)x)*10+7&lt;=N)
+        {
+            p.first=x*10+7;
+            p.second=flag|04;
+            Q.push(p);
+        }
+    }
+    printf("%d\n",count);
+    return 0;
+}
+</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-03-15T11:54:21+09:00">
+      金 15 3月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

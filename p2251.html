@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 搜索算法II：国际象棋Knight</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2251.html" rel="bookmark"
+         title="Permalink to 搜索算法II：国际象棋Knight">搜索算法II：国际象棋Knight</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[TABS_R id=2260]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>国际象棋中的Knight（骑士）在移动时，必须向一个方向移动两格同时再垂直移动一格，与中国象棋的“马”走法一样。只要棋盘尺寸大于<code>3*4</code>，骑士总能跳到任何指定的一格上。对于标准的<code>8*8</code>的国际象棋棋盘，我们可以使用BFS计算出骑真士从A格子到B格子所需要的最小步数：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>（ <a href="https://vjudge.net/problem/OpenJ_Bailian-2243">https://vjudge.net/problem/OpenJ_Bailian-2243</a> ）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="示例代码"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#define MAXN 8
+char isVisited[MAXN][MAXN];
+int inRange(int x){
+        return 0&lt;=x &amp;&amp; x&lt;MAXN;
+}
+int inRange(int x,int y){
+        return inRange(x) &amp;&amp; inRange(y);
+}
+struct qNode{
+        int x;int y;int level;
+        qNode(){}
+        qNode(int xx,int yy,int ll)
+        { x=xx;y=yy;level=ll;}
+};
+int solve(int startX, int startY, int endX, int endY){
+        if (startX==endX &amp;&amp; startY == endY)
+        {
+                return 0;
+        }
+        int ret = -1;
+        int dir[8][2] = {
+                {-2, -1},{-2,  1},{-1, -2},{-1,  2},
+                { 1, -2},{ 1,  2},{ 2, -1},{ 2,  1},
+        };
+        memset(isVisited,0,sizeof(isVisited));
+        std::queue&lt; qNode &gt; q;
+        qNode curr;
+        q.push(qNode(startX,startY,1));
+        int winFlag=0;
+        while (q.size()&gt;0 &amp;&amp; winFlag==0){
+                curr = q.front();
+                q.pop();
+                for (int i=0;i&lt;8;i++){
+                        int dx = curr.x+dir[i][0];
+                        int dy = curr.y+dir[i][1];
+                        if (dx==endX &amp;&amp; dy==endY){
+                                ret = curr.level;
+                                winFlag=1;
+                                break;
+                        }
+                        if (inRange(dx,dy) &amp;&amp; isVisited[dx][dy]==0){
+                                isVisited[dx][dy]=1;
+                                q.push(qNode(dx,dy,curr.level+1));
+                        }
+                }
+        }
+        return ret;
+}
+int main(void){
+        char start[3],end[3];
+        while (scanf(&quot;%s %s&quot;,start,end)!=EOF){
+                int startX = start[0] - 'a';
+                int startY = start[1] - '1';
+                int endX = end[0] - 'a';
+                int endY = end[1] - '1';
+                printf(&quot;To get from %s to %s takes %d knight moves.\n&quot;,
+                        start,end,
+                        solve(startX,startY,endX,endY) );
+        }
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这是常规的BFS问题。接下来，我们将在国际象棋的棋盘上放3个Knight，计算目标是从棋盘上确定一个格子，使得三个骑士在这个格子上汇合所用的总步数最少。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>直接的方法：定义一个<code>step[i][x][y]</code>，表示第i名骑士跳到<code>(x,y)</code>位置所需最少步数。直接将step[i]全初始化为-1，表示从未有骑士走过，初始位置<code>steps[i][x][y]=0</code>，而当骑士从<code>steps[i][x][y]</code>跳向<code>steps[i][x'][y']</code>时，可以令<code> steps[i][x'][y']=steps[i][x][y]+1 </code>。搜索方法如下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>memset(steps,-1,sizeof(steps));
+const int dir[8][2] = {
+        {-2, -1},{-2,  1},{-1, -2},{-1,  2},
+        { 1, -2},{ 1,  2},{ 2, -1},{ 2,  1},
+};
+for (int knight=0;knight&lt;MAXKNIGHT;knight++){
+        std::queue&lt; std::pair&lt;int,int&gt; &gt; q;
+        int x=startX[knight],y=startY[knight];
+        steps[knight][x][y] = 0;
+        q.push( std::make_pair(x,y) );
+        while (q.size()&gt;0){
+                auto p = q.front();
+                q.pop();
+                for (int i=0;i&lt;8;i++){
+                        x=p.first + dir[i][0];
+                        y=p.second + dir[i][1];
+                        if (inRange(x,y) &amp;&amp; steps[knight][x][y]==-1){
+                                steps[knight][x][y] = steps[knight][p.first][p.second]+1;
+                                q.push( std::make_pair(x,y));
+                        }
+                }
+        }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>搜索完成之后，遍历整个棋盘，看看哪个格子使得三个骑士的移动距离之和最小：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int minVal = INF;
+for (int i=0;i&lt;MAXN;i++){
+        for (int j=0;j&lt;MAXN;j++){
+                int knightsums = 0;
+                for (int k=0;k&lt;MAXKNIGHT;k++){
+                        knightsums+=steps[k][i][j];
+                }
+                minVal = std::min(minVal,knightsums);
+        }
+}
+printf(&quot;%d\n&quot;,minVal);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样虽然完成了这个任务，但仍有优化空间，因为对每个骑士都把整个棋盘走完一遍，最后判断还要再将整个棋盘走一遍，如何让骑士在移动的过程中就可能找到集合点呢。我们的BFS中可以同时移动骑士和方向，即移动一步就扩展24个状态（3个骑士*8个方向），这样只需要使用1个队列，不过判断状态会稍微复杂一些。这里将三个骑士的坐标用一个数字表示，定义一个函数<code>move(idx,knight,dir)</code>，<code>idx</code>表示这三个骑士的状态，<code>knight</code>表示第几名骑士（取0,1,2），<code>dir</code>表示方向(取0到7），函数返回值为移动后骑士的状态（若是不合法的移动则返回<code>idx</code>）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这种方法需要频繁的调用move()，如果move使用更巧妙的设计（例如直接将数字使用8进制，并利用位运算得出各位数）则效率会更高，下边这种设计方法的效率稍差一些，每次move都要做很多次乘除和取余。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int move(int idx,int knight,int dir)
+{
+        const int direction[8][2] = {
+                {-2, -1},{-2,  1},{-1, -2},{-1,  2},
+                { 1, -2},{ 1,  2},{ 2, -1},{ 2,  1},
+        };
+        int a[6],i=0;
+        for (i=0;i&lt;6;i++){
+                a[i] = idx%10;
+                idx/=10;
+        }
+        if ( inRange(a[2*knight]+direction[dir][0]
+                        ,a[2*knight+1]+direction[dir][1] )){
+                a[2*knight] += direction[dir][0];
+                a[2*knight+1] += direction[dir][1];
+        }
+        int ret = 0;
+        for (i=5;i&gt;=0;i--){
+                ret = 10*ret + a[i];
+        }
+        return ret;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>由于现在使用整数保存状态，如果开6位数的数组会比较浪费，这里使用<code>set&lt;int&gt;</code>保存状态是否被访问过。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int isComplete(int idx){
+        int a[6],i=0;
+        for (i=0;i&lt;6;i++){
+                a[i] = idx%10;
+                idx/=10;
+        };
+        return a[0]==a[2] &amp;&amp; a[0] == a[4] &amp;&amp;
+                a[1] == a[3] &amp;&amp; a[1] == a[5];
+}
+void solve(const char *k1,const char *k2,const char *k3){
+        int idx = (((((k1[0]-'A')*10
+                +(k1[1]-'1'))*10
+                +(k2[0]-'A'))*10
+                +(k2[1]-'1'))*10
+                +(k3[0]-'A'))*10
+                +(k3[1]-'1');
+        if (isComplete(idx)){
+                printf(&quot;0\n&quot;);
+        } else {
+                int winFlag =0;
+                int ret =0;
+                std::queue&lt; std::pair&lt;int,int&gt; &gt; q;
+                std::set&lt;int&gt; s;
+                q.push( std::make_pair(idx,0) );
+                s.insert(idx);
+                while (q.size()&gt;0 &amp;&amp; winFlag==0) {
+                        auto curr = q.front();
+                        q.pop();
+                        for (int k=0;k&lt;3 &amp;&amp; winFlag==0 ;k++){
+                                for (int step = 0;step&lt;8 &amp;&amp; winFlag==0;step++){
+                                        int next = move(curr.first,k,step);
+                                        if ( isComplete(next) ){
+                                                ret = curr.second+1;
+                                                winFlag = 1;
+                                                break;
+                                        }
+                                        if (s.count(next)==0){
+                                                q.push(std::make_pair(next,curr.second+1));
+                                                s.insert(next);
+                                        }
+                                }
+                        }
+                }
+                printf(&quot;%d\n&quot;,ret);
+        }
+        return ;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-14T03:49:23+09:00">
+      金 14 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 『The Little Schemer』笔记</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3691.html" rel="bookmark"
+         title="Permalink to 『The Little Schemer』笔记">『The Little Schemer』笔记</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>这是一本用Scheme语言来介绍递归和函数式编程的书。与《计算机程序的构造和解释》当中使用的Racket语言几乎通用(Racket是Scheme的一种标准的分支，本书中涉及不到二者的区别，本文中两种语言不作区分）。据说用函数式语言（Scheme, Haskell等等）非常适合编写编译器，不过这本『The Little Schemer』还到不了编写编译器的难度，只需要识字和会数数就可以阅读（用Racket写编译器可以看《计算机程序的构造和解释》，<a rel="noreferrer noopener" href="https://www.malic.xyz/sphinxBooks/contents/sicp/html/" target="_blank">笔记</a>正在整理中）。使用Scheme递归地编写程序本质上是简单的模式识别，所以讲解递归和函数式编程，只使用基础的几个关键字：<code>car, cdr, cons, eq?, null?, zero?, add1, sub1, number?, and, or, quote, lambda, define, cond</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Scheme语言是一种前缀表达，每个表达式使用一个括号括起来，括号中第一个项是运算符，后边的各项是参数，例如计算2和3相加，在Scheme中就使用<code>(+ 2 3)</code>。总是可以使用define关键字进行定义常量、函数等等。例如定义一个函数<code>f</code>对一个参数x起作用，得到结果是<code>x+1</code>，则可定义为<code>(define (f x) (+ x 1))</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在本书中，首先引入一个<code>atom?</code>的定义，用于判断一个元素是否为“原子”：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>（Scheme允许特殊符号用作表达式。对于结果为逻辑值的函数，一般用问号结尾表示，类似于其它语言中用is前缀（如isEmpty(),isZero()等））</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define atom?
+  (lambda (x)
+    (and (not (pair? x)) (not (null? x)))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2>Chap.1 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>先了解基本Scheme的元素：原子、列表、集合。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>原子：如下的各项都是原子，<code>atom, turkey, 1492, u, *abc$</code>。能够以任何字母、数字以及除了左右圆括号的其它符号，都可以作为原子。<br>列表：如下各项都是列表，<code>(atom), (atom turkey or), ((atom turkey) or), (), (() () ())</code>，只要是合法的括号对，每对括号中都是原子或列表，则它就是一个列表。<br>表达式：所有原子、所有列表，都是表达式.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>car之法则：</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4>基本元素car仅定义为针对非空列表</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>car是取列表的首个元素，cdr是取列表除car元素之外的部分。<br>列表<code>l</code>是<code>(((hotdogs)) (and) (pickle) relish)</code>，则<code>(car l)</code>是<code>((hotdogs))</code>，因为它是<code>l</code>的首个表达式，<code>(cdr l)</code>是<code>((and) (pickle) relish)</code>。<br>列表<code>l</code>是<code>((a b c) x y z)</code>，则<code>(car l)</code>是<code>(a b c)</code>，<code>(cdr l)</code>是<code>(x y z)</code>。<br><code>a</code>是<code>hotdog</code>，要访问<code>(car a)</code>是错误的，因为不能对一个原子求<code>car</code>。<br>列表<code>l</code>是<code>()</code>，则<code>(car l)</code>是错误的，不能对一个空列表求<code>car</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>cdr之法则：</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4>基本元素cdr仅定义为针对非空列表。任意非空列表的cdr总是另一个列表</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>car</code>和<code>cdr</code>都要以非空列表作为参数。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>定义<code>a</code>是原子<code>peanut</code>,<code>l</code>是列表<code>(butter and jelly)</code>，其<code>cons</code>运算<code>(cons a l)</code>是<code>(peanut butter and jelly)</code>.表达式<code>cons</code>添加一个原子到一个列表的开头。cons有两个作为参数，第一个参数是表达式，第二个参数是任意列表，其结果是将这个表达式置于列表的最前。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>cons之法则：</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4>基本元件cons两个参数，第二个参数必须是一个列表，结果是一个列表。</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>引入基本元件<code>null?</code>，用于判断一个列表是否为空。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>一个空列表可表达为<code>(quote ())</code>。<br>表达式<code>(null? (quote ()))</code>为真。<br><code>(null? (a b c))</code>为假，因为<code>(a b c)</code>不是空列表。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>null?之法则:</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4>基本元件null?只针对列表</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>定义<code>a1</code>是原子<code>Harry</code>,定义<code>a2</code>是原子<code>Harry</code>，表达式<code>(eq? a1 a2)</code>的结果为真，二者是相同的原子</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>定义列表<code>l</code>是<code>(Mary had a little lamb chop)</code>，<code>a</code>是<code>Mary</code>,则<code>(eq? (car l) a)</code>是真。因为<code>(car l)</code>就是<code>Mary</code>,与<code>a</code>是相同的原子。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>eq?之法则:</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":4} -->
+<h4>基本元件eq?需要两个参数，每个参数必须是非数字的原子</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>（不过某些标准下也可以用数字作为<code>eq?</code>的参数）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Chap.2 开始处理处理...反复处理</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>定义l是<code>(Jack Sprat could eat no chicken fat)</code>，由于l的每个元素都是原子，定义表达式<code>lat?</code>，用于判断l的所有元素是否全部为原子(lat? l)为真。<br>定义l是<code>((Jack) Sprat could eat no chicken fat)</code>，列表l中首个元素是列表不是原子，所以<code>(lat? l)</code>是假。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如何实现<code>lat?</code> 呢?就逐个元素用<code>atom?</code>运算判断一次，一旦有某个元素<code>atom?</code>运算为假，则<code>lat?</code>的值为假，否则直至最后列表为空的时候说明列表的所有元素都是原子则整个列表的内容全为原子，从而lat?值得到为真</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define lat?
+  (lambda (l)
+    (cond
+      ((null? l) #t)
+      ((atom? (car l)) (lat? (cdr l)))
+      (else #f))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>基本元件<code>cond</code>是条件condition的功能，<code>cond</code>有不定数量个参数，每一个是一个列表组成，其中每个列表的第一个表达式是条件，当此条件满足时则执行第二个表达式，按照顺序进行匹配，一旦某个模式被匹配之后就执行，后续的匹配则不再执行。<code>cond</code>中使用<code>else</code>关键字，<code>else</code>作为条件的值永远为真，可以当作所有模式都不匹配的最后条件（类似C语言中<code>switch</code>的<code>default</code>关键字)。这就是函数式的模式匹配。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对于一个列表l，如果它是空列表，那么lat?是真，如果不是空列表，则判断列表首元素是否为<code>atom?</code>，如果首元素是个atom，则执行<code>(lat? (cdr l))</code>，也就是递归到列表的cdr继续这样执行，如果当前首元素不是<code>atom</code>，则<code>cond</code>的匹配将到else，而else的值为真，所以结果为假。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>定义a是<code>meat</code>，列表l是<code>(mashed potatoes and meat gravy)</code>，则表达式<code>(member? a l)</code>表述原子a是列表l中的成员，得到的值为真，</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第一诫：表达任意函数时，总将询问null?作为问题之首</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>由于需要判断原子a和l的某个元素判断，但判断之前必须保证l不是空表，永远不可能在空列表中找到原子a,所以如果列表为空表，则得到结果为假，否则，就可以对原子<code>a</code>和列表首元素<code>(car l)</code>进行判等<code>eq?</code>，若原子a与<code>(car l)</code>不相等，则继续递归地判断<code>(member? a (cdr l))</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define member?
+  (lambda (a l)
+    (cond
+      ((null? l) #f)
+      (else (or (eq? (car l) a) (member? a (cdr l)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2>Chap.3 用cons构筑恢宏</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>定义a是原子mint，lat是列表定义为<code>(lamb chops and mint jelly)</code>，表达式<code>(rember a lat)</code>的功能是将<code>lat</code>中首个出现的<code>a</code>删除，结果为删除首个出现a的新的列表。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>与前边类似的，对于lat进行递归，如果lat是空列表，则返回空列表，否则对lat进行判断，比较lat的首项与a是否为同一原子，若是，则得到这个表达式之后的列表中的其它表达式，否则从列表下一个元素继续递归下去。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define rember
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else (cond
+              ((eq? (car lat) a) (cdr lat))
+              (else (rember a (cdr lat))))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>对于a是bacon,列表<code>lat</code>是<code>(bacon lettuce tomato)</code>来说，这段rember能够实现地很好，但换一个测试数据，原子a是<code>and</code>，列表为<code>(bacon lettuce tomato)</code>，用这样定义的<code>(rember a lat)</code>运算，得到的结果是<code>(tomato)</code>而不是预想的<code>(bacon lettuce tomato)</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第二诫：用cons构建列表</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>不难发现，上边的实现在<code>(car lat)</code>和a相等的时候，没有把a之前的那些记录下来，直接将前边的丢弃了再进行的递归。需要修改最后递归的逻辑：如果<code>(car lat)</code>和<code>a</code>不相等，那么得到的值是<code>(car lat)</code>和后边的<code>(rember a (cdr lat))</code>，用<code>cons</code>将<code>(car lat)</code>连在暂时不知道值的<code>(rember a (cdr lat))</code>最前。即：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define rember
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else (cond
+              ((eq? (car lat) a) (cdr lat))
+              (else (cons (car lat) (rember a (cdr lat)))))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>这样执行<code>(rember a lat)</code>就得到正确的结果，并且如果<code>a</code>不在<code>lat</code>中，那么返回值也将是<code>lat</code>本身。<code>rember</code>逐一查找<code>lat</code>中的各个元素是否与原子a相等，如果<code>(car lat)</code>不是原子<code>a</code>，就保存<code>car</code>以便后续<code>cons</code>到结果上，如果<code>rember</code>找到了原子a，就剔除原子<code>a</code>并返回<code>(cdr lat)</code>，并将之前的原子接在返回值之前，也就得到了结果。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>分析完还可以对其实现进行一点简化：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define rember
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) a) (cdr lat))
+      (else (cons (car lat) (rember a (cdr lat)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>定义列表l是<code>((apple peach pumpkin) (plum pear cherry) (bean carrot egglant))</code>，表达式<code>(firsts l)</code>的值为<code>(apple plum bean)</code>。<code>firsts</code>函数以一个列表l为参数，这个列表中都是非空列表，这个函数将得到一个新列表，每个元素由列表l的每个内部列表的第一个表达式组成。<br>定义列表l是<code>(((five plums) four) (eleven green oranges) ((no) more))</code>，表达式<code>(firsts l)</code>的值为<code>((five plums) eleven (no))</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>先编写firsts的框架，与前述函数实现相近</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define firsts
+  (lambda (l)
+    (cond
+      ((null? l) ...)
+      (else (cons ... (firsts (cdr l)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>当列表<code>l</code>为空表的时候，往往是递归的结束，由于需要用<code>cons</code>将列表连接起来，所以不能返回逻辑值，不难看出这里应该返回一个空表<code>(quote ())</code>，当l不是空表的时候，要针对“典型元素”用cons建行构建</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第三诫：构建列表时，描述第一个典型元素，之后cons该元素到一般性递归上</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在firsts的典型元素的描述上，应当是<code>(car l)</code>的<code>car</code>，即<code>(car (car l))</code>，其后的<code>(firsts (cdr l))</code>即自然递归。这样就将firsts的实现补充完成：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define firsts
+  (lambda (l)
+    (cond
+      ((null? l) (quote ()))
+      (else (cons (car (car l)) (firsts (cdr l)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>接下来，定义两个函数<code>(insertR new old lat)</code>和<code>(insertL new old lat)</code>，表示要在列表<code>lat</code>中找到首个出来的原子<code>old</code>，表达式<code>insertR</code>则在<code>old</code>之后插入这个原子，<code>insertL</code>在<code>old</code>之前插入这个原子。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define insertR
+  (lambda (new old lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) old ) (cons old (cons new (cdr lat))))
+      (else (cons (car lat) (insertR new old (cdr lat)))))))
+(define insertL
+  (lambda (new old lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) old ) (cons new lat))
+      (else (cons (car lat) (insertL new old (cdr lat)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>再复杂一点，定义一个函数<code>(multirember a lat)</code>，用于将列表<code>lat</code>中的所有原子a都删除。例如<code>a</code>是原子<code>cup</code>，列表<code>lat</code>是<code>(coffee cup tea cup and hick cup)</code>，则<code>(multirember a lat)</code>为<code>(coffee tea and hick)</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>与之前rember的差别在于，当<code>(eq? (car lat) a)</code>为真的时候，不能直接返回后续的列表，而是需要继续进行一般性递归<code>(multirember (cdr lat))</code>，即：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) a) (multirember a (cdr lat)))
+      (else (cons (car lat) (multirember a (cdr lat)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第四诫：在递归时总是至少改变一个参数。该参数必须向着不断接近结束条件而改变。改变的参数必须在结束条件中得以测试</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>将<code>insertR</code>和<code>insertL</code>分别改写为<code>multiinsertR</code>与<code>multiinsertL</code>：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define multiinsertR
+  (lambda (new old lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) old) (cons old (cons new (multiinsertR new old (cdr lat)))))
+      (else (cons (car lat) (multiinsertR new old (cdr lat)))))))
+(define multiinsertL
+  (lambda (new old lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) old) (cons new (cons old (multiinsertL new old (cdr lat)))))
+      (else (cons (car lat) (multiinsertL new old (cdr lat)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:heading -->
+<h2>Chap.4 数字游戏</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>仅考虑非负整数集。基本元件<code>add1</code>接受一个参数，结果为这个参数的后继数，即这个数字+1，基本元件<code>sub1</code>接受一个参数，结果为这个数字的前驱数，即这个数字-1。基本元件<code>zero?</code>接受1个参数，表示这个数字是否为0.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>使用这三个基本元件，首先来实现两个数字的加法运算。两数字m与n相加，可以描述为数字m进行n次add1操作，而进行n次<code>add1</code>操作可以用<code>(zero? n)</code>与<code>(sub1 n)</code>组合进行。由于+号已经是基本运算，我们使用原子o+表示我们自定义的这个加法，尝试编写此函数：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define o+
+  (lambda (m n)
+    (cond
+      ((zero? n) m)
+      (else (o+ (add1 m) (sub1 n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>这就已经违反了Scheme十诫之第一诫：问题之首必用<code>null?</code>，不过对于数字，<code>zero?</code>就类似于列表的<code>null?</code>，类似地<code>add1</code>是类似于cons那样构建列表，<code>sub1</code>像cdr那样进行一般性递归。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>两数字m与n相减，即对m执行n次<code>sub1</code>。尝试编写<code>'-</code>函数（虽然仅考虑非负整数集，不过当前<code>o-</code>函数对负整数也有效）：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define o-
+  (lambda (m n)
+    (cond
+      ((zero? n) m)
+      (else (o- (sub1 m) (sub1 n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>看来针对数字类型，要将Scheme十诫之第一诫进行一点更新：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第一诫(ver 1.1)：对一个原子列表lat递归调用时，要先询问(null? lat)，对于一个数字n进行递归调用时，要先询问(zero? n)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>接下来实现乘法。两个数字m与n相乘，就是累加n次的m。对于数字而言，递归时则是由<code>o+</code>连接的典型元素与一般性递归，对于乘法，典型元素就是m，一般性递归则是<code>(o* m (sub1 n))</code>，即：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define o*
+  (lambda (m n)
+    (cond
+    ((zero? n) 0)
+    (else (o+ m (o* m (sub1 n)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第四诫(ver 1.1)：在递归时总是至少改变一个参数。该参数必须向着不断接近结束条件而改变。改变的参数必须在结束条件中得以测试：用cdr时则用null?测试结束，用sub1时则用zero?测试结束</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>(o* 12 3)</code>的值为36，其计算过程为：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">  (o* 12 3)
+= (o+ 12 (o* 12 2))
+= (o+ 12 (o+ 12 (o* 12 1)))
+= (o+ 12 (o+ 12 (o+ 12 (o* 12 0))))
+= (o+ 12 (o+ 12 (o+ 12 0)))
+= (o+ 12 (o+ 12 12))
+= (o+ 12 24)
+= 36</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第五诫：用+构建一个值时，总是用0作为结束代码行的值；用*构建一个值时，总是用1作为结束行代码的值；用cons构建一个列表时，总是用(quote ())作为结束行代码的值。</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>记全部由数字（本节仅指非负整数）构成的列表为tup，即元组Tuple。编写一个<code>tup+</code>，接受将两个长度相同的tup作为参数，结果为同样长度的元组，每个元素是相应位置原tup的元素之和。例如<code>tup1</code>是<code>(3 6 9 11 4)</code>，<code>tup2</code>是<code>(8 5 2 0 7)</code>，则<code>(tup+ tup1 tup2)</code>结果为<code>(11 11 11 11 11)</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>由于限制tup1和tup2的长度需要一致，当二者都为空时，返回一个空列表，否则将两个tup的首元素相加，作为典型元素，两个tup的分别cdr作为一般性递归，使用cons构建成一个最终的列表。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define tup+
+  (lambda (tup1 tup2)
+    (cond
+      ((and (null? tup1) (null? tup2)) (quote()))
+      (else (cons
+             (o+ (car tup1) (car tup2))
+             (tup+ (cdr tup1) (cdr tup2)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>改进一下，如果tup1和tup2的长度可以不一致，长度不足则认为是以0填充，例如tup1为<code>(3 4)</code>,tup2为<code>(4 6 8 1)</code>,新的<code>(tup+ tup1 tup2)</code>将得到<code>(7 10 8 1)</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这时，两个表可能不同时为空，当tup1为空的时候，应返回tup2，当tup2为空的时候，应返回tup1，都不空的时候则进行典型元素和一般性递归的构建。tup1与tup2同时为空时，可以按tup1为空返回tup2，此时tup2是空表，所以逻辑上是正确的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define tup+
+  (lambda (tup1 tup2)
+    (cond
+      ((null? tup1) tup2)
+      ((null? tup2) tup1)
+      (else (cons
+             (o+ (car tup1) (car tup2))
+             (tup+ (cdr tup1) (cdr tup2)))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>再编写<code>lt</code>和<code>gt</code>的表达式，分别表示“less than”和“greater than”用于数字的比较。要比较两数字m,n的大小，仅用基本元件设计递归来比较二者的大小。可以对m和n执行多次sub1，直到某个数字满足zero?，当m先满足zero?，此时n仍大于0（仅考虑非负整数），说明m比n小，反之亦然。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"Scheme","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define lt
+  (lambda (m n)
+    (cond
+      ((zero? m) #t)
+      ((zero? n) #f)
+      (else (lt (sub1 m) (sub1 n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>测试一下，(lt 2 4)的求值过程：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">  (lt 2 4)
+= (lt 1 3)
+= (lt 0 2)
+= #t</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>是正确的。如果用两个相等的数字进行测试<code>(lt 2 2)</code>：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">  (lt 2 2)
+= (lt 1 1)
+= (lt 0 0)
+= #t</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>仍然得到真的结果，但实际应当为假。原因在于两个zero?判断会对结果产生影响，如果换过来的话：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"fileName":"Scheme","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define lt
+  (lambda (m n)
+    (cond
+      ((zero? n) #f)
+      ((zero? m) #t)
+      (else (lt (sub1 m) (sub1 n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>这个问题就解决了，两个数字相等时，返回值为假。类似地，编写<code>gt</code>函数：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define gt
+  (lambda (m n)
+    (cond
+      ((zero? m) #f)
+      ((zero? n) #t)
+      (else (gt (sub1 m) (sub1 n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>有了lt和gt，就可以编写对于数字类型的判等函数eq?，当然eq?作为基本元件，有些Scheme语言标准中允许对数字类型进行判等，为示区别，针对非负整数来自定义的判等函数称为<code>oeq?</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define oeq?
+  (lambda (m n)
+    (cond
+      ((&gt; m n) #f)
+      ((&lt; m n) #f)
+      (else #t))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>四则运算还有一个求商运算，scheme中可以使用<code>quotient</code>。我们自定义的求商函数命名为div，要求m除以n的商，即m当中含有多少个n，就是若m仍大于n，则将典型元素为1，且一般性递归推导为m-n与n求商，最终m小于n时，商为0结束递归。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define div
+  (lambda (m n)
+    (cond
+      ((&lt; m n) 0)
+      (else (add1 (div (o- m n) n))))))</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>例如<code>(div 15 4)</code>的运算过程为：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">  (div 15 4)
+= (add1 (div 11 4))
+= (add1 (add1 (div 7 4)))
+= (add1 (add1 (add1 (div 3 4))))
+= (add1 (add1 (add1 0)))
+= (add1 (add1 1))
+= (add1 2)
+= 3</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:heading -->
+<h2>Chap.5 全是星星！</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>原子<code>a</code>是<code>cup</code>，列表<code>lat</code>是<code>((coffee) cup ((tea) cup) (and (hick)) cup)</code>，定义一个函数<code>rember*</code>，这里加一个<code>*</code>会给人一种震惊的感觉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>(rember* a lat)</code>将不论原子a出现在列表lat的哪个表达式中的哪个部分，都将被去除。即<code>(rember* a lat)</code>将得到<code>((coffee) ((tea)) (and (hick)))</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define (rember* a l)
+        (cond ((null? l) nil)
+                ((pair? (car l))
+                        (cons (rember* a (car l)) (rember* a (cdr l))))
+                (else (if (eq? (car l) a)
+                                (rember* a (cdr l))
+                                (cons (car l) (rember* a (cdr l))))))
+)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第一诫（终极式）：当对一个原子列表lat进行递归时，询问两个lat的问题：null? lat和else。当对一个数字n进行递归调用时，询问两个有关n的问题：zero?n 和else，当对一个S-表达式进行递归调用时，询问三个有关l的问题null? lat，atom? (car lat)和else。</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>再编写一个<code>(insertR* new old l)</code>,这将l中每个单词old的右边插入一个new：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>(define (insertR* new old l)
+        (cond ((null? l) nil)
+                ((atom? (car l))
+                        (if (eq? (car l) old)
+                                (cons old (cons new (insertR* new old (cdr l)) ))
+                                (cons (car l) (insertR* new old (cdr l)))
+                                )
+                        )
+                (else (cons (insertR* new old (car l)) (insertR* new old (cdr l))) )
+        )
+)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Scheme十诫之第四诫（终极式）：在递归调用时，总是至少改变一个参数。当对一个原子列表lat进行递归调用时，使用cdr lat。当对数字n进行递归时，使用subl n，当对一个S-表达式l进行递归调用时，只要是null? l和atom? l都不为true则同时使用car l和sdr l。在递归时改变的参数，必须向着不断接近结束条件而改变，改变的参数必须在结束条件中得以测试。使用cdr l则用null? l测试是否结束，subl n则用zero? n判断结束</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-07-27T00:36:59+09:00">
+      火 27 7月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

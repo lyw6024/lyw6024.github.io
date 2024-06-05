@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2021年寒假热身赛2</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2964.html" rel="bookmark"
+         title="Permalink to 2021年寒假热身赛2">2021年寒假热身赛2</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a rel="noreferrer noopener" href="https://vjudge.net/problem/EOlymp-622" target="_blank">A.一</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>常规的进制转换问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/Jzub/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> <a href="https://vjudge.net/contest/416882#problem/B" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">B.魔数</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>贪心算法。 <br />如果一个数字由"1","14","144"构成，那么从前往后或者从后往前都可以，先检查最头上3位是不是“144”，若是就把检测位置移动3位，继续检测剩余的那些位。若不是144，类似地，就检查14，若通过就移动两位，否则检测是不是“1”。直到最后剩下空串，表示检测全通过。或者某个串这三次检测都未通过，则说明它不能由这三个数字组成。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/9cEc/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 参考代码(C++) </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a href="https://vjudge.net/contest/416882#problem/C" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">C.幼儿园</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给定数列{a}中找一个子数列{s}，使max{s} - min{s}最小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将a排序，则a[i]是一个子列的开头且是最小值，a[i+M]是子列的结尾且为最大值，对所有可能的i，记录<code>a[i+M]-a[i]</code>的最小值即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/WWne/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 参考代码(C++) </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a rel="noreferrer noopener" href="https://vjudge.net/problem/AtCoder-abc166_e" target="_blank">D.卧底探案</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>要求 有多少(i,j)使 \( j-i=A_i+A_j \)，即求 \( j-A_j = i+A_i \)，令\(L_k = k-A_k, R_k=k+A_k\)，就变成一个搜索问题：对于每个\( \{L\} \)中的元素\( L_k \)，查找在\( \{R\} \)中出现多少次。这样对R排序后用二分搜，时间复杂度\( O(N \log(N)) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/Y9vb/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 参考代码(C++) </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a rel="noreferrer noopener" href="https://vjudge.net/problem/EOlymp-4053" target="_blank">E.矿工挖宝箱</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>BFS+DP.  用二维数组acc，记下走到当前步累计最多可能得到的金矿，同时由于矿工奇特的前进方式，需要BFS逐层的走。走完之后如果右下角位置的acc仍为0，说明没能走到右下角，输出-1，否则输出最右下角的acc值即可。题目中同时需要BFS和更新acc，代码稍微长一些。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <a href="http://lab.malic.xyz/pastebin/kKed/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(C++) </a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-01-23T09:02:00+09:00">
+      土 23 1月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2020热身赛02</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4108.html" rel="bookmark"
+         title="Permalink to [voj] 2020热身赛02">[voj] 2020热身赛02</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="https://vjudge.net/contest/348475" target="_blank">https://vjudge.net/contest/348475</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.扫雷</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>建一个二维数组保存地图，写个函数用来探测某个点周围的地雷数。遍历所有点，如果这个点不是雷就看一下它周围的雷数，并将其'.'改为数字<br>为了免去传二维数组，可以直接将整个地图写成全局变量。为了不需要额外对边界的处理，可以在外边再加一层永不改变的墙，用不是'*'的符号（比如'+'）来表示。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/Ysdc/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.幻方</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>按题面所说的做即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/mt3b/" target="_blank" rel="noreferrer noopener">参考代码 C++</a> <a href="http://p.malic.xyz/Jhnc/" target="_blank" rel="noreferrer noopener"> Python code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.拼图</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>第i块拼图碎片我们可以用一个(l,r)描述：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>如果左侧块到底边距离C为0，则l=+A,否则l=-C</li><li>如果右侧块到底边距离D为0，则r=+B,否则r=-D</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>可以建立一个顶点数为2H的有向图：u[1],u[2],...,u[H],v[1],v[2],...,v[H]<br>图中有N条边，第i条边描述第i个拼图块：l若是正的则起点在u[l]，否则起点在v[-l]。r若是正的则起点在v[r]，否则起点在u[-r];<br>同时，拼图的最左必须是l>0，最右必须是r>0。<br>如果(l,r)的右边相邻的那个是(l',r')，则必须有要么r>0且l'>0（都接触拼图板的底边），要么r=-l'（两个拼图碎片拼起来）<br>从某个u出发，到某个v结束，若有一条经过包含所有边的欧拉路径，则这个拼图就是可以拼起来的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/XDjd/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.数独</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>解法很多。一种容易可行的方法是：用一个函数judge()用来判断当前数独的情形是不可能、可能还是已经完成，对于每个需要填数字的地方， 尝试向它填一个数，然后判断一下填入这个数字之后数独的状态，若是不可能就说明这个数字填的不正确，再重新填入其它数字， 而所有数字都填过之后都不可能说明之前有数字填错了，将这个格子再置0表示未填数并退回之前的重新填。若judge()是"可能"就继续填其它的格子。 直到当所有格子都填完之后并且judge()是"已完成"，则输出这个数独即可。<br>judge()要对行、列、每个3*3的块都检查一次，用bucket[10]表示一行或一列或一个方块中各数字的出现次数。 bucket[0]是0的出现次数，表示未填的个数。bucket[1到9]分别是1-9在这个单位中出现的次数。如果bucket[1到9]有任何一个大于1则返回"不可能"状态<br>在不是"不可能状态"的情形下，若bucket[0]>0，说明还有未填的数字，则返回"可能"状态。否则没有没有任何异常就返回"已完成"状态。<br>由于在判断过程中可能在数字都试过之后都不可能，需要有退回前一次填的格子，可以维护一个全局栈，也可以用递归实现。<br><br><a href="http://p.malic.xyz/RSdc/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.华容道</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>由于难以通过直接计算得到解，可以通过广度优先搜索进行：将当前局面向各个方向移动一下，并判断是不是终局，<br>若不是就再移动一下，记录下移动次数，若是终局则输出移动次数，不是就继续移动并更新移动次数.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BFS当中有一个关键问题就是判重：当前的局面是否已经走过。这个问题的状态节点数量比较大，要考虑存储，并且要较快的判断出状态重复性。<br>如果9个数字用字符串，也就是9个字节的数组保存，每个状态就有9个字节。存储量大并且难以比较。<br>如果用一个int表示一个状态，用下标表示已访问，那么这个int最大是876543210，一个int表示一个状态， 用数组保存状态，需要876543210个字节，即使压缩成876543210个比特位，空间仍然很大.<br>并不是每个数字都会有这种情形，比如111111111就不可能出现，但我们仍为其准备了标志位，这当中就有很多浪费。 一个状态只可能是0-8的一个排列，所以我们可以将一个局面表示成一个0-8的排列，为每个排列准备一个序号，例如012345678就是第0个排列，876543210就是第9!-1个排列，只需要362880个标志位<br>这样我们只需要编写：局面状态变为排列的序号的函数以及将相应序号转化成排列的函数。得到一个新局面，就判断一下这个局面的排列的序号。 排列与对应序号的映射可以通过"康托展开"实现（<a rel="noreferrer noopener" target="_blank" href="https://malic.xyz/archives/73">第k个排列数：康托展开</a>）<br>另外，还可以使用C++ STL中的set&lt;int>进行判重，用int表示一个局面，每次局面检查这个set当中是否能找到状态。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/NUn/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>F.国际象棋</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>每枚棋子各占一行，若第i枚棋子在当前i列中选择了某一列，则剩余棋子只能在剩余i-1列中选， 总共N枚棋子，总方案数就是N × (N-1) × (N-2) × ... × 2 × 1 = N!<br>此题最大为1000，也就是要支持到1000!。需要用大整数乘法，不过这里只需要int与大整数相乘。这要比大整数与大整数相乘简单很多。<br>用一个int数组表示结果，初始化全为0，第[0]位为1，让数组的每一位分别与2,3,4,...,N相乘， 每乘一次就做一次进位（保证数组的每一位乘法不要溢出）最后逐位输出即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>参考代码 <a href="http://p.malic.xyz/5KAe/" target="_blank" rel="noreferrer noopener">C++</a>  <a href="http://p.malic.xyz/emQc/" target="_blank" rel="noreferrer noopener">Python</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T14:35:25+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

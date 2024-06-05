@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 质因数分解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4354.html" rel="bookmark"
+         title="Permalink to 质因数分解">质因数分解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import java.io.*;
+import java.util.*;
+
+class Main{
+    public static void main(String[] argv){
+        factorize(1000007);
+    }
+
+    private static void factorize(int T){
+        System.out.printf(&quot;%d = &quot;,T);
+        int p = 2;
+        boolean initFlag = true;
+        while(T &lt; 1)
+        {
+            if(T % p ==0 ){
+                if(initFlag) {
+                    initFlag = false;
+                } else {
+                    System.out.printf(&quot; * &quot;);
+                }
+                System.out.printf(&quot;%d&quot;,p);
+                T = T / p;
+            } else {
+                p = nextPrime(p+1);
+            }
+        }
+        System.out.println();
+    }
+
+    private static boolean isPrime(int p) {
+        boolean isPrime = true;
+        for(int z = 3;z * z &lt;= p; z +=2) {
+            if(p%z==0){
+                isPrime = false;
+                break;
+            }
+        }
+        return isPrime;
+    }
+
+    private static int nextPrime(int p) {
+        if(p &lt; 2) {
+            return 2;
+        } else if(p == 2) {
+            return 3;
+        } else if (p%2 ==0 ) {
+            return nextPrime(p+1);
+        } else {
+            if(isPrime(p)) {
+                return p;
+            } else {
+                return nextPrime(p+2);
+            }
+        }
+    }
+
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2023-06-19T07:12:57+09:00">
+      月 19 6月 2023
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

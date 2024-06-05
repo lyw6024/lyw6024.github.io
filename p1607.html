@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 利用XPath筛选XML/HTML标签</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1607.html" rel="bookmark"
+         title="Permalink to 利用XPath筛选XML/HTML标签">利用XPath筛选XML/HTML标签</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> XPath是一个 W3C 标准，它使用路径表达式在 XML 文档中进行导航 。通过XPath对HTML信息进行筛选也非常有效。XML和HTML的DOM节点是一种树的结构，可以使用筛选器对其内容进行选择。例如Python可以用<code>lxml</code>，C#可以使用<code>HtmlAgilityPack</code>，都能用XPath非常方便地对HTML文件进行筛选提取。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>XPath中的节点</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>以此XML为例：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"xml","mime":"application/xml","theme":"erlang-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;bookstore&gt;
+  &lt;book&gt;
+    &lt;title lang=&quot;en&quot;&gt;Harry Potter&lt;/title&gt;
+    &lt;author&gt;J K. Rowling&lt;/author&gt;
+    &lt;year&gt;2005&lt;/year&gt;
+    &lt;price&gt;29.99&lt;/price&gt;
+  &lt;/book&gt;
+&lt;/bookstore&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>整个文档的根<code>&lt;bookstore&gt;&lt;/bookstore&gt;</code>叫作"文档节点"，项目中由<code>&lt;x&gt;&lt;/x&gt;</code>包围的内容叫作"内容节点"，<code>lang="en"</code>这类则为属性节点。如"Harry Potter"和"en"这类值称为原子值</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>节点关系</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>父（Parent）：每个元素以及属性都有一个父。<code>title, author, year, price</code>的父节点都是<code>book</code></li><li>子（Children） ：相应的，A元素是B元素的父，则B元素是A元素的子节点</li><li>同胞（Sibling）：A是B,C结点的父节点，那么B与C为同胞节点</li><li>祖先（Ancestor）：A结点的父节点，及A的父节点到文档节点的所有父节点，则为A的祖先节点。</li><li>后代（Descendant）：A是B的祖先节点，则B称为A的后代节点。</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2>语法</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> XPath 使用路径表达式在 XML 文档中选取节点 。 节点是通过沿着路径或者 step 来选取的。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>选取节点</h3>
+<!-- /wp:heading -->
+<!-- wp:table {"className":"is-style-regular"} -->
+<figure class="wp-block-table is-style-regular"><table class=""><tbody><tr><th>表达式</th><th>描述</th></tr><tr><td>nodename</td><td>选取此节点的所有子节点。</td></tr><tr><td>/</td><td>从根节点选取。</td></tr><tr><td>//</td><td>从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</td></tr><tr><td>.</td><td>选取当前节点。</td></tr><tr><td>..</td><td>选取当前节点的父节点。</td></tr><tr><td>@</td><td>选取属性。</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:heading {"level":3} -->
+<h3>谓语（Predicates）</h3>
+<!-- /wp:heading -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><tbody><tr><th>路径表达式</th><th>结果</th></tr><tr><td>/bookstore/book[1]</td><td>选取属于 bookstore 子元素的第一个 book 元素。</td></tr><tr><td>/bookstore/book[last()]</td><td>选取属于 bookstore 子元素的最后一个 book 元素。</td></tr><tr><td>/bookstore/book[last()-1]</td><td>选取属于 bookstore 子元素的倒数第二个 book 元素。</td></tr><tr><td>/bookstore/book[position()&lt;3]</td><td>选取最前面的两个属于 bookstore 元素的子元素的 book 元素。</td></tr><tr><td>//title[@lang]</td><td>选取所有拥有名为 lang 的属性的 title 元素。</td></tr><tr><td>//title[@lang='eng']</td><td>选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性。</td></tr><tr><td>/bookstore/book[price&gt;35.00]</td><td>选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td></tr><tr><td>/bookstore/book[price&gt;35.00]//title</td><td>选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:paragraph -->
+<p>选取未知节点</p>
+<!-- /wp:paragraph -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><tbody><tr><th>通配符</th><th>描述</th></tr><tr><td>*</td><td>匹配任何元素节点。</td></tr><tr><td>@*</td><td>匹配任何属性节点。</td></tr><tr><td>node()</td><td>匹配任何类型的节点。</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:heading -->
+<h2>XPath 轴（Axes）</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 轴可定义相对于当前节点的节点集。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><tbody><tr><th>轴名称</th><th>结果</th></tr><tr><td>ancestor</td><td>选取当前节点的所有先辈（父、祖父等）。</td></tr><tr><td>ancestor-or-self</td><td>选取当前节点的所有先辈（父、祖父等）以及当前节点本身。</td></tr><tr><td>attribute</td><td>选取当前节点的所有属性。</td></tr><tr><td>child</td><td>选取当前节点的所有子元素。</td></tr><tr><td>descendant</td><td>选取当前节点的所有后代元素（子、孙等）。</td></tr><tr><td>descendant-or-self</td><td>选取当前节点的所有后代元素（子、孙等）以及当前节点本身。</td></tr><tr><td>following</td><td>选取文档中当前节点的结束标签之后的所有节点。</td></tr><tr><td>following-sibling</td><td>选取当前节点之后的所有兄弟节点</td></tr><tr><td>namespace</td><td>选取当前节点的所有命名空间节点。</td></tr><tr><td>parent</td><td>选取当前节点的父节点。</td></tr><tr><td>preceding</td><td>选取文档中当前节点的开始标签之前的所有节点。</td></tr><tr><td>preceding-sibling</td><td>选取当前节点之前的所有同级节点。</td></tr><tr><td>self</td><td>选取当前节点。</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:heading -->
+<h2>XPath 运算符</h2>
+<!-- /wp:heading -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><tbody><tr><th>运算符</th><th>描述</th><th>实例</th><th>返回值</th></tr><tr><td>|</td><td>计算两个节点集</td><td>//book | //cd</td><td>返回所有拥有 book 和 cd 元素的节点集</td></tr><tr><td>+</td><td>加法</td><td>6 + 4</td><td>10</td></tr><tr><td>-</td><td>减法</td><td>6 - 4</td><td>2</td></tr><tr><td>*</td><td>乘法</td><td>6 * 4</td><td>24</td></tr><tr><td>div</td><td>除法</td><td>8 div 4</td><td>2</td></tr><tr><td>=</td><td>等于</td><td>price=9.80</td><td>如果 price 是 9.80，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>!=</td><td>不等于</td><td>price!=9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.80，则返回 false。</td></tr><tr><td>&lt;</td><td>小于</td><td>price&lt;9.80</td><td>如果 price 是 9.00，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>&lt;=</td><td>小于或等于</td><td>price&lt;=9.80</td><td>如果 price 是 9.00，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>&gt;</td><td>大于</td><td>price&gt;9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.80，则返回 false。</td></tr><tr><td>&gt;=</td><td>大于或等于</td><td>price&gt;=9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.70，则返回 false。</td></tr><tr><td>or</td><td>或</td><td>price=9.80 or price=9.70</td><td>如果 price 是 9.80，则返回 true。如果 price 是 9.50，则返回 false。</td></tr><tr><td>and</td><td>与</td><td>price&gt;9.00 and price&lt;9.90</td><td>如果 price 是 9.80，则返回 true。如果 price 是 8.50，则返回 false。</td></tr><tr><td>mod</td><td>计算除法的余数</td><td>5 mod 2</td><td>1</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-01T07:06:30+09:00">
+      金 01 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

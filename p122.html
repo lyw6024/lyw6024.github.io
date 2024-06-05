@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 一种随机抽样的算法</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p122.html" rel="bookmark"
+         title="Permalink to 一种随机抽样的算法">一种随机抽样的算法</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]有一个很常见的问题：从\(  N \)个互不相同的数，随机选取 \( M(M&lt;N)  \) 个数字.比如在一组N个样品当中选择其中M个进行破坏性测试。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>朴素的想法是，输出 \(  M \) 次随机数，在每次输出存于一个表中，每次准备输出时看一下这次要输出的随机数是否以前出现过，若出现过就再生成一个随机数，若没出现过就存入这个表并输出它。这个方法在M远小于 \(  N \) 的时候是很灵的，按概率来算一般执行  \(  M \)  次就可以获得  \(  M \)  个不同的随机数。但是当 \(  N \) 与M都很大，并且  \(  M \)  和 \(  N \) 相差并不很大的时候，比如从整个公司1000人当中挑随机选850人，当已经选出849人之后，只有151/1000的概率能选出一个之前未出现过的随机数，并且每次出现一个随机数要与之前849个数作比较以检查是否之前出现过，这样可能花的时间更长，下面介绍一种仅与总样本数N有关的抽样方法，这是《编程珠玑》上所讨论过的一种算法。在工程上还算实用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们从 \(  N \) 个样本中选取M个样本，每个样本被选出的概率都是\( \frac{M}{N} \)。我们为样本编号为1到N，首先1号样本抽选的概率是 \( \frac{M}{N} \) ，我们可以用if (random(0,N) &lt; M ) then select 1 表示\( \frac{M}{N} \)的概率。接下来选择2号样本，如果1号样本被选出了，那么2号样本被选出的概率则应是\( \frac{M-1}{N-1}\)（从剩下N-1个样本中再取M-1个），而如果1号样本没被选出，那么1号样本被选出的概率就是\( \frac{M}{N-1}\)（从剩下  \(  N-1 \)  个样本里选  \(  M \)  个）。这样2号样本被选出的概率为: [latex] (\text{1号被选出})\cdot(\text{在1选出时选2的概率})+(\text{1未被选出})\cdot(\text{1未选时选2的概率})=\frac{M}{N}\cdot \frac{M-1}{N-1}+(1-\frac{M}{N})\cdot(\frac{M}{N-1}) =\frac{M}{N} [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>类似地可得出，每个样本被选出的概率都是\( \frac{M}{N} \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>程序设计时，我们可以设定循环次数就是N次，每次循环时做一次随机，判断生成[0,N-i)的随机整数是否小于剩余样本数M，若小于则选择这第i个样本，同时使剩余样本数的变量减去1，否则什么也不做进行下一趟循环，直到进行完所有N趟循环。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>from random import randint
+N=100
+M=25
+for i in range(N):
+        if randint(0,N-i-1)&lt;M:
+                print(i)
+                M-=1</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样就可以有序的、随机不重复的从N个样本中选取M个样本</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-05-31T13:29:16+09:00">
+      金 31 5月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

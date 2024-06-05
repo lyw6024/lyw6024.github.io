@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2021年寒假热身赛 3</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2977.html" rel="bookmark"
+         title="Permalink to 2021年寒假热身赛 3">2021年寒假热身赛 3</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a href="https://vjudge.net/contest/419055#problem/A" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">A - 饮酒量</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>由于有小数，所以操作浮点数时要注意与0的关系。一种方法是先将x乘以100，用int类型对待，另一种方法则是处理浮点数和0的关系时，加入的允许误差<code>epsilon</code>，比如可以取\( 10^{-6} \)，从x开始依次减<code>v*p/100</code>，表示剩余可饮酒量，如果可饮酒量少于 <code>-epsilon</code>，则这一杯喝完确实醉了，仅小于0是不行的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/vWyb/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码 (Python)</a>   <a href="http://lab.malic.xyz/pastebin/Ukif/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码 (C++) </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> <a href="https://vjudge.net/contest/419055#problem/B" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">B - 猴大王</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>猴群最重的猴子重量为 \(x\)，次重的为\(y\)。 抓走 \(x\) 的那天， \(y\) 可当大王，其它天都是\(x\)当大王。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>若\( x=y \)，就是\(N\)行\(x\)。若\( x \neq y \)， 则\(x\) 被抓走的那一天输出 \(y\)，另外\(N-1\)天输出 \(x\)即可。  </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/Znze/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 参考代码 (C++)  </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> <a href="https://vjudge.net/contest/419055#problem/C" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">C - 方程组</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>直接三重循环解就可以，注意数据范围\( 1 \leq A,B,C \leq 10000 \)，方程有\(x^2+y^2+z^2 = C \leq 10000\)，所以\(x^2&lt;y^2&lt;z^2 \leq 10000\)。这样z取值\( [-98,100] \), y取值范围 \( [-99,z-1] \) , x取值范围\( [-100,y-1] \)。这样循环中总是\( x&lt;y&lt;z \)，循环中试验得到首个方程组的解便是符合要求的解。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/WFcd/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码(Python)</a> <a href="http://lab.malic.xyz/pastebin/EqMc/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码 (C++)</a>  </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a href="https://vjudge.net/contest/419055#problem/D" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">D - 画分形</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>依据题目描述，给出两点\(P_1,P_2\)，由基本数学知识可知：求出 \(P_1,P_2\) 的两个三等分点坐标\(S,T\)，记\( \overline{P_1 S}\)的长度为\(R\)，S的坐标为\( (x,y)\) , \(P_1 S\)与x轴夹角为\(\theta\)，则作等边三角形\(STU\)的点\(U\)坐标为\( (x + R \cdot \cos(\theta +   \frac{\pi}{3}) , y + R \cdot \sin(\theta + \frac{\pi}{3}) )\)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>根据阶数进行递归：若阶数为0，则输出线段端点坐标，否则将阶数减去1，重复上述过程。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <a href="http://lab.malic.xyz/pastebin/avAe/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码 (C++)  </a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><s>E - knight</s></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 定义一个<code>step[i][x][y]</code>，表示第i名骑士从它初始位置跳到(x,y)位置所需最少步数。 三枚骑士都跳完之后，再对所有(x,y)找 <code>step[0][x][y]+step[1][x][y]+ step[2][x][y]</code>的最小值即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><a href="https://vjudge.net/contest/419055#problem/E" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">F - 切大葱</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>用数组dp[k]保存，表示切长度为k的大葱获得的兴奋值为dp[k]，有：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>dp[1]=0</code><br /><code>dp[2]=1</code><br /><code>dp[k] = dp[c]+dp[k-c] + (c==k-c)</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>计算dp[N]需要 \( O(N^2) \) 的时间，对于\(N \leq 1000\)的数据是可以的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/EY6c/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">参考代码[dp - 50%](C++)</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于更大的数据，需要另寻方法求解，可归纳并证明知：若记函数<code>bc(x)</code>是整数<code>x</code>的二进制中1的数量，则有<code>dp[x]=x-bc(x)</code>。因为若x的二进制只有1个1，则\( x = 2^{\log_2(x)} = 2 * 2^{\log_2(x)-1}  \)，必可拆成两个\( 2^{\log_2(x)-1}  \),使兴奋度+1，且可以继续拆下去，直到拆成1，所以二进制只有1个1的数x有dp[x]=x-1。<br />若x的二进制有多个1，将最低位的1记为第\( j\)位，则将x先拆成\( 2^j \) 与\(x-2^j\)，可获得\( 2^j-1 + dp[x-2^j]\)的兴奋度，而 \( dp[x-2^j] \)是x去除最低位的1之后剩下的数字，如此再做下去，直至只剩1个1。所以二进制中每出现一个1，就使兴奋度在原数字上减少了1，故得证。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/n8Le/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 参考代码 (C++)  </a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-02-06T09:02:00+09:00">
+      土 06 2月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

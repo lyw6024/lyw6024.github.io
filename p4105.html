@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2020热身赛01</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4105.html" rel="bookmark"
+         title="Permalink to [voj] 2020热身赛01">[voj] 2020热身赛01</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a href="https://vjudge.net/contest/347604" target="_blank" rel="noreferrer noopener">https://vjudge.net/contest/347604</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.Test</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>读两个字符串S和T,然后输出TS.<br>提示：使用C/C++时数组要稍微开大一些，比如此题给出最长为100的字符串， 则char[]最少要开101，因为字符结尾还有结尾的标志'\0'， 不然内存越界会报出"Runtime Error"。数组比题意适当的开多一点一般是没有影响。<br>提示：使用Python需要注意输入格式，输入是在同一行内用空格分隔的， 需要用S,T= input().split(" ")，而不能是S=input()和T=input()， 这样是会等待两行的输入，与题给数据不同，无法读到正确数据。<br>提示：使用Java需要注意，要将主类名设为Main才可以运行(Java建议用BufferedReader， 不然数据读入会稍慢些，对于部分输入数据较大的题可能 会有影响.)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/ST8c/">参考代码(C++)</a> (<a href="http://p.malic.xyz/yFFd/" target="_blank" rel="noreferrer noopener">Java</a>) (<a href="http://p.malic.xyz/Pmve/" target="_blank" rel="noreferrer noopener">Python</a>) </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.没用的知识</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>写一个函数用来判断一个四位数字是否不重复，从输入的y+1年开始逐年判断即可.<br>提示：这个题只是输入数据不大于9000，如果输入了9000，则应该输出9012就对了。 有些代码都使y小于等于9000进行循环，其实不要做这样的限制。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/QW4d/" target="_blank" rel="noreferrer noopener">参考代码(C++)</a> (<a rel="noreferrer noopener" href="http://p.malic.xyz/XaQf/" target="_blank">Python</a>)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.镜中的质数&nbsp;</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>需要：判断一个正整数是否为质数、把一个正整数变成它的镜面数（反过来）, 对区间内所有数字x都判断一下x以及x的镜面是否为质数，若是就计数累加。最后输出累加即可.<br>求素数的方法有很多，直接写也不难，这个题数据量不大，不优化也没卡时间。 但是可以稍优化一下，能够快很多：要判断x是不是，只需要判断x能否被所有不大于x的算术平方根的正整数整除即可; 更快的可以使用埃拉托斯特尼筛法：先假定所有大于1的都是质数，放在一个数组里存着（数组大小根据问题而设定）， 若k是质数，则将所有k的倍数都置为不是质数即可，需要判断x是否为质数，只需要从数组中读取下标为x的那个值即可确定是否为素数.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="http://p.malic.xyz/ftP/" target="_blank">参考代码(C++)</a> <a href="http://p.malic.xyz/DP5f/" target="_blank" rel="noreferrer noopener">Python code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.慢速的递归&nbsp;</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>直接递归不能计算，因为会有很多重复计算，若是将已经算过的数值保存在数组当中，就可以大大加快速度<br>定义一个三维数组bw[][][]，定在全局当中，初始值为0。如果bw[][][]不是0， 则这个值已经被计算出了，直接返回数组中这个数值即可，否则这个值没有计算， 就调用递归先算出数组中这个值再作为函数返回值（可以验证， 计算递归bw[][][]得不到0，那么若是0则说明其必然是没被计算过）。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/93se/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a> </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>或者可以初始化，程序开始前先将bw[MAXN][MAXN][MAXN]先算完，用的时候直接取数组里的值。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/Kbhc/" target="_blank" rel="noreferrer noopener">pastebin - malic's code</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.图形的变换</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>如果把问题反过来想：三根长为y的木条最少几次可以变为三根长为x的，就可以让木条能长则尽量长。 若有两根固定长度为a1,a2的木棒，则另一根最长可以为a1+a2-1（必须是整数并且能拼成三角形）。 我们可以让三根木条轮流增长，直到三根木条最长都不小于x.<br>用一个只有3项的数组r表示木条的最大可能的长度，轮流地增加：i是当前已增长的次数， 则i%3是当前要增长的那根，(i+1)%3和(i+2)%3分别是另外两根木条, r[i%3] = r[(i+1)%3] + r[(i+2)%3] - 1;。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/geme/" data-type="URL" data-id="http://p.malic.xyz/geme/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3} -->
+<h3>F.无聊的假期&nbsp;</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>用一个数组dp[i][3]保存完成各活动至第i天的累积快乐值，a[i][3]是第i天各活动的快乐值 （即a[i][0]是题的a[i],a[i][1]是题目中b[i],a[i][2]是题目中c[i]）。<br>初始第1天的第k(k=0,1,2)项活动累积快乐值是dp[0][k]=a[0][k]。之后，第i(i&gt;0)天完成活动的最大值分别是 dp[i][0]= a[i][0] + max(dp[i-1][1],dp[i-1][2])；(dp[i][1]和dp[i][2]类似） 按照这个转移方程一直推导到最后一天，再从最后一天累积快乐值 dp[N-1][0],dp[N-1][1],dp[N-1][2]当中输出最大的那个即可.<br>可以稍微优化一点空间，因为累积快乐值只与上一天的累积有关，与之前天的没有关系， 所以dp可以只开dp[2][3]，a[]也可以只开一维，边读边算。当天若为i， 则上一天为1-i，转移方积是dp[i][0]=a[0]+max(dp[1-i][1],dp[1-i][2]); （dp[i][1]与dp[i][2]类似）.一边读取a一边当天的dp[]，算完今天之后i=1-i再算下一天， 直到算到最后一天结束，输出最后那天的dp[i][3]中的最大即可.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="http://p.malic.xyz/3rsd/" target="_blank" rel="noreferrer noopener">参考代码</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T14:25:53+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

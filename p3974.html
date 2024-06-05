@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 用PIL库将图片转换成字符画</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3974.html" rel="bookmark"
+         title="Permalink to 用PIL库将图片转换成字符画">用PIL库将图片转换成字符画</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>图片是由不同颜色的像素点构成的，我们可以用不同的字符代表不同的颜色，这样就用字符串形成了样式上相似的图画。以前百度贴吧还很火的时候经常有人用一大堆字符占楼，粗略的看上去就能看出这一堆字符似乎组成了一个图象，比如：有这样一张图</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://img-blog.csdn.net/20180208160912459?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMzg4NjM0OTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="windows XP å¾®æ "/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>把它转换成字符画大概可以是：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://img-blog.csdn.net/20180208161803990?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMzg4NjM0OTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="å­ç¬¦ç»"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>只要字体是等宽的，最后的显示结果都可以把原图像中的形状轮廓和颜色明暗表示出来，就如windows徽标上高光的部分在字符画上也显示的比较白，颜色深的地方也是用比较密集的字符堆起来的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下面我们用python语言中的PIL库来实现这个过程。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>PIL库是python语言的第三方库，原版的PIL库只支持到python 2.7,后来许多爱好者一起开发了支持python 3+的版本，安装库的名字是pillow。它支持图像存储、显示和处理，它能处理几乎所有的图片格式，可以完成对图像的缩放、叠加、裁剪以及颜色图形的添加或修改。最重要的是，它可以使用python程序语言来控制，易于批量操作。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>使用时，引入PIL库的Image，打开一个图片文件，在Image中有一个图像的getpiexel()方法，可以获得图像在某一像素点处的RGB值，我们可以定义一个函数，将获得的RGB值转化为灰度值。根据灰度值的大小设定不同的位置处输出的字符，例如像灰度值高的点可以显示#￥&amp;WM@等看起来比较满的字符，而灰度值低的地方可以显示成~-:;.`’这种占位比较小的字符。这样对全图伸缩到适于程序控制和图案显示的大小，遍历整个图像就可以得到字符画了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>
+from PIL import Image
+graychar=list("#&amp;$@WMZwm=Va+u6pqds3*(?tiO{[!/&lt;&gt;o;:)'.—-")
+#灰度值映射到字符的一种表示，可自定义
+def outputchar(r,b,g,alpha=256):
+        if alpha==0:
+                return ''
+        gray= int(0.2126*r+0.7152*g+0.0722*b)
+        unit=256/len(graychar)
+        return graychar[(int(gray//unit))]
+</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p>前边介绍过，Image当中图形有getpixel()方法可以获得一个RGB值，返回值是一个元组，所以在主函数中可以用ouputchar(*pic.getpixel((x,y))调用来获得对应位置的字符，其中(x,y)是图像的坐标点。getpixel()方法接收一个元组作为坐标，所以调用时这里有两层括号。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>pic=Image.open("hello.jpg")
+WIDTH,HEIGHT=80,45
+pic=pic.resize((WIDTH,HEIGHT))
+#resize方法调整读取图片的宽度与高度
+txt=""
+#用来保存字符画的字符串
+for y in range(HEIGHT):
+        for x in range(WIDTH):
+                txt+=output(*pic.getpixel((x,y)))
+        txt+='\n'
+        print(txt)</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p>注意，输出平台一定要将字体设定为等宽类型的，不然显示不出效果。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-09-27T01:28:23+09:00">
+      木 27 9月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

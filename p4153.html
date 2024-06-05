@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - OpenJDK 11にJavaFXを導入する</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4153.html" rel="bookmark"
+         title="Permalink to OpenJDK 11にJavaFXを導入する">OpenJDK 11にJavaFXを導入する</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>原链接：<a href="https://blogs.osdn.jp/2018/11/12/merge-openjfx.html">OpenJDK 11にJava</a><a rel="noreferrer noopener" href="https://blogs.osdn.jp/2018/11/12/merge-openjfx.html" target="_blank">F</a><a href="https://blogs.osdn.jp/2018/11/12/merge-openjfx.html">Xを導入する (osdn.jp)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Java 11 在2018 年 9 月 25 日发布正式版。JDK从这个版本开始不再附带JavaFX。要开发JavaFX就要用其它的方法再导入<a href="https://openjfx.io/">OpenJFX</a>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>本文介绍了Windows平台下将 <a href="http://openjdk.java.net/">OpenJDK</a> 引入 <a href="https://openjfx.io/">OpenJFX</a> 的方法。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Java 11是不包含JavaFX的 JDK (Java Development Kit)，这是比较大的一个变量。Oracle 与有偿提供商用<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK</a>不同、免费使用的JDK是 <a href="http://openjdk.java.net/">Oracle OpenJDK</a> 。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p><em>Oracle OpenJDK offers the same features and performance as Oracle JDK under the GPL license.</em></p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p><a href="http://openjdk.java.net/">OpenJDK</a>&nbsp;にも有償の&nbsp;Oracle JDK&nbsp;と同じ機能とパフォーマンスが提供されています。というわけで、&nbsp;今回は&nbsp;JDK&nbsp;として&nbsp;<a href="http://openjdk.java.net/">Oracle OpenJDK</a>&nbsp;を使用します。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><a href="https://jdk.java.net/">https://jdk.java.net/</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>OpenJFX&nbsp;の&nbsp;Windows&nbsp;用バイナリは&nbsp;<a href="https://gluonhq.com/products/javafx/">Gluon</a>&nbsp;からダウンロードできます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><a href="https://gluonhq.com/products/javafx/">https://gluonhq.com/products/javafx/</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><code>JavaFX Windows SDK</code>&nbsp;と&nbsp;<code>JavaFX Windows jmods</code>&nbsp;の&nbsp;2&nbsp;つのファイルをダウンロードしてください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>ダウンロードした&nbsp;OpenJDK&nbsp;と&nbsp;OpenJFX&nbsp;のファイルを適当なフォルダー&nbsp;（たとえば&nbsp;<code>C:¥temp</code>&nbsp;など）&nbsp;に保存します。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>JDK&nbsp;から分離されたことで&nbsp;JavaFX&nbsp;の扱い方がいままでよりも難しくなりました。OpenJFX&nbsp;に&nbsp;PATH&nbsp;を通したり、&nbsp;アプリケーション実行時の&nbsp;VM&nbsp;引数として&nbsp;<code>--add-modules javafx.controls</code>&nbsp;を指定したりとかなり煩雑です。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>この煩雑さは&nbsp;JavaFX&nbsp;が&nbsp;JDK&nbsp;から分離されていることに起因しています。JavaFX&nbsp;を&nbsp;JDK&nbsp;にマージしてしまえば、&nbsp;モジュール指定などを気にすることなく従来の&nbsp;Java&nbsp;と同様に&nbsp;JavaFX&nbsp;を使えるようになります。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OpenJDK&nbsp;に&nbsp;OpenJFX&nbsp;をマージするためのバッチファイルを作成しました。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>merge-openjfx.zip</code>&nbsp;をダウンロード&nbsp;・&nbsp;展開して、&nbsp;中にあるファイルを&nbsp;OpenJDK、&nbsp;OpenJFX&nbsp;を保存した場所にコピーしてください。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>このようなファイル構成になっている状態で&nbsp;<code>merge-openjfx.bat</code>&nbsp;をダブルクリックして実行します。<code>merge-openjfx.bat</code>&nbsp;を実行するとコマンドプロンプトが表示され処理が開始されます。しばらく待つと&nbsp;「続行するには何かキーを押して下さい」&nbsp;とメッセージが表示されます。何かキーを押すとコマンドプロンプトが閉じます。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>jdk-11.0.1</code>&nbsp;フォルダーが作成されています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>この&nbsp;OpenJDK&nbsp;は&nbsp;OpenJFX&nbsp;がバンドルされた状態になってるので、&nbsp;いままでと同様に&nbsp;JDK&nbsp;の一部として&nbsp;JavaFX&nbsp;を使用することができます。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-05-21T04:22:03+09:00">
+      土 21 5月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - ECNU 软工机试2018</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3976.html" rel="bookmark"
+         title="Permalink to ECNU 软工机试2018">ECNU 软工机试2018</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> <strong>A. 西班牙馅饼</strong> </h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>问题描述</h4>
+<!-- /wp:heading -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>港岛妹妹，你献给我的西班牙馅饼<br />甜蜜地融化了我，天空之城在哭泣<br />港岛妹妹，我们曾拥有的甜蜜的爱情<br />疯狂地撕裂了我，天空之城在哭泣</p><p>——李志《天空之城》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image {"align":"center"} -->
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://acm.ecnu.edu.cn/upload/3528/img1.oPJszaqn.jpg" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>粉丝问：“我想问一下在你歌词里面的馅饼是什么？”</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>李志答：“告诉你，西班牙馅饼是怎么一回事。是有一次我一个朋友给我寄了一张明信片，从西班牙寄过来的，明信片的封面是一块馅饼，谢谢你，你惊讶吗？你们惊讶吗？想想啥？你们知道个几把？整天瞎几把猜对不对？挺可笑的。所以答案一公布就这个样子。你再回想一下生活里面有多少个这样的事情，你充满了幻想，充满了好奇，猜哦，瞎几把猜，猜到后面傻逼了吧？没猜到了吧？”</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>现在我们看见了这个西班牙馅饼长什么样，西班牙馅饼是个矩形形状，想不到吧。我们可以把它抽象成一个&nbsp;N&nbsp;行&nbsp;M&nbsp;列的正整数矩阵。每个格子有一个“美味值”，由于一些不可告人的原因我们对于这个馅饼没行只能吃一口，港岛妹妹说如果她吃到美味值为&nbsp;k&nbsp;的馅饼，就会给我做出美味值为&nbsp;k&nbsp;的红烧肉。问红烧肉最多能有多好吃。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>N，M：表示&nbsp;N&nbsp;行&nbsp;M&nbsp;列，馅饼的尺寸大小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>以下&nbsp;N&nbsp;行&nbsp;M&nbsp;列为馅饼每个格子的美味值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>输入中所有数是不超过&nbsp;100&nbsp;的正整数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>一个正整数，表示红烧肉最多能有多好吃。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3 2
+8 15
+11 4
+2 43</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>69</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2> <strong>B. 梵高先生</strong> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>单点时限:&nbsp;</strong>1.0 sec<br /><strong>内存限制:&nbsp;</strong>256 MB</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>问题描述</h4>
+<!-- /wp:heading -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>谁的父亲死了<br />请你告诉我如何悲伤<br />谁的爱人走了<br />请你告诉我如何遗忘<br />——李志《梵高先生》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image {"align":"center"} -->
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://acm.ecnu.edu.cn/upload/3529/img2.mnPYPJUJ.jpg" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>2009年的最后一天 在义乌隔壁酒吧 李志为了还做唱片欠下来的20W 巡回35场演出 在这晚完成 喝醉了的逼哥哽咽着唱完梵高先生 说最后一次唱这歌。他粗鲁的打断了大家的合唱，然后用最沙哑的嗓音唱了起来，哪天，唯一和他合音的只有一只狗。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>抬头再看了一眼星空和黑夜，今晚的星星变成了一个三角形的样子，像这样：</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+...</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>现在给你一个正整数&nbsp;n，请你给出星空的前&nbsp;n&nbsp;行。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输入文件共一行，包含一个正整数&nbsp;n&nbsp;(1≤n≤20)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输出文件共&nbsp;n&nbsp;行，即星空的前&nbsp;n&nbsp;行。每行包含若干正整数，这些正整数之间用一个空格隔开（不能有多余的空格），最后一个正整数后面没有空格。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1
+1 1
+1 2 1
+1 3 3 1</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2> <strong>C. 和你在一起</strong> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>单点时限:&nbsp;</strong>1.0 sec<br /><strong>内存限制:&nbsp;</strong>256 MB</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>我想和你在一起<br />直到我不爱你<br />宝贝 人和人 一场游戏<br />我愿意为你死去<br />如果我还爱你<br />宝贝 反正活着 也没意义<br />宝贝 我也只能 这样为你<br />——李志《和你在一起》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://acm.ecnu.edu.cn/upload/3530/something.ZJKg8aQj.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>现场4分10秒，小哥跟着逼哥嘶吼，泪流满面。我要和你在一起，直到我不爱你。有这么&nbsp;n&nbsp;个数字，联成一排拼到一起便是我爱你的时间，那么我们会在一起多久呢</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如:&nbsp;n=3&nbsp;时，3 个整数 13，312，343 联接成的最长时间为: 34331213。<br />又如:&nbsp;n=4&nbsp;时，4 个整数 7，13，4，246 联接成的最长时间为: 7424613。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>n&nbsp;(1≤n≤20)，表示&nbsp;n&nbsp;个数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来一行&nbsp;n&nbsp;个正整数，大小不超过&nbsp;\( 10^4 \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>拼成的最长时间。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3
+623 583 413</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>623583413</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2> D. 定西 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>单点时限:&nbsp;</strong>1.0 sec<br /><strong>内存限制:&nbsp;</strong>256 MB</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>这么多年你一个人一直在走<br />方向和天气的节奏会让你忧愁<br />你说你遇见了一大堆奇怪的人<br />他们看上去好像都比你开心<br />——李志《定西》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://acm.ecnu.edu.cn/upload/3531/img3.kjyxYDSs.jpg" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>这首歌的吉他节奏总感觉是在致敬《加州旅馆》，前奏又像葫芦娃里面在蛇精洞是的配乐</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>一个人走走了很多年，发现自己走到了一个很长的，年久失修的楼梯面前。年久失修的意思就是，有&nbsp;k&nbsp;个台阶坏了，没法走。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>楼梯一共有&nbsp;n&nbsp;层，你一次能上一阶、两阶或三阶台阶，请问，你从楼梯底部 (0&nbsp;开始) 走到楼梯顶部，共有多少种走法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输入数据共两行，第一行包含两个自然数&nbsp;n&nbsp;( \(1 \leq n \leq 100\) ) 和&nbsp;k&nbsp;( \( 0 \leq k \leq n\) )，第二行包含&nbsp;k&nbsp;个自然数&nbsp;\( X_i&nbsp;(1 \leq X_i \leq n) \)，数字之间用一个空格隔开，表示损坏的台阶的序号（从楼梯底部到楼梯顶部，台阶序号依次为&nbsp;1&nbsp;到&nbsp;n）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输出数据仅包含一个整数，表示所有可行走法的总数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5 2
+2 4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2> E. 热河路 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>单点时限:&nbsp;</strong>2.0 sec<br /><strong>内存限制:&nbsp;</strong>256 MB</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>没有人在热河路谈恋爱，<br />总有人在天亮时伤感<br />如果年轻时你没来过热河路，<br />那你现在的生活是不是很幸福<br />——李志《热河》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image {"align":"center"} -->
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://acm.ecnu.edu.cn/upload/3532/else.CFEVuPDj.png" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>奔跑。跌倒。奔跑。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>热河路有一家开了好多年的理发店，不管剪什么样的发型，你只要付五块钱。现在我们来到了热河路。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们可以将其抽象成一个如下的序列：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>110100100010000100000……</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>请你找出这个无穷序列中指定位置上的数字。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>第一行一个正整数&nbsp;n&nbsp;(1≤n≤1500000)，表示询问次数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来的&nbsp;n&nbsp;行，每行一个正整数&nbsp;\( a_i&nbsp;(1 \leq a_i \leq 10^9) \)，\( a_i \)&nbsp;表示在序列中的位置。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输出&nbsp;n&nbsp;行，每行为一个&nbsp;0&nbsp;或&nbsp;1，表示该序列第&nbsp; \( a_i \) 位上的数字。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>4
+3
+14
+7
+6
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>0
+1
+0</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2> F. 庙会 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>单点时限:&nbsp;</strong>1.0 sec<br /><strong>内存限制:&nbsp;</strong>256 MB</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>是谁带你来看这场庙会<br />行为掩饰后超越了思维<br />舞台上的小丑和你的左小腿<br />别管我，别把我和他们扯在一起<br />——李志《鸵鸟》</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://acm.ecnu.edu.cn/upload/3533/img4.ShrNx5s3.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>来到这场庙会，现在需要男士们和女士们进入舞厅时，各自排成一队。跳舞开始时，依次从男队和女队的队头上各出一人配成舞伴。规定每个舞曲能有一对跳舞者。若两队初始人数不相同，则较长的那一队中未配对者等待下一轮舞曲。现要求写一个程序，模拟上述舞伴配对问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>假设在周末舞会上，男士们和女士们进入舞厅时，各自排成一队。跳舞开始时，依次从男队和女队的队头上各出一人配成舞伴。规定每个舞曲能有一对跳舞者。若两队初始人数不相同，则较长的那一队中未配对者等待下一轮舞曲。现要求写一个程序，模拟上述舞伴配对问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输入格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>三个整数&nbsp;m,&nbsp;n,&nbsp;k&nbsp;(1≤m,n≤150,1≤k≤4000)，分别表示男士人数、女士人数、几轮舞曲。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>输出格式</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输出各轮舞曲的配对方案。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>样例</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>input</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2 4 6</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>output</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1 1
+2 2
+1 3
+2 4
+1 1
+2 2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-03-26T11:00:00+09:00">
+      月 26 3月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

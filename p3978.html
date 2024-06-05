@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 数字图像处理——图像减法的应用例1</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3978.html" rel="bookmark"
+         title="Permalink to 数字图像处理——图像减法的应用例1">数字图像处理——图像减法的应用例1</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>原题地址&nbsp;<a href="https://acm.ecnu.edu.cn/problem/3343/">EOJ 3343</a>，题目描述没有内容，只给了两幅图，昨天恰好刚学到数字图像处理.有一节内容是讲到拿到两张相似的图片,可以对其做减法从而将其中的差异显示出来，可用于做特征分析。这两张图就看起来很相似，非常有可能有隐藏信息在里边，不论是不是，先拿来做减法试试看。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>openCV是比较完善的用于图形图像处理的库，但在这儿我们先用更简单的python的pillow库实现。pillow是早期pythonth自带的图形库，后来python版本更新，年久失修，现在的库是第三方维护的。库的名称为PIL，从PIL中调用Image进行操作。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>PIL的Image对象甚至可以直接读成numpy的array，这样做数学运算时也非常简单。打开两幅图片，使用Image.open()打开后，转成np.array()，发现两图的维度不同，一幅是三通道的(RGB)图形，另一幅图是四通道的(RGBA)，这样就不能用numpy的减法直接算（其实这个题猫腻就出在第四通道上）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于Image对象，可以使用getpixel()函数得到其通道的数值，这样我们先做处理，不论是三通道还是四通道，都统一成三通道，三通道的就认为alpha为255，返回其(R,G,B)数值，这样再生成np.array()，就可以做减法。再利用PIL的fromarray()，可将数组转换为图形显示出来。两图完全相同的部分数值是0，显示为黑色，而有差异的部分就可以看到显示出图样，是一个单词的形式</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":674} -->
+<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/dippic1-300x177.png" alt="[Image]" class="wp-image-674"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>原题目给出输入数据的范围 1 &lt;= n &lt;= 7，这与我们破解的图片显示出的单词“HACKING”是一致的，那么这个题目也就可以解决了，此题用python3可以只用一句解决：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><span style="background-color: #f9f9f9;">print("HACKING"[int(input())-1])</span></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下边是图像处理过程的代码：</p>
+<!-- /wp:paragraph -->
+<!-- wp:syntaxhighlighter/code {"language":"python"} -->
+<pre class="wp-block-syntaxhighlighter-code">from PIL import Image
+import numpy as np
+def preprocess(r,g,b,alpha=255):
+    return &#91;r,g,b,alpha]
+p1=Image.open("s1.png")
+p2=Image.open("s2.png")
+w1,h1=p1.size
+w2,h2=p2.size
+a=&#91;]
+for i in range(min(h1,h2)):
+    a.append(&#91;])
+    for j in range(min(w1,w2)):
+        t1=preprocess(*p1.getpixel((j,i)))
+        t2=preprocess(*p2.getpixel((j,i)))
+        a&#91;i].append((t1&#91;0]-t2&#91;0],t1&#91;1]-t2&#91;1],t1&#91;2]-t2&#91;2]))
+a=np.array(a,dtype='uint8')
+res=Image.fromarray(a)
+res.show()</pre>
+<!-- /wp:syntaxhighlighter/code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-11-25T01:12:36+09:00">
+      日 25 11月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

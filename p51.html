@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Magic Numbers [CodeForces - 320A]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p51.html" rel="bookmark"
+         title="Permalink to Magic Numbers [CodeForces - 320A]">Magic Numbers [CodeForces - 320A]</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>一个数字，若它是由1,14,144组成，则它是魔法数。如果一个数字是魔法数，那么给它前续和后缀一个魔法数它仍是魔法数，现在给出一个数字，需要请你判断一下它是不是魔法数</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>haskell来解想一种递归的解法，对于数字先判断它是否有非1与非4的数字，若有就直接返回不是魔法数，否则，若它是0位，则它就是魔法数，若它是1位，若这1位是1则也是，若它有2位，则首位是1的情况下递归的求后边的位，或判断这两位是否为14，若它是3位，则判断首位是1的情况下递归的求后边以及头2位是14的情况下求后边的再或者它本身是否是144；而其它情况当它长度大于3的时候，就判断若头1位是1，则递归的求1位之后是否正确，若头2位是14，则判断两位后是否正确，若头3位是144则判断三位后是否正确。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import Data.List
+main=do
+    line&lt;-getLine
+    putStrLn $ if solve line==True then "YES" else "NO"
+solve :: [Char]->Bool
+solve []=True
+solve s
+    | length s ==0 = True
+    | length s==1 =  s=="1"
+    | length s==2 = or [if (fst $ splitAt 1 s )=="1" then solve $ snd $ splitAt 1 s else False, s=="14"]
+    | otherwise = or [if (fst $ splitAt 1 s )=="1" then solve $ snd $ splitAt 1 s else False,if (fst $ splitAt 2 s )=="14" then solve $ snd $ splitAt 2 s else False,if (fst $ splitAt 3 s )=="144" then solve $snd $ splitAt 3 s else False]
+</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-05-23T09:47:36+09:00">
+      木 23 5月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

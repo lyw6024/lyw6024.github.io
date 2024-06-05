@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - windows批处理文件实用写法：快速编译执行OJ单文件程序</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p142.html" rel="bookmark"
+         title="Permalink to windows批处理文件实用写法：快速编译执行OJ单文件程序">windows批处理文件实用写法：快速编译执行OJ单文件程序</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>经常在各大OnlineJudge上做题或者竞赛，一般就是写单文件的程序。我个人的话是不需要集成开发环境的，毕竟不用为一个题而开一个工程，并且我经常换语言，可能 A题用Haskell而B题用Python，C题再用C++这样，要用的话可能要开不同开发环境建好几个工程。不如用文本编辑器（vim，sublime Text之类的）写纯代码，然后在命令行中用编译命令进行测试。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先将我会用的编译环境(gcc.exe, ,g++.exe, python.exe, javac.exe, ghc.exe等)先加到环境变量PATH当中，这样我在任何路径下打开控制台都可以启动编译器。然后就是一系列的参数，比如gcc和g++就需要加点-DMALIC=1， std=c++14什么的编译指令再用-o指定文件名，而Haskell的ghc就一般直接就指定文件名不加其余参数。这样如果用不同语言的时候还要输入一大串指令。为解决每次编译都要输入不同的指令的问题，我们就可以设计一个windows批处理文件，让批处理文件去调编译器而我们直接调那个批处理即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当前我在使用的一个编译批处理文件有如下几项功能：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>根据文件的扩展名，自动区别语言从而使用相应编译指令</li><li>若编译通过，则自动启动程序</li><li>程序输入是由一个输入文件进行的重定向，不需要每次都手动输入数据</li><li>若程序编译失败，则显示编译出错的信息。</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>为演示，我们选择gcc编译器，python解释器和java编译器。这三种语言的编译运行各有其特点。而gcc与g++是几乎一样的，所以要用g++的时候很容易调整，而其它的语言就加在批处理当中即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，windows的批处理文件是顺序执行的，我们要想办法让它进行“块语句”的跳转从而实现对不同语言而执行不同编译命令。按照绝大多数OnlineJudge平台的规则，主文件名都叫作Main，扩展名根据所使用语言不同而文件名可能就是Main.cpp, Main.py, Main.java, Main.hs, Main.cs等等。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们把一个题放在一个文件夹当中，这个文件夹里只可能有一个Main，首先我们判断Main的存在，可以使用if exist命令，例如：</p>
+<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+if exist Main.c goto :runC
+if exist Main.java goto :runJava
+if exist Main.py goto :runPy
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p>if exist的语法为 if exist &lt;文件名> &lt;命令>，此处分别判断了Main.c, Main.java, Main.py是否存在，若存在则执行其后的goto 命令。这里goto之后的runC, runJava和runPy的前边都有一个冒号，这代表行的代号，用于标识行的位置，goto :runC将跳转到这个批处理文件中后边带有:runC的地方。接下来我们就分别对三个块再进行设计。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>:runC
+if exist Main.exe rm Main.exe
+gcc Main.c -o Main.exe
+if exist Main.exe Main.exe &lt; _in
+goto :exit
+:runJava
+if exist Main.class rm Main.class
+javac Main.java
+if exist Main.class java Main &lt; _in
+goto :exit
+:runPy
+python Main.py &lt; _in
+goto :exit
+:exit</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p>每个块都是以:run什么开头，以goto :exit结束，这是因为:run只表示行号，如果不使用goto :exit的话，比如我们从:runC进入，它会执行完Main.exe之后继续执行runJava中的内容，再招待runPy中的内容，直到执行完最后一行为止，虽然那些文件不存在都执行出错，但执行到那些错误的命令并不是我们所想要的，我们还是在执行所需用的指令完成后直接跳转到批处理结尾来结束它。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C和java以及很多语言都会将源码编译成其它的字节码，所以会产生一个与源码不同的文件，我们通过这个文件的存在可以判断编译是否成功进行。为了防止之前的编译干扰到我们最新的更改，我们先把原先可能存在的这个字节码文件删除，使用rm命令。然后就执行编译的语句。如果编译成功的话，会生成一个字节码文件，再通过判断它的存在以确定是否生成了最新的程序，若生成了程序，则用重定向输入'&lt;'的方式把提前写好的输入文件当作标准输入传给程序进行执行。程序退出后批处理也会随之退出。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>而Python是解释型语言，不需要提前编译，所以直接执行python就可以运行它，在命令当中为它加入重定向输入&lt;即可</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样，快速编译批处理已经基本完成了，如果你这样执行一下会发现一执行批处理，就跳出上边列的那些指令，而实际上我们并不需要看到那些指令。为解决这个问题，我们可以在批处理的第1行加入@echo off，批处理执行时就不再分别显示各条指令，最前边加的'@'号则表示这一句echo off也不显示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在写算法的单文件程序时，需要经常对程序调整，有时调试或报错信息很长，几次调试下来不易区别哪些语句属于都是哪次调试的，我们可以加一个编译前清屏的功能，在批处理前加一句 @cls即可，cls是windows控制台下清屏的指令，与linux的clear一样。我们在执行命令前先清屏，把以前的调试或程序输出全部清空，再执行最新的编译。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>使用了@echo off和cls，我们每次执行这个批处理，没有任何命令的提示信息，它会直接显示编译器的编译信息或是程序执行的输出。如果希望显示编译语句（比如gcc的编译gcc Main.c -o Main.exe）可以不启用echo off，而是在所有不希望显示的语句前加'@'符号即可。其中行标号:run是不需要加'@'的，因为它只是一个行标号，本来也不会有任何的显示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外，当前的批处理是对文件名作了规范，即代码文件的文件名是Main,输入文件名是_in，如果希望不是固定名的代码文件进行编译，可以使用参数传递。假设我们的批处理名为cc.bat,我们要对当前路径下p1.cpp进行编译，我们可以在cc.bat中编写</p>
+<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+g++ %1.cpp  -o Main.exe
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p>而在控制台中执行时则为</p>
+<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+cc p1
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p>cc.bat中的%1表示传入的第1个参数，我们在使用时传入的第1个参数就是p1，这样实际执行的指令就是g++ p1.cpp -o Main.exe就是完整的编译指令。类似的，%2就表示传入的第2个参数，如果把代码按题号命令，则可以按照指令参数的方式来编写批处理文件，在程序中需要指定文件名的地方，都用相应参数%1代替即可。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-12T04:15:33+09:00">
+      木 12 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

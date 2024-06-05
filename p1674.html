@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - PTA 520争霸赛 FGH题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1674.html" rel="bookmark"
+         title="Permalink to PTA 520争霸赛 FGH题解">PTA 520争霸赛 FGH题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading -->
+<h2><strong>7-6 随机输一次</strong></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><a href="https://pintia.cn/problem-sets/1259839299727368192/problems/1259850789826048003">https://pintia.cn/problem-sets/1259839299727368192/problems/1259850789826048003</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>给出一个数字序列以及一组玩“剪子石头布”的动作，依次在数字序列中每赢相应场次就输一场。按照这个规则，输出 “剪子石头布” 相应的动作。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分析：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将给出的"场次序列"保存在顺序表，用一个整数表示顺序表中的位置，即当前应当应相应的数量后输一次。并保存一个当前赢的场次，如果当前赢的场次恰等于场次序列当前的值，那么就出输的动作，并将赢的场次置为0，同时场次序列的位置移到下一个，否则输出赢的动作并赢的场次自增1。直到输入数据为"End"结束。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1673]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2><strong>7-7 阶乘的非零尾数</strong></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>问题描述：要计算数字( 最大为(\( 10^7 \) )阶乘末位有多少个0的同时，还要计算非0的后K位( \( 0 \lt K \lt 10 \) )数字.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分析：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>末位最多只要10位，可以模仿大数乘法（用数组模拟大数。这里是int类型和大数的乘法，比大数之间相乘容易），保存阶乘的最后非0的MAXN位（保险起见要将MAXN设定为17以上），输出其低K位即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>而求阶乘后有几个0，只需要看它能被5整除几次，其原因这里不再赘述。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"default"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#define MAXN 17
+int analogInt[MAXN];
+void multi(int x)
+{
+    int i;
+    for(i=0;i&lt;MAXN;i++)
+    {
+        analogInt[i]*=x;
+    }
+    for(i=1;i&lt;MAXN;i++)
+    {
+        if(notZero[i-1]&gt;9)
+        {
+            analogInt[i]+=analogInt[i-1]/10;
+            analogInt[i-1]=analogInt[i-1]%10;
+        }
+    }
+    while(analogInt[0]==0)
+    {
+        for(i=1;i&lt;MAXN;i++)
+        {
+            analogInt[i-1]=analogInt[i];
+        }
+    }
+}
+void outputDigits(int digits)
+{
+    int i;
+    for(i=digits-1;i&gt;=0;i--)
+    {
+        printf(&quot;%d&quot;,analogInt[i]);
+    }
+    printf(&quot; &quot;);
+}
+int main(void)
+{
+    int i,a,k;
+    memset(analogInt,0,MAXN);
+    analogInt[0]=1;
+    scanf(&quot;%d%d&quot;,&amp;a,&amp;k);
+    for(i=1;i&lt;=a;i++)
+    {
+        multi(i);
+    }
+    outputDigits(k);
+    long long c=0;
+    while(a&gt;0)
+    {
+        c+=a/5;
+        a/=5;
+    }
+    printf(&quot;%lld\n&quot;,c);
+    return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2><strong>7-8 三足鼎立</strong></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>问题描述：给出一个数字K，以及一个序列，在序列中能找到多少对数字可与K组成三角形</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-21T06:35:19+09:00">
+      木 21 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

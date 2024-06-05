@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX排版基本概念</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1126.html" rel="bookmark"
+         title="Permalink to LaTeX排版基本概念">LaTeX排版基本概念</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>LaTeX源文件</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>LaTeX命令由命令、正文、注释组成。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>命令</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>以back-slash('\')开头的一个字符串，可以带参数，也有的不带参数</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">\命令名
+\命令名[参数]{参数}</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>其中方括号内的参数是可选的，有时也称为“选项”，花括号内的参数是必须的，不可省略。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有些命令只对接下来的1个字符起作用，有些命令对接下来所有字符都起作用（往往这种命令也称为“声明”）。可以使用大括号来扩展或限制命令的作用范围。例如\textbf对接下来1个字符进行加粗，\bfseries对接下来所有字符加粗：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass{article}
+\begin{document}
+This is \textbf bold face style.
+This is \textbf{bold face} style.
+This is {\bfseries bold face} style.
+This is \bfseries bold face style.
+\end{document}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1127,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-38.png" alt="[Image]" class="wp-image-1127"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>LaTeX也支持自定义命令，这类似于宏替换，就是给原有的一个或多个命令起新名字，并将参数代入：</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">\newcommand{新命令}[参数个数]{命令内容}
+\newcommand*{新命令}[参数个数]{命令内容} </pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>加*的newcommand定义是短命令，内容中不能出现段落。新命令必须是原来没有的新名字</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\newcommand{\eps}{\varepsilon}
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>注释</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>LaTeX用"%"作为一个注释的开始，在'%'号之后的所有内容都是注释。如果想输入原始的%号，则要使用"\%"</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>环境</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>为了排版某些具有特定格式的文本，需要将之放在特定的环境中。如表格、列表、数学公式等</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">\begin{环境名}
+..
+\end{环境名}
+</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>环境可以嵌套但不能交叉，环境中可以包含其它命令，通常这些命令只在环境中起作用，例如希腊字母\alpha在数学环境中起作用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>document是LaTeX最基本的环境，一篇文档只能有一个document环境，正文所有内容都只能放在document当中。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\begin{document}之前和\documentclass之后这一段区域称为导言区。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>导言区</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>导言区放置全局控制命令，对整个文档起作用。有些命令只能放在导言区，例如调用宏包，设置页面大小等等。有些命令不能放在导言区，如章节命令。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>调用宏包</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>宏包是LaTeX功能的扩展，用\userpackage[选项]{宏包名}，只可以放在导言区，如果宏包不带选项，可以用逗号分隔一起调用：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\usepackage{float}
+\usepackage{xcolor}
+\usepackage[numbers,square,sort&amp;compress]{natbib}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>长度</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>LaTeX中长度由十进制数和单位表示。单位有mm）毫米），cm（厘米），in（英寸），pt（点/磅），em（大约是大写字母M的宽度），ex（大约是小写字母x的高度）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有时为了排版需要，可以指定弹性长度：<code>长度 plus 上偏量 minus 下偏量</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>分段和分页</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>换行是自动的，如果需要强制分行，可以用命令：<code>\\</code>，<code>\\* </code>， <code>\newline</code>。<code>\\*</code>同时表示禁止在换行处分页。<br /><code>\\</code>和<code>\\*</code>后可带长度选项，表示与新行的距离：<code> \\[3mm]</code>，<code>\\[-5pt]</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>一个空白行或用\par命令可以分段。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>换页也是自动的，如果需要强制分页，可以使用<code>\newpage</code>命令</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>间距和缩进</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>行距：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>\baselineskip</code> ：相邻两行的基线之间的距离<br /><code>\lineskip</code> ：前一行下边界与后一行上边界的距离</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>一般是修改行间距伸展因子来改变行距：  <code>\renewcommand{\baselinestretch}{倍数} </code>，或 <code>\linespread{倍数}</code> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>段间距：\lineskip+\parskip</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code> \setlength{\parskip}{长度}</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>段段首行缩进的长度 \parident。由英文习惯，每节第一段首行不缩进，若要包括第1段的每段的首行都缩进，则需要调用宏包 <code>\usepackage{indentfirst} </code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>\indent</code> 强制缩进（缩进长度<code>\parindent</code>）<br /><code>\noindent</code> 不允许缩进</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>水平间距：<code>\quad</code> 生成一段宽1em的水平空白，<code>\qquard</code>是<code>\quad</code>两倍。<code>\hskip{宽度}</code> 生成指定宽度的空白。<code>\hfill </code>根据排版需要插入空白，占满整行。<code>\hphantom{文本内容}</code> 生成水平空白，空白宽度为文本内容的总宽度。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>垂直间距：<code>\vspace{高度}</code> 生成指定高度的垂直空白，<code>\vspace*</code>{高度} 与<code>\vspace</code>一样，尽可能生成在页面顶部或底部。<code>\smallskip, \medskip, \bigskip </code>分别生成垂直空白高度<code>3pt plus 1pt minus 1pt</code>的1倍、2倍、4倍 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>特殊字符</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有10个字符被赋予了特殊用途，需要使用相应命令才可输出：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1136,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-39.png" alt="[Image]" class="wp-image-1136"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>&lt;,&gt;,|被定义为了数学符号，只能在数学模式中使用。若要在普通文本中使用，也要用相应命令：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1137,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-40.png" alt="[Image]" class="wp-image-1137"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>其它的一些特殊字符</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1138,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-41.png" alt="[Image]" class="wp-image-1138"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-18T08:19:11+09:00">
+      水 18 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Win10 激活:slmgr命令</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3004.html" rel="bookmark"
+         title="Permalink to Win10 激活:slmgr命令">Win10 激活:slmgr命令</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>管理员模式打开命令提示行</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li><code>slmgr /xpr </code> ：用于查看当前许可证有效期</li><li><code>slmgr /upk</code> ：卸载密钥</li><li><code>slmgr /ipk &lt;key> </code>  ：安装密钥</li><li><code>slmgr /skms</code> ：设置KMS计算机名、端口</li><li><code>slmgr /ato </code> ：激活Windows</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>每个密钥都有使用期限和次数，所以在激活时要去查找尽可能新的那些密钥。一般激活一次有180的期限，在180天后需要重新激活。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>依次将如下的命令输入到带有管理员权限的控制台（或PoweShell）。首先指定KMS服务，一般可用的就是<code>kms.xspace.in</code>，也可尝试使用<code>zh.us.to</code>或<code>110.noip.me</code>，将旧密钥卸载，然后安装一个新的，最后使用激活命令。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>每个命令输入之后会有一定的等待时间，要等到提示窗口显示这一步完成之后再输入下一条指令。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>若提示为“软件授权服务报告无法激活计算机”，则尝试重新指定KMS服务；若提示为“激活服务器确定密钥被阻止”则说明此密钥已经无效。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>slmgr /skms kms.xspace.in
+slmgr /upk
+slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+slmgr /ato</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-02-18T01:53:39+09:00">
+      木 18 2月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

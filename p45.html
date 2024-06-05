@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Filter Elements：haskell基本操作</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p45.html" rel="bookmark"
+         title="Permalink to Filter Elements：haskell基本操作">Filter Elements：haskell基本操作</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>从序列中输出那些出现至少k次的元素</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>函数式解法就是构造一系列的函数，然后进行函数间的组合来解决问题。此题还是多组读入，在读入时就是做一个递归，每次递归将当读取序列和K值，然后将序列和K值传入一个过滤函数，在传之前先构造两个序列，一个是按原顺序去重的序列，一个是将元素和出现次数构成元组的序列。传入过滤函数时，对于每个出现在去重序列的元素，判断它的出现次数是否不小于k，若是则输出，并递归地读到下一个去重序列元素，直至去重序列为空，一次计算则结束</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<pre>
+import Data.List
+main=do
+    line&lt;-getLine
+    mainLoop (read line::Int)
+mainLoop ::Int -&gt; IO()
+mainLoop 0 =return()
+mainLoop n=do
+    line&lt;-getLine
+    let k=last [read x::Int | x&lt;-words line]
+    line&lt;-getLine
+    let r=[read x::Int | x&lt;-words line]
+    let singleElemArray=nub r
+    let groupedArray=[(head x,length x)|x&lt;-group $ sort r]
+    output [fst x|x&lt;-groupedArray,(snd x)&gt;=k] singleElemArray
+    mainLoop (n-1)
+output :: [Int]-&gt;[Int]-&gt;IO()
+output [] _ =putStrLn "-1"
+output x [] =putStrLn ""
+output x (y:ys)=if (y `elem` x)
+    then do
+        putStr ((show y)++" ")
+        output x ys
+    else
+        output x ys
+</pre>
+<!-- /wp:html -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-01-03T09:30:00+09:00">
+      木 03 1月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

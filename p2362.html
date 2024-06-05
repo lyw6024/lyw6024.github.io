@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 快速质因数分解： Atcoder[abc177-E]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2362.html" rel="bookmark"
+         title="Permalink to 快速质因数分解： Atcoder[abc177-E]">快速质因数分解： Atcoder[abc177-E]</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题描述</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给出含有\(N\)个元素的数组\(A_i \)，若对任意的\(i,j ( 1 \leq i &lt; j \leq N \)，都有\(\gcd(A_i,A_j)=1\)，则称为个数组为"pairwise coprime"。若这个数组不是 "pairwise coprime"，同时有\(  \gcd(A_1,A2,\cdots,A_N)=1\)，则称这个数组为"setwise coprime"，否则，此数组为"not coprime"。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\(2 \leq N \leq 10^6 \)</li><li>\(1\leq A_i \leq 10^6\)</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2>分析</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>为了求解pairwise coprime，利用定义判断需要花\(O(N^2) \)的时间，会得到<code>TLE</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将pairwise coprime的条件可以等价表述成“对于任意质数\( p\)，\(A_i\)中的p的某个倍数的数仅有1个”（如果\( A_i\)和 \(A_j\)同是p的某个倍数，那么\(\gcd(A_i,A_j)=p\)，就不是pairwise coprime了）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>所以可以将\(A_i \)进行质因数分解，来检查\(A_i\)的各个元素是否有质因子重复出现。这样可以使用快速质因数分解，能够达到\( O(A\log\log A + N \log A) \)的时间复杂度（ 这里\(A=\max\{A_i\}\) ）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>判断setwise coprime的话，直接计算整个数组的\( \gcd \)即可，这一步的时间复杂度为\( O(N \log(A)) \)，综上，本题可以在 \( O(A\log\log A + N \log A) \)的时间内解决。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下面是关于快速质因子分解的算法过程。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4 id="-">快速质因数分解</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给出最大值为A的N个数字，将这些数进行质因数分解。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先使用筛法得到质数序列。使用一个数组D保存"最小质数因子"，例如D[4]=D[6]=2,D[35]=5：如果x是素数那么D[x]=x，这个数组和筛法一样是\( O(A \log \log A) \)的时间。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>D[x]就是x的因子中最小的素数，利用这个数组进行质因数分解时就减少了不必要的试除法，每个数的质因数分解的时间为\(O(\log A)\)</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-29T14:21:24+09:00">
+      土 29 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

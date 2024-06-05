@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 用Naive Bayes算法检查垃圾邮件</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3972.html" rel="bookmark"
+         title="Permalink to 用Naive Bayes算法检查垃圾邮件">用Naive Bayes算法检查垃圾邮件</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>朴素贝叶斯方法的思想很简单，就是根据已知类型的数据算出概率，在拿到未知类型的数据时，可以根据已知类型的数据的概率得出未知类型的数据类型的概率，从而猜测未知数据的分类。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如，假设你曾在校园观察并统计过，有80名男生穿的是裤子，3名男生穿的是裙子，有90名女生穿的是裙子，60名女生穿的是裤子。后来当你远远地看到有一位学生，不能确定是男生还是女生，但你看得出来TA穿着裙子，则可以推算：他是男生并穿裙子的概率是3/83,而她是女生并穿裙子的概率则90/150，那么将这名远处的学生认为是女生的猜测会使猜测的正确概率更大一些。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上例中只应用了一个特征进行判断，如果有多组特征，就需要注意一些问题。对于文本处理，需要处理的特征就多的多，例如要对一封邮件是否为垃圾邮件进行分类，我们要做的是把邮件的词组分出来，每个词是一个特征，这个词在垃圾邮件中出现的多，还是在正常邮件中出现的多，那么每封邮件的特征组数就是词数（更准确说，有效的词）。根据统计学相关知识，每个特征的概率相乘，就可以判断邮件是正常邮件概率高还是垃圾邮件的概率高，从而确实它的类别</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>但是实际运作时会有一点问题，因为概率是相乘的，而一旦某个词的概率为0，这导致整个类别的概率为0，或者词数非常多，每个词的作为一个概率都是[0,1]间的实数，乘的次数非常多之后乘积也可能因为小数精度下溢而导致概率为0。这时可以做变换f(P)=log(1+P)，则总的概率是各个概率取对数的和，就可以避免个别的单词概率为0的现象。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><span style="font-size: medium;">同时，为了防止概率的数值过小，可以进行平滑操作的变换，即将每项</span>[latex]\frac{n_i}{n}[/latex]变换为[latex]\frac{n_i+α}{ n+α*N } [/latex],当α=1时即Laplace平滑。这样可以将数值缩放到合适的大小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:html /-->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">from math import log
+def getWords(fileName):
+    fileCtx=open(fileName,"r").read().splitlines()
+    label=[]
+    contents=[]
+    for i,sentence in enumerate(fileCtx):
+        s=sentence.split(" ")
+        label.append(int(s[0]))
+        contents.append(s[1:])
+    return label,contents
+def washData(contents,threhold=200):
+    allwd={}
+    for sentence in contents:
+        for wd in sentence:
+            if wd in allwd:
+                allwd[wd]+=1
+            else:
+                allwd[wd]=0;
+    stopWords=open("stopwords.txt","r").read().splitlines()
+    mainVect={}
+    for wd in allwd:
+        if(allwd[wd]&gt;=threhold and len(wd)&gt;3 and not(wd in stopWords)):
+            mainVect[wd]=allwd[wd]
+    return mainVect
+def trainingAids(freqWords):
+    posDict={}
+    for wd in freqWords:
+        posDict[wd]=0
+    for i,sentence in enumerate(contents):
+        for wd in sentence:
+            if wd in freqWords:
+                if label[i]==0:
+                    posDict[wd]+=1
+    return posDict
+def judge(fileName,label,freqWords,posDict,isTag=1):
+    fileCtx=open(fileName,"r").read().splitlines()
+    contents=[]
+    tagList=[]
+    pC=sum(label)/label.__len__()
+    for i,sentence in enumerate(fileCtx):
+        s=sentence.split(" ")
+        tagList.append(int(s[0]))
+        contents.append(s[isTag:])
+    ret=[]
+    for i,sentence in enumerate(contents):
+        probPos=log(1+pC)
+        probNeg=log(2-pC)
+        N=sentence.__len__()
+        for wd in sentence:
+            if (wd in freqWords):
+                probPos+=log(1+(posDict[wd]+1)/(freqWords[wd]+N))
+                probNeg+=log(2-((posDict[wd]+1)/(freqWords[wd]+N)))
+        if probPos&gt;probNeg :
+            ret.append(0)
+        else:
+            ret.append(1)
+    return tagList,ret
+if "__main__"==__name__:
+    label,contents=getWords("trainData.txt")
+    freqWords=washData(contents,768)
+    posDict=trainingAids(freqWords)
+    tagList,res=judge("valData.txt",label,freqWords,posDict,isTag=1)
+    val=0
+    for i in range(res.__len__()):
+        if tagList[i]==res[i]:
+            val+=1
+    print("accuracy:{0}/{1}={2:.1f}%".format(val,res.__len__(),100*val/res.__len__()))</pre>
+<!-- /wp:preformatted -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-10-27T01:14:59+09:00">
+      土 27 10月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 搜索算法I：二十四点</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2249.html" rel="bookmark"
+         title="Permalink to 搜索算法I：二十四点">搜索算法I：二十四点</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[TABS_R id=2260]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>使用四个正整数，添加一些运算符以将四个数字组成运算结果等于24的表达式。最经典的二十四点是从1到13的正整数以及+,-,*,/,括号。而不同的规则下可能包括：是否支持括号、是否按四则运算优先级、是否允许将数字调整顺序、是否允许分数（对于<code>5*(5-1/5)</code>如果支持分数那么这将能够得到<code>5*(24/5) = 24</code>，不允许分数的情况下<code>1/5</code>视为整除得到结果为0）、是否按四则运算优先级等变体。不过，不论如何变形，二十四点都是对四个数字和三个运算符进行搜索。本文将以最基本的：允许括号、允许调整数字顺序、允许使用分数的规则进行探讨。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，我们先定义我们的运算：加、减、乘、除、减于、除于。对于“减于”运算，a减于b即b减a，除于类似，a除于b即b除a，加入这样两个运算之后，我们就可以将所有二十四点的算式抽象成以下两种模式，假定运算数为<code>a,b,c,d</code>,运算符用<code>#</code>表示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li><code>((a # b) # c) # d</code></li><li><code>(a # b) # (c # d)</code></li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>那么，我们所需要的就是将4个数字与6个运算符分别填入<code>a,b,c,d</code>与三个<code>#</code>。本问题允许调整数字顺序，所以先使用递归把<code>a,b,c,d</code>的全排列分别放置到四个数字上，然后对6个符号逐个枚举。虽然存在a+b与b+a这样的等价情况，但我们估计一下，将四个数字的全排列以及三个符号全部枚举出来的运算量仅有\( 2 \times 4! \times 6^3 = 10368 \)，所以即使不需要对等价情况再做处理运算量也完全可以接受。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将我们的数字定义为<code>Number</code>类型，根据题目是否支持小数的规则我们将<code>Number</code>预设为<code>int</code>或<code>double</code>，定义<code>Number</code>类型的数组numberBucket[4]，分别用来做运算，运算符号用<code>char</code>类型进行抽象，用0,1,2,3,4,5分别表示我们定义的6种运算。先生成四个数字的全排列，并列出运算符号的所有情况。我们编写makeNumber()来生成全排列，当生成排列的数字已经是4个，再列举运算符，当运算符也列举出3个，此时就可以进行运算了，我们用expressionMode1()和expressionMode2()分别表示上边列的两种形式的运算，将列出来的数字与运算符逐一代入算式判断运算结果是否为24即可。由于规则支持分数，所以判断数字相等就不能使用<code>==</code>，而是使用浮点误差的<code>fabs()&lt;epsilon</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>// -std=c++11 or higher
+using Number = double;
+int num[4]; // input
+Number numberBucket[4];
+int used[4];
+int symbols[4];
+Number expressionMode1();
+Number expressionMode2();
+int isZero(Number x)
+{
+        const double epsilon = 1e-6;
+        return fabs(x)&lt;epsilon;
+}
+int makeOperator(int depth)
+{
+        if (depth==3){
+                return (isZero(expressionMode1()-24) || isZero(expressionMode2()-24));
+        }
+        for (int i=0;i&lt;6;i++){
+                symbols[depth] = i;
+                if ( makeOperator(depth+1) ){
+                        return 1;
+                }
+        }
+        return 0;
+}
+int makeNumber(int depth)
+{
+        if (depth==4){
+                return makeOperator(0);
+        }
+        for (int i=0;i&lt;4;i++){
+                if (used[i]==0){
+                        numberBucket[depth] = num[i];
+                        used[i]=1;
+                        if (makeNumber(depth+1)){
+                                return 1;
+                        }
+                        used[i]=0;
+                }
+        }
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>有了基本的搜索结构，剩下的便是编写<code>expressionMode()</code>以及主函数。在编写运算函数<code>expressionMode</code>的时候，要注意可能出现的除0问题，可以预定义一个较大的数字作为无限大的标记<code>INF</code>，一旦除0则返回值为<code>INF</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#define INF 0x7FFFFF
+Number calculate(Number a,Number b,int opIdx)
+{
+        if(opIdx==0){
+                return a+b;
+        } else if (opIdx==1){
+                return a-b;
+        } else if (opIdx==2){
+                return a*b;
+        } else if (opIdx==3){
+                return isZero(b)? INF: a/b;
+        } else if (opIdx==4){
+                return b-a;
+        } else{
+                return isZero(a)? INF: b/a;
+        }
+}
+Number expressionMode1(){
+        Number s= calculate(numberBucket[0],numberBucket[1],symbols[0]);
+        s = calculate(s,numberBucket[2],symbols[1]);
+        return calculate(s,numberBucket[3],symbols[2]);
+}
+Number expressionMode2(){
+        Number a1 = calculate(numberBucket[0],numberBucket[1],symbols[0]);
+        Number a2 = calculate(numberBucket[2],numberBucket[3],symbols[2]);
+        return calculate(a1,a2,symbols[1]);
+}
+int main(void)
+{
+        while(1){
+                for (int i=0;i&lt;4;i++){
+                        scanf(&quot;%d&quot;,num+i);
+                }
+                if(num[0]==0 &amp;&amp; num[1]==0 &amp;&amp;
+                        num[2]==0 &amp;&amp; num[3]==0 ){
+                        break;
+                }
+                memset(used,0,sizeof(used));
+                printf(&quot;%s\n&quot;,makeNumber(0)?&quot;YES&quot;:&quot;NO&quot;);
+        }
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>本题VJudge链接：<a href="https://vjudge.net/problem/OpenJ_Bailian-2787">https://vjudge.net/problem/OpenJ_Bailian-2787</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-14T03:48:52+09:00">
+      金 14 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

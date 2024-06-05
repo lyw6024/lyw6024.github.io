@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - ECNU 软工机试2019</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p128.html" rel="bookmark"
+         title="Permalink to ECNU 软工机试2019">ECNU 软工机试2019</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>软件工程学硕与专硕机试题，时长2.5小时</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> A. 约瑟夫问题 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>单点时限: 2.0 sec <br>内存限制: 512 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述：</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>“约瑟夫问题，怎么又是约瑟夫问题。” 我嘟囔着，心里却开始盘算阴谋。<br> 小学的开始，学数组的时候用 Pascal 写约瑟夫问题。<br> 初中的时候，学模拟的时候用 Pascal 写约瑟夫问题。<br> 高中的时候，学指针的时候用 C++ 写约瑟夫问题。<br> 本科的时候，学算法的时候用 Python 写约瑟夫问题。<br> 而现在，考场上，约瑟夫问题卷土重来，却好似没了以前的面目。<br> 你抱怨着从来没有听说过这个问题，所以我只能再给你讲一遍什么是约瑟夫问题：<br> N 个人围成一圈，每个人按照顺时针的顺序，标号为 1 到 N 。现在从标号为 1 的人开始按照顺时针的顺序报数，数到 M 的人出圈；再由下一个人从 1 开始重新报数，数到 M 的人出圈（需要注意的是，出圈的人将不在参与之后的报数）……<br> 你说你还是没有很清楚，所以我决定给你举一个例子：<br> 5 个人围成一个圈，每次报数为 2 的人将出圈。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><tbody><tr><th>报数序号</th><td>标号</td><td>所报的数</td><td>是否出圈</td></tr><tr><td>1 </td><td>1</td><td>1</td><td>否</td></tr><tr><td>2 </td><td>2</td><td>2</td><td>是</td></tr><tr><td>3 </td><td>3</td><td>1</td><td>否</td></tr><tr><td>4 </td><td>4</td><td>2</td><td>是</td></tr><tr><td>5 </td><td>5</td><td>1</td><td>否</td></tr><tr><td>6 </td><td>1</td><td>2</td><td>是</td></tr><tr><td>7 </td><td>3</td><td>1</td><td>否</td></tr><tr><td>8 </td><td>5</td><td>2</td><td>是</td></tr><tr><td>9 </td><td>3</td><td>1</td><td>否</td></tr><tr><td>10</td><td>3</td><td>2</td><td>是</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p> 所以出圈的顺序为：2、4、1、5、3。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>讲到这里，我的阴谋也基本成型了。现在，我会告诉你围成圈的一共有 N 个人，每次数到 M 的人将出圈，你需要 告诉我的是，第 K 个出圈的人的标号。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输入格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 数据第一行包含一个整数 T ，表示测试数据组数。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对于每一组测试数据，包含一行三个整数 N,M,K ，之间用空格隔开，意义参见题面 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p> 对于数据范围的约定：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p> • 对于 50%的数据，保证 \( 1 \leq K  \leq  N  \leq  100, 1  \leq   M  \leq  100,1  \leq  T  \leq  50 \);</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p> • 对于 80%的数据，保证  \(  1  \leq  K  \leq  N  \leq  10^5,1  \leq  M  \leq  10^5,1  \leq  T  \leq  50   \) ； </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>• 对于 100%的数据，保证  \(  1  \leq  K  \leq  N≤10^{18},1  \leq  M  \leq  10^{18},1  \leq  T  \leq  50 且 \min\{M,K\}≤10^6   \) 。 </p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输出格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 对于每组测试数据输出一行包含一个整数，表示答案。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 测试样例 1</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5
+5 2 1
+5 2 2
+5 2 3
+5 2 4
+5 2 5</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2
+4
+1
+5
+3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例2</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5
+10 3 5
+10 5 2
+10 1 8
+10 8 10
+5 6 1</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>7
+10
+8
+1
+1</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> B. 合法变量 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>单点时限: 1.0 sec <br>内存限制: 256 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>马上就要成为研究生了。我决定考考你对基础知识的掌握程度。 我会给你一个不包含空格或者其他空白字符的字符串，请判断是否是 C 语言合法的变量名称。 我保证给你的字符串一定不是 C 语言的保留字。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果一个字符串是 C 语言合法的变量名称，必须满足以下要求： </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><!-- wp:list-item -->
+<li> 非保留字。 </li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>只包含字母、数字及下划线（“_”）。 </li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>不以数字开头。 </li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输入格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 输入包含一行一个不包含空格或者其他空白字符的字符串，保证字符串的长度不超过 30 。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输出格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 一行，如果它是 C 语言的合法标识符，则输出 “yes” ，否则输出 “no” 。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>样例1</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>iloveyou</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>yes</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>样例2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>555_failed</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>no</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> C. 晚饭吃什么 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 单点时限: 1.0 sec <br>内存限制: 256 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 又到了吃晚饭的时间， dx 又来到了熟悉的二楼，面对着众多美食她的选择困难症又犯了。 这时 xxh 提出一个建议，食堂一共有 <code>m</code> 个窗口，将它们按照 <code>1,2,3,⋯,m </code>来排序。由 xxh 来选择一个数字 <code>n</code> ， dx 按 照 <code>1,2,3,⋯,m,1,2,⋯</code> 的顺序，直到第 <code>n</code> 个窗口就是 dx 今晚点餐的窗口。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>例：食堂一共有 7 个窗口， xxh 给出数字 9，则 dx 将在 2 号窗口点餐。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>dx 一口就答应了，但没想到 xxh 给的数字实在是太大了。 dx 根本数不过来，但又不甘心就这样放弃，请想想办 法帮助 dx 找到她今晚点餐的窗口编号。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输入格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>输入数据第一行包含一个整数 \( T ( 1 \leq T \leq 1000 ) \)，表示数据组数。 <br>接下来 T 行，每行包含两个整数\( n,m ( 2 \leq n \leq 10^{1000}, 2 \leq m \leq 10^8 ) \)，表示所选的数字和窗口数量 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p> 对于 10%的数据保证\( 2 \leq n  \leq  10^9 \) <br> 对于 30%的数据保证  \( 2  \leq  n  \leq  10^{18}   \) <br>对于 100%的数据保证 \(  2  \leq  n  \leq  10^{1000}   \) </p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输出格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 输出每行包含一个整数，表示 dx 今晚点餐的窗口编号。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例1</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2
+148 90
+183 50</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre> 58 33 </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例2</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5
+7660882 2070
+38198 9970
+4287 74680
+6108 3957955
+76712 15</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1882
+8288
+4287
+6108
+2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> D. 津津的数字压缩法 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 单点时限: 2.0 sec<br> 内存限制: 512 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 最近津津需要处理一大堆长长的数字，可是她却买不起大容量的 SSD 来存放这些数据。 在一顿深入思考、冷静分析后，津津想出来了这样一个压缩数字的方法： </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>譬如说，数字 1111122 可以被描述为“ 5 个 1 和 2 个 2 ”，所以可以被压缩为 5122 ；<br>又譬如，122344111 可被描述为”1 个 1 、2 个 2 、1 个 3 、2 个 4 和 3 个 1“，所以可以被压缩为 1122132431 。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>类似的道理， 1111111111 可以压缩为 101 ， 00000000000 可压缩为 110 ， 100200300 可压缩为 112012201320 。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>当然在很多情况下这样子压缩反而让数字边长了…但是津津才不管这些呢！ 所以我们的任务是帮助津津按照她的压缩方法压缩她给出的数据，毕竟她开心就好。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输入格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 输入仅一行，包含一个很长很长的非负整数 s （可能会出现前导 0 ）。 数据保证 s 的位数在 1 到 1000 之间。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输出格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 一行，对应的压缩结果。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例1</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>122344111</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1122132431</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例2</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>00000000000</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>110</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> E. 财务危机 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 单点时限: 1.0 sec<br> 内存限制: 256 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>小啵同学毕业之后决定创业。他招聘了 N 名员工，并且为每名员工都配备了一个办公室。 <br>好景不长，仅仅过了一个月，公司就陷入了财务危机。无奈之下，小啵决定只留下 M 个办公室。这也就意味着，所 有的员工需要重新安排办公室。 <br>小啵想知道有多少种不同的安排方法。 <br>请注意，小啵不允许有办公室空出来（否则他就可以租更少的办公室）；办公室没有编号；两个方案被认为是相同 的，当且仅当在两个方案中，每个人的办公室同事都是相同的。 <br>具体请参考样例解释。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输入格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>输入数据仅有一行，包含两个整数 N 和 M，表示员工数量和留下办公室的个数。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p> 对于 50% 的数据，保证\( 1 \leq N  \leq  10 \)<br> 对于 80% 的数据，保证 \(  1  \leq  N  \leq  10^3  \) <br>对于 100% 的数据，保证  \( 1  \leq  N  \leq  10^6  \) <br>对于所有数据均保证 \( 0  \leq  M  \leq  10^3 且 M  \leq  N   \) </p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输出格式 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>输出一个整数 P，代表所有的方案数。 答案可能很大，你只需要对答案模 \( 1000000007 (10^9+7) \)输出即可。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例1</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3 2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例2</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>4 3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>6</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 提示 </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在第一组样例中有 3 种方案：（1，23）（2，13）（3，12） </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在第二组样例中有 6 种方案：（1，2，34）（1，3，24）（1，4，23）（2，3，14）（2，4，13）（3，4，12） </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> F. 超越方程 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 单点时限: 3.5 sec<br> 内存限制: 256 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>求超越函数\( f(x)=k \cdot x^p−m^x \) ，其中\( k,m,p \in Z+,p \geq 2,m \geq 2 \) ,在闭区间中\( [a,b] \)的最大值。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":1360,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-59.png" alt="[Image]" class="wp-image-1360"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>当然，由于超越函数不具有良好的函数特性，比如：超越函数不一定是单调函数。 于是，为了简化问题，数据中保证 f(x) 在闭区间 [a,b] 中是一个单峰函数，也就是说函数 f(x) 在区间 [a,b] 上只有唯一 的最大值点 C ，而在最大值点 C 的左侧，函数单调增加；在点 C 的右侧，函数单调减少。 <br>是不是感觉很简单呢？ </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输入格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>第一行一个整数 t ，表示测试组数。 接下来 t 行，每行五个整数 k,m,p,a,b 。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>30% 数据满足 \( t=1 , 1 \leq k \leq 10 , 2 \leq m \leq 10 , 2 \leq p \leq 10 , 0 \leq a&lt;b \leq 10 \)<br> 50% 数据满足 \( 1 \leq t \leq 10 , 1 \leq k \leq 100 , 2 \leq m \leq 10 , 2 \leq p \leq 100 , 0 \leq a&lt;b \leq 10^3 \)<br> 70% 数据满足 \( 1 \leq t \leq 10^3 , 1 \leq k \leq 100 , 2 \leq m \leq 10 , 2 \leq p \leq 100 , 0 \leq a&lt;b \leq 10^3 \)<br> 100% 数据满足\(  1 \leq t \leq 10^4 , 1 \leq k \leq 10^6 , 2 \leq m \leq 10^3 , 2 \leq p \leq 10^6 , 0 \leq a&lt;b \leq 10^7 \)</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输出格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>共 t 行，每行一个小数 \( x_0 \) 满足\( a &lt; x_0 &lt; b \)， 且满足 f(x0) 是 f(x) 在闭区间 [a,b] 上的最大值。 你的答案和标准答案的绝对误差或相对误差在 \( 10^{-6} \) 之内就会被认为是正确的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1
+1 2 2 2 4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3.21243252</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 温馨提示</h4>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><!-- wp:list-item -->
+<li><code>long double</code> 最大范围约在 \( 10^{4932} \)，<code>long double</code> 输出请用 <code>prinf("%.8Lf\n",ans);</code>或者强制类型转换成 <code>double</code> 都输出。（for c &amp; c++）。</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li> <code>double</code> 最大范围约在 \(10^{308} \)，<code>double </code>输出请用 <code>prinf("%.8lf\n",ans);</code>（for c &amp; c++）。</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li> java 请使用 <code>java.math.BigDecimal</code> ，</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li> 读入数据量大，请使用 <code>scanf</code>（for c &amp; c++） 。</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li> 请一定要认真阅读输入数据的数据约定！！！！！</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"> G. 找数 </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 单点时限: 1.0 sec<br> 内存限制: 256 MB </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">问题描述</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>输入一个整数 n( \(2 \leq n \leq 10\) ) ，你需要找到一些 n 位数（允许有前置 0 ，见样例），这些 n 位数均 由 0 ~ n−1 这些数字组成。 并且每个数字恰好只出现一次。此外，这个 n 位数中前 \( n/2 \) 位数组成的数恰好是后  \( n/2 \)   位数组成的数的整 数倍。按从小到大的顺序输出所有满足条件的 n 位数。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading"> 输入格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>一个整数 n ( \(2 \leq n \leq 10\) 且 n 为偶数）。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">输出格式</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p> 每行输出一个 n 位数。 表示满足条件的所有 n 位数，按升序排序。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">测试样例</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Input</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Output</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"languageLabel":"no","mode":"null","mime":"text/plain","lineNumbers":false,"theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>01</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-03-25T11:00:00+09:00">
+      月 25 3月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

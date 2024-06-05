@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 平面区域分割问题的推理与证明</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2213.html" rel="bookmark"
+         title="Permalink to 平面区域分割问题的推理与证明">平面区域分割问题的推理与证明</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题1：直线分割平面问题</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>描述：</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>定义平面上的直线任意两条直线均不平行，并且没有多线共点（每个交点仅有两直线经过），则称这些直线“居于一般位置”。平面上有\(n\)条居于一般位置的直线，可将平面分割为\( A_n \)个区域，其中\(A_n \)满足：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\[  A_n = 1+ \frac{n(n+1)}{2} \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>分析：</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>当\( n\)非常小的时候，\(n=1\)时，将平面一分为二，\( A_1=2\)；\(n=2\)时则将两个平面分成4部分，\(A_2=4\)；\(n = 3\)时，将两直线分割的四个区域中的其中三个区域一分为二，也就是说将平面分成\(A_3=7\)部分。归纳猜想：对于平面上\(n-1\)条居一般位置的直线，再添加一条一般位置的直线可将平面增加\( n \)个区域。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果我们证明了这个猜想的正确性，那么可以得出一个递推公式，从而计算通项。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>证明：</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>既然直线居一般位置，添加一条直线不可能在区域的边界：这条直线或者将区域一分为二（这样就多出了一个区域），或者与这个区域不相交。<br />我们向已有\( n\)条直线的区域添加第\(n+1\)条直线，暂时先将第\(n\)条直线移走，那么新添加的这\(n+1\)条直线就起到了第\(n\)条直线的作用，根据假设这样平面上增加了\(n\)个区域。接下来把第\(n\)条直线放回去，只需要证明这第\(n\)条直线的存在使得第\(n+1\)条直线多出了一个区域。<br />既然所有直线都居于一般位置，第\(n\)条直线与第\(n+1\)条直线必然在某个区域\(R\)内交于点\(p\).于是这两条直线就都分割了区域\(R\)，每条直线单独把\(R\)分成两部分，同时两者也把区域\(R\)分成了4部分。因此，没有第\(n\)条直线的时候，添上第\(n+1\)直线的时候会把\(R\)区域多分出两部分而不是一部分，而且只有区域\(R\)与第\(n+1\)条直线有关，所以在没有第\(n\)条直线时，第\(n+1\)条直线会增加\(n\)个区域，而有第\(n\)条直线时第\(n+1\)条直线就会增加\(n+1\)个区域。<br />故证毕。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样我们证明了猜想的正确性，即\( A_{i} = A_{i-1} + i \)，且\(A_1 = 2\)，根据此递推表达式不难计算出通项。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题2：圆周的点分割圆区域问题</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>描述：</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>圆周上有n个不重合的点，将这n个点全部连接起来，连接时不经过已有的两弦的交点，这样可将圆周切分成最多\( F_n \)个区域，其中\( F_n \)满足：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\[ F_n=1+\frac{n(n-1)}{2} + \frac{n(n-1)(n-2)(n-3)}{24} \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>分析：</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>根据拓扑学中的欧拉公式在平面的应用，平面上\( E \)条边形成\( V \) 个顶点分割成\(F\)个面区域，满足\( V+F=E+2 \)（这里常数2即为<strong>欧拉示性数</strong>，在其它的拓扑结构中是其它值）。本问题中要计算目标为\( F\)，那么只需推导\( V=V(n) \) 与 \( E = E(n) \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>圆周上有\( n \)个点，首先将圆切分成n条边，然后任意两点都可以连接一条弦，所以首先形成了\(E(n)= n+\begin{pmatrix} n \\ 2 \end{pmatrix} \)条边。<br />顶点数首先是圆周上的\( n \) 个点，然后从圆周上任选4点的两条弦相交可以再构成一个顶点，所以顶点数为\(V(n)= n+\begin{pmatrix} n \\ 4 \end{pmatrix} \)。弦与弦相交形成的那些顶点会将弦一分为二，所以图形最终的边数应是 \(E(n)= n+\begin{pmatrix} n \\ 2 \end{pmatrix} +2   \begin{pmatrix} n \\ 4 \end{pmatrix}  \) 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>所以，可得到平面区域数量为：\[ F(n) = E(n)+2-V(n) =2+ \begin{pmatrix} n \\ 2 \end{pmatrix}  + \begin{pmatrix} n \\ 4 \end{pmatrix}    \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\( F(n) \)是被 \( V\)个顶点\( E \)条边所分割的平面区域的数量，其结果包含了圆外的一个区域，而所求的区域数量是圆内部的。所以，圆周上n个顶点连线可将圆最多分成的区域数量为：<br />\[ F_n  = 1 + \begin{pmatrix} n \\ 2 \end{pmatrix}  + \begin{pmatrix} n \\ 4 \end{pmatrix}  \]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-11T06:55:18+09:00">
+      火 11 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

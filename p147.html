@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - windows批处理之stderr重定向</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p147.html" rel="bookmark"
+         title="Permalink to windows批处理之stderr重定向">windows批处理之stderr重定向</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>我们知道，IO的标准数据流有三个，分别是stdin,stdout和stderr，分别表示标准输入，标准输出和标准错误。一般在控制台里这三者是显示在一起的，我们可以通过重定向将它们区别开。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>最近仿照spyder做了一个Haskell的简单的程序，左侧是代码，右边分为上下两部，上边是输入stdin，下边是控制台执行。预先写了一系列的执行指令放在批处理中，使用时调用批处理，并将批处理的执行结果显示在相应窗口。批处理中就是在做编译和运行程序的工作。例如</p>
+<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+if exist Main.exe rm Main.exe
+gcc Main.c -o Main.exe
+if exist Main.exe Main.exe<_in
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p>但是在使用时发现，只有在编译通过时，才可以显示出程序运行的结果。编译出错的话不会像在控制台那样把编译错误信息输出。这是因为以程序中取得的是标准输出流stdout，而编译出错时，错误信息是通过标准错误流stderr输出的，这是获取不到的。而在控制台中运行的时候，因为这些流都是显示在控制台界面上，所以看不出有区别。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>要在程序中能将stderr接收，解决方法之一就是文件重定向，这时的重定向不是文件，而是数据流（其实Unix系统下数据流也是文件，windows的重定向也是类似思想）。批处理语句的 "gcc Main.c -o Main.exe"如果正确执行是没有输出的，若输出了信息就应该是编译错误的信息stderr，我们可以把这一句重定向到标准输入流stdout。</p>
+<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+if exist Main.exe rm Main.exe
+gcc Main.c -o Main.exe 2>&1
+if exist Main.exe Main.exe<_in
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p>在原本的编译语句之后 加上 "2&gt;&amp;1"，这里1,2分别表示的是stdout和stderr，(相应的，0表示标准输入stdin但此处不使用)，则可将stderr重定向至stdout，这样在程序当中接收的是stdout的内容，而若出现了stderr也可以通过已重定向过的stdout流而被程序接收到。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-09-12T04:47:14+09:00">
+      木 12 9月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

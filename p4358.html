@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 间隔为2的幂次的翻页js实现</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4358.html" rel="bookmark"
+         title="Permalink to 间隔为2的幂次的翻页js实现">间隔为2的幂次的翻页js实现</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html","theme":"idea"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+div {
+ padding: 20px;
+}
+.page-links a.post-page-numbers {
+    padding: 7px 10px;
+    border: solid #6AA 2px;
+    border-radius: 4px;
+}
+.page-links span.post-page-numbers {
+    padding: 7px 10px;
+    border: solid #88D 2px;
+    border-radius: 20px;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;script&gt;
+
+function printPageHref(pi,gap) {
+        document.write(&quot;&lt;a href=\&quot;https://www.malic.xyz/archives/4298/&quot; + pi +&quot;\&quot; class=\&quot;post-page-numbers\&quot;&gt;&lt;ruby&gt; &quot;+ pi + &quot;&lt;rt&gt;&quot; + gap + &quot;&lt;/rt&gt;&lt;/ruby&gt;&lt;/a&gt;&quot;);
+}
+function listPageNext(curr,total)
+{
+        page = curr+1;
+        gap = 2;
+        while(page &lt; total ){
+                printPageHref(page,&quot;(+&quot; + (page-curr) + &quot;)&quot;);
+                page = Math.min(page + gap,total);
+                gap = gap * 2;
+        }
+        printPageHref(page,&quot;(+&quot; + (page-curr) + &quot;)&quot;);
+}
+
+function listPagePrev(curr)
+{
+        page = curr-1;
+        gap = 2;
+        arr = new Array();
+        while(1 &lt; page) {
+                arr.unshift(page);
+                page = Math.max(page - gap,1);
+                gap = gap * 2;
+        }
+        if(arr.indexOf(1) &lt; 0) {
+                arr.unshift(1);
+        }
+        for(k = 0;k&lt;arr.length;k++){
+                printPageHref(arr[k],&quot;(-&quot;+ (curr-arr[k]) + &quot;)&quot;);
+        }
+}
+
+totalPage = 21;
+
+function main(currp){
+        document.write(&quot;&lt;div class=\&quot;page-links\&quot;&gt;&quot;);
+        if(currp&gt;1){listPagePrev(currp);}
+        document.write( &quot;&lt;span class=\&quot;post-page-numbers current\&quot; aria-current=\&quot;page\&quot;&gt;&quot; + currp + &quot;&lt;/span&gt;&quot;);
+        if(currp&lt;totalPage){listPageNext(currp,totalPage);}
+        document.write(&quot;&lt;/div&gt;&quot;);
+}
+
+
+for(i=1;i&lt;=totalPage;i++) {
+main(i);
+}
+
+&lt;/script&gt;
+&lt;/html&gt;
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2023-06-19T07:36:00+09:00">
+      月 19 6月 2023
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

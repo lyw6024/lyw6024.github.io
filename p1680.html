@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 冷冻沙丁鱼 - 题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1680.html" rel="bookmark"
+         title="Permalink to 冷冻沙丁鱼 - 题解">冷冻沙丁鱼 - 题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题描述：</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>钓了N条沙丁鱼，每条沙丁鱼的美味度为A，鲜度为B。现要将沙丁鱼存放到冰箱里冷冻。但是沙丁鱼的冷冻是有特殊要求的：如果有两条沙丁鱼i,j的美味度和鲜度满足： \( A_i A_j + B_i B_j = 0 \)，则这两条鱼会急速腐化，导致整个冰箱中的鱼都坏掉，所以不能让这样的鱼同时冷冻在冰箱中。<br />分别给出N条沙丁鱼的美味度\( A_i \) 与鲜度 \( B_i \)，计算有多少种选法可以正常进行冷冻沙丁鱼而不致其腐化。(结果可能较大，所以输出对1000000007余的值）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\( 1 \le N \le 2 \times 10^5 \)<br />\( -2 \times 10^{18} \le A_i,B_i \le  2 \times 10^{18}  \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>题目序号<a href="https://vjudge.net/problem/AtCoder-abc168_e">abc168_e</a></p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:heading -->
+<h2>测试样例</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>输入1</h3>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">3
+1 2
+-1 1
+2 -1</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":3} -->
+<h3>输出1</h3>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">5</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":3} -->
+<h3>输入2</h3>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">10
+3 2
+3 2
+-1 1
+2 -1
+-3 -9
+-8 12
+7 7
+8 1
+8 2
+8 4</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading {"level":3} -->
+<h3>输出2</h3>
+<!-- /wp:heading -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">479</pre>
+<!-- /wp:preformatted -->
+<!-- wp:heading -->
+<h2>思路</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><em>\( (A_i,B_i)=(0,0) \)</em>的沙丁鱼会和任意的沙丁鱼组合都会腐化，就有只选一只<em>\( (A_i,B_i)=(0,0) \)</em>的沙丁鱼，和<em>\( (A_i,B_i)=(0,0) \)</em>一只都不选这两类，显然，前者的选法和<em>\( (A_i,B_i)=(0,0) \)</em>的沙丁鱼数量一样。接下来主要对后者情况讨论，即<em>\( (A_i,B_i) \neq (0,0) \)</em>. </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>    定义沙丁鱼的“斜率”为<em>\(\frac{A_i}{B_i} \)</em>，并且这个数值要表示为分数约分后的结果。 更具体的规则如下所示 </p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> <em>\( B_i=0\)</em>时，斜率为1/0 </li><li><em>\(B_i >0\)</em>时，斜率为<em>\(\frac{A_i}{\gcd(A_i,B_i)} / \frac{B_i}{\gcd(A_i,B_i)} \)</em></li><li> <em>\(B_i >0\)</em>时，斜率为<em>\(\frac{A_i}{\gcd(A_i,B_i)} / \frac{B_i}{\gcd(A_i,B_i)} \)</em> </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p> 以下的情况中描述了斜率和相互腐化的关系 </p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> 斜率1/0的沙丁鱼会与斜率为0/1的发生腐化，反之亦然 </li><li> 斜率为a/b( <em>\(a, b \neq 0\)</em> )的沙丁鱼会与斜率为-b/a的发生腐化，反之亦然 </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>  例如以下几组斜率是相互被腐化的 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><em>\[ 1/0 \leftarrow \rightarrow 0/1  \]</em><br /><em>\[ 5/3 \leftarrow \rightarrow -3/5  \]</em><br /><em>\[ 2/1 \leftarrow \rightarrow -1/2  \]</em></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 因此，可以使用组成“沙丁鱼腐化斜率数对”（共N个），把斜率出现的个数存储在关联数组（例如C++的map或Python的dict）当中，然后进行计数即可。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>请小心数据溢出。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>  由于此题<em>\( (A_i,B_i) \)</em>的数值可能很大，如果用相应的小数代替分数，即使是用long double精度仍然不够。 </p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-21T11:43:00+09:00">
+      木 21 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

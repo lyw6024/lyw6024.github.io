@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Racket 基本的数学运算</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p312.html" rel="bookmark"
+         title="Permalink to Racket 基本的数学运算">Racket 基本的数学运算</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>纯函数式编程语言不能用循环，一切这种结构都要改作递归实现</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>1.平方根（牛顿切线法）</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"fileName":"Racket","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#lang racket
+(define (sqrt x)
+  (define (good-enough? a b) (&amp;lt; (abs (- (* a a) b)) 0.00001))
+  (define (improve a b) (average a (/ b a)))
+  (define (average a b) ( / (+ a b) 2))
+  (define (_sqrt guess x)
+    (if (good-enough? guess x)
+        guess
+        (_sqrt (improve guess x) x)
+     ))
+  (_sqrt 1.0 x)
+)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>2. 判断质数</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"fileName":"Racket","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#lang racket
+(define (isPrime x)
+  (define (_isPrime idx x)
+    (define (&amp;lt;= a b) (or (&amp;lt; a b) (= a b)))
+    (define (inRange? j i) (&amp;lt;= (* j j) i))
+    (if (inRange? idx x)
+        (if (= (remainder x idx) 0)
+            #f
+            (_isPrime (+ idx 1) x)
+            )
+        #t
+        )
+     )
+  (if (&amp;lt; x 2)
+      #f
+  (_isPrime 2 x))
+)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>3. 求平方根（二分法）</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"fileName":"Racket","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#lang racket
+(define (sqrt x)
+  (define (good-enough? lwbd upbd)
+    (let ((epsilon 0.00001))
+      (&amp;lt; (abs (- upbd lwbd)) epsilon)
+      )
+    )
+  (define (f x) (* x x))
+  (define (_sqrt lwbd upbd x)
+    (let ((m (/ (+ lwbd upbd) 2)))
+      (if (good-enough? upbd lwbd)
+        m
+      (if (&amp;gt; (* (- (f lwbd) x)  (- (f m) x) ) 0)
+          (_sqrt m upbd x)
+          (_sqrt lwbd m x)
+      )
+     )
+    )
+   )
+  (_sqrt 0.0 x x)
+)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>4.分数的四则运算</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"fileName":"Racket","mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#lang racket
+(define (make-rat a b)
+  (let ((_a (abs a))
+        (_b (abs b))
+        )
+    (let ((_g (gcd _a _b)))
+      (if (&lt; (* a b) 0)
+      (cons (- (/ _a _g)) (/ _b _g))
+      (cons  (/ _a _g) (/ _b _g))))
+    )
+  )
+(define (numer f) (car f))
+(define (denom f) (cdr f))
+(define (output-rat s)
+  (display (numer s))
+  (display &quot;/&quot;)
+  (display (denom s))
+)
+(define (gcd x y)
+  (if (= (remainder x y) 0)
+      y
+      (gcd y (remainder x y))))
+(define (add-rat a b)
+  (let ((_n (+ (* (numer a) (denom b)) (* (numer b) (denom a))))
+        (_d (* (denom a) (denom b)) ))
+    (make-rat _n _d))
+  )
+(define (sub-rat a b)
+  (define (neg x) (make-rat (- (numer x)) (denom x)))
+  (add-rat a (neg b))
+)
+(define (mul-rat a b)
+  (let ((_n (* (numer a) (numer b)))
+        (_d (* (denom a) (denom b)))
+        )
+    (make-rat _n _d)
+    )
+  )
+(define (div-rat a b)
+  (define (reci x)
+    (make-rat (denom x) (numer x)))
+  (mul-rat a (reci b))
+  )
+(output-rat (add-rat (make-rat 3 5) (make-rat 1 2)))
+(newline)
+(output-rat (sub-rat (make-rat 4 5) (make-rat 1 7)))
+(newline)
+(output-rat (mul-rat (make-rat 2 5) (make-rat 1 2)))
+(newline)
+(output-rat (div-rat (make-rat 1 7) (make-rat 1 3)))
+(newline)
+           </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>5.对list的map和变长参数的imap</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"scheme","mime":"text/x-scheme"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+(define (map f h)
+  (if (null? h)
+      null
+      (cons (f (car h)) (map f (cdr h)))
+))
+(define (imap f . h)
+  (map f h)
+)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-01-03T06:35:22+09:00">
+      金 03 1月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

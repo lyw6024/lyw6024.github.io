@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - VS Code 配置LaTeX Workshop插件创造LaTeX编写环境</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1103.html" rel="bookmark"
+         title="Permalink to VS Code 配置LaTeX Workshop插件创造LaTeX编写环境">VS Code 配置LaTeX Workshop插件创造LaTeX编写环境</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:image {"id":1104,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-30-1024x555.png" alt="[Image]" class="wp-image-1104"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>微软的VS Code实在太好用了，丰富的插件集成在编辑器里，还能保持着以前自己的使用习惯，安装vim插件就可以按vim使用习惯操作，安装Remote ssh插件就可以直接编辑远程ssh上的文件。编写LaTeX当然也可以做到，安装LaTeX Workshop插件之后，最左侧的图标栏将会多出一个"TEX"图标，可以编译LaTeX文件，喜欢的话可以将编译后的pdf分屏展示在右侧，如上图所示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>实际上LaTeX编译有许多种，最普遍的英文LaTeX编译是pdflatex，由于最初TeX的设计者高德纳只考虑到ASCII字符，后来推出了支持UTF-8的xelatex，而其它的例如将LaTeX转成HTML的htlatex或生成dvi格式的tex就可能不需要配置。在安装插件之后如果不修改设置的话，就只能用pdflatex编译而不能用支持中文的xelatex。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>要进行设置，就找到Settings(Ctrl+,) 搜索关于LaTeX Recipes的内容</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1105,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-31.png" alt="[Image]" class="wp-image-1105"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>编辑Edit in settings.json。 我们现在希望的是以xelatex和pdflatex为主，其它的如latexmk的编译就暂时不需要了（会配置之后需要的时候可以再改配置文件）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先是编译工具，编译工具中除了xelatex和pdflatex还有很重要的文献bibtex，这一段的json如下所示</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"application/json"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&quot;latex-workshop.latex.tools&quot;: [
+  {
+    &quot;name&quot;: &quot;xelatex&quot;,
+    &quot;command&quot;: &quot;xelatex&quot;,
+    &quot;args&quot;: [
+      &quot;-synctex=1&quot;,
+      &quot;-interaction=nonstopmode&quot;,
+      &quot;-file-line-error&quot;,
+      &quot;-pdf&quot;,
+      &quot;%DOCFILE%&quot;
+    ]
+  },
+  {
+    &quot;name&quot;: &quot;pdflatex&quot;,
+    &quot;command&quot;: &quot;pdflatex&quot;,
+    &quot;args&quot;: [
+      &quot;-synctex=1&quot;,
+      &quot;-interaction=nonstopmode&quot;,
+      &quot;-file-line-error&quot;,
+      &quot;%DOCFILE%&quot;
+    ]
+  },
+  {
+    &quot;name&quot;: &quot;bibtex&quot;,
+    &quot;command&quot;: &quot;bibtex&quot;,
+    &quot;args&quot;: [
+      &quot;%DOCFILE%&quot;
+    ]
+  }
+]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>然后为了在插件中使用这些工具，再写入recipes:</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"application/json"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&quot;latex-workshop.latex.recipes&quot;: [
+  {
+    &quot;name&quot;: &quot;xelatex&quot;,
+    &quot;tools&quot;: [
+      &quot;xelatex&quot;
+    ],
+  },
+  {
+    &quot;name&quot;: &quot;pdflatex&quot;,
+    &quot;tools&quot;: [
+      &quot;pdflatex&quot;
+    ]
+  },
+  {
+    &quot;name&quot;: &quot;xe-&gt;bib-&gt;xe-&gt;xe&quot;,
+    &quot;tools&quot;: [
+      &quot;xelatex&quot;,
+      &quot;bibtex&quot;,
+      &quot;xelatex&quot;,
+      &quot;xelatex&quot;
+    ]
+  },
+  {
+    &quot;name&quot;: &quot;pdf-&gt;bib-&gt;pdf-&gt;pdf&quot;,
+    &quot;tools&quot;: [
+      &quot;pdflatex&quot;,
+      &quot;bibtex&quot;,
+      &quot;pdflatex&quot;,
+      &quot;pdflatex&quot;
+    ]
+  }
+]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>由于含参考文件时需要编译多次，所以如果带参考文献的LaTeX就可以直接使用后两个选项，点击1次就可以编译得到带正确序号参考文献的LaTeX文档。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1106,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-32.png" alt="[Image]" class="wp-image-1106"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>开始尝试使用LaTeX编写文档吧</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-18T06:06:54+09:00">
+      水 18 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

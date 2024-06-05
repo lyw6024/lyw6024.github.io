@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 进程与线程(1)：基本问题、进程控制、进程通信</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1793.html" rel="bookmark"
+         title="Permalink to 进程与线程(1)：基本问题、进程控制、进程通信">进程与线程(1)：基本问题、进程控制、进程通信</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>为了使参与并发执行的每个程序（及其数据）都能并发执行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（Process Control Block, PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。由程序段、相关数据段、PCB就构成了进程实体。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 id="%E5%85%B8%E5%9E%8B%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89">典型的进程的定义</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>进程是进程实体的运行过程，是系统进行资源分配和调度的一个独立单位。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 id="%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E5%8F%8A%E8%BD%AC%E6%8D%A2">进程状态及转换</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3 id="%E5%B0%B1%E7%BB%AAready">就绪(Ready)</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>进程已经处于好运行的状态</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 id="%E6%89%A7%E8%A1%8Crunning">执行(Running)</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>进程已经获得CPU，程序正在执行</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 id="%E9%98%BB%E5%A1%9Eblock">阻塞(Block)</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>正在执行的进程由于发生事件(如IO请求，申请缓冲区失败)暂时无法继续执行时的状态，进程执行受到阻塞。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 id="%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2">状态转换</h2>
+<!-- /wp:heading -->
+<!-- wp:image {"align":"center","id":1818,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/p1-1.png" alt="[Image]" class="wp-image-1818"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> 为了满足PCB对数据及操作的完整性要求以及增强灵活性，通常在系统中又引入了两种常见状态：创建和终止 </p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1819,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/p2-1.png" alt="[Image]" class="wp-image-1819"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2 id="%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">进程管理的数据结构</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>控制表的一般结构</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1807,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p3-1.png" alt="[Image]" class="wp-image-1807"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2 id="%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1">进程通信</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>进程之间要传送大量数据时，应当利用OS提供的高级通信工具，主要是OS隐藏了实现进程通信的具体细节，向用户提供了一组用于实现高级通信的命令，用户可以方便地直接利用它实现进程之间的通信。或者说通信过程是对用户透明的，这减少了通信程序编制的复杂性。利用高级通信命令可以高效地传送大量数据。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3 id="%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E7%B1%BB%E5%9E%8B">进程通信的类型</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>共享存储器系统<ul><li>相互通信的进程共享某些数据结构或共享存储区，进程之间利用这些空间进行通信。</li></ul></li><li>管道通信<ul><li>向管道(共享文件)提供输入的发送进程(写进程)以字符流形式将大量的数据送入管道，接收管道输出的接收进程(读进程)从管道中读数据。为协调双方通信，管道必须能够：互斥、同步、确定对方是否存在。</li></ul></li><li>消息传递系统<ul><li>以格式化的消息为单位，将数据封装在消息中，并利用OS提供的一组通信命令（原语）在进程间消息传递。</li></ul></li><li>客户机-服务器系统<ul><li>网络环境上的主流通信方式，主要有套接字、远程过程调用和远程方法调用。</li></ul></li></ul>
+<!-- /wp:list -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-06-15T14:27:00+09:00">
+      月 15 6月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

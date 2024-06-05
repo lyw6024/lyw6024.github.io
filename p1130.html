@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX字体、图表及其交叉引用、脚注</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1130.html" rel="bookmark"
+         title="Permalink to LaTeX字体、图表及其交叉引用、脚注">LaTeX字体、图表及其交叉引用、脚注</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>接下来，是一些更具体的文档结构。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>字体</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>每种字体都包含5种属性：编码、族、系列、形状、大小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>族：字体的概观样式</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\rmfamliy: 罗马字体</li><li>\sffamily: 无衬线字体</li><li>\ttfamily: 打字机字体</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>系列：字体的宽度和黑度</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\mdseries 中等黑度</li><li>\bfseries: 黑体</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>形状：字体的高矮倾斜</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\upshape : 直立</li><li>\itshape: 意大利斜体</li><li>\scshape: 小体大写字体</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>这些关于字体的命令都属于声明，在遇到新的同类命令之前会一起直作用。如果要限制作用范围，可以使用大括号或者环境。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上述的声明都对应着一个命令，功能一样但只对参数中的文本起作用。相应的命令形式为以text开头，后续两个字母是对应声明的前2个字母。如\textrm{},\textsf{},\texttt{},\textup{},...</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>强调：声明为\em，命令为\emph{}</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>字体大小的默认值可以在开头的\documentclass[10pt]{}设置，基本尺寸是10pt,11pt,12pt,默认值是10pt。在设定了基本之后，可以用声明改变字体大小</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>\tiny 5pt</li><li>\scriptsize 7pt</li><li>\footnotesize 8pt</li><li>\small 9pt</li><li>\normalsize 10pt</li><li>\large 12pt</li><li>\Large 14.4pt</li><li>\LARGE 17.28pt</li><li>\huge 20.74pt</li><li>\Huge 24.88pt</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>可以用\fontsize{字体尺寸}{行间距}\selectfont 来自定义字体大小，例如  <code>\fontsize{48pt}{\baselineskip}\selectfont</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>表格</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>指定一个表格，需要使用tabular环境：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{tabular}[竖向位置]{列格式}
+A1 &amp; B1 &amp; C1 &amp; D1 \\
+A2 &amp; B2 &amp; C2 &amp; D2 \\
+\end{tabular}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>竖向位置默认值为竖直居中，可以填入参数t或b分别表示上对齐或下对齐。列格式用于指定各列的格式，比如列线和对齐形式，常用l,c,r表示水平对齐形式，|,||表示列线。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>每行的单元格之间需要用'&amp;'分隔，行与行用'\\'分隔。使用\hline画横向分割线。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{tabular}{|c|c|c|c|}
+    \hline
+    AND &amp; 0 &amp; 1 \\
+    \hline
+    0 &amp; 0 &amp; 0\\
+    \hline
+    1 &amp; 0 &amp; 1 \\
+    \hline
+\end{tabular}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1143,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-42.png" alt="[Image]" class="wp-image-1143"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>合并单元格</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>多列合并时，使用 <code> \multicolumn{列数}{列格式}{内容}</code>。若要合并多行，需先导入宏包 <code>\usepackage{multirow}</code>，再使用<code>\multirow{行数}{宽度}[竖向位置]{内容}</code>。如果想让LaTeX自行决定宽度，就将宽度用'*'表示 。\hline作为行分界线仍会将multirow的单元格进行连线，这时可以使用<code>\cline{n-m}</code>从第n到m列画横向分隔线。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \multirow{5}{*}{0} &amp; \multicolumn{4}{|c|}{4}  \\
+    \cline{2-5}
+    ~ &amp; \multicolumn{2}{|c|}{0} &amp; \multicolumn{2}{|c|}{2} \\
+    \cline{2-5}
+     ~ &amp; 0 &amp; 1 &amp; 2 &amp; 3 \\
+    \cline{2-5}
+    ~ &amp; \multicolumn{2}{|c|}{0} &amp; \multicolumn{2}{|c|}{2} \\
+    \cline{2-5}
+    ~ &amp; \multicolumn{4}{|c|}{4}  \\
+    \hline
+\end{tabular}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1144,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-43.png" alt="[Image]" class="wp-image-1144"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>表格尺寸</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>用\renewcommand{\arrayscretch}{1.2}将表格各行之间的距离扩大到1.2倍，列间距可用\setlength{\tabcolsep}{3pt}将间距设为6pt（因为一个\tabcolsep是与另一个列的间距，两列之间的间距就是两倍的）。线条粗细 用\setlength设定\arrayrulewidth</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>图片</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>要在文档中加入图片，需要先导入宏包 <code> \usepackage{graphicx} </code>,可以插入图片，并进行裁剪缩放旋转。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>插入图片基本命令 \includegraphics[选项]{图片路径}<br />常用的选项有:width,height（可以指定其一，则另一项按比例缩放）scale缩放因子，bb图形边界，viewport（裁剪区域），angle（旋转角度）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在插图或者插入表格时如果当前页剩余空间不够，图表将会移到下一页，这时会出现很大的空白。可以使用浮动图表环境</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">\begin{figure}[位置] ... \end{figure}
+\begin{table}[位置] ... \end{table}</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>在浮动图表环境中，可以使用\caption命令为浮动图表添加标题并自动编号，插图和表格分别编号（对应的计数器分别为figure和table)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>要使多张图片并排，作为多个子图，可以先导入subfigure宏包，然后用<code>\subfigure[子标题]{figure}</code>表示1个子图</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\documentclass{article}
+\setlength{\textwidth}{16cm}
+\usepackage{graphicx,subfigure}
+\begin{document}
+\begin{figure}
+\subfigure[Fish1]{
+    \includegraphics[width=7cm]{img/g1.jpg}
+    \label{fig1a}
+}
+\hfill
+\subfigure[Fish2]{
+    \includegraphics[width=7cm]{img/g2.jpg}
+    \label{fig1b}
+}
+\caption{Touch fish}
+\end{figure}
+\end{document}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1148,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-44.png" alt="[Image]" class="wp-image-1148"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>在浮动图表中，<code>\label{标签名}</code>可以在正文中用<code>\ref{标签名}</code>引用，\ref会自动生成对应引用标签所指的编号。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>脚注</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>在需要注释的后边使用\footnote{脚注内容}，在排版时会生成一个脚注标记，同时脚注内容在当前页的底部。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>脚注标记通常是上标形式的数字，并自动编号：article文档类的全文脚注统一编号，book文档类每一章的脚注统一编号。脚注只能用在普通文本当中，不能在数学环境、表格等环境中。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-18T08:53:40+09:00">
+      水 18 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

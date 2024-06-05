@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 利用内存映射文件实现进程间图片轮播</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2052.html" rel="bookmark"
+         title="Permalink to 利用内存映射文件实现进程间图片轮播">利用内存映射文件实现进程间图片轮播</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>使用共享内存进行多进程通信是最快的IPC(Inter-Process Communication)方式，往往与信号量配合使用，在<a href="https://www.malic.xyz/archives/387">另一篇文章</a>当中已经展示过相关的代码，但是可用性不高，因为如果需要向内存写入时可以同时读出数据，会导致展示图片数据错乱。与信号量的配合使用则能够解决这个问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，C++程序作为图片发送端，即向共享内存中写入图片。轮流地打开imageName数组中的图片写入共享内存区域pBuf，pBuf[0]到pBuf[3]作为信号量而保留，图片数据从pBuf[4]开始写。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>图片的读取和流程控制在C#进行，流程中仅使用pBuf[0]与pBuf[1]作为信号量，分别表示是否继续读取和是否完成写入。</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>pBuf[0]为1表示读取继续进行，若不再需要读取，则置pBuf[0]为0，则C++程序会退出while循环，回收共享内存的资源。</li><li>pBuf[1]为0表示C++程序正在将图片信息写入到内存映射文件，此时C#不应读取其内容，待C++读取完毕置pBuf[1]为1，C#程序则可以开始从内存映射文件中读取数据转换成图片。</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p> 将C++程序进行编译，生成应用程序（例如名为readLoop.exe，这需要在C#中指定）然后编写C#的winform工程，并使用<code>BackgroundWorker</code>的多线程方式启动这个应用程序。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;windows.h&gt;
+const char *imageName[] = {
+        &quot;11683053441969795147.jpg&quot;,
+        &quot;0b3cdd7308f340bead962c992b4b2fd4.jpg&quot;,
+        &quot;18639d5b1f7e40dfbfad6b3bd9c407e9.jpg&quot;,
+        &quot;37d4448ad3f14b48901ff3b90c33eaea.jpg&quot;,
+        &quot;495d3b575da64966b3ca3574c3e2c4ea.jpg&quot;,
+        &quot;589a971d0a7f4814be6926d0076ecaba.jpg&quot;,
+        &quot;678bf3bfa3554393b2b3e784f257325f.jpg&quot;,
+        &quot;a4743b26cf0f46dfaf1f42d06611601c.jpg&quot;,
+        &quot;aaa930ba51e3480c805f8fb82734069b.jpg&quot;,
+        &quot;d9e43b03a7364fb3849cd3ef0cd840fc.jpg&quot;,
+        &quot;dd3801e0bb084537b505ca3fcd301f8e.jpg&quot;,
+        &quot;eac81c422041458c95fb8d8cb31ba1bf.jpg&quot;
+        };
+#define BUF_SIZE 360000
+const char szName[] = &quot;fm01&quot;;
+int main(void)
+{
+        char Root[] = &quot;E:\\imgSample\\&quot;;
+        char fileName[50];
+        int idx = 0,i;
+        FILE *fp;
+        HANDLE hMapFile = CreateFileMapping(
+                INVALID_HANDLE_VALUE,
+                NULL,
+                PAGE_READWRITE,
+                0,
+                BUF_SIZE,
+                (LPCSTR)szName
+                );
+        char *pBuf = (char*)MapViewOfFile(
+                hMapFile,
+                FILE_MAP_ALL_ACCESS,
+                0,
+                0,
+                BUF_SIZE
+                );
+        pBuf[0]=1;
+        while(pBuf[0]==1)
+        {
+                printf(&quot;p[0]:%d\t&quot;,pBuf[0]);
+                strcpy(fileName,Root);
+                strcat(fileName,imageName[idx]);
+                idx++;
+                if(idx&gt;11)
+                {
+                        idx=0;
+                }
+                printf(&quot;%s\n&quot;,fileName);
+                fp = fopen(fileName,&quot;rb&quot;);
+                pBuf[1]=0;
+                i=4;
+                while(fscanf(fp,&quot;%c&quot;,&amp;pBuf[i])!=EOF)
+                {
+                        i++;
+                }
+                pBuf[i]=0;
+                pBuf[1]=1;
+                Sleep(50);
+                fclose(fp);
+        }
+        UnmapViewOfFile(pBuf);
+        CloseHandle(hMapFile);
+        printf(&quot;end\n&quot;);
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.IO;
+using System.IO.MemoryMappedFiles;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.ComponentModel;
+using System.Diagnostics;
+namespace client_csharp
+{
+    public partial class Form1 : Form
+    {
+        const int BUF_SIZE = 360000;
+        BackgroundWorker bg1;
+        Image pic,lastPic;
+        int frameCount;
+        byte[] charsInMMf;
+        public Form1()
+        {
+            InitializeComponent();
+            bg1 = new BackgroundWorker();
+            bg1.WorkerReportsProgress = true;
+            bg1.WorkerSupportsCancellation = true;
+            bg1.DoWork += new DoWorkEventHandler(doworks);
+            bg1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(runcomplete);
+            bg1.ProgressChanged += new ProgressChangedEventHandler(progresschanged);
+        }
+        private void doworks(Object sender,DoWorkEventArgs args)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = &quot;readLoop.exe&quot;;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.Start();
+            lastPic = null;
+            waitForOpenFm();
+            flush(sender as BackgroundWorker);
+        }
+        private void waitForOpenFm()
+        {
+            while (true)
+            {
+                try
+                {
+                    MemoryMappedFile.OpenExisting(&quot;fm01&quot;);
+                    break;
+                }
+                catch
+                {
+                    // still not open
+                    Thread.Sleep(50);
+                }
+            }
+            return;
+        }
+        private void flush(BackgroundWorker worker)
+        {
+            using (var mmf = MemoryMappedFile.OpenExisting(&quot;fm01&quot;))
+            {
+                MemoryMappedViewAccessor viewAccessor = mmf.CreateViewAccessor(0, BUF_SIZE);
+                charsInMMf = new byte[BUF_SIZE];
+                frameCount = 0;
+                while (true)
+                {
+                    while(true)
+                    {
+                        if (viewAccessor.ReadByte(1)==1)
+                        {
+                            break;
+                        }
+                        Thread.Sleep(10);
+                    }
+                    viewAccessor.ReadArray&lt;byte&gt;(4, charsInMMf, 0, BUF_SIZE);
+                    pic = Image.FromStream(new MemoryStream(charsInMMf));
+                    worker.ReportProgress(0);
+                    frameCount += 1;
+                    if (worker.CancellationPending)
+                    {
+                        viewAccessor.Write(0, 0);
+                        break;
+                    }
+                    Thread.Sleep(50);
+                }
+            }
+        }
+        private void runcomplete(Object sender, RunWorkerCompletedEventArgs args)
+        {
+        }
+        private void progresschanged(Object sender, ProgressChangedEventArgs args)
+        {
+            if(lastPic!=null)
+                lastPic.Dispose();
+            pictureBox1.BackgroundImage = pic;
+            lastPic = pic;
+            label1.Text = frameCount.ToString();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bg1.RunWorkerAsync();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bg1.CancelAsync();
+        }
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-18T10:14:44+09:00">
+      土 18 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

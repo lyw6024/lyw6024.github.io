@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C++可调用对象包装器:std::function探析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2883.html" rel="bookmark"
+         title="Permalink to C++可调用对象包装器:std::function探析">C++可调用对象包装器:std::function探析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> 在C语言的时代，我们可以使用函数指针来吧一个函数作为参数传递，这样我们就可以实现回调函数的机制，例如我们编写一个函数<code>f</code>，将函数<code>do_sth</code>作用于<code>x1</code>,<code>x2</code>两个变量，并返回得到作用的结果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>int f( do_sth, x1,x2);</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>f的返回值将回依据传入函数<code>do_sth</code>的不同而得到不同的结果，例如<code>x1</code>与<code>x2</code>要进行四则运算，则只需要将<code>do_sth</code>分别传入为加减乘除四个运算函数即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>然而，函数的定义方法却五花八门，可以定义为函数，也可以定义成函数对象类，这样就导致使用统一的方式保存可调用对象或者传递可调用对象时，会十分繁琐。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>// 普通函数
+int add(int a, int b){return a+b;}
+// lambda表达式
+auto mod = [](int a, int b){ return a % b;}
+// 函数对象类
+struct divide{
+    int operator()(int denominator, int divisor){
+        return denominator/divisor;
+    }
+};</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>虽然定义形式各不相同，但是这些函数都是同样的调用模式，即传入int与int，运算后得到int，即</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int(int,int)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>std::function</code>就可以将上述类型保存起来，如下： </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>std::function&lt;int(int, int)&gt;  a = add;
+std::function&lt;int(int, int)&gt;  b = mod ;
+std::function&lt;int(int, int)&gt;  c = divide(); </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>std::function 是一个可调用对象包装器，是一个类模板，可以容纳除了类成员函数指针之外的所有可调用对象，它可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟它们的执行。std::function可以取代函数指针的作用，因为它可以延迟函数的执行，特别适合作为回调函数使用。它比普通函数指针更加的灵活和便利。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 使用std::function前，需要<code>#include &lt;functional></code>带上头文件 。 通过<code>std::function</code>对C++中各种可调用实体（普通函数、lambda表达式、函数指针、以及其它函数对象等）的封装，形成一个新的可调用的<code>std::function</code>对象；让我们不再纠结那么多的可调用实体。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"align":"center"} -->
+<h2 class="has-text-align-center">参考来源 &amp; 延伸阅读</h2>
+<!-- /wp:heading -->
+<!-- wp:list {"ordered":true} -->
+<ol><li><a rel="noreferrer noopener" aria-label="std::function::function（在新窗口打开）" href="http://cplusplus.com/reference/functional/function/function/" target="_blank">std::function::function</a>  </li><li><a rel="noreferrer noopener" aria-label="C++11 中的std::function和std::bind（在新窗口打开）" href="https://www.jianshu.com/p/f191e88dcc80" target="_blank">C++11 中的std::function和std::bind</a> </li><li><a rel="noreferrer noopener" aria-label="C++ 之std::function() 作为函数参数入口 详解（在新窗口打开）" href="https://blog.csdn.net/p942005405/article/details/84755007" target="_blank">C++ 之std::function() 作为函数参数入口 详解</a> </li><li><a rel="noreferrer noopener" aria-label="C++服软C#系列 —— std::function（在新窗口打开）" href="https://blog.csdn.net/a1875566250/article/details/39956057" target="_blank">C++服软C#系列 —— std::function</a> </li><li><a href="https://www.cnblogs.com/heartchord/p/5017071.html" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">std::function</a> （各类调用实体在模板中的用法）</li></ol>
+<!-- /wp:list -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-12-18T07:48:56+09:00">
+      金 18 12月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

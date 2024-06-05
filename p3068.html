@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2021年寒假热身赛 5</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3068.html" rel="bookmark"
+         title="Permalink to 2021年寒假热身赛 5">2021年寒假热身赛 5</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:html -->
+<blockquote class="wp-block-quote" style="font-style:normal;"><p><strong>踏莎行·候馆梅残</strong></p><p>[宋]欧阳修</p>
+<p>候馆梅残，溪桥柳细。<br />草薰风暖摇征辔。<br />离愁渐远渐无穷，迢迢不断如春水。</p>
+<p>寸寸柔肠，盈盈粉泪。<br />楼高莫近危阑倚。<br />平芜尽处是春山，行人更在春山外。 </p></blockquote>
+<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> # 未完成，简单说说思路</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>A. <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/426278#problem/A" target="_blank">进位制变换</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>由于数字最多1000位，并且可能是36进制，所以要自己编写运算。用字符串表示数字，实现字符串与数字的整除与取模运算即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>B. <a href="https://vjudge.net/contest/426278#problem/B" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">乘积为整数</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 小数点后可能有9位，那么两个小数点后都是9位的数字相乘则精度会超过double允许的类型，所以可以将小数转化为分数 .</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>因为从小数化为分数，分数的分母都是从\( 10^L \)开始，并可能被约分，最后分母只剩\(2^a5^b\)的形式，也就是说如果要将一个数字的分母\( 2^a⋅5^b\)约去，只需要看这个数字的分子与另一个数字的分子之积是否含有\(2^a⋅5^b\)的因子，其它的因子都不会有影响 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 这样，在本题中，我们将每个数字用\( (a,b) \)&nbsp;描述，对应于\( 2^a⋅5^b\)。若两数相乘为整数，则两数&nbsp;\(2^a⋅5^b\)&nbsp;与&nbsp;\(2^c⋅5^d\)的乘积是&nbsp;\(2^{a+c}⋅5^{b+d}\)，即\( (a+c,b+d) \)&nbsp;，若有\( a+c≥0 \) &nbsp;and&nbsp;\( b+d≥0\) ，则两数之积为整数。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>C.  <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/426278#problem/C" target="_blank">蛤蟆吐球消消乐</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>按题意说的做就行。本题进行插入和删除操作，就可以利用C++ STL的vector实现。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/jShd/">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>D.  <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/426278#problem/D" target="_blank">楼高莫近危阑倚</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>先DFS找到树根（唯一没有父结点的那个）。然后维护一个树状数组，或者线段树，则在\( O(N \log(N)) \)的时间内解决。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>E.  <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/contest/426278#problem/E" target="_blank">TA也超级加倍?</a> </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>\( \lceil \frac{N}{2^a3^b5^c} \rceil \)  和 \( \lfloor \frac{N}{2^a3^b5^c} \rfloor \) </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>F.<a href="https://vjudge.net/contest/426278#problem/F" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）"> 上下文无关文法</a></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>动态规划</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-03-13T09:05:00+09:00">
+      土 13 3月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

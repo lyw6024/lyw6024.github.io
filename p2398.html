@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 上楼梯问题 - Advanced</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2398.html" rel="bookmark"
+         title="Permalink to 上楼梯问题 - Advanced">上楼梯问题 - Advanced</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Alice想登上N阶的楼梯，每一步Alice可以上一阶也可以上两阶，问登上N阶楼梯总共有多少种方法。稍有编程基础就知道这符合Fibonacci数列，因为Alice上N阶楼梯的走法F(n) 等于它走N-1阶的方案与N-2阶的方案之和，即F(n) = F(n-1) + F(n-2)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>现在Bob也想上N阶的楼梯，每一步Bob可以上一阶、两阶、三阶、...，M阶，这时登上N阶楼梯共有多少种方法。类似的，有\( F(n) = \sum_{i=1}^{M} F(n-i) \)。Alice的走法就是Bob的走法当M=2的情形。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来才是要重点讨论的内容：Cindy要登上N阶的楼梯，每一步能上1,2,...,M阶，但是Cindy这一步跨的阶数不能与上一步相同，试问恰好上到第N阶有多少种方案。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果M为1，那么N大于1时Cindy永远无法登上。M若为2，则Cindy只能[1,2,1,2,...]或[2,1,2,1,...]，如果N是3的正整数倍，那么Cindy就有两种方案，否则就只有1种方案。M若是大于2的情况，我们就需要用一个方法保存上一步的走法。用数组<code>d[i][k]</code>表示一个状态，表示Cindy走了k步到第i阶，那么在走k步之前的状态是<code>d[i-k][...]</code>，要求相邻两步不能相同，也就是<code>d[i-k][j]</code>的所有j不为k的情况，即 \( d[i][k] = \sum_{j=1,j \neq k}^{M} d[i-k][j] \).要计算Cindy到第i阶的方案数，就是把所有的可能的k累加：\( \sum_{k=1}^{M} d[i][k] \)。在写程序实现时要注意阶梯数小于M与大于等于M时的<code>d[i][k]</code>的计算有细微区别：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int dp(int M,int N)
+{
+        int i,j,k;
+        for(i=1;i&lt;=M;i++)
+        {
+                d[i][i]=1;
+                for(k=1;k&lt;i;k++)
+                {
+                for(j=1;j&lt;i;j++)
+                {
+                        if(j!=k)
+                        {
+                                d[i][k] += d[i-k][j];
+                        }
+                }}
+        }
+        for(i=M+1;i&lt;=N;i++)
+        {
+                for(k=1;k&lt;=M;k++)
+                {
+                d[i][k] = 0;
+                for(j = 1;j&lt;=M;j++)
+                {
+                        if(i&gt;k &amp;&amp; j!=k)
+                        {
+                                d[i][k] += d[i-k][j];
+                        }
+                }
+                }
+        }
+        int res=0;
+        for(int i=1;i&lt;=M;i++)
+        {
+                res+=d[N][i];
+        }
+        return res;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>Dave想登上一个有N阶的楼梯，每一步可以走1,2,..,M阶，但是Dave跨过的阶数不能与之前的两步相同，问恰好上到第N阶有多少种方案。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>// TODO 这有点难</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-09-04T09:46:13+09:00">
+      金 04 9月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

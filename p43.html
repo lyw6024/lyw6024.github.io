@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [SPOJ-CANTON]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p43.html" rel="bookmark"
+         title="Permalink to [SPOJ-CANTON]">[SPOJ-CANTON]</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>找规律并输出...</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+using std::lower_bound;
+#define MAXN 4472
+int accu[MAXN];
+void init()
+{
+        int i;
+        accu[0]=1;
+        for(i=1;accu[i-1]&amp;lt;10000000;i++)
+                accu[i]=accu[i-1]+(i+1);
+}
+void solver()
+{
+        int x;
+        int *p;
+        scanf(&quot;%d&quot;,&amp;amp;x);
+        p=lower_bound(accu,accu+MAXN,x);
+        //printf(&quot;%d in level %d with d=%d\n&quot;,x,p-accu,x-accu[p-accu-1]);
+        if((p-accu)%2==0)
+        {
+                printf(&quot;TERM %d IS %d/%d\n&quot;,x,(2+p-accu)-(x-accu[p-accu-1]),x-accu[p-accu-1]);
+        }
+        else
+        {
+                printf(&quot;TERM %d IS %d/%d\n&quot;,x,x-accu[p-accu-1],(2+p-accu)-(x-accu[p-accu-1]));
+        }
+}
+int main(void)
+{
+        int N;
+        scanf(&quot;%d&quot;,&amp;amp;N);
+        init();
+        while(N--)
+        {
+                solver();
+        }
+        return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-07-03T09:16:33+09:00">
+      水 03 7月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

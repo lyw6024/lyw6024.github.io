@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 字符串前缀问题：Trie树</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2394.html" rel="bookmark"
+         title="Permalink to 字符串前缀问题：Trie树">字符串前缀问题：Trie树</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>Trie树主要是解决字符串前缀的搜索问题，例如最短前缀、某个前缀所含的字符串数等等。这是一种为解决一类字符串问题的树，与用于查找的树结构不同的是，Trie树需要在树的边上保存数据，这样组织一棵Trie树就需要有边节点和顶点节点。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>一个Trie树是多叉树，根结点为空，树的边表示一个字母，顶点保存字符串状态数据，最简单的字符串的状态就是到此顶点是否有字符串完结。例如给出两个单词car与cartoon。从根结点开始，插入一个新结点，根结点到这个结点的边表示字母<code>c</code>，然后再新建结点，由上一个结点到这个新结点的边为<code>a</code>，然后再新增一个结点，由上一个结点到这个结点的边为字母<code>r</code>，由于单词<code>car</code>后续已经结束，所以这个新结点的字符串状态应表示为<code>"有字符串完结"</code>，对于cartoon，由于前3个字母car已经可以沿着树的边找到，所以不需要再新增结点，只需要对后4个字母新增结点并设置相应的边即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>基本的Trie树包括插入（建树）和搜索。这类问题一般是将一系列的数据逐个插入到树中，建立起这一组数据的前缀信息，然后查询或者搜索相应的前缀。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>具体而言，使用这样的结构作为边和顶点：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>struct EdgeNode
+{
+        char letter;
+        int ToVertex;
+};
+struct VertexNode
+{
+        std::vector&lt;EdgeNode&gt; childs;
+        bool EndHere;
+        int tollStation;
+};
+std::vector&lt;VertexNode&gt; Tree;
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这里的<code>VertexNode</code>使用<code>vector&lt;EdgeNode> </code>表示顶点所连的边，<code>Endhere</code>表示是否有字符串在这里终止，<code>tollStation</code>（收费站）来记录有多少个字符串经过了这个结点。Edge保存了它所表示的字母<code>letter</code>和它指向的结点编号<code>ToVertex</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>整个Trie树使用<code>std::vector&lt;VertexNode> Tree</code>表示，首先将一个空VertexNode结点插入到Tree中，作为树根Tree[0]。插入操作为：对于待插入字符串的每一个字符，首先将它经过的结点的<code>tollStation</code>加一，然后再检查它是否存在相应路径能对应到这个字符，如果存在就将树继续向之后的顶点进行检查，如果顶点的所有边都不存在相应字符，则新建一个顶点，新建一条边指向这个新顶点，使这条边的字符是字符串上相应位置的字符。直到字符串读到末尾，将边的“EndHere”状态置为1.</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>void insertWord(char* msg)
+{
+        int vid = Tree.size();
+  // start to root
+        int currId = 0;
+        for(int i=0;msg[i];i++)
+        {
+                bool needMakeNewNode = true;
+                Tree[currId].tollStation ++;
+                VertexNode currVertexNode = Tree[currId];
+      // all edge of this vertex
+                for(int ei = 0;
+                        needMakeNewNode &amp;&amp; ei&lt;currVertexNode.childs.size();
+                        ei++)
+                {
+          // if the letter of this edge == msg[i]
+          // move vertex to this edge pointing.
+                        if(msg[i] == currVertexNode.childs[ei].letter)
+                        {
+                                currId  = currVertexNode.childs[ei].ToVertex;
+                                needMakeNewNode = false;
+                                break;
+                        }
+                }
+                // if no letters of edges equal the msg[i]
+      // then, make a new edge and new vertex
+                if(needMakeNewNode)
+                {
+                        EdgeNode e;
+                        e.letter = msg[i];
+                        e.ToVertex = vid;
+                        Tree[currId].childs.push_back(e);
+                        VertexNode v;
+                        v.EndHere = false;
+                        v.tollStation = 0;
+                        Tree.push_back(v);
+                        currId = vid;
+                        vid++;
+                }
+        }
+  // msg read over, set end = true;
+        Tree[currId].tollStation ++;
+        Tree[currId].EndHere = true;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>另一项操作为搜索，给出一个字符串，判断以它作为前缀的单词数量。有些情况下要考虑这个前缀并不存在树中。如果给出的前缀字符串能在树中找到，我们输出它的tollStation值即可，如果不在树中则输出0.</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int search(char* msg)
+{
+        int currId = 0;
+        int InTree = true;
+        int ei;
+        for(int i=0; InTree &amp;&amp; msg[i];i++)
+        {
+                VertexNode currVertexNode = Tree[currId];
+                for(ei = 0;
+                        ei&lt;currVertexNode.childs.size();
+                        ei++)
+                {
+                        EdgeNode e = currVertexNode.childs[ei];
+                        if(e.letter==msg[i])
+                        {
+                                currId = e.ToVertex;
+                                break;
+                        }
+                }
+                if(ei==currVertexNode.childs.size())
+                {
+                        InTree = false;
+                }
+        }
+        if(InTree)
+        {
+                return Tree[currId].tollStation;
+        }
+        else
+        {
+                return 0;
+        }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>与Trie树相关的两题：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/problem/HihoCoder-1014" target="_blank">https://vjudge.net/problem/HihoCoder-1014</a>  (<a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="http://lab.malic.xyz/pastebin/SQEe/" target="_blank">参考代码</a>)</li><li> <a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="https://vjudge.net/problem/OpenJ_Bailian-2797" target="_blank">https://vjudge.net/problem/OpenJ_Bailian-2797</a>  (<a rel="noreferrer noopener" aria-label="（在新窗口打开）" href="http://lab.malic.xyz/pastebin/XC4d/" target="_blank">参考代码</a>)</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-09-03T09:52:33+09:00">
+      木 03 9月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

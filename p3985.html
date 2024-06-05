@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Minecraft中投两次末影之眼定位要塞</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3985.html" rel="bookmark"
+         title="Permalink to Minecraft中投两次末影之眼定位要塞">Minecraft中投两次末影之眼定位要塞</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在Minecraft中使用末影之眼可以寻找要塞。击杀末影人获得的末影珍珠与烈焰粉各1个可合成一颗末影之眼。一般末影珍珠的爆率不高，找到要塞之后进入下界门也需要16只末影之眼，所以更要节省着使用。如何花费尽量少的末影之眼来找到要塞呢，接下来我们使用坐标系变换将要塞的坐标计算出来。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先，回忆一点数学知识：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><!-- wp:list-item -->
+<li>已知平面直角坐标系的两条不平行的直线，可以求出其交点。利用的是联立两直线方程得到方程组并求其解，两直线不平行则此方程组有且仅有唯一解，此解即是两直线在平面直角坐标系的交点。</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>已知平面一点的坐标和横轴正方向的夹角能唯一确定一条射线，并且可以求出此射线所在直线的方程。<br>利用的是直线的斜率为此夹角的正切值，将已知点代入直线的点斜式方程即可得到直线方程。</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>这些都是基础数学常识，我们可以在Minecraft中看一下。<br>在游戏中按F3(默认快捷键)，可以看到左上和右上出现了非常多的数据。我们只需要关心左上角的"XYZ"一行，以及Facing一行即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>XYZ这一行展示出了我们的坐标，其中y表示高度，所以我们只需要看x和z，而Facing一行最末的括号中是我们的方向，以“方向角/仰角”的格式，我们也只需要看水平的方向角。我们可以在一个地方扔出一颗末影之眼，扔出之后准星对着末影之眼飞出的方向。这样，既有平面坐标(x,z)，又有一个夹角，从而确定一条从当前点到要塞连线的射线，<br>换个地方再扔一次，就得到另一条射线。我们对这两条射线所在的直线联立方程组进行求解，便可以计算出要塞的坐标。可以尝试一下：利用点斜式方程\( z-z_0=tan(\theta)(x-x_0) \)，代入联立并解得一个坐标，这个坐标并不是要塞坐标。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>数学中惯用的坐标系是\(xy\)逆时针坐标系。过原点的射线与x轴正半轴的夹角绕原点向逆时针增加的。<br>即沿着夹角为0的射线出发使\(x\)值增大。且夹角为\(90\)度时，使\(y\)值增大。<br>而Minecraft中的方向角为\(0\)时会使\(z\)方向增大，夹角为\(90\)度时使\(x\)值减小。<br>说明Minecraft中的坐标系是\(zx\)顺时针坐标系，构建直线方程就不能直接使用我们的结论。<br>不过我们可以将此\(zx\)顺时针坐标系下变换为\(xy\)逆时针坐标系，再沿用基础数学结论。<br>对于\(zx\)坐标系，我们记变换后的坐标系为\(x'y'\)逆时针坐标系。<br>变换矩阵为</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{pmatrix} x' \\ y' \\ \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \\ \end{pmatrix} \begin{pmatrix} z \\ x \\ \end{pmatrix} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这样\(z\)正方向的顺时针夹角\(\theta\)在\(x'y'\)坐标系下便是x'正方向的逆时针夹角，与数学上惯用的平面直角坐标一致。<br>将输入的\(zx\)坐标变换为相应\(x'y'\)，求出直线交点\( (x',y') \)，再逆变换得到 \(x\)与\(z\)的值，即是要塞所在的位置。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>至于投出两次末影之眼的地点，要使两次夹角相差不能太小，由于两夹角的正切值之差在计算时作为分母出现，若此差值过小，则误差可能非常大。<br>一般是在投出一次之后，向末影之眼指示方向垂直的方向行动一段距离。但若距离过大，可能导致这两次末影之眼分别定位至不同的要塞，则计算无效。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>例如：<br>站立的坐标为\((x,z)=(-815,-247) \)，投出一颗末影之眼，此时方向角为\( 42.6^\circ \)<br>移动至\( (x,z)=(-746,-55)\),再投一颗末影之眼，得到方向角为\( 52.1^\circ \)<br>变换至\(x'y'\)坐标下，对应两夹角不变，两点的坐标分别为\((247,-815),(55,-746)\)<br>则两直线方程分别为</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{cases}<br>y'+815  &amp;=\tan(42.6^\circ)(x'-247) \\<br>y'+746  &amp;=\tan(52.1^\circ)(x'-55) \\<br>\end{cases} \]<br>解得</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{cases}x' &amp; =-617.42 \\ y' &amp;=-1609.76 \\ \end{cases}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从而原坐标系下坐标为</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{cases}<br>x &amp;=y' &amp;= -1609.76 \\<br>z &amp; =-x' &amp; =617.42 \\<br>\end{cases} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>验证一下，在拥用权限游戏中使用命令"/locate stronghold"查看最近的要塞位置，结果为</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&quot;The nearest stronghold is at [-1608,~,632]&quot;(1102 blocks away)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>结果还是比较可观的，跑到算出的坐标下应该不难挖到地牢从而找到要塞。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-03-05T11:50:15+09:00">
+      土 05 3月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

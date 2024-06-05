@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 算23 [EOlymp - 1540]题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p101.html" rel="bookmark"
+         title="Permalink to 算23 [EOlymp - 1540]题解">算23 [EOlymp - 1540]题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>给5个数字，判断这5人数通过加减乘法运算后能否算出23</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 解法很多，数据量不是特别大，所以直接搜索解空间（生成数组的全排列，然后遍历所有的运算）也能正确解答。<br />使用递归解决：给出了5个数，假设它的某个排列是[x1,x2,x3,x4,x5]，要判断用这5个数计算23，只需要判断用[x1,x2,x3,x4]能否计算出23-x5,或能否算出23+x5，或者在23被x5整除的情况下能否算出23/x5（这分别代表[..]+5=23,[..]-5=23与[..]×5=23），这样问题的规模就减小到4个数。<br />再递归的做下去：用[x1,x2,x3]能否算出(23-x5)-x1，或者能否算出(23-x5)+x1,或是(23-x5)被x1整除的情况下能否算出(23-x5)/x1...最后当数组规模只剩1的时候，直接判断要计算的目标是不是数组里的这个数字即可，并且对初始的5个数的所有排列形式都分别递归。只要有任何一个递归函数最终达到了[x1]==计算目标，就返回true，将所有递归结果用“逻辑或”相连接。&nbsp; </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+void swap(int *x,int *y)
+{
+    if(*x!=*y)
+    {
+        *x^=*y;
+        *y^=*x;
+        *x^=*y;
+    }
+}
+int f(int target,int *a,int N)
+{
+    int i,j;
+    if(N==1)
+        return a[0]==target;
+    int *b;
+    bool pr,mr,tr=false;
+    b=new int [N];
+    for(i=0;i&lt;N;i++)
+    {
+        for(j=0;j&lt;i;j++)
+            b[j]=a[j];
+        for(j=i+1;j&lt;N;j++)
+            b[j-1]=a[j];
+        pr=f(target-a[i],b,N-1);
+        mr=f(target+a[i],b,N-1);
+        if(target%a[i]==0)
+            tr=f(target/a[i],b,N-1);
+        if(pr||mr||tr)
+            break;
+    }
+    delete [] b;
+    return pr||mr||tr;
+}
+int main(void)
+{
+    int i,a[5];
+    bool bf;
+    while(1)
+    {
+        bf=true;
+        for(i=0;i&lt;5;i++)
+        {
+            scanf(&quot;%d&quot;,a+i);
+            if(a[i]&gt;0)
+                bf=false;
+        }
+        if(bf)
+            break;
+        if(f(23,a,5)==true)
+            printf(&quot;Possible\n&quot;);
+        else
+            printf(&quot;Impossible\n&quot;);
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-06-09T11:58:43+09:00">
+      日 09 6月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

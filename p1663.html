@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - python 利用dict构造多重集合multiset类</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1663.html" rel="bookmark"
+         title="Permalink to python 利用dict构造多重集合multiset类">python 利用dict构造多重集合multiset类</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>python有set()结构，但是set不允许重复元素出现。如果我们的任务像优先队列那样经常访问最大最小值，那么使用set要比list快。而字典dict的键是set组织的，我们利用data作为key，出现次数作为value可以自己构造一个multiset类。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对照C++的multiset类，设计以下的方法：构造；元素个数，是否为空；修改：插入，删除，清空；取值：最大、最小、计数、存在性.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于python不能做函数重载，所以没有对multiSet的构造函数添加从其它数据结构的构造方法。但可以视需要再添加。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于使用字典的值表示键的出现次数，若要求多重集合的元素数可以遍历整个字典的值并累加，但如果字典的键比较多并且访问集合元素数比较频繁，这一步是相当耗时的，所以额外定义一个变量专门保存整个多重集合的大小。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>修改集合需要插入、删除和清空。插入时检查当前键是否存在于字典中，若存在则相应值+=1，否则建立这个键并赋值为1。删除操作类似地，检查待删除元素是否存在于字典中，若不存在则什么也不做。存在时若此值为1则删除此键，否则此值自减1。清空操作则是将字典置空并将集合大小置0.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>取数操作有最大、最小、查找、计数。直接对字典取max是取的键的最大值，这恰与我们所需相符。字典的键本身是set组织的，用关键字in查找是O(logN)的复杂度，比线性表快。count同样是O(logN)的复杂度。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class multiSet:
+    def __init__(self):
+        self.container = {}
+        self.capSize = 0
+    # capacity
+    def size(self):
+        return self.capSize
+    def isEmpty(self):
+        return self.capSize==0
+    # modifiers:
+    def insert(self,v):
+        self.capSize+=1
+        if(v in self.container):
+            self.container[v]+=1
+        else:
+            self.container[v]=1
+    def remove(self,v):
+        if v in self.container:
+            self.capSize-=1
+            if(self.container[v]==1):
+                del self.container[v]
+            else:
+                self.container[v]-=1
+    def clear(self):
+        self.capSize = 0
+        self.capacity = {}
+    # Operations:
+    def max(self):
+        return max(self.container)
+    def min(self):
+        return min(self.container)
+    def find(self,v):
+        return v in self.container
+    def count(self,v):
+        if v in self.container:
+            return self.container[v]
+        else:
+            return 0
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-21T05:08:00+09:00">
+      木 21 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

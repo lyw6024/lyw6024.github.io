@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Haskell混合数字类型的运算</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p553.html" rel="bookmark"
+         title="Permalink to Haskell混合数字类型的运算">Haskell混合数字类型的运算</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>Num是数字类型，可以进行数字所支持的运算。在Num类的类成员中还有Int, Integer, Float, Double这些类，这些类成员同样可以执行运算，比如对于乘法，函数签名为</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Prelude&gt; :t (*)
+(*) :: Num a =&gt; a -&gt; a -&gt; a</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>说明这个乘法运算在Num约束下的类型a进行，对于两个a类型的运算得到一个a类型的结果。例如</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Prelude&gt; 20*1.5
+30.0
+Prelude&gt; :t (20*1.5)
+(20*1.5) :: Fractional a =&gt; a</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p> 其它四则运算的函数签名与乘法的函数签名类似。不过要注意的是，参与运算的必须是相同的Num约束的类型，例如必须是Int与Int相乘，而若是使用Int与Integer相乘就会出错：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Prelude&gt; (5::Int)*(6::Int)
+30
+Prelude&gt; (5::Int)*(6::Integer)
+&lt;interactive&gt;:13:11:
+    Couldn't match expected type ‘Int’ with actual type ‘Integer’
+    In the second argument of ‘(*)’, namely ‘(6 :: Integer)’
+    In the expression: (5 :: Int) * (6 :: Integer)
+    In an equation for ‘it’: it = (5 :: Int) * (6 :: Integer)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>将两运算数5和6分别视为Int和Integer类型，这个*运算就会因为类型与签名无法匹配而报错。而更多的是有Floating参与的情况因为经常需要整数与小数相乘，如果不是常数（数字会认为是Num类型，自动进行类型推导）那么不同类型之间就无法进行运算。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Integral是整数数字的类型约束，Int和Integer都是其类成员，Floating是浮点数的类型约束，Float和Double都是其类型成员。如果我们有几个函数结果的类型不同，而这些类型之间需要运算，对于Integral的整数类就需要用将之转换为Num类</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Prelude&gt; :t fromIntegral
+fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>fromIntegral会将Integral类约束的a类型转换为Num约束的b类型，在参与运算时，Num类型与Num约束下的类型就可以合理的进行类别推导，从而完成运算。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Prelude&gt; (5::Int)/(3.2::Double)
+&lt;interactive&gt;:21:11:
+    Couldn't match expected type ‘Int’ with actual type ‘Double’
+    In the second argument of ‘(/)’, namely ‘(3.2 :: Double)’
+    In the expression: (5 :: Int) / (3.2 :: Double)
+    In an equation for ‘it’: it = (5 :: Int) / (3.2 :: Double)
+Prelude&gt; (fromIntegral (5::Int))/(3.2::Double)
+1.5625
+Prelude&gt; :t (fromIntegral (5::Int))/(3.2::Double)
+(fromIntegral (5::Int))/(3.2::Double) :: Double</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>fromIntegral将Int类转化为Num类，而Num类与Double进行运算时类型会推导成Double与Double的运算，结果为Double类，就可以实现不同类型数据之间的运算。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>最后用一个实例，运用一下fromInteger，用于计算一个浮点数的数值与这个数字的字符长度之比：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main = do
+    line&lt;-getLine
+    let value = read line :: Double
+    let strLen = length $ line
+    print $ (value) / (fromIntegral strLen)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-02-29T01:49:59+09:00">
+      土 29 2月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

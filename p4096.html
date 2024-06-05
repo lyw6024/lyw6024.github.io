@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2019热身赛05</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4096.html" rel="bookmark"
+         title="Permalink to [voj] 2019热身赛05">[voj] 2019热身赛05</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a href="https://vjudge.net/contest/286793" target="_blank" rel="noreferrer noopener">https://vjudge.net/contest/286793</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.摆仙果 &nbsp;模拟</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>用正确序列分别和三人的摆放方式比较，计录每人摆放正确的数量，可以用取余的方式将输入序列和相应的循环节比较。求出最大的数量并输出。然后分别看Adrian,Bruno,Goran摆放正确的数量是否是最大数量，若是则输出名字。<br><a href="http://p.malic.xyz/sjSc/" target="_blank" rel="noreferrer noopener">查看A题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.品仙宴&nbsp;排序</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>如果只用数组保存，那么原序列的下标就不能体现，可以用结构体保存，一个结构体中包含有下标（表示客人序号）和等菜的时间。对上菜时间排序后，依次输出下标即可。<br><a href="http://p.malic.xyz/FpTf/" target="_blank" rel="noreferrer noopener">查看B题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.找仙人&nbsp;模拟</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>可以对每个参加游戏的人被叫到的号做一下统计，若是奇数则说明在场内，偶数说明不在场内。如果顺次查找时间达O(N^2)，可能超时。若先排序再数相邻元素中数值相同的则O(N*logN)可以通过。<br>或者使用C++ STL的set结构，叫到一个号码，若在不在set中就插入之，否则在队内就把它删去，set结构查找插入删除都是O(logN)的时间，所有N次操作是O(N*logN)的时间。最后输出这个set的size()即可。<br>用python的话可以用List的操作append()和pop(index()),对应set的插入和删除操作，但list操作时间长，可能个别测试点超时。所以，可以用collections库的Counter函数将list转为统计出现次数的字典，把全部数字append到列表当中，用Counter统计出现次数是奇数的数字个数。<br><a rel="noreferrer noopener" href="http://p.malic.xyz/35nb/" target="_blank">参考代码(C++)</a> <a rel="noreferrer noopener" href="http://p.malic.xyz/DAic/" target="_blank">参考code(C++,STL)</a>  <a rel="noreferrer noopener" href="http://p.malic.xyz/UAP/" target="_blank"><a rel="noreferrer noopener" href="http://p.malic.xyz/DAic/" target="_blank">参考</a>code(Python)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.采仙草&nbsp;动态规划</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>与经典背包问题完全一样，这里不再赘述。<br><a href="http://p.malic.xyz/rKrf/" target="_blank" rel="noreferrer noopener">查看D题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.炼仙丹&nbsp;深度优先搜索</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>数学模型就是小于等于T的正整数中，有多少个数字仅含7,5,3并且7,5,3三个数都有。最小的一个显然是357，次大的是375。给具有这种性质的数字起个名字就叫“357数”。如果一个数字仅含3,5,7，但可能不全含有，我们给这种性质的数字称为“偏357数”。如果k是357数，那么给k后边续一位3，或者5，或者7的时候，它们仍然是357数。如果k是“偏357数”,也是可能形成357数的，比如3335，后续一位7仍然能形成"357数"。<br>我们记下一个“偏357数”的三个状态：含有3，含有5，含有7。函数f(int k,bool r3,bool r5,bool r7) 表示一个"偏357数"或"357数"k,当r3与r5与r7都是true时,k是357数，否则是偏357数。<br>如果k不大于T，为它后续一个3并令r3=true，后续5并令r5=true,后续7并令r7=true，这样新得到的数k*10+3，k*10+5,k*10+7就是新的"偏357数"或"357数"，就是调用要f(k*10+3,true,r5,r7),f(k*10+5,r3,true,r7),f(k*10+7,r3,r5,true).每次调用f()先看k的三个标志位是否全为true，若是则增加计数。直到当k超过T时结束判断，输出357数的计数结果。<br>除了用三个变量分别标明状态，还可以用一个数字作为标志位。r3,r5,r7表示分别用二进数001B，010B，100B表示，每次得到新的数就用标志进行按位或运算flag|1,flag|2,flag|4，当标志位flag是111B=7的时候说明此数是357数。<br><a rel="noreferrer noopener" href="http://p.malic.xyz/grpe/" data-type="URL" data-id="http://p.malic.xyz/grpe/" target="_blank">查看E题参考代码(C++)</a> <a rel="noreferrer noopener" href="http://p.malic.xyz/5Cuf/" target="_blank">参考代码（Python）</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>F.读仙书&nbsp;递归</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>生成这个序列，N最大是50，要生成第50个书柜中的完整的顺序串，是一个1.3×10<sup>11</sup>位的字符串，每个字符占1字节的话，需要11.7GB来存储这个字符串。即便将a,b两状态压缩成1bit，也仍需要1.47GB。显然不可行。<br>记第N个书柜中的摆放形式是b[N]，则N>1时，b[N]=b[N-2].b[N-1]（这里'.'运算表示字符串的直接连接），并且b[N]的长度F[N]等于b[N-1]的长度与b[N-2]的长度之和，即F[N]=F[N-2]+F[N-1]。要求b[N]的第k个字符，只需要看k和F[N-2]的关系。若k不大于F[N-2]，说明b[N]的第k本就是b[N-2]的第k本，否则它就是b[N-1]的第k-F[N-2]本。<br>这样可以一直从N向下计算到N=0或1时书柜中只有1本书，若是b[0]则输出'a'，若是b[1]则输出'b'。<br><a href="http://p.malic.xyz/4Nbc/" data-type="URL" data-id="http://p.malic.xyz/4Nbc/" target="_blank" rel="noreferrer noopener">参考代码(C++)</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T06:40:33+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 线性方程组求解器 [Linear Equation Solver]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p394.html" rel="bookmark"
+         title="Permalink to 线性方程组求解器 [Linear Equation Solver]">线性方程组求解器 [Linear Equation Solver]</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>求解线性方程Ax=B，其中A是N*N的矩阵，B是有N个元素的列向量。若可解则输出唯一解，或输出"multiple"，无解时输出"inconsistent"。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+题目链接： <br /><a href="https://open.kattis.com/problems/equationsolver">https://open.kattis.com/problems/equationsolver</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果必然有解，用行列式法很容易。行列式的定义就符合递归，非常简洁地就可以实现对行列式的求解.例如用Python用二维列表a表示行列式，则求行列式的值det(a)就可以设计成：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def det(a):
+    if len(a)==1:
+        return a[0][0]
+    res = 0
+    sign = 1
+    for i in range(len(a)):
+        subMat = []
+        for j in range(1,len(a)):
+            subLine = []
+            for k in range(len(a)):
+                if k!=i:
+                    subLine.append(a[j][k])
+            subMat.append(subLine)
+        res += sign*a[0][i]*det(subMat)
+        sign = -sign
+    return res</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>但是此题可能出现行列式为0的情况，当行列式为0时，可能无解，可能有多解，这就需要处理矩阵A，在矩阵变换过程中，若出现某一行全为0，若此时这一行对应的增广矩阵的对应元素不是0，则必然无解，对应元素是0则是多解（如果有多行都是全0，只要有一行对应增广矩阵不是0就是无解的）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>几乎是无可避免的要处理矩阵A，按照如下方法：将A通过交换与行变换形成上三角矩阵（在此过程中可以判断是否是多解或无解，只有唯一解才能化成三角矩阵），然后将矩阵单位化。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>main()函数可以写为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#define MAXN 107
+double Mat[MAXN*MAXN];
+double BMat[MAXN];
+int main(void)
+{
+    int N;
+    char zeroColumnFlag;
+    while(1)
+    {
+        scanf(&quot;%d&quot;,&amp;N);
+        if(N==0)
+            break;
+        readMat(N);
+        zeroColumnFlag = solveMat(N);
+        if(zeroColumnFlag)
+        {
+            InvalidStatus(N);
+        }
+        else
+        {
+            identityMatrix(N);
+            outputResult(N);
+        }
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>然后逐步把各函数按照数学方法设计完成即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>void readMat(int N)
+{
+    int i;
+    for(i=0;i&lt;N*N;i++)
+    {
+        scanf(&quot;%lf&quot;,Mat+i);
+    }
+    for(i=0;i&lt;N;i++)
+    {
+        scanf(&quot;%lf&quot;,BMat+i);
+    }
+}
+void outputMat(int N)
+{
+    int i,j;
+    for(i=0;i&lt;N;i++)
+    {
+        for(j=0;j&lt;N;j++)
+        {
+            printf(&quot;%9.3f&quot;,Mat[i*N+j]);
+        }
+        printf(&quot;\t%9.3f\n&quot;,BMat[i]);
+    }
+    printf(&quot;\n&quot;);
+}
+int isZero(double x)
+{
+    const double epsilon = 0.00000001;
+    if(fabs(x)&lt;epsilon)
+        return 1;
+    else
+        return 0;
+}
+void swapElem(double *a,int i,int j)
+{
+    double tmp = a[i];
+    a[i]=a[j];
+    a[j]=tmp;
+}
+void swapLine(int N,int k1,int k2)
+{
+    int i;
+    for(i=0;i&lt;N;i++)
+    {
+        swapElem(Mat,k1*N+i,k2*N+i);
+    }
+}
+void upperTriangularMat(int i,int N)
+{
+    int k1,k2;
+    for (k1=i+1;k1&lt;N;k1++)
+    {
+        double rate = Mat[k1*N+i]/Mat[i*N+i];
+        BMat[k1] -= rate *BMat[i];
+        for(k2=i;k2&lt;N;k2++)
+        {
+            Mat[k1*N+k2] -= rate*Mat[i*N+k2];
+        }
+    }
+}
+void identityMatrix(int N)
+{
+    int i,j;
+    for ( i=N-1;i&gt;=0;i--)
+    {
+        double rate = 1/Mat[i*N+i];
+        BMat[i] = rate*BMat[i];
+        Mat[i*N+i] = 1;
+        for (j=0;j&lt;i;j++)
+        {
+            BMat[j] -= BMat[i]*Mat[j*N+i];
+            Mat[j*N+i]=0;
+        }
+    }
+}
+void InvalidStatus(int N)
+{
+    int i,j;
+    double s,*p;
+    for (i=0;i&lt;N;i++)
+    {
+        s=0;
+        p = Mat+i*N;
+        for(j=0;j&lt;N;j++)
+        {
+            s+=p[j]*p[j];
+        }
+        if(isZero(s) &amp;&amp; !isZero(BMat[i]))
+        {
+            printf(&quot;inconsistent\n&quot;);
+            return ;
+        }
+    }
+    printf(&quot;multiple\n&quot;);
+    return ;
+}
+int solveMat(int N)
+{
+    int i,k1;
+    int zeroColumnFlag=0;
+    for(i=0;i&lt;N;i++)
+    {
+        zeroColumnFlag = 1;
+        for (k1 = i;k1&lt;N;k1++)
+        {
+            if(!isZero(Mat[k1*N+i]))
+            {
+                swapLine(N,k1,i);
+                swapElem(BMat,k1,i);
+                zeroColumnFlag = 0;
+                break;
+            }
+        }
+        if(zeroColumnFlag)
+        {
+            break;
+        }
+        else
+        {
+            upperTriangularMat(i,N);
+        }
+    }
+    return zeroColumnFlag;
+}
+void outputResult(int N)
+{
+    for (int i=0;i&lt;N;i++)
+    {
+        if(i&gt;0)
+            printf(&quot; &quot;);
+        printf(&quot;%.5lf&quot;,BMat[i]);
+    }
+    printf(&quot;\n&quot;);
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-02-08T08:36:53+09:00">
+      土 08 2月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - markdown快速使用手册</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1757.html" rel="bookmark"
+         title="Permalink to markdown快速使用手册">markdown快速使用手册</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>vs code的插件是非常丰富，像markdown这样使用广泛的标记型语言，vs code上自然少不了它的插件。利用 <code>Markdown All in One </code>插件在VS Code中写markdown比typora还要爽，它能够以代码编辑的同时分屏即时预览效果，而不需要切换代码和预览模式。在VS Code中还可以同时使用其它插件来找到更适合自己喜欢的输入模式（例如VS Code的Vim插件，则能够以vim输入模式编辑markdown）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1758,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-114-1024x555.png" alt="[Image]" class="wp-image-1758"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>当然了，不论是用Typora还是VS Code的markdown插件还是其它markdown编辑器，其语法都是一致的。接下来将介绍markdown一些最常用的标记。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>标题结构</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>标题结构有两种形式，一种是在下一行用一串'='或'-'分别表示上边这行文字是一级标题和二级标题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>一级标题1
+=========
+上边这行是一级标题
+二级标题1
+--------
+用一串'='可标记一级标题，一串'-'可标记二级标题
+二级标题2
+--------
+即使只有1个'='或'-'也能够进行标题的标记，但一般为了直观还是输入一串。
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1760,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-116.png" alt="[Image]" class="wp-image-1760"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>还可以用'#' 作为前缀表示这一行的文字是标题，'#'的个数可以由1到6，分别表示一级标题到六级标题</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre># 编程入门
+学编程
+## 学习Basic
+Basic起源早
+### Smile Basic
+任天堂3DS和Switch可以用SmileBasic自己编写游戏
+#### 循环语句
+要让代码重复运行就要用循环
+##### FOR循环
+其中一种循环形式就是FOR语句
+###### 嵌套形式
+FOR可以嵌套使用，但不能交叉。
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1761,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-117.png" alt="[Image]" class="wp-image-1761"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>文本格式</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>markdown的文本直接编写就可以。要换行时直接使用Enter换行是不能分行的。换行的时候有两种：一是只换行（新行的行间距仍等于段内行距），这种换行是先输入两个空格再输入换行。另一种是分段（间距为段间距），这种是通过连续两个换行，即在两行文字间多插入一个空白行实现的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果需要显式的分割线，则可以在一个空白行中输入三个以上的'*'或'-'（注意前后需要有空白行，不然输入的多个'-'会将上一行的文字识别成二级标题）</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在文段中需要斜体的文字，可以在其前后使用'*'包括起来，或者使用下划线'_'将之包括起来。粗体则用前后各2个'*'符号，或各2个"_"。使用3个则为加粗斜体。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>删除线可用前后两个波浪线'~'包括起来。Markdown没有简记的下划线记法，不过Markdown支持简单的HTML记法，可以用&lt;u&gt;&lt;/u&gt;标记下划线。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>农桑辑要
+========
+果实·种梨插梨附(节选)
+-----------
+梨既生，杜旁有*叶出*，辄去之。_不去_ 势分，梨长必迟。凡插梨，园中者，__用旁枝__；庭前者，中心。旁枝，**树下** 易收；中心，上耸不妨。用根蒂小枝，树形可憘，五年方结子。鸠脚老枝，三年即结子，而树丑。《 ***吴氏本草*** 》曰：金创，乳妇，不可食梨。~~梨多食则损人，非补益之物~~。产妇蓐中，及疾病未愈，食梨多者，无不致病。咳逆气上者，尤宜慎之。凡远道取梨枝者，下根即烧三四寸，亦可行数百里犹生。
+----
+藏梨法 :初霜后即收。&lt;u&gt;霜多则不得经夏也&lt;/u&gt;。于屋下掘作深窨引坑，底无令润湿；收梨置中，不须覆盖，便得经夏。摘时必令好接，勿令损伤.
+凡醋梨，易水熟煮，则甜美而不损人也。
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1762,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-118.png" alt="[Image]" class="wp-image-1762"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>列表</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有序列表使用<code>数字+'.'+空格</code>。无序列表可以使用'*','+','-'作为前缀并加一个空格的形式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>多级列表只需要加缩进即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>唐宋八大家
+==========
+1. 唐代
+    + 韩愈
+    + 柳宗元
+99. 宋代
+    * 三苏
+        - 苏轼
+        - 苏洵
+        - 苏辙
+    * 欧阳修
+    * 王安石
+    * 曾巩
+    </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1764,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-119.png" alt="[Image]" class="wp-image-1764"/><figcaption>即使代码中在宋代前写的是99，markdown也会按顺序自动索引（此特性因环境设置而异）</figcaption></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>引用块与代码块</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>引用块使用一个<code>'&gt;'+空格</code>表示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>会稽山上，云朵淡淡的像是水墨画中轻抹上去的一半；越州城外，衰草连天，无穷无际。城门楼上的号角声，时断时续。在北归的客船上，与歌妓举杯共饮，聊以话别。
+回首多少男女间情事，此刻已化作缕缕烟云散失而去。眼前夕阳西下，万点寒鸦点缀着天空，一弯流水围绕着孤村。
+&gt; 山抹微云，天连衰草，画角声断谯门。暂停征棹，聊共引离尊。
+&gt; 多少蓬莱旧事，空回首、烟霭纷纷。斜阳外，寒鸦万点，流水绕孤村。
+悲伤之际又有柔情蜜意，心神恍惚下，解开腰间的系带，取下香囊。徒然赢得青楼中薄情的名声罢了。
+此一去，不知何时重逢？离别的泪水沾湿了衣襟与袖口。正是伤心悲情的时候，城已不见，万家灯火已起，天色已入黄昏。
+&gt; 销魂当此际，香囊暗解，罗带轻分。谩赢得、青楼薄幸名存。
+&gt; 此去何时见也？襟袖上、空惹啼痕。伤情处，高城望断，灯火已黄昏。</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1765,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-120.png" alt="[Image]" class="wp-image-1765"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>行内代码可以使用前后各1个重音符号 （'`'）包括起来。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>代码块可以直接使用缩进表示，也可以在代码块的前后的空白行使用各3个重音符号包括起来。在代码块前的3个重音符同一行后可以写上代码块的语言，这样能够将代码段高亮显示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>在C++中可以自定义结构体重载`bool operator&lt;()`函数，也可以自己写`int compare()`。
+而在C#中自定义排序，就需要对类的`IComparer&lt;&gt;`接口进行实现，排序时调用`Sort()`方法时将实现的排序接口作为参数传入即可。
+```C#
+class totalRank : IComparer&lt;student&gt;
+{
+    public int Compare(student x ,student y)
+    {
+        try
+        {
+            return (x.score1+x.score2+x.score3)
+                -(y.score1+y.score2+y.score3);
+        }
+        catch
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+```</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1766,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-121.png" alt="[Image]" class="wp-image-1766"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>超链接</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>markdown中使用<code>&lt;&gt;</code>直接将一个超链接包括起来，则显式地表示这是超链接。再一种使用标记文字的超链接，一种形式是 <code>[文字](链接)</code>，另一种是 <code>[文字][标记]</code> 并在文档后边的区域使用 <code>[标记]:链接</code> 的形式指明标记所对应的链接。标记既可以是数字也可以是其它字符串，只要标记不重复就可以。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>收藏夹
+=====
+科学
+-----
++ [Wolfram|Alpha](http://www.wolframalpha.com/)
++ [数字帝国][1]
++ [几何绘图][geogebra]
++ [化学试剂查询][chem]
+信息技术
+-------
++ &lt;https://paste.ubuntu.com/&gt;
++ [学习Haskell][2]
+[1]:https://zh.numberempire.com
+[2]:http://learnyouahaskell.com/chapters
+[geogebra]:https://www.geogebra.org/
+[chem]:http://www.ichemistry.cn/
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1767,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-122.png" alt="[Image]" class="wp-image-1767"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>图片</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Markdown中插入图片与超链接类似，图片也是通过超链接访问到的。按照<code>![alt 文字](图片地址 "可选标题")</code>，由于某些原因无法显示图片时，就会用alt后的文字取代这里的图片，不喜欢写也可以直接放一个空的方括号。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外，如果不使用链接或路径访问图片，还可以将图片编为base64编码，直接将图片写在文档中。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将图片转为base64的方法可以看：</p>
+<!-- /wp:paragraph -->
+<!-- wp:core-embed/wordpress {"url":"http://www.malic.xyz/archives/1771","type":"wp-embed","providerNameSlug":"malic-xyz","className":""} -->
+<figure class="wp-block-embed-wordpress wp-block-embed is-type-wp-embed is-provider-malic-xyz"><div class="wp-block-embed__wrapper">
+http://www.malic.xyz/archives/1771
+</div></figure>
+<!-- /wp:core-embed/wordpress -->
+<!-- wp:paragraph -->
+<p>使用base64唯一的问题就是base64字符串太长，而markdown又不支持读取多文件内容，这样的话，最好还是将base64以引用链接的形式写在文章末尾。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1769,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-123.png" alt="[Image]" class="wp-image-1769"/></figure>
+<!-- /wp:image -->
+<!-- wp:image {"id":1770,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-124.png" alt="[Image]" class="wp-image-1770"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>表格</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>表格使用一行<code>|--|</code>来区分表头和表格内容，并且可以在这行各个栏中使用冒号用以表示本列对齐方式。同一行中的项目用竖线'|'分隔。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>表格
+======
+基本表格结构
+-----------
+|   | 0 | 1 |
+| - | - | - |
+| 0 | 0 | 1 |
+| 1 | 1 | 1 |
+对齐方式
+---------
+| 左对齐 | 右对齐 | 居中对齐 |
+| :-----| ----: | :----: |
+| 对齐 | 对齐 | 对齐 |
+| 单元格单元格 | 单元格单元格 | 单元格单元格 |</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1773,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-125.png" alt="[Image]" class="wp-image-1773"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2>数学公式</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>前后使用一个'$'符号将行内数学公式括起来，行间公式则使用前后一行各2个'$'则表示。数学公式的写法与LaTeX数学公式写法基本一致 （一般markdown使用mathjax或KaTeX渲染） ，这里不再赘述。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>其它元素</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>markdown可以使用一些简单的HTML标签进行标记，更丰富了markdown的标记能力。例如直接使用![]()插入图片并不能设置图片的尺寸，我们就可以使用<code>&lt;img&gt;</code>标签为其指定 style从而实现设定图片尺寸。可以为<code>&lt;table&gt;</code>指定style为margin:auto用以双栏对照排版。使用&lt;sup&gt;&lt;sub&gt;分别表示上下标等等。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"markdown","mime":"text/x-markdown","theme":"twilight"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;h2&gt;一元二次方程&lt;/h2&gt;
+ax&lt;sup&gt;2&lt;/sup&gt;+bx+c=0
+$$
+x_{1,2} = \frac{-b \plusmn \sqrt{b^2-4ac}}{2a}
+$$
+&lt;h2&gt;甲烷燃烧&lt;/h2&gt;
+CH&lt;sub&gt;4&lt;/sub&gt;+2 O&lt;sub&gt;2&lt;/sub&gt; = CO&lt;sub&gt;2&lt;/sub&gt;+2 H&lt;sub&gt;2&lt;/sub&gt;O
+&lt;h2&gt;日本人と魚&lt;/h2&gt;
+&lt;table style=&quot;margin:auto&quot;&gt;
+&lt;tr&gt;
+    &lt;td&gt;
+    言葉というものは，生活の深い関わりを持っている。
+    動物のラクダは、日本語では「ラクダ」という単語しかない。ところが、アラビア語には同じラクタを指すのにも「人が乗るためのラクダ」「荷物を運ぶためのラクダ」など、それぞれ違う単語があるという。
+    &lt;/td&gt;
+    &lt;td&gt;
+    语言和生活有着密切的联系。动物中的骆驼日语中只有「ラクダ」这一个单词，可是据说在阿拉伯语中，同样是指骆驼，却有&quot;供人骑的骆驼&quot;&quot;运货的骆驼&quot;等各种不同的单词，
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;
+    砂漠に生まれ、人々にとってラクダは生活に欠かすことのできないものだったら，それだけ言葉も細かく使い分かるようになだらしい。
+    &lt;/td&gt;
+    &lt;td&gt;
+    是因为对生活在沙漠里的人们来说，骆驼是生活中不可缺少的东西，所以在语言使用上似乎也区分得这么细
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;
+    では、日本語ではどうだろうか。そう考えた時、思い当たるのは魚である。
+    &lt;/td&gt;
+    &lt;td&gt;
+    那么日语如何呢？考虑这个问题时首先想到的是鱼
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;
+    例えばブリという魚は、成長の段階に応じて，ハマチ、メジロなどいくつか違った名前で呼ばれている。こうした細かい言葉の使い分けがあるのは魚と日本人の生活との深い関わりがあるからだろう。
+    &lt;/td&gt;
+    &lt;td&gt;
+    例如鰤鱼按照生长阶段的不同，以哈马奇，梅基罗等几种不同的名称来称呼，语言上分得这么细，大概是因为鱼和日本人的生活之间有着密切的关系吧
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"id":1774,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-126.png" alt="[Image]" class="wp-image-1774"/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>折叠内容</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有些内容可能段落较长，但内容重要性又没有那么高，当需要阅读时再将其展开会保证文章的良好结构，这样可以使用HTML的&lt;details>标签，将这些内容默认折叠。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>&lt;details&gt;
+&lt;summary&gt;Tag&lt;/summary&gt;
+Content
+&lt;/details&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"align":"center","id":1854,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-127.png" alt="[Image]" class="wp-image-1854"/></figure></div>
+<!-- /wp:image -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-06-09T15:57:45+09:00">
+      火 09 6月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

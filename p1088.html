@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 标记文本结构</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1088.html" rel="bookmark"
+         title="Permalink to 标记文本结构">标记文本结构</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>HTML是一种典型的标记文本结构，我们可以在纯代码环境中编辑，最后通过一定的工具查看标记后的文本。例如在编辑器当中编写<code>&lt;p&gt;2&lt;sup&gt;5&lt;/sup&gt;&lt;/p&gt;</code>然后将之放在浏览器中打开，浏览器就会将标记的<code>&lt;p&gt;&lt;/p&gt;</code>包围的内容解释为一个段落，<code>&lt;sup&gt;&lt;/sup&gt;</code>包围的内容解释为上标显示出来。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外一种非常丰富的标记结构是reStructuredText(rst)，用于生成文档的sphnix就是读取这种rst来可以生成其它格式 （PDF，HTML等） ，同样有多级标题、表格、列表、代码段等等格式。本站  <a href="http://www.malic.xyz/?page_id=669">http://www.malic.xyz/?page_id=669</a>  的笔记就都是用rst格式写的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当然最有名的当属排版软件TeX，有了LaTeX模版在排版时就非常方便。并且VS Code利用LaTeX Workshop插件，可以更方便的编辑LaTeX。关于LaTeX可以学习 <a href="http://math.ecnu.edu.cn/~jypan/Teaching/Latex/">http://math.ecnu.edu.cn/~jypan/Teaching/Latex/</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下边将对比一下常见文档结构在这几种格式中的标记形式</p>
+<!-- /wp:paragraph -->
+<!-- wp:html -->
+<figure class="wp-block-table ">
+<table border="1">
+<thead>
+<tr>
+<td>&nbsp;</td>
+<td>HTML</td>
+<td>rst</td>
+<td>LaTeX</td>
+</tr></thead><thead>
+</thead><tbody>
+<tr>
+<td>段落</td>
+<td>&lt;p&gt; &lt;/p&gt;</td>
+<td>无标记（分段要多空一行）</td>
+<td>无标记（分段要多空一行）</td>
+</tr>
+<tr>
+<td>表格</td>
+<td>用&lt;table&gt;&lt;/table&gt;标记，&lt;tr&gt;&lt;/tr&gt;标记行，&lt;td&gt;&lt;/td&gt;标记单元格</td>
+<td>直接用+-+,|通过对齐的方式，画出表格</td>
+<td>\begin{table}\end{table}标记表格，\\用于换行,&amp;分隔单元格</td>
+</tr>
+<tr>
+<td>标题</td>
+<td>&lt;h1&gt;&lt;/h1&gt;&lt;h2&gt;&lt;/h2&gt;</td>
+<td>在文字的下一行，用长于文字长度的"="表示一级标题，'-'为二级标题</td>
+<td>\chapter{}\section{}\subsection{}</td>
+</tr>
+<tr>
+<td>多级标题</td>
+<td>&lt;h1&gt;&lt;/h1&gt;&lt;h2&gt;&lt;/h2&gt;</td>
+<td>在文字的下一行，用长于文字长度的"="表示一级标题，'-'为二级标题</td>
+<td>\chapter{}\section{}\subsection{}</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>ul无序列表,ol有序列表，li表示每个列表项</td>
+<td>1个空格+数字+.+空格 +列表项内容</td>
+<td>\begin{enumerate}\item{},或\begin{discription{}\item{}</td>
+</tr>
+<tr>
+<td>块文本</td>
+<td>pre</td>
+<td>.. code:: 空一行之后用缩进表示块文本</td>
+<td>\usepackage{listings}\begin{lstlisting}[language=?]</td>
+</tr>
+<tr>
+<td>图片</td>
+<td>img src="*"</td>
+<td>... image:: *</td>
+<td>\includegraphics{}</td>
+</tr>
+</tbody>
+</table></figure>
+<!-- /wp:html -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-18T03:20:59+09:00">
+      水 18 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

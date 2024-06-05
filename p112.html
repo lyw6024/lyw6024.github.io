@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - atcoder [Exception Handling ]题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p112.html" rel="bookmark"
+         title="Permalink to atcoder [Exception Handling ]题解">atcoder [Exception Handling ]题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a href="https://atcoder.jp/contests/abc134/tasks/abc134_c">https://atcoder.jp/contests/abc134/tasks/abc134_c?lang=en</a> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>给定长为N的序列，下标从1到N。 对于每个元素，输出序列里缺少这个序列之后的最大值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>解法：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>N が数千以下 (言語によっては数万以下) なら、各問で A<sub>i</sub> 以外の N − 1 個の要素すべてに対してループ を回して最大値を直接求めても実行制限時間の 2 秒に間に合います。しかし実際には N は最大で 20 万であ り、この方針では C++ でも間に合う望みはありません。計算時間を削減する方針を以下に二つ示します。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>方針 1: 場合分け </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>ほとんどの場合、問いの答えは N 個すべての要素のうちの最大の値 A<sub>max</sub> です。唯一の例外は問いで取り 除かれる値 Ai が A<sub>max</sub> と等しい場合で、この場合の答えはすべての要素のうち 2 番目に大きい値 A<sub>second</sub> (数列中に A<sub>max</sub> が複数回現れる場合は A<sub>second</sub> = A<sub>max</sub> とします) です。問いの処理を始める前に A<sub>max</sub> と A<sub>second</sub> をあらかじめ求めておけば、各問を直ちに処理できます。なお、A<sub>second</sub> を最も簡単な実装で求める 方法は、与えられた数列をコピーして言語の標準ライブラリでソートすることでしょう (やや「余計」な計算 をすることになりますが十分高速です)。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>方針 2: 両端から攻める </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>j = 0, 1, . . . , N − 1 に対し、A<sub>1</sub>, A<sub>2</sub>, . . . , A<sub>j</sub> のうちの最大の値を left<sub>j</sub> とします (ただし left<sub>0</sub> = 0 としま す)。j ≥ 1 のとき left<sub>j</sub> = max(left<sub>j−1</sub>, A<sub>j</sub> ) *1 であることに注意すると、これらの値は一周のループですべ て求められます。また、j = 2, . . . , N + 1 に対し、A<sub>j</sub> , A<sub>j+1</sub>, . . . , A<sub>N</sub> のうちの最大の値を right<sub>j</sub> とします (ただし right<sub>N+1</sub> = 0 とします)。j ≤ N のとき right<sub>j</sub> = max(right<sub>j+1</sub>, A<sub>j</sub> ) であることに注意すると、こ れらの値も一周のループですべて求められます。問いの処理を始める前にこれらの値をあらかじめ求めておけ ば、各問 i の答えを max(left<sub>i−1</sub>,right<sub>i+1</sub>) として直ちに求められます。</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import Data.List
+main=do
+    line&lt;-getLine
+    ctx&lt;-getContents
+    let p =[read x::Int | x&lt;-lines ctx]
+    let m=maxL p
+    let r= length [1 | x&lt;-p,(maxL p)==x]
+    let s= if r==1 then maxL [x |x&lt;-p ,x /= m] else m
+    output p m s
+maxL :: [Int]->Int
+maxL [x] =x
+maxL (x:xs) = max x (maxL xs)
+output :: [Int]->Int->Int->IO()
+output [] _ _ = return()
+output (x:xs) m s
+    | m/=s =do
+         if x==m then putStrLn (show s) else putStrLn (show m )
+         output xs m s
+    | otherwise =do
+         putStrLn (show m)
+         output xs m s</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-07-21T12:41:10+09:00">
+      日 21 7月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

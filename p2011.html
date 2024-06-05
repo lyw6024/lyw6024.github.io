@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - OS/Linux相关面试常见题目</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2011.html" rel="bookmark"
+         title="Permalink to OS/Linux相关面试常见题目">OS/Linux相关面试常见题目</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading -->
+<h2>内存泄漏含义，如何检测</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse title="details"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 内存泄漏（Memory Leak）是指程序中己动态分配的堆内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 多CPU、多I/O场景下该选择多进程还是多线程？ </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> [collapse title=" details"] </p>
+<!-- /wp:paragraph -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><tbody><tr><td>
+<strong>对比维度</strong>
+</td><td>
+<strong>多进程</strong>
+</td><td>
+<strong>多线程</strong>
+</td><td>
+<strong>总结</strong>
+</td></tr><tr><td>
+数据共享、同步
+</td><td>
+数据共享复杂，需要用IPC；数据是分开的，同步简单
+</td><td>
+因为共享进程数据，数据共享简单，但也是因为这个原因导致同步复杂
+</td><td>
+各有优势
+</td></tr><tr><td>
+内存、CPU
+</td><td>
+占用内存多，切换复杂，CPU利用率低
+</td><td>
+占用内存少，切换简单，CPU利用率高
+</td><td>
+线程占优
+</td></tr><tr><td>
+创建销毁、切换
+</td><td>
+创建销毁、切换复杂，速度慢
+</td><td>
+创建销毁、切换简单，速度很快
+</td><td>
+线程占优
+</td></tr><tr><td>
+编程、调试
+</td><td>
+编程简单，调试简单
+</td><td>
+编程复杂，调试复杂
+</td><td>
+进程占优
+</td></tr><tr><td>
+可靠性
+</td><td>
+进程间不会互相影响
+</td><td>
+一个线程挂掉将导致整个进程挂掉
+</td><td>
+进程占优
+</td></tr><tr><td>
+分布式
+</td><td>
+适应于多核、多机分布式；如果一台机器不够，扩展到多台机器比较简单
+</td><td>
+适应于多核分布式
+</td><td>
+进程占优
+</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:paragraph -->
+<p>  <strong>需要频繁创建销毁的优先用线程</strong> : 最常见的应用就是Web服务器了，来一个连接建立一个线程，断了就销毁线程 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><strong>需要进行大量计算的优先使用线程</strong>:所谓大量计算，当然就是要耗费很多CPU，切换频繁了，这种情况下线程是最合适的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>强相关的处理用线程，弱相关的处理用进程</strong> :例如一般的Server需要完成如下任务：消息收发、消息处理。“消息收发”和“消息处理”就是弱相关的任务，而“消息处理”里面可能又分为“消息解码”、“业务处理”，这两个任务相对来说相关性就要强多了。因此“消息收发”和“消息处理”可以分进程设计，“消息解码”、“业务处理”可以分线程设计。当然这种划分方式不是一成不变的，也可以根据实际情况进行调整。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>可能要扩展到多机分布的用进程，多核分布的用线程</strong> </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 如果多进程和多线程都能够满足要求，那么选择最熟悉、最拿手的那个。 实际应用中基本上都是“进程+线程”的结合方式，千万不要真的陷入一种非此即彼的误区。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>malloc申请地址时，操作系统是如何响应的，从内核到获取内存地址，中间发生了什么 </h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>-malloc返回的地址是啥（虚拟地址、逻辑地址、物理地址哪一个）？ </h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title=" details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>linux采用的是glibc中堆内存管理ptmalloc实现，虚拟内存的布局规定了malloc申请位置以及大小，malloc一次性能申请小内存(小于128Kb),分配在堆区(heap)，用sbrk()进行对齐生长，而malloc一次性能申请大内存(大于128kb)分配到的是在共享映射区，而不是在堆区，采用的mmap()系统调用进行映射. malloc的实现与物理内存是无关的，内核为每个进程维护一张页表，页表存储进程空间内每页的虚拟地址，页表项中有的虚拟内存页对应着某个物理内存页面，也有的虚拟内存页没有实际的物理页面对应.&nbsp;无论malloc通过sbrk还是mmap实现，分配到的内存只是虚拟内存，而且只是虚拟内存的页号，代表这块空间进程可以用，实际上还没有分配到实际的物理页面.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>-什么时候完成地址映射的？使用上述对象的时候，操作系统是如何响应的？</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title=" details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>当一个进程发生缺页中断的时候，进程会陷入核心态，执行以下操作：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>1）检查要访问的虚拟地址是否合法</li><li>2）查找/分配一个物理页</li><li>3）填充物理页内容（读取磁盘，或者直接置0，或者什么都不做）</li><li>4）建立映射关系（虚拟地址到物理地址的映射关系）</li><li>5）重复执行发生缺页中断的那条指令</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>-产生了中断还是异常？</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title=" details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>等进程访问到这个新分配的内存空间的时候，如果其还没有分配到实际的物理页面，就会产生缺页中断，内核这个时候会给进程分配实际的物理页面，以与这个未被映射的虚拟页面对应起来.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>-中断和异常的区别？</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse title="details"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>中断是指&nbsp;<strong>CPU</strong>&nbsp;对系统发生某事件时的这样一种响应<strong>:</strong>CPU 暂停正在执行的程序，在保留现场后自动地转去执行该事件的中断处理程序；执行完后，再返回到原程序的断点处继续执行。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 还可进一步把中断分为<strong>外中断</strong>和<strong>内中断</strong>。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>外中断——就是我们指的中断——是指由于外部设备事件所引起的中断，如通常的磁盘中断、打印机中断等；</li><li> 内中断——就是异常——是指由于 CPU 内部事件所引起的中断，如程序出错(非法指令、地址越界)。内中断(trap)也被译为“捕获”或“陷入”。</li><li> 异常是由于执行了现行指令所引起的。由于系统调用引起的中断属于异常。</li><li> 中断则是由于系统中某事件引起的，该事件与现行指令无关。</li></ul>
+<!-- /wp:list -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class=""><thead><tr><td>类别</td><td>原因</td><td>异步/同步</td><td>返回行为</td></tr></thead><tbody><tr><td>Interrupt</td><td>来自IO或其它硬件</td><td>异步</td><td>总是返回到下一条指令</td></tr><tr><td>Trap</td><td>有意识安排的</td><td>同步</td><td>返回下一条指令</td></tr><tr><td>Fault</td><td>可恢复的错误</td><td>同步</td><td>返回当前指令</td></tr><tr><td>Abort</td><td>不可恢复的错误</td><td>同步</td><td>不会返回</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>多进程之间的通信方式、多线程之间的同步方式 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title=" details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4> 进程间通信 </h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+1、低级通信,控制信息的通信(主要用于进程之间的同步,互斥,终止和挂起等等控制信息的传递)<br />
+2、高级通信,大批数据信息的通信(主要用于进程间数据块数据的交换和共享,常见的高级通信有管道,消息队列,共享内存等).</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>管道( pipe )：管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。</li><li> 有名管道 (named pipe) ： 有名管道也是半双工的通信方式，但是它允许无亲缘关系进程间的通信。</li><li> 信号量( semophore ) ： 信号量是一个计数器，可以用来控制多个进程对共享资源的访问。不是用于交换大批数据,而用于多线程之间的同步.常作为一种锁机制,防止某进程在访问资源时其它进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</li><li> 消息队列( message queue ) ： 消息队列是由消息的链表，存放在内核中并由消息队列标识符标识。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。</li><li> 信号 ( signal ) ： 信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生。</li><li> [共享内存( shared memory )] ：共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号两，配合使用，来实现进程间的同步和通信。</li><li> 套接字( socket ) ： 套解口也是一种进程间通信机制，与其他通信机制不同的是，它可用于不同机器间的进程通信。</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"level":4} -->
+<h4> 线程间的同步方式有四种 :</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>- 临界区<br /> 临界区对应着一个CcriticalSection对象，当线程需要访问保护数据时，调用EnterCriticalSection函数；当对保护数据的操作完成之后，调用LeaveCriticalSection函数释放对临界区对象的拥有权，以使另一个线程可以夺取临界区对象并访问受保护的数据。<br /> 关键段对象会记录拥有该对象的线程句柄即其具有“线程所有权”概念，即进入代码段的线程在leave之前，可以重复进入关键代码区域。所以关键段可以用于线程间的互斥，但不可以用于同步（同步需要在一个线程进入，在另一个线程leave） </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>-互斥量<br /> 互斥与临界区很相似，但是使用时相对复杂一些（互斥量为内核对象），不仅可以在同一应用程序的线程间实现同步，还可以在不同的进程间实现同步，从而实现资源的安全共享。<br /> 1、互斥量由于也有线程所有权的概念，故也只能进行线程间的资源互斥访问，不能由于线程同步；<br /> 2、由于互斥量是内核对象，因此其可以进行进程间通信，同时还具有一个很好的特性，就是在进程间通信时完美的解决了"遗弃"问题 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>-信号量<br /> 信号量的用法和互斥的用法很相似，不同的是它可以同一时刻允许多个线程访问同一个资源，PV操作事件可以完美解决线程间的同步问题，同时信号量也属于内核对象，可用于进程间的通信 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>-事件<br /> 事件分为手动置位事件和自动置位事件。事件Event内部它包含一个使用计数（所有内核对象都有），一个布尔值表示是手动置位事件还是自动置位事件，另一个布尔值用来表示事件有无触发。由SetEvent()来触发，由ResetEvent()来设成未触发。<br />事件是内核对象,可以解决线程间同步问题，因此也能解决互斥问题</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 锁的原理、共享锁、自旋锁、读写锁，自旋锁的底层实现 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 并发和并行的区别 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 内存泄漏、野指针、悬空指针 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 如何提高内存管理的效率 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 页表的机制、缺页中断、页面调度算法</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 为什么要设计逻辑地址？逻辑地址的优势在哪？当前有大容量PC内存，逻辑地址为何还要保留？ </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 逻辑地址怎么转换为物理地址 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 内存空间一级、二级配置器 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 对锁的理解，互斥锁的底层如何实现的，跟内存访问的底层如何建立关系</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> gcc编译过程 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> awk的使用 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> shell编程</h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>有一个存储有name id score 三个属性的文本文件，查找score 在0.7与0.8之间的所有样本的 id </h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse] </p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-18T03:51:06+09:00">
+      土 18 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

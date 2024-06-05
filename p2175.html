@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Integer Product 解题分析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2175.html" rel="bookmark"
+         title="Permalink to Integer Product 解题分析">Integer Product 解题分析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题描述：</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给出\( N \) 个数字\(A_i \)，形式可能是整数或小数，统计有多少对 \( (A_i,A_j) ( i&lt;j ) \)的乘积\( A_i \cdot A_j \)为整数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>数据限制：<br />\( 0 &lt; N \leq 200000 \)<br />\( 0 &lt; A_i &lt;10^{4} \)<br />\( A_i \) 若为小数则小数点后最多有9位数字</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>分析：</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>小数点后可能有9位，那么两个小数点后都是9位的数字相乘则精度会超过double允许的类型，所以可以将小数转化为分数，编写一个有理数类。对于小数\(a.b = a + 0.b \)，若小数点后的\(b\)部分的长度为\( L \) 则\(a.b\)可写为分数形式\(\frac{a \cdot 10^L+b}{10^L}\)，再编写判断两个分数相乘是否为整数就可以，遍历所有\( A_i\)以及\( i&lt;j \)的\( A_j \) 统计数量即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="示例代码"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","lineNumbers":false,"theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+using ll = long long ;
+#define MAXN 200009
+long long gcd(ll a ,ll b)
+{
+    if(a%b==0)
+        return b;
+    else
+        return gcd(b,a%b);
+}
+class Rat
+{
+    public:
+        Rat(){}
+        ll num,den;
+        Rat(ll nn,ll dd)
+        {
+           ll G = gcd(nn,dd);
+           num = nn/G;
+           den = dd/G;
+        }
+        int MultiIsInt(const Rat o )
+        {
+            return (o.num % den ==0) &amp;&amp; (num%o.den==0);
+        }
+        void output()
+        {
+            printf(&quot;%lld/%lld\n&quot;,num,den);
+        }
+        bool operator&lt;(const Rat o)
+        {
+            return num*1.0/den &lt; o.num*1.0/o.den;
+        }
+}a[MAXN];
+#define MAXL 29
+int main(void)
+{
+    char theNumber[MAXL];
+    int N,i,j;
+    scanf(&quot;%d&quot;,&amp;N);
+    for (i=0;i&lt;N;i++){
+        scanf(&quot;%s&quot;,theNumber);
+        char* ret = strchr(theNumber,'.');
+        if (ret==NULL){
+            a[i] = Rat(atoi(theNumber),1);
+        } else {
+            int lenOfDen = strlen(&amp;theNumber[ret-&amp;theNumber[0]+1]);
+            ll den = pow(10,lenOfDen);
+            ll num = atoi(theNumber)*den
+            +atoi(&amp;theNumber[ret-&amp;theNumber[0]+1]);
+            a[i] = Rat(num,den);
+        }
+    }
+    int s=0;
+    for(i=0;i&lt;N;i++)
+    {
+        for(j=i+1;j&lt;N;j++)
+        {
+            if(a[i].MultiIsInt(a[j])==1)
+            {
+                s+=1;
+            }
+        }
+    }
+    printf(&quot;%d\n&quot;,s);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>然而这个程序给出了 <code>AC*5,TLE*5</code>的结果。说明此题这种\( O(N^2) \)的效率并不合格。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>针对本题，转化成有理数运算的思路是正确的，但不需要使用有理数的运算，因为从小数化为分数，分数的分母都是从\(10^L\)开始，并可能被约分，最后分母只剩\(2^a 5^b \)的形式，也就是说如果要将一个数字的分母\( 2^a \cdot 5^b  \)约去，只需要看这个数字的分子与另一个数字的分子之积是否含有\(  2^a \cdot 5^b   \)的因子，其它的因子都不会有影响。例如\( 7.5 = \frac{75}{10} = \frac{15}{2}\)，它在本题中与\( \frac{5}{2} \)起到的作用是相同的，因为\( 15=3 \times 5 \)，但是因子\( 3 \)在分子上无论如何也不会将分母 \( 2^a 5^b  \) 约去任何一部分，只有因子\(5\)有作用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样，在本题中，我们将每个数字用\( (a,b) \) 描述，对应于\(2^a \cdot 5^b \)。若两数相乘为整数，则两数  \(2^a \cdot 5^b \) 与 \(2^c \cdot 5^d \)的乘积是 \(2^{a+c} \cdot 5^{b+d} \)，即\((a+c,b+d) \)  ，若有\( a+c \geq 0  \text{ and } b+d \geq 0 \)，则两数之积为整数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由于小数最多有9位，即最小的数字是\( 0.000000001 \)，即\(  2^{-9}\cdot 5^{-9}  \) ，最大可能为\( 10000 \) ,即\(   2^{4}\cdot 5^{4}    \) 只需要一个二维数组，将相应a与b的数字数量存入数组，只需要遍历整个数组即可计算结果。或者使用<code>map&lt;pair&lt;int,int>,int></code>结构保存，map的键是2的幂a与5的幂b组成的pair (a,b)，map对应的值为这个(a,b)所对应的数字个数。二重遍历map可以计算得到结果。<code>Accepted</code>的程序代码如下所示</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=2194]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-10T03:37:19+09:00">
+      月 10 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

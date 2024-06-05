@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 如何用ffmpeg将视频无缝连接</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1304.html" rel="bookmark"
+         title="Permalink to 如何用ffmpeg将视频无缝连接">如何用ffmpeg将视频无缝连接</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>现有视频 <code>v1.mp4</code> 与<code>v2.mp4</code>，要将两个视频完全连接起来。不需要启动多媒体软件进行编辑，直接使用ffmpeg执行如下几句指令即可实现：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>ffmpeg -i v1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts t1.ts
+ffmpeg -i v2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts t2.ts
+ffmpeg -i &quot;concat:t1.ts|t2.ts&quot; -c copy -bsf:a aac_adtstoasc -movflags +faststart output.mp4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>其中各参数分别表示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> -c：设置编码器。当为 copy：指复制编码流 </li><li> -bsf:v h264_mp4toannexb，为匹配的视频流设置比特流过滤器 </li><li> -bsf:a aac_adtstoasc，为匹配的音频流设置比特流过滤器 </li><li> -f mpegts，强制输出mpegts格式 </li><li> -movflags +faststart，支持边下边看 </li></ul>
+<!-- /wp:list -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-08T11:36:59+09:00">
+      水 08 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 最大公约数gcd的时间复杂度</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1473.html" rel="bookmark"
+         title="Permalink to 最大公约数gcd的时间复杂度">最大公约数gcd的时间复杂度</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell","theme":"idea"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>gcd :: Integral a =&gt; a -&gt; a -&gt; a
+gcd x y
+    | mod x y ==0 = y
+    | otherwise = gcd y (mod x y)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>在离散数学上已经了解过，gcd的运行次数不超过 \( 2\log_2{(n+1)}\)，其中\(n\)是待求两数中的较小的那个数。拉梅定理也告诉我们,\( gcd(x,y) \)的运行次数，不超过\(x,y\)较小数\(n \)十进制位数的5倍。这都说明了gcd的时间复杂度是 \( O(\log(n)) \)的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来给出其证明：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于x,y的最大公约数\( \gcd(a,b) \)，不妨设\( a &gt; b \)，<br />记\( r_0 = a, r_1 = b \)，则有：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> \[ r_0 = q_1r_1+r_2 \\<br /> r_1 = q_2r_2+r_3 \\<br /> r_2 = q_3r_3+r_4 \\<br /> ... \\<br /> r_{n-2} = q_{n-1}r_{n-1} +r_{n} \\<br /> r_{n-1} = q_{n}r_{n}+0\\<br /> \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由除数和余数的关系知，\( r_{n-1} &gt; r_{n} \)，即</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\[  r_1 &gt; r_2 &gt; ... &gt; r_{n-1} &gt; r_{n} \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>则 \[ q_i =\lfloor \frac{r_i}{r_{i+1} } \rfloor \geq 1\]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>而最后的\(   r_{n-1} = q_{n}r_{n}+0  \)要有\(r_{n-1}&gt;r{n} \)，必有\( q_n &gt;=2 \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>可得</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\[ r_0 \geq r_1+r_2 \\ <br />r_1 \geq r_2+r_3\\<br />... \\<br />r_{n-2} \geq r_{n-1}+r_{n} \\<br />r_{n-1} \gt r_n \\<br /> \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这与Fibonacci数列非常相似。可以将\(r_i \)的初始条件与Fibonacci数列建立联系： \[ r_n \geq1 = F_2 \\ r_{n-1} \geq 2 =F_3\]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>利用数学归纳法，推出：\[ \begin{align}<br />r_{n-k} &amp;=  q_{n-k+1}r_{n-k+1} + r_{n-k+2} \\ <br />&amp;\geq r_{n-k+1} + r_{n-k+2} \\<br />&amp;\geq F_{k+1}+F{k}\\<br />&amp;=F_{k+2} <br />\end{align}\]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>从而在\( k=n-1 \)时，\(r_1 \geq F_{n+1} \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>由Fibonacci数的性质可知，\( F_{n+1} \geq \varphi^{n-1} \)，其中\(\varphi=\frac{\sqrt{5}+1}{2}\)是Fibonacci数列特征方程的大于1的根。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样，就得到 \[ r_1 \geq  \varphi^{n-1} \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>两边取常用对数，则得 \[ n-1 \leq \frac{\lg{r_1}}{\lg{\varphi}}\]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>其中\( \lg{\varphi}  \)是可以直接计算的，其值为 \( 0.208987640...\) ，所以  <br />\[ n-1 \leq \frac{\lg{r_1}}{0.208987640} \lt 5 \lg{r_1} \lt  5 \lceil \lg{r_1}  +1  \rceil  \] 而 \(  \lceil \lg{r_1}  +1  \rceil  \) 就是数\( r_1 \)的十进制位数</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>从而可得 \[ n \lt 5 \lceil \lg{r_1}  +1  \rceil  -1 \leq   5 \lceil \lg{r_1}  +1  \rceil   \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>故证毕。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-20T01:06:25+09:00">
+      月 20 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C# 自定义类型排序</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1745.html" rel="bookmark"
+         title="Permalink to C# 自定义类型排序">C# 自定义类型排序</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>在编写程序处理数据时经常需要对自己组织的数据进行排序，有时还是不同形式的排序，在C++中可以自定义结构体重载<code>bool operator&lt;()</code>函数，也可以自己写<code>int compare()</code>。而在C#中自定义排序，就需要对类的<code>IComparer&lt;&gt;</code>接口进行实现，排序时调用Sort()方法时将实现的排序接口作为参数传入即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>假定现在有一组学生的三门课成绩</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class student
+{
+    public int score1;
+    public int score2;
+    public int score3;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>接下来分别实现对学生的成绩分科排序和总分排序。<br />分科排序是指：先按score1由小到大排，若score1一样则按score2由小到大排，否则按score3由小到大。<br />总分排序就是按照学生三科成绩之和由小到大排。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>使用随机数生成N个学生的分数，并保存在<code>List&lt;student&gt; a</code>当中</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private static void Main()
+{
+    List&lt;student&gt; a = new List&lt;student&gt;();
+    Random rd = new Random();
+    const int N=15;
+    for(int i=0;i&lt;N;i++)
+    {
+        student s1 = new student();
+        s1.score1 = rd.Next(0,100);
+        s1.score2 = rd.Next(0,100);
+        s1.score3 = rd.Next(0,100);
+        a.Add(s1);
+    }
+    ...
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>先实现分科排序，创建名为<code>score123Rank</code>的类继承<code>IComparer&lt;student&gt;</code>接口，主要是实现其<code>int Compare()</code>函数，实现分科排序的功能。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class score123Rank : IComparer&lt;student&gt;
+{
+    public int Compare(student x, student y)
+    {
+        try
+        {
+            if(x.score1!=y.score1)
+                return x.score1 - y.score1;
+            else if(x.score2!=y.score2)
+                return x.score2 - y.score2;
+            else
+                return x.score3 - y.score3;
+        }
+        catch
+        {
+            throw new NotImplementedException();
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样，在主函数中只需要调用<code>a.Sort(new score123Rank())</code>就完成了排序。输出排序后的结果看一下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>a.Sort(new score123Rank());
+for(int i=0;i&lt;N;i++)
+{
+    Console.WriteLine(&quot;{0}\t{1}\t{2}&quot;,
+            a[i].score1,a[i].score2,a[i].score3);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>类似地，再编写总分排序的类<code>totalRank</code>。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class totalRank : IComparer&lt;student&gt;
+{
+    public int Compare(student x ,student y)
+    {
+        try
+        {
+            return (x.score1+x.score2+x.score3)
+                -(y.score1+y.score2+y.score3);
+        }
+        catch
+        {
+            throw new NotImplementedException();
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样再调用<code>a.Sort(new totalRank())</code>就对a中按照总分进行了排序。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>完整Main函数为</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private static void Main()
+{
+    List&lt;student&gt; a = new List&lt;student&gt;();
+    Random rd = new Random();
+    const int N=15;
+    for(int i=0;i&lt;N;i++)
+    {
+        student s1 = new student();
+        s1.score1 = rd.Next(0,100);
+        s1.score2 = rd.Next(0,100);
+        s1.score3 = rd.Next(0,100);
+        a.Add(s1);
+    }
+    a.Sort(new score123Rank());
+    for(int i=0;i&lt;N;i++)
+    {
+        Console.WriteLine(&quot;{0}\t{1}\t{2}&quot;,
+                a[i].score1,a[i].score2,a[i].score3);
+    }
+    Console.WriteLine();
+    a.Sort(new totalRank());
+    for(int i=0;i&lt;N;i++)
+    {
+        Console.WriteLine(&quot;{0}\t{1}\t{2}&quot;,
+                a[i].score1,a[i].score2,a[i].score3);
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>运行结果如下所示。空白行的前边是分科排名，后边是总分排名。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1752,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-113.png" alt="[Image]" class="wp-image-1752"/></figure>
+<!-- /wp:image -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-06-08T11:26:37+09:00">
+      月 08 6月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 序数法：一种排列的生成算法</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p904.html" rel="bookmark"
+         title="Permalink to 序数法：一种排列的生成算法">序数法：一种排列的生成算法</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><strong>一个\([ 0, n!-1] \)当中的整数m，先将其转化为唯一确定的长度 n-1 的序数\( (a_{n-1},...a_1) \)，再将这个序数转化为长度为n的一个排列。</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>下边详细介绍此方法和理论：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex]<br /> \begin{align} <br />n! &amp;= n(n-1)! \\<br />    &amp;= ((n-1)+1)(n-1)! \\<br />    &amp;= (n-1)(n-1)! + (n-1)!<br />\end{align}<br />[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>类似地，</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex]<br />(n-1)! = (n-2)(n-2)! + (n-2)!<br />[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将上式代入最后一项，并运用多次则得：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex] <br />\begin{align}n! &amp;= (n-1)(n-1)! + (n-2)(n-2)! + (n-3)(n-3)! +... + 2 \cdot 2! + 1 \cdot 1! +1 \\ &amp;=\sum_{k=1}^{n-1}{k \cdot k!} +1 \end{align} [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>那么0到\( n!-1 \)的整数m可以唯一地表示为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex]m = a_{k-1}(k-1)! + a_{k-2} (k-2)! +... + a_2 \cdot 2! + a_1[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>其中\( a_k \)满足\( 0 \le a_k \le k ,i=1,2,...,k-1 \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样的话，0到\( n!-1 \) 的这n个整数就可与序数\( (a_{n-1},a_{n-2},...,a_2,a_1)  \)建立一一对应关系。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来就讨论从整数m来计算序数 \( (a_{n-1},a_{n-2},...,a_2,a_1)  \) 的过程:</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex] m= a_{n-1}(n-1)! + a_{n-2}(n-2)! +... + a_2 \cdot 2! + a_1 [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>若记\( n_1 = m \)，令\( n_1 \)除以2，余数\( r_1 \)就是\( a_1 \) :</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex] n_2 = \lfloor \frac{n_1}{2} \rfloor = a_{n-1} \frac{(n-1)!}{2} + a_{n-2} \frac{(n-2)!}{2}+... + a_2, r_1 = a_1 [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>\( n_2 \)继续除以3，余数就是\(  a_2 \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex]n_3 = \lfloor \frac{n_2}{3} \rfloor  = a_{n-1} \frac{(n-1)!}{3!} + a_{n-2} \frac{(n-2)!}{3!}+... + a_3, r_2 = a_2 [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>推及一般并可证，有[latex]n_{i+1} = \lfloor \frac{n_i}{i+1} \rfloor, r_i = a_i, i=1,2,...,n-1[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>也就是说，对于一个正整数m，不断的按照上式求出n-1个余数，就可以知道m唯一对应的序数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>例如：\( 7!&gt;4000 \) ,以 \( m=4000 \) 为例，计算4000所对应的6位的序数</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex]<br />\begin{align}<br />n_1 &amp;= 4000 \\<br />n_2 &amp;= \lfloor\frac{4000}{2}\rfloor =2000,&amp; a_1 =4000 \mod 2 =  0\\<br /> n_3 &amp;= \lfloor\frac{2000}{3}\rfloor =666,&amp; a_2 = 2000 \mod 3 = 2\\<br />n_4 &amp;= \lfloor\frac{666}{4}\rfloor =166,&amp; a_3 = 666 \mod 4 = 2\\<br />n_5 &amp;= \lfloor\frac{166}{5}\rfloor =33,&amp; a_4 = 166 \mod 5 = 1\\ <br /> n_6 &amp;= \lfloor\frac{33}{6}\rfloor =5,&amp; a_5 = 33 \mod 6 = 3\\   <br />n_7 &amp;=  \lfloor\frac{5}{7}\rfloor  = 0,&amp; a_6 =5 \mod 7 = 5<br />\end{align}[/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>所以 \( 4000 = 5\cdot 6! + 3\cdot 5! + 1\cdot4! + 2\cdot3! + 2\cdot 2! \),序数为\( (5,3,1,2,2,0) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来就是要将序数 \( (a_{n-1},a_{n-2},...,a_2,a_1)  \)  与n个元素的全排列一一对应。不失一般性，n个元素不妨令\( i \)为\( 1,2,...n \) ：序数 \( (a_{n-1},a_{n-2},...,a_2,a_1)  \)  中\( a_i \)表示在排列中 \( i+1 \)这个数的右方比\( i+1 \) 小的数的个数,\( i=n-1,n-2,...,2,1 \)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>以4的全排列\( (1,2,3,4) \) 的一个序数\( (301) \)为例，\( a_3=3 \)，说明4这个数右方比4小的有3个，则4在第1位，a_2=0说明3这个数右方没有比3小的，则3在第4位，a_1=1说明2的右边有1个比2小的，所以2的右边有1。这样就可以确定这个排列为\( (4,2,1,3) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将此描述中的“右方”描述成“左方”，同样可以得到一种对应关系。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>将m转化为序列seq[ (N-1) .. 1]. seq[i]的下标i代表序数\( a_i \)的下标i</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>void int2seq(int m,char* seq,int N)
+{
+    int i,n_curr,n_next;
+    n_curr = m;
+    for(i=1;i&lt;N;i++)
+    {
+        n_next = n_curr/(i+1);
+        seq[i] = n_curr % (i+1);
+        n_curr = n_next;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>将序数seq转化为一个1,2,3,...,n的排列</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>void seq2arrange(char *seq,char *arrange,int N)
+{
+    int i,t,idx,counter;
+    memset(arrange,1,sizeof(char)*N);
+    for(i=N-1;i&gt;=1;i--)
+    {
+        idx=N-1;
+        counter = seq[i];
+        while ( counter &gt; 0)
+        {
+            if( arrange[idx]&lt;i+1 )
+            {
+                counter -=1;
+            }
+            idx--;
+        }
+        while( arrange[idx]&gt;1)
+        {
+            idx--;
+        }
+        arrange[idx] = i+1;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>main函数测试用：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int main(void)
+{
+    int i,k,N;
+    char res[MAXN],seq[MAXN];
+    N=4;
+    for(i=0;i&lt;fact(N);i++)
+    {
+        int2seq(i,seq,N);
+        seq2arrange(seq,res,N);
+        for(k=0;k&lt;N;k++)
+        {
+            printf(&quot;%d&quot;,res[k]);
+        }
+        puts(&quot;&quot;);
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>运行结果</p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>1234
+2134
+1324
+2314
+3124
+3214
+1243
+2143
+1342
+2341
+3142
+3241
+1423
+2413
+1432
+2431
+3412
+3421
+4123
+4213
+4132
+4231
+4312
+4321</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-12T03:16:40+09:00">
+      木 12 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

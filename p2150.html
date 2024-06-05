@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 判断是否为轴对称图形</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2150.html" rel="bookmark"
+         title="Permalink to 判断是否为轴对称图形">判断是否为轴对称图形</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>问题描述：按一种顺/逆时针顺序给出平面N个点的坐标，判断这N个点所形成的图形是否轴对称。为了简化题目，本题两点所构成的线段均平行于坐标轴</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>题目链接：<a href="https://vjudge.net/problem/FZU-2035">https://vjudge.net/problem/FZU-2035</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>目前的想法是将所有的点都保存到vector中，取第[i]个和第[i+N/2]个点连线，然后取遍所有j可能的检查[i+j]和[i-j]这两个点的中点是否在第[i]和第[i+N/2]点的连线上，如果是轴对称图形的话，那么一定存在一条对角的连线，使得所有其它点关于这条连线对称。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>但是编写了程序提交总是通不过，可能数据不够强。现在的程序考虑了可能出现数据中的点不是多边形顶点的情况，例如(0,0),(1,0),(3,0)的情况已经进行了处理。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用C++编写了Point和Line类，主要用于维护对于点与直线的位置关系以及运算。如果万一有哪个公式出了小差错，就会无法通过，这也不知道是思路有问题还是某函数的哪部分出错。有机会再细查查。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>现在使用的一组测试数据：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>3
+4
+0 0
+0 1
+1 1
+1 0
+6
+0 0
+4 0
+4 2
+1 2
+1 4
+0 4
+11
+4 0
+4 3
+5 3
+5 5
+3 5
+3 4
+0 4
+0 0
+1 0
+2 0
+3 0</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>程序如下</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+using std::vector;
+#include &lt;cmath&gt;
+int __NaN=0xFFC00000;
+const float NaN=*((float *)&amp;__NaN);
+int gcd(int x,int y)
+{
+        if(x%y==0)
+        {
+                return y;
+        }
+        else
+        {
+                return gcd(y,x%y);
+        }
+}
+class Point{
+        private:
+                double X,Y;
+                bool valid;
+        public:
+                Point(){}
+                Point(bool v)
+                {
+                        valid = v;
+                }
+                Point(double x,double y)
+                {
+                        X=x;Y=y;
+                        valid=true;
+                }
+                bool isValid()
+                {return valid;}
+                double getX()
+                {
+                        if(valid)
+                                return X;
+                        else
+                                return NaN;
+                }
+                double getY()
+                {
+                        if(valid)
+                                return Y;
+                        else
+                                return NaN;
+                }
+                Point midPoint(Point p);
+};
+Point Point::midPoint(Point p)
+{
+        if(valid &amp;&amp; p.isValid())
+                return Point((X+p.getX())/2,(Y+p.getY())/2);
+        else
+                return Point(false);
+}
+class Line{
+        private:
+                double A,B,C;
+        public:
+                Line(){}
+                Line(double a,double b,double c)
+                {
+                        A=a;
+                        B=b;
+                        C=c;
+                }
+                Line(Point a,Point b)
+                {
+                        double dx = a.getX()-b.getX();
+                        double dy = a.getY()-b.getY();
+                        A=dy;
+                        B=-1.0*dx;
+                        C=dx*a.getY()-dy*a.getX();
+                }
+                void output()
+                {
+                        printf(&quot;%.1fx%+.1fy%+.1f=0\n&quot;,A,B,C);
+                }
+                double dist(Point a);
+                Point CrossPoint(Line b);
+                bool inLine(Point p);
+};
+double Line::dist(Point a)
+{
+        return (A*a.getX()+B*a.getY()+C)/sqrt(A*A+B*B);
+}
+Point Line::CrossPoint(Line L)
+{
+        double tx,ty;
+        if(A*L.A*B*L.B ==0)
+        {
+                if((A==0 &amp;&amp; L.A==0) || (B==0 &amp;&amp; L.B==0))
+                {
+                        return Point(false);
+                }
+                else
+                {
+                        if(A==0)
+                        {
+                                ty = -1*C/B;
+                                tx = -1*(L.B*ty+L.C)/L.A;
+                        }
+                        else if(L.A==0)
+                        {
+                                ty = -1*L.C/L.B;
+                                tx= -1*(B*ty+C)/A;
+                        }
+                        else if(B==0)
+                        {
+                                tx = -1*C/A;
+                                ty = -1*(L.C+L.A*tx)/L.B;
+                        }
+                        else //L.B==0
+                        {
+                                tx = -1*L.C/L.A;
+                                ty = -1*(C+A*tx)/B;
+                        }
+                        return Point(tx,ty);
+                }
+        }
+        else if((A-L.A)*(B-L.B)==0)
+        {
+                // assume there no 2 same lines;
+                if(A-L.A==0)
+                {
+                        ty=(C-L.C)/(L.B-B);
+                        tx = -1*(B*ty+C)/A;
+                }
+                else  // B-L.B==0
+                {
+                        tx = (C-L.C)/(L.A-A);
+                        ty = -1*(C+A*tx)/B;
+                }
+                return Point(tx,ty);
+        }
+        else
+        {
+                double D=L.A*B-A*L.B, D1 = L.A*C+A*L.C;
+                ty = -D1/D; // assume there no parallel lines
+                tx = -1*(B*ty+C)/A;
+                return Point(tx,ty);
+        }
+}
+bool Line::inLine(Point p)
+{
+        const double epsilon = 0.00000001;
+        return fabs(A*p.getX()+B*p.getY()+C)&lt;epsilon;
+}
+void solve()
+{
+        vector&lt;Point&gt; v;
+        int i,N,x,y;
+        scanf(&quot;%d&quot;,&amp;N);
+        for(i=0;i&lt;N;i++)
+        {
+                scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+                v.push_back(Point(x,y));
+        }
+        for(i=0;i&lt;N+2;i++)
+        {
+                Line L0 = Line(v[i%v.size()],v[(i+2)%v.size()]);
+                if(L0.inLine(v[(i+1)%v.size()]))
+                {
+                        v.erase(v.begin()+(i+1)%v.size());
+                        i-=1;
+                }
+        }
+        int RealPoints = v.size();
+        int winFlag = 0;
+        for(i=0;i&lt;RealPoints/2 &amp;&amp; winFlag==0;i++)
+        {
+                winFlag=1;
+                Line L0 = Line(v[i],v[i+RealPoints/2]);
+                for(int j=1;j&lt;RealPoints/2 &amp;&amp; winFlag==1;j++)
+                {
+                        Point r = v[(i+j)%RealPoints].midPoint(v[(i+RealPoints-j)%RealPoints]);
+                        if(L0.inLine(r)==false)
+                        {
+                                winFlag = 0;
+                                break;
+                        }
+                }
+                if(winFlag==1)
+                {
+                        break;
+                }
+        }
+        if(winFlag==1)
+                printf(&quot;YES\n&quot;);
+        else
+                printf(&quot;NO\n&quot;);
+        return ;
+}
+int main(void)
+{
+        int T;
+        scanf(&quot;%d&quot;,&amp;T);
+        for(int i = 0 ;i&lt;T;i++)
+        {
+                printf(&quot;Case %d: &quot;,i+1);
+                solve();
+        }
+        return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-04T10:37:30+09:00">
+      火 04 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

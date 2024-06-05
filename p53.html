@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 抓住那头牛 [OpenJ_Bailian - 4001]</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p53.html" rel="bookmark"
+         title="Permalink to 抓住那头牛 [OpenJ_Bailian - 4001]">抓住那头牛 [OpenJ_Bailian - 4001]</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> <br /><a href="https://cn.vjudge.net/problem/OpenJ_Bailian-4001#author=malic">https://cn.vjudge.net/problem/OpenJ_Bailian-4001#author=malic</a>  </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>一般找最短方案都是用广度优先搜索，不只是图算法里有广度优先算法，对解空间进行遍历也可以使用BFS进行搜索。<br />简单情形，猫初始在X号箱子，它想去的Y号箱子比X的号码小，这时它只能逐个箱子的走过去，这时直接输出X-Y.<br />其它情形，就进行广度优先搜索，第k次移动处于位置x的时候，第k+1次移动可能处于x+1,x-1或2x，为节省时间，要保证x+1,x-1和2x以前没走过，这儿加个数组判断这个点x+1，x-1，2x以前是否没走到，若没走到的话就走过去。可以设定一个结构体记下当前的移动次数level和坐标data，初始data=X,level=0放入队列，从队列出取一个数，检查x+1,x-1,2x是否没有被访问过，没访问过的就以level=level+1和相应data入队，直到发现data=Y的时候，输出移动步数level并终止程序.&nbsp; </p>
+<!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;cstdio>
+#include &lt;queue>
+#define MAXN 100003
+using namespace std;
+struct qNode
+{
+    int data;
+    int level;
+};
+int main(void)
+{
+    bool visited[MAXN]={0};
+    queue&lt;qNode> q;
+    qNode *p,*n1,*n2,*n3;
+    int start,target;
+    scanf("%d%d",&amp;start,&amp;target);
+    if(start>=target)
+    {
+        printf("%d\n",start-target);
+    }
+    else
+    {
+        p=new qNode;
+        n1=new qNode;
+        n2=new qNode;
+        n3=new qNode;
+        p->data=start;
+        p->level=0;
+        visited[start]=true;
+        q.push(*p);
+        while(q.size()>0)
+        {
+            *p=q.front();
+            q.pop();
+            if(p->data==target)
+            {
+                printf("%d\n",p->level);
+                break;
+            }
+            if( p->data+1&lt;MAXN &amp;&amp; visited[p->data+1]==false)
+            {
+                n1->data=p->data+1;
+                visited[p->data+1]=true;
+                n1->level=p->level+1;
+                q.push(*n1);
+            }
+            if( p->data-1>=0 &amp;&amp; visited[p->data-1]==false)
+            {
+                n2->data=p->data-1;
+                visited[p->data-1]=true;
+                n2->level=p->level+1;
+                q.push(*n2);
+            }
+            if(p->data*2&lt;MAXN &amp;&amp; visited[p->data*2]==false)
+            {
+                n3->data=p->data*2;
+                visited[p->data*2]=true;
+                n3->level=p->level+1;
+                q.push(*n3);
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+<!-- /wp:code -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-03-09T09:53:44+09:00">
+      土 09 3月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 内存映射文件mapping file：windows的C, C#实现</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p387.html" rel="bookmark"
+         title="Permalink to 内存映射文件mapping file：windows的C, C#实现">内存映射文件mapping file：windows的C, C#实现</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>C++ 发送端：先用CreateFileMapping()创建共享内存，pBuf是内存中的内容，将内容写入其中。例如，在程序路径下有图片<code>sample.jpg</code>，使用内存映射文件通过C++读取，再用C#读出内容并显示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;windows.h&gt;
+using namespace std;
+#define BUF_SIZE 388160
+const char szName[] = &quot;fileMapping_01&quot;;    // 共享内存的名字
+int main()
+{
+    char x;
+    char msg[BUF_SIZE];
+    // 创建共享文件句柄
+    HANDLE hMapFile = CreateFileMapping(
+        INVALID_HANDLE_VALUE,    // 物理文件句柄
+        NULL,                    // 默认安全级别
+        PAGE_READWRITE,          // 可读可写
+        0,                       // 高位文件大小
+        BUF_SIZE,                // 地位文件大小
+        (LPCSTR)szName                   // 共享内存名称
+        );
+    char *pBuf = (char *)MapViewOfFile(
+        hMapFile,            // 共享内存的句柄
+        FILE_MAP_ALL_ACCESS, // 可读写许可
+        0,
+        0,
+        BUF_SIZE
+        );
+    FILE *fp = fopen(&quot;sample.jpg&quot;,&quot;rb&quot;);
+    int i=0;
+    while(fscanf(fp,&quot;%c&quot;,&amp;pBuf[i])!=EOF)
+    {
+        i+=1;
+    }
+    pBuf[i]=0;
+    fclose(fp);
+    scanf(&quot;%c&quot;,&amp;x);
+    UnmapViewOfFile(pBuf);
+    CloseHandle(hMapFile);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>C#接收端：新建C#的winform项目，为button1编写click方法，读取共享内存中的内容，展示在picturebox1上。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"dracula"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.IO;
+using System.IO.MemoryMappedFiles;
+namespace client_csharp
+{
+    public partial class Form1 : Form
+    {
+        const int BUF_SIZE = 388160;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var mmf = MemoryMappedFile.OpenExisting(&quot;fileMapping_01&quot;))
+            {
+                MemoryMappedViewAccessor viewAccessor = mmf.CreateViewAccessor(0, BUF_SIZE);
+                byte[] charsInMMf = new byte[BUF_SIZE];
+                viewAccessor.ReadArray&lt;byte&gt;(0, charsInMMf, 0, BUF_SIZE);
+                var p = Image.FromStream(new MemoryStream(charsInMMf));
+                pictureBox1.BackgroundImage = (Bitmap)p;
+            }
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>另外，用C编写接收端，从中读数据输出到控制台：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;windows.h&gt;
+using namespace std;
+#define BUF_SIZE 1025
+const char szName[] = &quot;fileMapping_01&quot;;    // 共享内存的名字
+int main()
+{
+    // 创建共享文件句柄
+    HANDLE hMapFile = CreateFileMapping(
+        INVALID_HANDLE_VALUE,    // 物理文件句柄
+        NULL,                    // 默认安全级别
+        PAGE_READWRITE,          // 可读可写
+        0,                       // 高位文件大小
+        BUF_SIZE,                // 地位文件大小
+        (LPCSTR)szName                   // 共享内存名称
+        );
+    char *pBuf = (char *)MapViewOfFile(
+        hMapFile,            // 共享内存的句柄
+        FILE_MAP_ALL_ACCESS, // 可读写许可
+        0,
+        0,
+        BUF_SIZE
+        );
+    printf(&quot;%s&quot;,pBuf);
+    UnmapViewOfFile(pBuf);
+    CloseHandle(hMapFile);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>C#的发送端，类似，但C#的char是2字节的，若要与C进行字符上的通信，必须用byte进行数据流的交换，再对byte进行转换才可以。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"base16-light"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>using System;
+using System.IO;
+using System.IO.MemoryMappedFiles;
+using System.Runtime.InteropServices;
+using System.Threading;
+namespace sendfm
+{
+    class Program
+    {
+        public struct ServiceMsg
+        {
+            public int Id;
+            public long NowTime;
+        }
+        static void Main(string[] args)
+        {
+            String shareName = &quot;sharedMem&quot;;
+            using (MemoryMappedFile mmf = MemoryMappedFile.CreateOrOpen(shareName, 1024000, MemoryMappedFileAccess.ReadWrite))
+            {
+                bool mutexCreated;
+                //进程间同步
+                var mutex = new Mutex(true, &quot;testmapmutex&quot;, out mutexCreated);
+                using (MemoryMappedViewStream stream = mmf.CreateViewStream()) //创建文件内存视图流
+                {
+                    var writer = new BinaryWriter(stream);
+                    for (int i = 0; i &lt; 5; i++)
+                    {
+                        writer.Write(10*i);
+                        Console.WriteLine(&quot;{0}位置写入流:{0}&quot;, i);
+                    }
+                }
+                mutex.ReleaseMutex();
+                Console.WriteLine(&quot;启动状态服务，按【回车】读取共享内存数据&quot;);
+                Console.ReadLine();
+                mutex.WaitOne();
+                using (MemoryMappedViewStream stream = mmf.CreateViewStream())
+                {
+                    var reader = new BinaryReader(stream);
+                    for (int i = 0; i &lt; 10; i++)
+                    {
+                        Console.WriteLine(&quot;{1}位置:{0}&quot;, reader.ReadInt32(), i);
+                    }
+                }
+                using (MemoryMappedViewAccessor accessor = mmf.CreateViewAccessor(1024, 10240))
+                {
+                    int colorSize = Marshal.SizeOf(typeof(ServiceMsg));
+                    ServiceMsg color;
+                    for (int i = 0; i &lt; 50; i += colorSize)
+                    {
+                        accessor.Read(i, out color);
+                        Console.WriteLine(&quot;{1}\tNowTime:{0}&quot;, new DateTime(color.NowTime), color.Id);
+                    }
+                }
+                mutex.ReleaseMutex();
+            }
+        }
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-01-17T09:31:43+09:00">
+      金 17 1月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

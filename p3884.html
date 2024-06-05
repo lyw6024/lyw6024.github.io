@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - spring実戦：パスワードの更新</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3884.html" rel="bookmark"
+         title="Permalink to spring実戦：パスワードの更新">spring実戦：パスワードの更新</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>首先先加一个页面。数据库中加一行：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"sql","mime":"text/x-sql"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>INSERT INTO role_group VALUES
+('RG00007',
+ 'ログインパスワード変更',
+ '/user/changepassswd',
+ 65535,
+ 7,
+ '2021-10-29 16:00:00',
+ '2030-11-01 00:00:00',
+ 1);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>相应地，在UserCtrl中映射这个地址<code>'/user/changepassswd'</code>,</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>        @RequestMapping(value=&quot;/user/changepassswd&quot;)
+        @Role(roles = {BaseRole.R16384, BaseRole.R32768})
+        public String changePassword(Model model)
+        {
+                return &quot;user/changepassword&quot;;
+        }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>建立一个模板<code>changepassword.html</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"htmlmixed","mime":"text/html"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+&lt;div class=&quot;menuzonediv container&quot;&gt;
+&lt;form id=&quot;frmUserChangePasswd&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;txtPrevPasswd&quot;&gt;現在のパスワード&lt;/label&gt;
+                        &lt;input class=&quot;form-control useraddinputstyle&quot; type=&quot;password&quot; name=&quot;prevPassword&quot; id=&quot;txtPrevPasswd&quot; autocomplete=&quot;off&quot; value=&quot;prevPass&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;txtNewPasswd&quot;&gt;新しいパスワード&lt;/label&gt;
+                &lt;input class=&quot;form-control useraddinputstyle&quot; type=&quot;password&quot; name=&quot;newPassword&quot; id=&quot;txtNewPasswd&quot; autocomplete=&quot;off&quot; value=&quot;newPass2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+        &lt;label for=&quot;txtNewPasswdRe&quot;&gt;新しいパスワード（確認）&lt;/label&gt;
+                &lt;input class=&quot;form-control useraddinputstyle&quot; type=&quot;password&quot; name=&quot;newPasswordRe&quot; id=&quot;txtNewPasswdRe&quot; autocomplete=&quot;off&quot; value=&quot;newPass3&quot;&gt;
+&lt;/div&gt;
+&lt;div id=&quot;alertSuccess&quot; class=&quot;alert alert-success&quot; role=&quot;alert&quot; style=&quot;display:none;&quot;&gt;
+パスワードを更新しました。
+&lt;/div&gt;
+&lt;div id=&quot;alertWarning&quot; class=&quot;alert alert-warning&quot; role=&quot;alert&quot; style=&quot;display:none;&quot;&gt;
+&lt;span id=&quot;warningMessage&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;input type=&quot;button&quot; class=&quot;conditionbutton1&quot; id=&quot;btnChangePasswd&quot; value=&quot;更新&quot;&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function() {
+    $(&quot;#topDispTitle&quot;).html(&quot;ログインパスワード変更&quot;);
+    $(&quot;#dispTitleArea&quot;).removeClass(&quot;d-none&quot;);
+});
+function showSuccessAlert()
+{
+        $(&quot;#alertSuccess&quot;).show();
+        setTimeout('$(&quot;#alertSuccess&quot;).fadeOut();',1200);
+}
+function showWarningAlert(message)
+{
+        $(&quot;#warningMessage&quot;).html(message);
+        $(&quot;#alertWarning&quot;).show();
+        setTimeout('$(&quot;#alertWarning&quot;).fadeOut();',1200);
+}
+&lt;/script&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>index.js中加入此更新按钮的动作</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"javascript","mime":"text/javascript"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>
+        $(document).on('click', '#btnChangePasswd', function() {
+                var transJson = parseFormData($(&quot;#frmUserChangePasswd&quot;));
+                console.log(transJson);
+                $.ajax({
+                        url: TRIAL_CONTEXT_PATH + '/user/changepswordAction',
+                        data: transJson,
+                        type: 'post',
+                        contentType: &quot;application/json&quot;
+                }).done(function(data) {
+                        console.log(data);
+                        //通信成功時の処理
+                        if(data==&quot;Success&quot;){
+                                //チェック成功時の処理
+                                showSuccessAlert();
+                        } else if(data==&quot;E0018&quot;) {
+                                //ErrorSituation 1
+                                // message is 「使用できる文字種は大小英文字、数字、記号の全てを組み合わせて、8文字以上、12文字以下です。」
+                                showWarningAlert(&quot;使用できる文字種は大小英文字、数字、記号の全てを組み合わせて、8文字以上、12文字以下です。&quot;);
+                        } else if(data==&quot;E0019&quot;) {
+                                //ErrorSituation 2
+                                // message is 「新パスワード」と「新しいパスワード(確認)」が一致していません。」
+                                showWarningAlert(&quot;新パスワード」と「新しいパスワード(確認)」が一致していません。&quot;);
+                        } else if(data==&quot;E0020&quot;) {
+                                //ErrorSituation 2
+                                // message is 「現在のパスワードが違います。」
+                                showWarningAlert(&quot;現在のパスワードが違います。&quot;);
+                        }
+                }).fail(function(xhr) {
+                        //通信失敗時の処理
+                        showErrorModal(&quot;更新に異常が発生しました。&quot;, $('#errorMessage'), $('#modalMsgBox'));
+                });
+        });
+        </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>然后实现这个post的动作。在userCtrl类中</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>        @RequestMapping(value=&quot;/user/changepswordAction&quot;,method = RequestMethod.POST)
+        @ResponseBody
+        @Role(roles = {BaseRole.R16384, BaseRole.R32768})
+        public String changePasswordAction(@RequestBody PasswordDto passDto,Model model)
+        {
+                UserInfo userInfo = (UserInfo) httpSession.getAttribute(SysConstants.LOGIN_USER);
+                if (Objects.isNull(userInfo)) {
+                return &quot;user/login&quot;;
+            }
+                if(!usersService.checkPassword(userInfo.getUserId(),passDto.getPrevPassword())) {
+                        //NG: old password wrong
+                        return &quot;E0020&quot;;
+                }else if(!passDto.getNewPassword().equals(passDto.getNewPasswordRe())) {
+                        //NG: password not equals
+                        return &quot;E0019&quot;;
+                }
+                // (↑) password valid OK;
+                // (↓) password format check
+                if( !StringUtils.passwordValid(passDto.getNewPassword()) ) {
+                        return &quot;E0018&quot;;
+                } else {
+                        // password OK, update to Database
+                        if(!usersService.updateUserPassword(userInfo.getUserId(),passDto.getNewPassword())) {
+                                return &quot;E0015&quot;;
+                        } else {
+                                return &quot;Success&quot;;
+                        }
+                }
+        }
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这儿第21行是自己添加的StringUtils类，在utils路径下。首先新建这个类，并且在userCtrl类中使用时需要在最上边import进来。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这个StringUtils就是处理字符串的函数，这儿主要是处理密码，检查密码长度、分别存在大小写和数字。大写判断用循环逻辑，后边使用正则表达式进行检查。（当然判断大写的逻辑也可以用正则式<code>"[A-Z]"</code>）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>package jp.co.basenet.trial.utils;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+public class StringUtils {
+        private static boolean hasUppercase(String passwd) {
+                final String upperText = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+                for(char c:passwd.toCharArray()){
+                        if(upperText.indexOf(String.valueOf(c))&gt;=0){
+                                return true;
+                        }
+                }
+                return false;
+        }
+        private static boolean hasLowercase(String passwd) {
+                Pattern p = Pattern.compile(&quot;[a-z]&quot;);
+        Matcher m = p.matcher(passwd);
+                return m.find();
+        }
+        private static boolean hasDigital(String passwd) {
+                Pattern p = Pattern.compile(&quot;\\d&quot;);
+        Matcher m = p.matcher(passwd);
+                return m.find();
+        }
+        public static boolean passwordValid(String passwd)
+        {
+                return ( (8&lt;=passwd.length() &amp;&amp; passwd.length()&lt;=12)
+                        &amp;&amp; hasUppercase(passwd)
+                        &amp;&amp; hasLowercase(passwd)
+                        &amp;&amp; hasDigital(passwd) );
+        }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这里处理完成，就可以将密码加到数据库里了。先在UserService里加个接口，然后在userServiceImpl中实现。用userInfoResposity更新到SQL中，用xml写SQL语句。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>UserService</code>类：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Boolean updateUserPassword(String userId,String newPasswd);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>UserServiceImpl</code>类：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>     public Boolean updateUserPassword(String userId,String newPasswd)
+        {
+                Optional&lt;UserInfo&gt; userOptional = userInfoRepository.findById(userId);
+        if (!userOptional.isPresent()) {
+            return false;
+        }
+        UserInfo userInfo = userOptional.get();
+        String userNewPasswordSha = SHA256Utils.getSHA256(userId + newPasswd);
+        userInfo.setUserPassword(userNewPasswordSha);
+                userInfoRepository.updateUserPassword(userInfo);
+                return true;
+        }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>UserInfoMapper</code>类：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-java"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>     void updateUserPassword(UserInfo userinfo);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p><code>UserInfoMapper.xml</code>：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"xml","mime":"application/xml"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>    &lt;update id=&quot;updateUserPassword&quot; parameterType=&quot;jp.co.basenet.trial.jpa.model.UserInfo&quot;&gt;
+        update user_info set
+            user_password=#{userPassword},
+                        update_datetime=#{updateDatetime},
+                        update_user_id=#{updateUserId}
+        where user_id = #{userId}
+    &lt;/update&gt;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-10-29T13:56:45+09:00">
+      金 29 10月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

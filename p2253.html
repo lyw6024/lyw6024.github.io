@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 搜索算法III：启发式搜索</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2253.html" rel="bookmark"
+         title="Permalink to 搜索算法III：启发式搜索">搜索算法III：启发式搜索</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> [TABS_R id=2260] </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在对最短路搜索时，如果起点与终点的距离较远，使用BFS会扩展出非常多的结点，运算量将是以指数式增长。尤其是比较“空旷”的状态转移，从起点到终点几乎没有阻碍，但是使用BFS仍然需要添加那些绕远路的节点。这时，我们应想一个办法，使我们的搜索优先去找“最有希望最短到达终点”的新结点，即使偶尔会绕远路，但在一马平川的情况，其高效就体现出来了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>但是，如果让搜索径直朝向终点扩展，那可能因为没有大局观而某几步走了近路反而导致一条路走到黑。实际上从起点出发的步数也应当考虑在代价之内。于是，启发式搜索便是这样的思路：定义函数\( F(X)= G(X) + H(X) \),其中\( G(X) \)就是常规的BFS扩展到状态\( X \)所用的步数，而 \( H(X) \) 则是我们为问题设计的<strong>评估函数</strong>，如果对所有状态的评估函数的值都一样就是常规的BFS，而经过设计的评估函数\( H(X) \)可以使启发式搜索比BFS更加优先快速地找到最短路。可以说\( H(X) \)设计的好坏决定了对问题使用启发式搜索效率的高低。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在设计\( H(X) \) 时，\( H(X) \)的值越大，就会越强烈地去搜索更近的路，效果也会越快，但应当注意，过于大的\( H(X) \)值会使搜索过程丢失最优解。所以，<strong>评估函数\( H(X) \)的值必须不大于实际当前状态到目标状态的代价</strong>.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>启发式搜索在实际表现时，未必一定能比BFS要高效，一方面取决于评估函数的选取，另一个方面由于在选取状态时也会有额外的开销。而快速趋近目标结果所减少的时间，能否弥补这一部分开销也是非常关键的。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，我们使用走迷宫任务来探讨启发式搜索。从'+'出发到达'*'，并二者直线方向设立墙，使之需要稍微绕一下才能走到：</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">13 9
+---------
+---------
+---------
+---------
+-+----#--
+------#--
+------#--
+------#--
+------#--
+--#####--
+---------
+-------*-</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>直接使用BFS的走迷宫这样编写，我们将board访问的顺序用小写英文字母表示，'a'表示第1步的访问，'b'表示第2步的访问，...。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[collapse title="code"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+struct qNode{
+    int x,y,level;
+    qNode(){}
+    qNode(int xx,int yy,int ll)
+    { x=xx;y=yy;level=ll;}
+};
+#define MAXN 25
+char board[MAXN][MAXN];
+int H,W;
+void outputBoard()
+{
+    for (int i=0;i&lt;=H+1;i++){
+        for (int j=0;j&lt;=W+1;j++){
+            printf(&quot;%c&quot;,board[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+void bfs(int startX,int startY)
+{
+        int dir[8][2] = {
+                {0, -1},{0,  1},{-1, 0},{1,0},
+                {1, -1},{1,  1},{-1, -1},{-1,1}
+        };
+    std::queue&lt;qNode&gt; q;
+    printf(&quot;%c\n&quot;,board[startX][startY]);
+    q.push(qNode(startX,startY,0));
+    qNode curr;
+    int ret = -1;
+    int winFlag =0;
+    while (q.size()&gt;0 &amp;&amp; winFlag == 0){
+        curr = q.front();
+        q.pop();
+        for (int i=0;i&lt;8;i++){
+            int dx = curr.x+dir[i][0];
+            int dy = curr.y+dir[i][1];
+            if (board[dx][dy]=='*'){
+                ret = curr.level;
+                winFlag = 1;
+                break;
+            }
+            if (board[dx][dy]=='-'){
+                board[dx][dy]='a'+curr.level;
+                q.push(qNode(dx,dy,curr.level+1));
+            }
+        }
+    }
+    outputBoard();
+}
+int main(void)
+{
+    int i,j;
+    memset(board,'#',sizeof(board));
+    scanf(&quot;%d%d&quot;,&amp;H,&amp;W);
+    getchar();
+    for (i=1;i&lt;=H;i++){
+        for (j=1;j&lt;=W;j++){
+            scanf(&quot;%c&quot;,&amp;board[i][j]);
+        }
+        getchar();
+    }
+    outputBoard();
+    bfs(6,2);
+    return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>输出结果如下所示</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2296,"width":150,"height":368,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://www.malic.xyz/wp-content/uploads/image-148.png" alt="[Image]" class="wp-image-2296" width="150" height="368"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>可以看出搜索的结点非常多，即使是完全反方向的那些结点也全部搜索到了。启发式搜索则一定程度上少搜索一些绕远路的结点（但也不能完全不搜索，因为可能直线距离的近路是“死胡同”，怎么设计就看评估函数\(H(X)\)的好坏）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果我们使用启发式搜索，首先应使用两个表openList和closeList，定义\(F\)为初始到状态的步数\(G\)与评估函数\(H\)之和。流程为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"ordered":true} -->
+<ol><li>计算初始的\(F\)值加入openList.</li><li> 从openlist中取出\(F\)值最小的状态\(u\)，并将 \(u\) 加入closelist。若 \(u\) 为目标状态，结束搜索； </li><li> 对 \(u\) 进行扩展，假设其扩展的状态为 \(v\) ：若  \(v\) 未出现过，计算  \(v\) 的\( F\)值并加入openlist；若  \(v\) 在openlist中，更新  \(v\) 的 \( F\) 值，取较小的一个；若  \(v\) 在closelist中，抛弃该状态。 </li><li> 若openlist为空，结束搜索。否则回到2。 </li></ol>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>在实现这个算法时，openList的操作有取得最小值和元素存在性，而closeList只需要判断存在性，所以openList稍微麻烦一些。若使用C++ STL中的priority_queue虽然可以较快取出最小元素，但无法判断元素存在性。所以我们还要自己编写一个小顶堆，在取得最小元素的同时，能够遍历整个堆来判断其存在性。而closeList只需要用保存状态的0/1数组即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>利用这个方法可以避免搜索一些明显会远离目标状态的状态，从而缩小搜索空间，早一步搜索到目标结果。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cmath&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+#include &lt;set&gt;
+#include &quot;heap.cpp&quot;
+#define MAXN 25
+char closeList[MAXN][MAXN];
+char board[MAXN][MAXN];
+int H,W;
+void outputBoard()
+{
+    for (int i=0;i&lt;=H+1;i++){
+        for (int j=0;j&lt;=W+1;j++){
+            printf(&quot;%c&quot;,board[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+int evaluate(qNode c,int endX,int endY)
+{
+    return abs(c.x-endX) + abs(c.y - endY);
+}
+void AStarSearch(int startX,int startY)
+{
+    int i,j,endX,endY;
+    for(i=1;i&lt;=H;i++)
+        for(j=1;j&lt;=W;j++){
+            if(board[i][j]=='*') {
+                endX=i;
+                endY=j;
+            }
+        }
+        int dir[8][2] = {
+                {0, -1},{0,  1},{-1, 0},{1,0},
+                {1, -1},{1,  1},{-1, -1},{-1,1}
+        };
+    heap_t *h = heap_create(1,cmp_qNode);
+    heap_push(h,qNode(startX,startY,0,0,0));
+    while(!heap_empty(h)){
+        qNode curr = heap_top(h);
+        if(curr.x==endX &amp;&amp; curr.y==endY)
+        {
+            break;
+        }
+        heap_pop(h);
+        closeList[curr.x][curr.y]=1;
+        for(i=0;i&lt;8;i++)
+        {
+            int dx = curr.x+dir[i][0];
+            int dy = curr.y+dir[i][1];
+            if(board[dx][dy]!='#'){
+                qNode next;
+                next.x = dx;
+                next.y = dy;
+                next.G;
+                next.H;
+                next.F = next.G + next.H;
+                if(heap_exists(h,next)){
+                    if(next.F &gt; next.H + curr.G+1){
+                        next.F = next.H + curr.G + 1;
+                    }
+                } else if(closeList[dx][dy]==1){
+                    continue;
+                } else {
+                    next.G = curr.G+1;
+                    next.H = evaluate(next,endX,endY);
+                    next.F = next.G + next.H;
+                    board[dx][dy]='a'+next.G-1;
+                    heap_push(h,next);
+                }
+            }
+        }
+    }
+    outputBoard();
+}
+int main(void)
+{
+    int i,j;
+    memset(board,'#',sizeof(board));
+    memset(closeList,0,sizeof(closeList));
+    scanf(&quot;%d%d&quot;,&amp;H,&amp;W);
+    getchar();
+    for (i=1;i&lt;=H;i++){
+        for (j=1;j&lt;=W;j++){
+            scanf(&quot;%c&quot;,&amp;board[i][j]);
+        }
+        getchar();
+    }
+    outputBoard();
+    AStarSearch(6,2);
+    return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这时的搜索顺序是这样的</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2325,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-149.png" alt="[Image]" class="wp-image-2325"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>可以看出，启发式搜索会尽量地朝向终点的方向去搜索，不会向“南辕北辙”的路走，减少了搜索的结点。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-16T07:49:58+09:00">
+      日 16 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

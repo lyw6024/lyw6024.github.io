@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C#自制控件：以扇形图控件为例</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2240.html" rel="bookmark"
+         title="Permalink to C#自制控件：以扇形图控件为例">C#自制控件：以扇形图控件为例</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>C#的winform自带许多控件，在实际的工程需求中，可能需要将其中几个控件组合成一个新的控件使用，或者根据自己的设计来美化控件。这时，我们可以通过继承UserControl类，实现自定义控件的绘制。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在VS2019中，新建一个项目属性为“Windows窗体控件库”的项目。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2241,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-141.png" alt="[Image]" class="wp-image-2241"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>这时出现了没有窗口边框的控件编辑界面，这时可以将工具箱中的多个工具拖到编辑界面上。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外新建一个窗体项目进行测试控件之用，要将编写的控件应用到自己窗体上，只需要在引用中添加自定义窗口的工程即可。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在控件编辑界面上，放置一个正方形的panel，用来将扇形图绘制在panel上，再加入一个label，用于显示数值。对于控件，我们可能根据控件的特点添加属性，只需要将数据字段设为<code>public</code>即可，而对于控件，一种非常常用的功能，就是当数值改变时控件的变化。我们可以这样编写：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private int _rate;
+[Category(&quot;自定义数据段&quot;),Description(&quot;扇形图的数据&quot;)]
+public int Rate
+{
+    get
+    {
+        return _rate;
+    }
+    set
+    {
+        if(value!=_rate)
+        {
+            whenValueChange();
+        }
+        _rate = value;
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样控件的属性中就会有Rate字段，而对Rate字段的编辑对应在代码中就是<code>value</code>，其类型等于Rate的类型。当控件的数值改变的时候，控件会有变化，而变化的形式可以通过定义的函数来指定。例如这里当Rate改变时，我们将按Rate数值而重新对绘扇形图进行绘制。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>绘制扇形图即在panel的区域内用Graphics绘制相应度数的弧。当Rate修改的时候label也会修改。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private Brush foreBrush = Brushes.Orange;
+private Brush backBrush = Brushes.Azure;
+private void drawProcess()
+{
+    var sp = Convert.ToInt32(360 * _rate*1.0 / 100);
+    var gr = panel1.CreateGraphics();
+    gr.FillPie(foreBrush, panel1.ClientRectangle, 0, sp);
+    gr.FillPie(backBrush, panel1.ClientRectangle,sp,360-sp);
+}
+private void whenValueChange()
+{
+    drawProcess();
+    label1.Text = _rate.ToString()+&quot;%&quot;;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>对于控件，除了自定义属性，还能够自定义事件。自定义事件是通过定义委托函数，将委托函数定义为<code>public</code>类型，即可在自定义事件中调用它。例如再对自定义属性Rate的修改的时候调用函数。定义如下的委托函数</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public delegate void Rate_ValueChangedDelegate(object sender, EventArgs e);
+[Category(&quot;自定义事件&quot;), Description(&quot;当Rate变更时&quot;)]
+public event Rate_ValueChangedDelegate Rate_ValueChanged;
+private void whenValueChange()
+{
+    drawProcess();
+    label1.Text = _rate.ToString()+&quot;%&quot;;
+    Rate_ValueChanged?.Invoke(this, null);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样就基本地实现了对控件的自定义属性与自定义事件。另外，对于使用Graphics绘制的内容，需要重写<code>OnPaint</code>函数，否则当窗体需要重绘的时候（例如最小化之后再还原时）Graphics的内容会被清空。由于编写了<code>drawProcess()</code>函数，只需要在<code>OnPaint</code>函数调用<code>drawProcess()</code>函数即可：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>protected override void OnPaint(PaintEventArgs e)
+{
+    drawProcess();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>在主窗体中测试自定义控件的功能，添加引用之后可以看到工具箱中会出现新定义的控件，将之放在窗体中，控件的属性与事件中可以分别看到自定义的public字段以及相应委托函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2245,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-142.png" alt="[Image]" class="wp-image-2245"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:image {"align":"center","id":2246,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-143.png" alt="[Image]" class="wp-image-2246"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p> 再利用一个TrackBar用来调整自定义控件的Rate数值，并为trackBar1编写当trackBar1的数值修改时，让Rate跟随trackBar1的value。可以看到自定义控件的图形发生了变化。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2247,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-144.png" alt="[Image]" class="wp-image-2247"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>根据这些基本的对控件的控制方法，可以根据需要扩展到更丰富的功能。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-13T10:01:36+09:00">
+      木 13 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 让数组排序动起来：利用OpenCV将数组排序可视化</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1847.html" rel="bookmark"
+         title="Permalink to 让数组排序动起来：利用OpenCV将数组排序可视化">让数组排序动起来：利用OpenCV将数组排序可视化</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>排序是基本的算法之一，常用的有选择排序、插入排序、起泡排序、归并排序、快速排序等，大多数程序语言也内置了对数组的排序操作。在学习阶段还是需要掌握和理解这些排序的规则的，如果把数组以图形的方式显示出来并把排序过程做成动画，会更容易理解与接受。今天就利用OpenCV来实现将排序展示出来。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>OpenCV做成动态只需要记住使用<code>cv2.waitKey(delay)</code>,就可以让画面停顿<code>delay</code>毫秒，我们可以在排序的每一步，停顿几十毫秒并将当前的数组以图形的方式展示出来，这样进行排序就可以将排序可视化。本文将用Python和C#对此任务进行讨论。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>Python</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Python安装OpenCV不再赘述，建立空的<code>Main.py</code>文件以及新建图片文件<code>background.png</code>。导入必要的包，以及预定义常量：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import cv2
+import random
+import math
+N=500
+upperbound=100
+winSize=300
+winName=&quot;sortviz&quot;
+delay_frame=50
+delay_sorted=1000
+backgroundColor=[0x80,0x80,0x80]
+foreColor = [0xFF,0xFF,0x0]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>N和upperbound是数组的大小和数组中元素可能的最大值，排序前的数组是通过随机数生成的，所以要预先给定数组中可能的最大值upperbound。接下来winSize和winName是窗口尺寸与窗口名称，在使用<code>cv2.imshow(winName,mat)</code>对图像更新时，只要名为winName的窗口存在，mat就会更新在名为winName的窗体中，从而实现动态的效果。设定每50毫秒刷新一次，排序结束后延迟为1000毫秒。背景色是灰色，前景色是Aqua，这里指定的就是[Blue,Green,Red]。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>设计一个函数，用来进行快速排序</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def qSort(a,lwbd,upbd):
+    if(lwbd&lt;upbd):
+        t=a[lwbd]
+        i=lwbd
+        j=upbd
+        while i!=j:
+            while i&lt;j and a[j]&gt;t:
+                j-=1
+            if i&lt;j:
+                a[i]=a[j]
+                i+=1
+            while i&lt;j and a[i]&lt;=t:
+                i+=1
+            if i&lt;j:
+                a[j]=a[i]
+                j-=1
+        a[i]=t
+        qSort(a,lwbd,i-1)
+        qSort(a,i+1,upbd)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>如果我们要通过控制台看排序的每步，应该在qSort()的递归调用前将列表a输出，而现在要将a显示在openCV的窗体上，就将更新语句放在这个位置。现在需要编写将列表a转换为图形的函数<code>plotArray()</code>，同时将qSort()包装一下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def drawBackground():
+    img[0:winSize,0:winSize]=backgroundColor
+def fillRectangele(p1,p2):
+    img[p1[0]:p2[0],p1[1]:p2[1]]=foreColor
+def plotArray(a):
+    drawBackground()
+    columnWidth=winSize/N
+    for i in range(len(a)):
+        fillRectangele(
+                (winSize-int(a[i]*winSize/upperbound),int(i*columnWidth)),
+                (winSize,int((1+i)*columnWidth))
+            )
+    return
+def qSort(a,lwbd,upbd):
+    if(lwbd&lt;upbd):
+        t=a[lwbd]
+        i=lwbd
+        j=upbd
+        while i!=j:
+            while i&lt;j and a[j]&gt;t:
+                j-=1
+            if i&lt;j:
+                a[i]=a[j]
+                i+=1
+            while i&lt;j and a[i]&lt;=t:
+                i+=1
+            if i&lt;j:
+                a[j]=a[i]
+                j-=1
+        a[i]=t
+        cv2.waitKey(delay_frame)
+        plotArray(a)
+        cv2.imshow(winName,img)
+        qSort(a,lwbd,i-1)
+        qSort(a,i+1,upbd)
+    return
+def QuickSort():
+    a=[random.randint(0,upperbound) for _ in range(N)]
+    qSort(a,0,len(a)-1)
+    cv2.waitKey(delay_sorted)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>每次将数组画在窗体上需要用drawBackground()重绘背景，从而将之前画的覆盖掉，然后将当前的数组在空白的背景上画出来。数组中a[i]的值画在图上缩放高为<code>a[i]*winSize/upperbound</code>，宽度为<code>columnWidth</code>的矩形。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这样，将background.png作为窗体显示，调整窗口尺寸为宽高均为winSize的3通道图像，接下来调用QuickSort()就可以把快速排序的过程展示出来了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>img = cv2.imread(&quot;background.png&quot;)
+img.resize(winSize,winSize,3)
+QuickSort()
+cv2.waitKey(0)</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>要实现更多的排序按照类似的方法，在排序过程中加入cv2.waitKey(delay_frame)和plotArray(a)以及cv2.imshow()就可以画出相应排序的动态图像。例如冒泡排序</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def BubbleSort():
+    a=[random.randint(0,upperbound) for _ in range(N)]
+    n=N-1
+    while n&gt;0:
+        lastChangeIndex=0
+        for i in range(n):
+            if(a[i]&gt;a[i+1]):
+                t=a[i]
+                a[i]=a[i+1]
+                a[i+1]=t
+                lastChangeIndex = i
+        cv2.waitKey(delay_frame)
+        plotArray(a)
+        cv2.imshow(winName,img)
+        n=lastChangeIndex
+    cv2.waitKey(delay_sorted)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>除了将数组a以柱状图的形式展示之外，还可以将a画成极坐标形式的散点，只需要将plotArray()函数进行修改。a[i]表示到图形中心的距离为a[i]*winSize/(2*upperbound)的一个点，不同点用不同的角度区分。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def drawPoint(x,y):
+    w = 1
+    l = 3
+    img[x-l:x+l,y-w:y+w]=foreColor
+    img[x-w:x+w,y-l:y+l]=foreColor
+def plotArray(a):
+    drawBackground()
+    center = winSize/2
+    dtheta = 6*math.pi/len(a)
+    for i in range(len(a)):
+        R = a[i]*winSize/(2*upperbound)
+        drawPoint(
+                int(center+R*math.cos(i*dtheta)),
+                int(center+R*math.sin(i*dtheta))
+                )
+    return </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>C#</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>C#中使用OpenCV也非常方便，在Nuget管理包中安装OpenCvSharp，在程序前using OpenCvSharp;，同样是预定义一些常量，然后初始化数组。使用C#可以新建Mat类而不需要指定图片。新建Mat对象后，绘图过程与Python类似，不再赘述。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这里用C#实现了冒泡排序、选择排序、插入排序、快速排序。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"base16-dark"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class Program
+{
+    enum PolyMode
+    {
+        polar,
+        linear
+    };
+    const int winSize = 500;
+    const string winName = &quot;sortedvis&quot;;
+    const int N = 500;
+    const int upperbound = 100;
+    const int delay_sorted = 1000;
+    const int delay_frame = 50;
+    static void Main(string[] args)
+    {
+        List&lt;int&gt; a = new List&lt;int&gt;(N);
+        for(int i=0;i&lt;N;i++)
+        {
+            a.Add(0);
+        }
+        var board = new Mat(winSize, winSize, MatType.CV_8UC3);
+        Cv2.NamedWindow(winName);
+        BubbleSort(ref board, ref a);
+        SelectionSort(ref board, ref a);
+        InsertionSort(ref board, ref a);
+        QuickSort(ref board,ref a);
+        Cv2.WaitKey(0);
+    }
+    static void DrawBG(ref Mat mat)
+    {
+        mat.FillConvexPoly(new Point[] {
+            new Point(0,0),
+            new Point(winSize,0),
+            new Point(winSize,winSize),
+            new Point(0,winSize)
+        }, Scalar.Gray);
+    }
+    static void PolyArr(ref Mat mat, ref List&lt;int&gt; a, string putText = null)
+    {
+    const PolyMode polyMode = PolyMode.polar;
+        switch (polyMode)
+        {
+            case PolyMode.polar:
+                kernal_PolarArr(ref mat, ref a, putText);
+                break;
+            case PolyMode.linear:
+                kernal_ColumnArr(ref mat, ref a, putText);
+                break;
+            default:
+                break;
+        }
+    }
+    static void kernal_ColumnArr(ref Mat mat,ref List&lt;int&gt; a,string putText=null)
+    {
+        DrawBG(ref mat);
+        var width = winSize / N;
+        var expandRate = winSize / upperbound;
+        for(int i=0;i&lt;a.Count;i++)
+        {
+            mat.FillConvexPoly(new Point[]
+            {
+                new Point(i*width,winSize),
+                new Point(i*width,winSize- a[i]*expandRate),
+                new Point((i+1)*width,winSize-a[i]*expandRate),
+                new Point((i+1)*width,winSize)
+            },Scalar.Aqua) ;
+        }
+        if (putText != null)
+        {
+            Cv2.PutText(mat, putText, new Point(30, 30), HersheyFonts.HersheyDuplex, 1, Scalar.Black);
+        }
+        Cv2.ImShow(winName, mat);
+    }
+    static void kernal_PolarArr(ref Mat mat, ref List&lt;int&gt; a, string putText = null)
+    {
+        DrawBG(ref mat);
+        var center = winSize / 2;
+        var dtheta = 10*Math.PI/a.Count;
+        for (int i = 0; i &lt; a.Count; i++)
+        {
+            var R = (a[i]) * winSize*1.0 / (2*upperbound);
+            mat.DrawMarker(new Point(center+R*Math.Cos(i*dtheta),center-R*Math.Sin(i*dtheta)),
+                Scalar.Aqua,
+                MarkerTypes.Cross,
+                5);
+        }
+        if (putText != null)
+        {
+            Cv2.PutText(mat, putText, new Point(30, 30), HersheyFonts.HersheyDuplex, 1, Scalar.Black);
+        }
+        Cv2.ImShow(winName, mat);
+    }
+    static void BubbleSort(ref Mat mat, ref List&lt;int&gt; a)
+    {
+        shuffle(ref a);
+        PolyArr(ref mat, ref a);
+        int i, lastChangedIndex,t, n = a.Count-1;
+        while(n&gt;0)
+        {
+            lastChangedIndex = 0;
+            for(i=0;i&lt;n;i++)
+            {
+                if(a[i]&gt;a[i+1])
+                {
+                    t = a[i];
+                    a[i] = a[i + 1];
+                    a[i+1]=t;
+                    lastChangedIndex = i;
+                }
+            }
+            Cv2.WaitKey(delay_frame);
+            PolyArr(ref mat, ref a,&quot;Bubble Sort&quot;);
+            n = lastChangedIndex;
+        }
+        Cv2.WaitKey(delay_sorted);
+    }
+    static void SelectionSort(ref Mat mat, ref List&lt;int&gt; a)
+    {
+        shuffle(ref a);
+        PolyArr(ref mat, ref a);
+        int i, j, k, t;
+        for(i=0;i&lt;a.Count-1;i++)
+        {
+            k = i;
+            for(j=i+1;j&lt;a.Count;j++)
+            {
+                if (a[k] &gt; a[j])
+                    k = j;
+            }
+            t = a[i];
+            a[i] = a[k];
+            a[k] = t;
+            Cv2.WaitKey(delay_frame);
+            PolyArr(ref mat, ref a, &quot;Selection Sort&quot;);
+        }
+        Cv2.WaitKey(delay_sorted);
+    }
+    static void InsertionSort(ref Mat mat,ref List&lt;int&gt;a)
+    {
+        shuffle(ref a);
+        PolyArr(ref mat, ref a);
+        int j,t;
+        for(int i=1;i&lt;a.Count;i++)
+        {
+            t = a[i];
+            for( j=i-1;j&gt;=0 &amp;&amp; t&lt;a[j];j--)
+            {
+                a[j + 1] = a[j];
+            }
+            a[j + 1] = t;
+            Cv2.WaitKey(delay_frame);
+            PolyArr(ref mat, ref a, &quot;Insertion sort&quot;);
+        }
+        Cv2.WaitKey(delay_sorted);
+    }
+    static void QuickSort(ref Mat mat,ref List&lt;int&gt; a)
+    {
+        shuffle(ref a);
+        PolyArr(ref mat, ref a);
+        qSort(ref mat, ref a, 0, a.Count - 1);
+        Cv2.WaitKey(delay_sorted);
+    }
+    static void qSort(ref Mat mat, ref List&lt;int&gt; a, int lwbd, int upbd)
+    {
+        if (lwbd &lt; upbd)
+        {
+            int i, j, t;
+            t = a[lwbd];
+            i = lwbd;
+            j = upbd;
+            while (i != j)
+            {
+                while (i &lt; j &amp;&amp; a[j] &gt; t)
+                    j--;
+                if (i &lt; j)
+                    a[i++] = a[j];
+                while (i &lt; j &amp;&amp; a[i] &lt;= t)
+                    i++;
+                if (i &lt; j)
+                    a[j--] = a[i];
+            }
+            a[i] = t;
+            Cv2.WaitKey(delay_frame);
+            PolyArr(ref mat, ref a, &quot;Quick sort&quot;);
+            qSort(ref mat, ref a, lwbd, i - 1);
+            qSort(ref mat, ref a, i + 1, upbd);
+        }
+    }
+    static void shuffle(ref List&lt;int&gt; a)
+    {
+        Random rd = new Random();
+        for (int i=0;i&lt;a.Count;i++)
+        {
+            a[i] = rd.Next(0, upperbound);
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-06-28T04:42:07+09:00">
+      日 28 6月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 挑战OJ的利器 freopen()函数</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3973.html" rel="bookmark"
+         title="Permalink to 挑战OJ的利器 freopen()函数">挑战OJ的利器 freopen()函数</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>各位朋友在初学C/C++程序设计时，不论是程序设计与算法， 还是数据结构等课程的时候，一定经常会去oj平台，可能是自己学校的OJ平台，也可能是PAT，也可能是大名鼎鼎的poj.org。在上边练习时，每个题少不了调试阶段，有时输入数据还很多，可不能每次调试都要把那么多数据都输入进去。虽然用粘贴的方法也可行（控制台内不能用鼠标右键，点控制台左上角图标会弹出菜单，从中选择粘贴），但还不够快速。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有的朋友可以说“用文件输入操作”的方法，也是非常好，数据放在文本当中保存，每次运行时可以直接出运行结果。可是数据入口比较多的时候，要对不同变量赋值，可能有好几处都是fscanf()函数，而提交到OJ上的代码要全换成scanf()，函数的参数也要变一下，不注意还可能漏掉几处，通不过OJ的编译，也略显繁琐。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>有没有更好的方法呢？当然有，方法就是用本文标题所说的freopen()函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用freopen()函数的效果和打开文件一样，运行以后直接出结果，不同之处在于用freopen()函数比用文件操作需要改动的地方少的多，只需要改动一处，即可提交到OJ上。下边我们看一看freopen()函数的用法</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>freopen()是stdio.h标准库当中的一个函数，用以重定向输入输出流。所谓输入输出流就是传数据的途径，比如用键盘输入，在控制台输出，都是输入输出流。默认的输入流数据是在键盘，这就是C程序在控制台上输入的数据，由scanf()或cin执行，运行程序后用printf()函数再输出到控制台。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们可以用freopen()函数改变默认的输入流，如果把默认的输入流改成某个文件，读数据时不再从键盘而是从文件中读入。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>freopen()有三个参数，第一个参数是文件路径，第二个参数是打开方式，第三个参数是被重定向的文件流，函数的返回值是文件指针，如果文件未打开，则返回值为NULL。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>freopen("D:/input.txt","r",stdin);</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>//以只读方式打开D盘input.txt的文件，将此文件重定向为输入流</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们为了解决输入数据的问题，只把输入流改成某个文件，输出流stdout不做更改。改变了输入流，从文本读入数据的过程与未改动时的从键盘输入是完全一样的效果，也就是说，用scanf()函数可以直接读出文件中的数据。这样，在测试过程中，的数据都从freopen()定义的输入流中读取，而调试完毕后，只把freopen()一句注释掉（删除）就可以顺利通过OJ的编译了！</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="http://lab.malic.xyz/pastebin/krGYTPgCb/">查看参考代码</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2018-09-27T01:25:15+09:00">
+      木 27 9月 2018
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

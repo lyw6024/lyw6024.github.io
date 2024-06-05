@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 查找满足A[i]+A[j]=j-i的数对(i,j)数量</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1611.html" rel="bookmark"
+         title="Permalink to 查找满足A[i]+A[j]=j-i的数对(i,j)数量">查找满足A[i]+A[j]=j-i的数对(i,j)数量</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax] </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题描述</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>给定\( N \)个数字组成的数列\( {A_N} \)，\( A_i \)下标从1开始，求出有多少对\( (i,j) \) 使 \( A_i+A_j = j-i \)成立。<br /></p>
+<!-- /wp:paragraph -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p> <a href="https://vjudge.net/problem/AtCoder-5309">https://vjudge.net/problem/AtCoder-5309</a> </p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:paragraph -->
+<p>例如对于数列 \( \{2, 3, 3, 1, 3, 1\} \)，有三个数对满足条件: <br />\[A_1+A_4=3=4-1  \\<br /> A_2+A_6=4 = 6-2 \\<br /> A_4+A_6=2=6-4 \]<br />所以此时结果为3.</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>问题分析</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>用枚举当然很简单，可是只有小数据量时能通过。由于此题给出的数列长度达\( 2\times 10^5 \)，\(O(N^2) \)的枚举法会超时。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell","theme":"seti"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>main = do
+    line&lt;-getLine
+    line&lt;-getLine
+    let p = zip [1..] [read x::Int|x&lt;-words line]
+    print $ length [1|x&lt;-p,y&lt;-p,fst y &gt; fst x,(fst y)-(fst x)==(snd x)+(snd y)]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>要想办法优化到最多 \( O(N \log(N) )\)的时间，也就是想办法将逐元素的顺序查找改为二分查找。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>我们要对数列\( A_N \)中的两个元素\( A_i,A_j\)符合\[ A_i+A_j = j-i \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>移项即\[ i+A_i = j-A_j \]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>令\( L_i = i+A_i \), \(R_i = i-A_i \)，我们只需要对每个\( L \)中的元素\( L_i \)，查找\( R \)中有多少个与 \( L_i \) 相等的即可。估算一下复杂度，对R进行1次排序并进行N次查找， 理论上可以在  \( O(N \log(N) )\)的时间完成。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>此题\( A_i \)达\( 10^9 \)，且\( N \) 最大\( 2\times 10^5\)，在计算\( L_i = i+A_i \) 时可能造成<code>int</code>范围溢出，所以将数组设为<code>long long</code>类型</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>参考程序</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src","theme":"seti"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::sort;
+using std::lower_bound;
+using std::upper_bound;
+const int MAXN=200003;
+long long a[MAXN],L[MAXN],R[MAXN];
+int main(void)
+{
+    int i,N;
+    scanf(&quot;%d&quot;,&amp;N);
+    for(i=0;i&lt;N;i++)
+    {
+        scanf(&quot;%lld&quot;,a+i);
+        L[i] = i+1+a[i];
+        R[i] = (i+1)-a[i];
+    }
+    sort(R,R+N);
+    long long ret = 0,lwbd,upbd;
+    for(i=0;i&lt;N;i++)
+    {
+        lwbd = lower_bound(R,R+N,L[i]) - &amp;R[0];
+        upbd = upper_bound(R,R+N,L[i]) - &amp;R[0];
+        ret+=upbd-lwbd;
+    }
+    printf(&quot;%lld\n&quot;,ret);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>用Python写时间比较极限，提交了一次运行1996ms，时限就2000ms</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"seti"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>def lower_bound(arr,tar):
+    def _lower_bound(first,length):
+        if(length==0):
+            return first
+        half = length//2
+        middle = first+half
+        if arr[middle]&lt;tar:
+            return _lower_bound(middle+1,length-half-1)
+        else:
+            return _lower_bound(first,half)
+    return _lower_bound(0,len(arr))
+def upper_bound(arr,tar):
+    def _upper_bound(first,length):
+        if(length==0):
+            return first
+        half = length//2
+        middle = first+half
+        if arr[middle]&gt;tar:
+            return _upper_bound(first,half)
+        else:
+            return _upper_bound(middle+1,length-half-1)
+    return _upper_bound(0,len(arr))
+N=int(input())
+a=list(map(int,input().split()))
+L = [(i+1)+a[i] for i in range(N)]
+R = [(i+1)-a[i] for i in range(N)]
+R.sort()
+s=0
+for it in L:
+    s+=upper_bound(R,it)-lower_bound(R,it)
+print(s)
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>Haskell写了一样的方法但是只有小数据能过，还需要再进一步学习</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"haskell","mime":"text/x-haskell","theme":"seti"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>import Data.List
+main = do
+    line&lt;-getLine
+    line&lt;-getLine
+    let a = [read x::Int|x&lt;-words line]
+    let aL = [x+y|(x,y)&lt;-zip a [1..]]
+    let aR = sort [y-x|(x,y)&lt;-zip a [1..]]
+    print $ sum $ map (\x -&gt;(upper_bound aR x) - ( lower_bound aR x)) aL
+lower_bound :: [Int]-&gt;Int-&gt;Int
+lower_bound a t = _lower_bound a 0 (length a) t
+_lower_bound :: [Int]-&gt;Int-&gt;Int-&gt;Int-&gt;Int
+_lower_bound a first 0  _= first
+_lower_bound a first len target = do
+    let half = div len 2
+    let middle = first + half
+    if a!!middle &lt; target
+        then _lower_bound a (middle+1) (len-half-1) target
+        else _lower_bound a first half target
+upper_bound :: [Int]-&gt;Int-&gt;Int
+upper_bound a t = _upper_bound a 0 (length a) t
+_upper_bound :: [Int]-&gt;Int-&gt;Int-&gt;Int-&gt;Int
+_upper_bound a first 0 _ = first
+_upper_bound a first len target = do
+    let half = div len 2
+    let middle = first + half
+    if a!!middle &gt; target
+        then _upper_bound a first half target
+        else _upper_bound a (middle+1) (len-half-1) target
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-03T14:32:00+09:00">
+      日 03 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

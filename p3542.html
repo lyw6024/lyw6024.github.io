@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 在本地上配置wordpress</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3542.html" rel="bookmark"
+         title="Permalink to 在本地上配置wordpress">在本地上配置wordpress</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>wordpress是经典的php语言的一种动态内容管理系统，许多网站都是基于wordpress改造而成，由于开源特性和丰富插件，也比较容易扩展改造自己喜欢的特性。但如果仅需要做内容管理而不需要发布至网络上，也不需要购买云服务器来专门开设网站，只需要在本地启动服务并输入相应网址，就可以像Microsoft Office Word那样编辑文章，并且能够进行版本管理和文章管理。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>wordpress需要使用nginx作为服务器（当然也可以用Apache或者其它的服务器），并需要php环境，当然还需要wordpress源文件。相应链接为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li>Nginx : <a rel="noreferrer noopener" href="https://nginx.org/" target="_blank">https://nginx.org/</a></li><li>PHP: <a rel="noreferrer noopener" href="https://www.php.net/" target="_blank">https://www.php.net/</a></li><li>WordPress: <a rel="noreferrer noopener" href="https://wordpress.org/" target="_blank">https://wordpress.org/</a> （中文站: <a rel="noreferrer noopener" href="https://cn.wordpress.org/" target="_blank">https://cn.wordpress.org/</a>）</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>在服务器上配置wordpress时还需要正确地配置MySQL或其它数据库服务，但在本地配置时可以不需要使用MySQL而使用SQLite替代，SQLite不像MySQL那样是客户-服务端类型的数据库服务，而是一种连接到程序中的SQL引擎，很多客户端软件都使用SQLite作为数据库引擎。在服务器上由于需要考虑并发访问等问题不建议使用SQLite，但在本地上使用的话，用SQLite引擎作为WordPress的数据库是非常合算的，免去了本地配置数据库的问题。WordPress要使用SQLite甚至不需要安装SQLite，只需要引入一个<code>db.php</code>文件即可。在配置的时候会详细介绍。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>Nginx</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>首先将Nginx,php,wordpress下载好，启用Nginx是第1步，而启用Nginx的第1步是先正确地写好config，默认的配置文件路径在Nginx目录的<code>conf/nginx.conf</code>下。Nginx的配置文件<code>#</code>开头的内容是注释，表示此行不被解析，默认的配置文件已经写好了用于php的项目，只需要将相应注释解除即可，即<code>pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</code>所对应的其下 <code>location /</code>中的一段内容，将其行前#全部删去，使这些<code>fastcgi</code>生效。另外为了使php的主页index.php能生效，还需要在前边<code>location /{ index }</code>当中加入<code>index.php</code>。并且如果只在服务器下开一个wordpress服务，直接将wordpress设为主目录，也就是将<code>location /{ root }</code>后的<code>html</code>改为相应<code>wordpress</code>路径（可以是相对于nginx.exe的路径），也就是这个路径当中有<code>index.php</code>，就能够直接用localhost访问到。完整Nginx配置为（删去了部分注释）：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"nginx","mime":"text/x-nginx-conf"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#user  nobody;
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    server {
+        listen       80;
+        server_name  localhost;
+        location / {
+            root   html/wordpress;
+            index  index.php index.html index.htm;
+        }
+        #error_page  404              /404.html;
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+            root           html;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>PHP</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>下载并解压PHP，同样先调整配置文件<code>php.ini</code>再使用。默认没有提供<code>php.ini</code>，而是给了<code>php.ini-development</code>和<code>php.ini-production</code>两个文件，选一个自己喜欢的复制一份并把后边<code>-*</code>部分删去，按实际需求调整。首先要能生效则最少需要将<code>php.ini</code>中的<code>doc_root</code>字段设为wordpress的目录，找到<code>extension=pdo_sqlite</code>一行，将最前的分号<code>;</code>删去，以启用SQLite数据库扩展功能。这样php就可以正确解析到php文件。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><code>php.ini</code>配置完成后，在当前目录下启动命令行，输入<code>php-cgi -b 9000</code>，其中<code>-b</code>是指定端口启用php服务，而9000则是在Nginx的fastcgi_pass中配置的:9000端口号，可以根据自己的喜欢修改，只要启动php时输入的端口号和Nginx中配置的统一就可以。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>SQLite</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>由于不需要使用MySQL服务，要让WordPress使用SQLite引擎也不复杂，从 <a rel="noreferrer noopener" href="https://github.com/aaemnnosttv/wp-sqlite-db" target="_blank">aaemnnosttv/wp-sqlite-db(github.com)</a> 上下载db.php，并放在wordpress目录下<code>wp-content</code>当中即可生效。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>打开wordpress目录下的wp-config.php，在喜欢的位置添加一行<code>define('DB_TYPE', 'sqlite');</code>，表示数据库类型为SQLite。顺便也将数据库信息配置一下，或者直接使用默认设置（SQLite没有USER和PASSWORD，<code>DB_USER</code>和<code>DB_PASSWORD</code>字段对于sqlite没有作用）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>使用时将会以<code>wp-content/database/.ht.sqlite</code>作为数据库文件，当然可以用如下define常量语句来指定。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"php","mime":"text/x-php"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>define('DB_DIR', '/absolute/custom/path/to/directory/for/sqlite/database/file/');
+define('DB_FILE', 'custom_filename_for_sqlite_database');</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>启动</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>在浏览器地址栏中访问<code>localhost</code>，可以看到首次使用时wordpress的基本配置，即生成数据表等内容。可以使用默认设定，就可以在本地使用Wordpress了。在这样配置完成后，以后再使用时，仅需要启动nginx.exe以及运行命令<code>php-cgi.exe -b 9000</code>即可。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-06-04T02:39:05+09:00">
+      金 04 6月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C++面试常见题目</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2001.html" rel="bookmark"
+         title="Permalink to C++面试常见题目">C++面试常见题目</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:heading -->
+<h2>struct和class的区别</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse title="details"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C++中struct与class区别不大，但是为了保证向下兼容，仍然对struct进行了保留。C语言中struct只能定义成员，不能定义函数。而C++中的struct可以包含成员函数、可以实现继承、可以实现多态。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C++中struct的成员和函数默认是public，而class默认是private。继承的访问权限则根据子类确定，若子类是class则默认为private,子类是struct则为public。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>class关键字可以定义模板参数，而struct不用于定义模板参数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>初始化问题：如果定义了构造函数，那么不能使用大括号初始化。若没有定义构造函数，struct可以直接使用大括号初始化，而class在所有成员变量都是public的时候才可以使用大括号进行初始化。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>struct中能不能声明函数，能不能定义private成员变量和函数？</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C语言的struct不能声明函数，C++可以声明函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C++的struct可以使用private关键字定义private的成员变量和函数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>new和malloc的区别，new的底层怎么做的</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> C语言提供了malloc和free两个系统函数，完成对堆内存的申请和释放。而C++则提供了两个关键字new和delete。new/delete 主要是用在类对象的申请和释放。申请的时候会调用构造器完成初始化，释放的时候，会调用析构器完成内存清理。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>用法区别：new和delete是C++关键字 ，g++支持就可以用。malloc/free定义在头文件中，使用时需要引入stdlib。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>返回值：new操作符内存分配成功时，返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，故new是符合类型安全性的操作符。而malloc内存分配成功则是返回void * ，需要通过强制类型转换将void*指针转换成我们需要的类型。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 重载：C++允许自定义operator new 和 operator delete 函数控制动态内存的分配 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>分配失败：new内存分配失败时，会抛出bac_alloc异常。malloc分配内存失败时返回NULL。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>内存区域：new操作符从自由存储区（free store）上为对象动态分配内存空间，而malloc函数从堆上动态分配内存。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>底层：new会先调用operator new函数，申请足够的内存（通常底层使用malloc实现）。然后调用类型的构造函数，初始化成员变量，最后返回自定义类型指针。 malloc/free是库函数，只能动态的申请和释放内存，无法强制要求其做自定义类型对象构造和析构工作。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> C++ 11新特性 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li> 引入了 nullptr 关键字，专门用来区分空指针、0 </li><li> auto 关键字</li><li> using取代typedef （<code>using db = double;</code>取代<code>typedef double db;</code>）</li><li>STL加入了array容器， std::array相对于数组，增加了迭代器等函数 。增加了 forward_list  单向链表 。增加了unordered_map 映射与 unordered_set ；std::map使用的数据结构为二叉树，而std::unordered_map内部是哈希表</li><li> default关键字生成默认构造函数和析构函数 ， delete关键字禁止拷贝构造、禁止赋值构造、禁止自定义参数的构造函数 。 </li><li>override和final ：作用于虚函数，更多的作用是：显式的标识是否应该多态继承或不应该。 子类用override修饰其虚函数，表示要多态继承基类的虚函数。不可以修饰非虚函数 。 基类用final修饰其虚函数，意外其子类不可以多态继承该虚函数 </li><li> lambda表达式 </li><li> 多线程与互斥同步 ：std::thread， std::atomic 多线程资源互斥操作， std::condition_variable  可以让线程休眠 </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>C++11的四种类型转换以及怎么使用</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>static_cast</strong>  完成编译器认可的隐式类型转换 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>dynamic_cast</strong>  执行派生类指针或引用与基类指针或引用之间的转换。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>const_cast</strong>  只能对指针或者引用去除或者添加const属性，对于变量直接类型不能使用const_cast；不能用于不同类型之间的转换，只能改变同种类型的const属性。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> <strong>reinterpret_cast</strong>  从字面意思理解是一个“重新解释的类型转换”。也就是说对任意两个类型之间的变量我们都可以个使用reinterpret_cast在他们之间相互转换，无视类型信息。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>堆和栈的区别</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 栈区（stack）： 由编译器自动分配释放&nbsp;&nbsp; ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 堆区（heap）&nbsp;&nbsp;：一般由程序员分配释放，&nbsp;&nbsp; 若程序员不释放，程序结束时可能由OS回收 。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外，还有全局区（静态区）（static）—，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。程序结束后由系统释放。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 申请后系统的响应： 只要栈的剩余空间大于所申请空间，系统将为程序提供内存，否则将报异常提示栈溢出。对于堆，首先应该知道操作系统有一个记录空闲内存地址的链表，当系统收到程序的申请时， 会遍历该链表，寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表 中删除，并将该结点的空间分配给程序，另外，对于大多数系统，会在这块内存空间中的首地址处记录本次分配的大小，这样，代码中的delete语句才能正确的释放本内存空间。 另外，由于找到的堆结点的大小不一定正好等于申请的大小，系统会自动的将多余的那部分重新放入空闲链表中。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 申请大小的限制 ： 在Windows下,栈是向低地址扩展的数据结构，是一块连续的内存的区域。栈顶的地址和栈的最大容量是系统预先规定好的 。堆是向高地址扩展的数据结构，是不连续的内存区域。这是由于系统是用链表来存储的空闲内存地址的，自然是不连续的，而链表的遍历方向是由低地址向高地址。堆的大小受限于计算机系统中有效的虚拟内存。由此可见，堆获得的空间比较灵活，也比较大。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>内容：在函数调用时，第一个进栈的是主函数中后的下一条指令（函数调用语句的下一条可执行语句）的地址，然后是函数的各个参数，在大多数的C编译器中，参数是由右往左入栈的，然后是函数中的局部变量。注意静态变量是不入栈的。当本次函数调用结束后，局部变量先出栈，然后是参数，最后栈顶指针指向最开始存的地址，也就是主函数中的下一条指令，程序由该点继续运行。 堆一般是在堆的头部用一个字节存放堆的大小，具体内容由程序员安排。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>深拷贝和浅拷贝的区别 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 动态联编 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse  title="details" ]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 编译程序在编译阶段并不能确切知道将要调用的函数，只有在程序运行时才能确定将要调用的函数，为此要确切知道该调用的函数，要求联编工作要在程序运行时进行，这种在程序运行时进行联编工作被称为动态联编。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>（1）成员函数必须声明为virtual<br />（2） 类之间应满足子类型关系，通常表现为一个类从另一个类公有派生而来。 <br />（3） 必须先使用基类指针指向子类型的对象，然后直接或者间接使用基类指针调用虚函数。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 动态联编要求派生类中的虚函数与基类中对应的虚函数具有相同的名称、相同的参数个数和相同的对应参数类型、返回值或者相同，或者都返回指针或引用，并且派生类虚函数所返回的指针或引用的基类型是基类中虚函数所返回的指针或引用的基类型的子类型。如果不满足这些条件，派生类中的虚函数将丢失其虚特性，在调用时进行静态联编。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> vector、list、stack底层实现的原理、使用场景、特点对比 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 多进程、多线程 C++的Tread ？线程池的优势，为什么效率高？ </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 对指针、引用、指针引用和引用指针的理解 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> c++多态：重载和虚函数 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 虚函数表、虚函数表指针大小、虚函数表存储的位置 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 虚继承 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 智能指针 ， shared_ptr底层如何实现 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 共享指针的循环引用、weak_ptr如何解决shared_ptr的循环引用 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 左值右值、move </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 重载和重写的区别 ，重写的原理（多态与虚函数的原理） </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> 子类继承二个有虚函数的父类，那么子类有几个虚函数表 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> static关键字的作用 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse title="details"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>  static修饰局部变量时，使得被修饰的变量成为静态变量，存储在静态区。存储在静态区的数据生命周期与程序相同，在main函数之前初始化，在程序退出时销毁。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 修饰全局变量 :全局变量本来就存储在静态区，因此static并不能改变其存储位置。但是，static限制了其链接属性。被static修饰的全局变量只能被该包含该定义的文件访问（即改变了作用域）。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>  static修饰函数使得函数只能在包含该函数定义的文件中被调用。对于静态函数，声明和定义需要放在同一个文件夹中。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 用static修饰类的数据成员使其成为类的全局变量，会被类的所有对象共享，包括派生类的对象，所有的对象都只维持同一个实例。 因此，static成员必须在类外进行初始化(初始化格式：int base::var=10;)，而不能在构造函数内进行初始化，不过也可以用const修饰static数据成员在类内初始化。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 用static修饰成员函数，使这个类只存在这一份函数，所有对象共享该函数，不含this指针，因而只能访问类的static成员变量。静态成员是可以独立访问的，也就是说，无须创建任何对象实例就可以访问。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> map与unordered_map的区别，底层实现原理 </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse title="details"]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> map内部实现了一个红黑树，该结构具有自动排序的功能，因此map内部的所有元素都是<strong>有序的</strong>，红黑树的每一个节点都代表着map的一个元素，因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行这样的操作，故红黑树的效率决定了map的效率 。不过map的空间占用较高， </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> unordered_map内部实现了一个哈希表，因此其元素的排列顺序是杂乱的，无序的 ， 查找速度非常的快 。 哈希表的建立比较耗费时间 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2> const作用：const int func(const int&amp; A) const </h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>[collapse]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-18T01:25:57+09:00">
+      土 18 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

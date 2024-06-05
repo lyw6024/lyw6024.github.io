@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 考研数学微积分题海拾贝</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3660.html" rel="bookmark"
+         title="Permalink to 考研数学微积分题海拾贝">考研数学微积分题海拾贝</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>求极限 \[ \lim_{n \to +\infty }\frac{\sqrt[n]{(n!)}}{n} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><br>\[ \begin{align} <br>\lim_{n \to +\infty }\frac{\sqrt[n]{(n!)}}{n} &amp;= \exp(\ln(\lim_{n \to +\infty }\frac{\sqrt[n]{(n!)}}{n})) \\<br>~ &amp;= \exp(\lim_{n \to +\infty }\ln{\frac{\sqrt[n]{(n!)}}{n}}) \\<br>~ &amp;= \exp(\lim_{n \to +\infty }\ln{\sqrt[n]{\frac{(n!)}{n^n} }}) \\<br>~ &amp;= \exp(\lim_{n \to +\infty } \frac{1}{n} \ln{\frac{(n!)}{n^n} }) \\<br>~ &amp;= \exp(\lim_{n \to +\infty } \frac{1}{n} \ln{(\frac{1}{n}\frac{2}{n}\cdots\frac{n}{n})}) \\<br>~ &amp;= \exp(\lim_{n \to +\infty } \frac{1}{n} (\ln{(\frac{1}{n})} + \ln{(\frac{2}{n})} + \cdots + \ln{(\frac{n}{n})})) \\<br>~ &amp;= \exp(\lim_{\epsilon \to 0^+ } \int^1_\epsilon {\ln(t)dt}) \\<br>~ &amp;= \exp(\int^1_0 {\ln(t)dt}) \\<br>~ &amp;= \exp(-1) \\<br>~ &amp;= \frac{1}{e} \\<br>\end{align}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">[mathjax]<br>设\(f(x)\)在\([0,1]\)内可导，且\(f(0)=0\),\(f(1)=1\). 且\(f(x)\)在\([0,1]\)上严格递增。<br>证明：存在\(\xi_i \in (0,1) (1 \le i \le n)\)，使\[ \frac{1}{f'(\xi_1)} + \frac{1}{f'(\xi_2)} + \cdots +\frac{1}{f'(\xi_n)} = n \]成立。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>设有\( \xi_i \in (0,1) \)，对f(x)在区间\([0,x_1]\),\([x_1,x_2]\),\([x_2,x_3]\),\( \cdots \),\([x_n,1]\),上分别使用拉格朗日中值定理可得</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ f'(\xi_1) = \frac{f(x_1)-f(0)}{x_1-0} = \frac{f(x_1)}{x_1}   \Rightarrow \exists \xi_1 \in (0,x_1) , \frac{1}{f'(\xi_1)} = \frac{x_1}{f(x_1)}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ f'(\xi_2) = \frac{f(x_2)-f(x_1)}{x_2-x_1}   \Rightarrow \exists \xi_2 \in (x_1,x_2) , \frac{1}{f'(\xi_2)} = \frac{x_2-x_1}{f(x_2) - f(x_1)}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \vdots\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ f'(\xi_n) = \frac{f(1)-f(x_{n-1})}{1-x_{n-1}}  \Rightarrow \exists \xi_n \in (x_{n-1},1) , \frac{1}{f'(\xi_n)} = \frac{1-x_{n-1}}{1- f(x_{n-1})}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>要证\[ \frac{1}{f'(\xi_1)} + \frac{1}{f'(\xi_2)} + \cdots +\frac{1}{f'(\xi_n)} = n \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>只需\[ f(x_1) = \frac{1}{n},f(x_2) = \frac{2}{n}, \cdots, f(x_{n-1}) = \frac{n-1}{n} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>又\(f(0)=0\),\(f(1)=1\)，根据连续函数的介值定理，存在\( x_k \in (0,1) \),\( k \in[1,n-1]\)，使\(f(x_k) = \frac{k}{n}\)成立，</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>故得证。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">设\( z=f(u)\)，二元函数\(u=u(x,y) \)是由方程 \( u=\varphi(u) + \int^x_y p(t) dt \)确定的。其中\(f(u)\), \( \varphi(u)\)可微，\(p(t)\), \(\varphi'(u)\)连续，且\(\varphi'(u) \neq 1 \),求\(p(y) \frac{\partial z}{\partial x} + p(x) \frac{\partial z}{\partial y}\)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[\frac{\partial z}{\partial x} = f'(u) \frac{\partial u}{\partial x},\frac{\partial z}{\partial y} = f'(u) \frac{\partial u}{\partial y}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>又由\( u=\varphi(u) + \int^x_y p(t) dt \)，两边分别对 \(x\)与\(y\)求偏导，有</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{cases}<br>\frac{\partial u}{\partial x} =&amp; \varphi'(u) \frac{\partial u}{\partial x} +p(x)\\<br>\frac{\partial u}{\partial y} =&amp; \varphi'(u) \frac{\partial u}{\partial y} -p(y) \\<br>\end{cases} \Rightarrow<br>\begin{cases}<br>\frac{\partial u}{\partial x} =&amp; \frac{p(x)}{1-\varphi'(u)}\\<br>\frac{\partial u}{\partial y} =&amp;- \frac{p(y)}{1-\varphi'(u)}<br>\end{cases} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>所以 \begin{align} ~ &amp; p(y) \frac{\partial z}{\partial x} + p(x) \frac{\partial z}{\partial y} \\<br>=&amp; f'(u)\left(p(y)\frac{\partial u}{\partial x}+p(x)\frac{\partial u}{\partial y}\right) \\<br>=&amp; f'(u)\left(p(y)\frac{p(x)}{1-\varphi'(u)} - p(x)\frac{p(y)}{1-\varphi'(u)}\right) \\<br>=&amp;0<br> \end{align}</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">设\( f(x) = \frac{1}{1-x^2+x^4}\)，求\( f^{(100)}(0)\)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ <br>f(x) = \frac{1}{1-x^2+x^4} = \frac{1+x^2}{1+x^6}<br>\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>由带有皮亚诺余项的麦克劳林公式，有</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ f(x) = (1+x^2)(1-x^6 + x^{12}  \cdots + x^{96} - x^{102} + o(x^{102}) ) \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>所以 \( f(x) \)展开式的100次项为\(0\)，即：\( \frac{f^{(100)}(0)}{100!} = 0 \)，所以\( f^{(100)}(0) =0 \)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">设\(f(x) = e^x \sin(2x) \),求\( f^{(4)}(0) \)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>由麦克劳林公式</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ f(x) = f(0) + \frac{f'(0)}{1!} x + \frac{f'(0)}{2!} x^2  \cdots + \frac{f'(0)}{n!} x^n + o(x^n)\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>则： \[ f(x)=(1+x+\frac{1}{2}x^2 + \frac{1}{6}x^3 + o(x^3))(2x-\frac{1}{6}(2x)^3 + o(x^4) ) \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>所以\(f(x)\)展开式的4次项为： \[ \frac{1}{6}x^3 \cdot 2x -  \frac{1}{6}(2x)^3\cdot x =- x^4\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>由于麦克劳林展开式中4次项为 \( \frac{f^{(4)}(0)}{4!}x^4 = -x^4\)，所以系数 \( \frac{f^{(4)}(0)}{4!} = -1 \)，即\( f^{(4)}(0) = -24 \)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">设\(f(x)\)在\( [0,1] \)二阶连续可微，且满足 \( f''(x) \le 0 \) , \( 0 \le f(x) \le 1 \) , \(f(0)=f(1) = 0\)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">求证：平面曲线 \( y=f(x) , x \in [0,1] \) 的弧长 \( s \le 3\)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>由于\( f(x) \)在\( [0,1] \)连续，从而存在\( x_0 \in [0,1] \)使\(f(x)\)在\(x=x_0\)处取最大值。<br>(1)如果 \( f(x_0)=0 \)，则\(f(x)=0, x\in[0,1]\)，所以这段曲线的弧长\(s=1 \le 3 \)得证<br>(2)如果\( f(x_0)&gt;0 \)，有\( f'(x_0) = 0 \), 又因为\(  f''(x) \le 0 \)，所以有\( f'(x) \ge 0, x \in [0,c] \), \( f'(x) \le 0, x \in [c,1] \)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从而：\[ \begin{align} <br>s &amp; = \int_0^1 {\sqrt{1+|f'(x)|^2}dx}\\<br>~ &amp;= \int_0^c {\sqrt{1+|f'(x)|^2}dx} +\int_c^1 {\sqrt{1+|f'(x)|^2}dx} \\<br>~ &amp; \le \int_0^c { (1+f'(x) )dx} +\int_c^1 {(1-f'(x))dx} \\<br>~ &amp; = [x+f(x)]^c_0 +[x-f(x)]^1_c \\<br>~&amp;= 1+2f(c) \le 3\\<br>\end{align}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">求不定积分</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">\[ \int{(\frac{\arctan x}{x-\arctan x})^2 dx}\]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>提示： \( -\frac{v'}{v^2}dv = d(\frac{1}{v})\)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[ \begin{align} ~&amp; \int{(\frac{\arctan x}{x-\arctan x})^2 dx} \\<br>&amp;= \int{\frac{t^2}{(\tan t - t)^2} d(\tan(t))} \\<br>&amp;= \int{\frac{t^2}{(\cos t( \tan t - t))^2} d(t)} \\<br>&amp;= \int{\frac{t^2}{( \sin t - t \cos t)^2} d(t)} \\<br>&amp;= \int{\frac{t^2}{( \sin t - t \cos t)^2} d(t)} \\<br>&amp;= \int{\frac{t}{\sin t}\frac{ t \sin t}{( \sin t - t \cos t)^2} d(t)} \\<br>&amp;= \int{\frac{t}{\sin t}d(\frac{1}{\sin t - t \cos t})} \\<br>&amp;= \frac{t}{\sin t} \frac{1}{\sin t - t \cos t} - \int{\frac{1}{\sin t - t \cos t} d(\frac{t}{\sin t})}\\<br>&amp;= \frac{t}{\sin t} \frac{1}{\sin t - t \cos t} - \frac{\cos t}{\sin t} + C\\<br>&amp;= \frac{x \arctan x}{x - \arctan x} + C\\<br>\end{align} \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:nextpage -->
+<!--nextpage-->
+<!-- /wp:nextpage -->
+
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">求下列定积分： </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"fontSize":"medium"} -->
+<p class="has-medium-font-size">\[ \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(x)}{1+e^x}dx \]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[collapse title="解答"]<br>\begin{align} M= &amp; \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(x)}{1+e^x}dx \\<br>=&amp; \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(-x)}{1+e^{-x}}dx \\<br>=&amp; \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(x)}{1+e^{-x}}dx \\<br>\end{align}<br>\begin{align} M+M= &amp; \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(x)}{1+e^x}dx + \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{\sin^2(x)}{1+e^{-x}}dx \\<br>=&amp; \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \sin^2(x) (\frac{1}{1+e^x} + \frac{1}{1+e^{-x}})dx \\<br>=&amp;\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \sin^2(x) (\frac{1}{1+e^x} + \frac{e^x}{e^x+1})dx \\<br>=&amp;\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \sin^2(x) (\frac{1+e^x}{e^x+1})dx \\<br>\end{align}</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\[2M = \int_{\frac{-\pi}{2}}^{\frac{\pi}{2}} \sin^2(x) dx \] </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>\begin{align} M =&amp; \frac{1}{2}\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \sin^2(x) dx \\<br>=&amp; \int_{0}^{\frac{\pi}{2}} \sin^2(x) dx\\<br>=&amp; \frac{\pi}{4}<br>\end{align}</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[/collapse]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-07-30T05:01:09+09:00">
+      金 30 7月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

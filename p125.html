@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 复读子串 Repeated Subsequences [EOlymp - 3624]题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p125.html" rel="bookmark"
+         title="Permalink to 复读子串 Repeated Subsequences [EOlymp - 3624]题解">复读子串 Repeated Subsequences [EOlymp - 3624]题解</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>最长公共子列问题。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这个题的时限特别长，是10秒钟，看来似乎是可以枚举串的所有分组并逐一计算LCS。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 先写能够计算最长公共子序列的函数，然后对每种切分方式（遍历所有可切分的点），分别计算两串的最长公共子序列，记下最长的长度和序列，然后输出最长的那个序列即可。此题思路不难，关键在于如何输出最长公共子序列以及如何适当的存储中间数据。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using std::max;
+int LCS(char* s1, char* s2,char *res)
+{
+    int i,j,M,N,k=0,upbd;
+    M=strlen(s1);
+    N=strlen(s2);
+    int **dp;
+    dp=new int* [M+2];
+    for(i=0;i&lt;M+2;i++)
+        dp[i]=new int [N+2];
+    for(i=0;i&lt;N+2;i++)
+        dp[0][i]=0;
+    for(i=1;i&lt;M+1;i++)
+    {
+        dp[i][0]=0;
+        for(j=1;j&lt;N+1;j++)
+        {
+            if(s1[i-1]==s2[j-1])
+                dp[i][j]=dp[i-1][j-1]+1;
+            else
+                dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+        }
+    }
+    k=dp[M][N];
+    i=M;
+    j=N;
+    upbd=k;
+    res[k]='\0';
+    while(i&gt;0 &amp;&amp; j&gt;0)
+    {
+        if(dp[i-1][j]==dp[i-1][j-1] &amp;&amp; dp[i-1][j-1]==dp[i][j-1] )
+        {
+            if (dp[i][j]==dp[i-1][j-1]+1)
+                res[--upbd]=s1[i-1];
+            i--;
+            j--;
+        }
+        else
+        {
+            if(dp[i-1][j]==dp[i][j])
+                i--;
+            else
+                j--;
+        }
+    }
+    for(i=0;i&lt;M+2;i++)
+        delete [] dp[i];
+    delete [] dp;
+    return k;
+}
+void solve(char *s)
+{
+    char *s1,*s2,*res,*target;
+    int N=strlen(s),i,d,maxVal=-1;
+    s1=new char [N+1];
+    s2=new char [N+1];
+    res=new char [N+1];
+    target=new char [N+1];
+    for(i=1;i&lt;N;i++)
+    {
+        strcpy(s1,s);
+        s1[i]=0;
+        strcpy(s2,s+i);
+        d=LCS(s1,s2,res);
+        if(d&gt;maxVal)
+        {
+            maxVal=d;
+            strcpy(target,res);
+        }
+    }
+    printf(&quot;%s\n&quot;,target);
+    delete [] s1;
+    delete [] s2;
+    delete [] res;
+    delete [] target;
+}
+#define MAXLENGTH 303
+int main(void)
+{
+    char s[MAXLENGTH];
+    while(scanf(&quot;%s&quot;,s)!=EOF)
+    {
+        if(strcmp(&quot;#END&quot;,s)==0)
+            break;
+        solve(s);
+    }
+    return 0;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-03-19T14:14:02+09:00">
+      火 19 3月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

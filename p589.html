@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 在服务器上架设多种程序语言Jupyter服务</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p589.html" rel="bookmark"
+         title="Permalink to 在服务器上架设多种程序语言Jupyter服务">在服务器上架设多种程序语言Jupyter服务</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>有个服务器在长城之外被屏蔽掉了，在cloudflare上把dns设为其推荐的服务，并启动cdn，这样就可以通过域名访问网站， 不过只用nginx放一个静态页也没什么用，不如给它配上几种编程语言让它发挥一定作用。在网站上开启Jupyter并用nginx反向代理即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Step 1. 安装配置jupyter </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>先安装Jupytet，用pip命令</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>python3 -m pip install jupyter</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>在启动jupyter notebook服务之前，先进行服务的配置。使用如下命令生成配置文件</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>jupyter notebook --generate-config</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>这将生成一个 jupyter_notebook_config.py （一般是在/root/.jupyter/ ，可根据上述命令的输出确定），并对其进行编辑。主要需要编辑的有如下几项：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>c.NotebookApp.ip = 'localhost'
+c.NotebookApp.allow_remote_access = True
+c.NotebookApp.password =
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = </pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>其中ip是jupyter要监听的ip，因为最终将采用nginx进行反向代理来访问到nginx上，所以只需要监听localhost就可以。allow_remote_access只能是True，不然会提示403 Forbidden的错误。password填写一个字符串，使用命令生成：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>python3 -c "import IPython;print(IPython.lib.passwd())"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>IPython.lib.passwd()会提示你输入一次密码和确认密码，在此之后将输入密码的sha1值输出，这时就将sha1完整的写在配置文件的password里，"sha1:d7ef**6d5:26**2c5e" 。open_browser的值是False，不需要在启动jupyter服务的时候打开浏览器，一般只有本地用的时候才需要。port填一个喜欢的端口就可以，在nginx代理时要用到。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>找一个合适的路径，运行 jupyter notebook --allow-root 查看是否能正常运行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Step 2. 反向代理Nginx</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在nginx的配置文件（/etc/nginx/conf.d/default.conf）当中，添加如下内容</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"nginx","mime":"text/x-nginx-conf"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>server
+{
+listen 80;
+server_name ...;
+...;
+location / {
+        proxy_pass http://127.0.0.1:YOUR_PORT/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For$proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection &quot;upgrade&quot;;
+        proxy_redirect off;
+    }
+    ...
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>使用nginx -t检查配置文件是否可以使用，然后nginx -s reload重启nginx服务。此时运行jupyter notebook就应该可以在浏览器中输入地址来访问到jupyter。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Step 3.   jupyter 增加语言</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>根据  <br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">https://github.com/jupyter/jupyter/wiki/Jupyter-kernels</a>  </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>所列出的kernel，可以为想添加的语言安装相应内核，从而支持其它语言</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":1179,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-45.png" alt="[Image]" class="wp-image-1179"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>在安装内核的时候有可能遇到内存不足的情况，服务器的配置一般比较贵，可以增加swap临时文件作为临时扩展的内存。首先使用dd命令为指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换 ，if表示input file，of是output file，bs是块单元大小，count是数目，执行命令后将生成一个bs*count大小的文件of</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"> dd if=/dev/zero of=/root/swapfile bs=1M count=1024 <br></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>然后将其格式化为交换分区文件 ，并启用交换分区文件 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>mkswap /root/swapfile
+swapon /root/swapfile</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>如果想永久使用这块swap分区，每次开机时都把这个swap文件加载上，就要在 <br>/etc/fstab 当中添加：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>/root/swapfile swap swap defaults 0 0</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>如果要删去这个swap分区，就先停掉swap文件，然后把它删除。如果/etc/fstab当中有相应文件也将相应的删去。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>/sbin/swapoff /root/swapfile
+rm -rf /root/swapfile</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Step 4. 后台驻留服务</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>启动jupyter之后，如果我们把控制台关掉，服务就停掉了，我们要将它在后台运行。使用nohup command &amp; 让程序在后台运行。command之后的'&amp;'符号表示不挂断程序。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>nohup jupyter notebook --allow-root &amp;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>在同一个控制台中，使用 jobs 可以查看当前用nohup启动的服务名，fg []可以将服务关掉。如果不是同一个控制台启动的，那么就要用ps -aux查看进行ID并使用kill -9 PID关掉后台进程</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-04T15:38:39+09:00">
+      水 04 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

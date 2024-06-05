@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 有理数系的线性代数运算程序(1)有理数类</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p855.html" rel="bookmark"
+         title="Permalink to 有理数系的线性代数运算程序(1)有理数类">有理数系的线性代数运算程序(1)有理数类</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>线性代数主要涉及矩阵的运算，尤其是矩阵中行/列变换，矩阵的秩、行列式、线性方程组、特征值等问题。在开始设计之前，先完成有理数系的运算。我们要将分数形式的数字展现成分数而不是近似小数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先添加一个类RationalNumber，表示一个有理数，如果它是整数，则分母为1，如果它是小数，就保存成最简分数。如果是负有理数，保证负号在分子上。这样定义后重载四则运算和判等运算的运算符。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>class RationalNumber
+    {
+        private int _num, _den;
+        private int gcd(int x,int y)
+        {
+            if(x%y==0)
+            {
+                return y;
+            }
+            else
+            {
+                return gcd(y, x % y);
+            }
+        }
+        public RationalNumber()
+        {
+            _num = 0;
+            _den = 1;
+        }
+        public RationalNumber(int x)
+        {
+            _num = x;
+            _den = 1;
+        }
+        public RationalNumber(int nn,int dd)
+        {
+            int sign = 1;
+            int g = gcd(Math.Abs(nn), Math.Abs(dd));
+            if(nn*dd&lt;0)
+            {
+                sign = -1;
+            }
+            _num = sign*Math.Abs(nn)/g;
+            _den = Math.Abs(dd)/g;
+        }
+        public string ToLaTeX()
+        {
+            if (_den == 1)
+            {
+                return _num.ToString();
+            }
+            else
+            {
+                if (_num &gt; 0)
+                {
+                    return String.Format(&quot;\\frac{{{0}}}{{{1}}}&quot;, _num, _den);
+                }
+                else
+                {
+                    return String.Format(&quot;-\\frac{{{0}}}{{{1}}}&quot;, -_num, _den);
+                }
+            }
+        }
+        public override string ToString()
+        {
+            return String.Format(&quot;{0}/{1}&quot;, _num, _den);
+        }
+        public static RationalNumber operator+(RationalNumber self,RationalNumber o)
+        {
+            return new RationalNumber(self._num * o._den + self._den * o._num, self._den * o._den);
+        }
+        public static RationalNumber operator -(RationalNumber self, RationalNumber o)
+        {
+            return new RationalNumber(self._num * o._den - self._den * o._num, self._den * o._den);
+        }
+        public static RationalNumber operator *(RationalNumber self, RationalNumber o)
+        {
+            return new RationalNumber(self._num * o._num, self._den * o._den);
+        }
+        public static RationalNumber operator /(RationalNumber self, RationalNumber o)
+        {
+            return new RationalNumber(self._num * o._den, self._den * o._num);
+        }
+        public static RationalNumber operator /( int o, RationalNumber self)
+        {
+            return new RationalNumber( self._den * o, self._num);
+        }
+        public static RationalNumber operator /(RationalNumber self, int o)
+        {
+            return new RationalNumber(self._num , self._den *o );
+        }
+        public static bool operator ==(RationalNumber self, RationalNumber o)
+        {
+            return self._num == o._num &amp;&amp; self._den == o._den;
+        }
+        public static bool operator !=(RationalNumber self, RationalNumber o)
+        {
+            return !(self._num == o._num &amp;&amp; self._den == o._den);
+        }
+        public static bool operator ==(RationalNumber self, int o)
+        {
+            return self._den == 1 &amp;&amp; self._num == o;
+        }
+        public static bool operator !=(RationalNumber self, int o)
+        {
+            return (self._den != 1  || (self._den ==1 &amp;&amp; self._num != o));
+        }
+        public override bool Equals(Object o)
+        {
+            return this is RationalNumber &amp;&amp;  this == (RationalNumber)o;
+        }
+        public override int GetHashCode()
+        {
+            return Convert.ToInt32(String.Format(&quot;{0}{1}&quot;,_num , _den));
+        }
+    }</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"></div>
+<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link" href="http://www.malic.xyz/post-857/">下一节：线性方程组</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-09T06:53:22+09:00">
+      月 09 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

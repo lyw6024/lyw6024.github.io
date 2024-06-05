@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - django通过URL访问文件</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1422.html" rel="bookmark"
+         title="Permalink to django通过URL访问文件">django通过URL访问文件</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>有时会需要通过URL直接访问到文件内容，而不是通过HTML内容访问。如果是用nginx或apache当然就把资源放在相应路径下，并指定权限就可以了，但django采用MVC模型不能直接读到文件，若要通过URL访问到文件，需要稍加配置。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先启动一个django项目</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh","theme":"the-matrix"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>django-admin startproject urlvisitfile</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>只需要修改urls.py就可以。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>导入<code>django.views.static</code>中的<code>serve</code>， 以及<code>django.conf.urls</code>的<code>url</code>，并将urlpatterns改成如下形式。其中url第3个参数的"document_root"对应的值<code>"D：/project"</code>就是要分享的文件路径。需要访问时，可以通过在浏览器或服务中使用<code>&lt;url>/file/sample.png</code>访问<code>D:/project/sample.png</code> 文件</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"python","mime":"text/x-python","theme":"bespin"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>from django.conf.urls import url
+from django.views.static import serve
+urlpatterns = [
+        url(r'^file/(?P&lt;path&gt;.*)$',serve,{&quot;document_root&quot;:&quot;D:/project/&quot;})
+]</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-17T07:24:44+09:00">
+      金 17 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 表格的目标检测 - 利用FPN的Faster R-CNN</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1648.html" rel="bookmark"
+         title="Permalink to 表格的目标检测 - 利用FPN的Faster R-CNN">表格的目标检测 - 利用FPN的Faster R-CNN</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>做文档信息提取时，遇到表格的结构，由于它具有结构性，直接将表格中的内容识别出来是不够的，它的行列也相当于信息。需要将表格着重处理。要全面地获取这部分信息，就要识别表格的结构。第一步就是先定位表格，看整个文档图片中是否含有表格，如果有就提取出来再进行后续处理（表格结构识别，即一个表格的行列数）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>如果只是同类表格的批量处理，例如火车票、发票、同一医院的体检报告等，矫正畸变后直接相应位置固定上，这样的任务表格的存在性和结构信息作为先验知识的。而如果要做到通用的文档信息，不确定是否存在表格，以及存在表格的话表格是怎样的结构，就需要通过一些手段发现表格的这些信息。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这类问题也是有图像处理的方法和深度学习的方法。图像处理就角点检测、直线检测等。也有用机器学习SVM，决策树方法的。深度学习也有很多，像YOLO, Faster R-CNN，页面区域可见性图+GNN对顶点和边预测，条件GAN生成表布局特征补充于UNet与Mask R-CNN等等。在这个任务中我们使用了带特征金字塔的Faster R-CNN。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>表格的特征体现在“对齐”上。表格的形式多种多样，有的是全线，有的只有横向线，有的是三线表。共性在于表格中的数据具有一定对齐性（主观地，不是严格对齐）。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>数据增强预处理方面，对文档图片分成三通道。其中两个通道是这样做的：没有统计过，但是抽样地取得了一些表格，发现表格中的数据很多是数字，所以把数字特别标了出来。用OCR工具判断如果这个字符是数字就把它周围像素的红色通道设置255，其它的字符就蓝通道255。还有一个通道用了RLSA模糊，表格定位不需要知道表格中具体的文字内容，用这种平滑把相近的文字变成小块。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>在送入Faster R-CNN之前先通过ZF model进行一个参数微调。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>送入Faster R-CNN，这里用FPN取代原始Faster R-CNN的RPN.</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-05-18T14:12:07+09:00">
+      月 18 5月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

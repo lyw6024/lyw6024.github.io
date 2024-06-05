@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - Docker虚拟化容器</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3962.html" rel="bookmark"
+         title="Permalink to Docker虚拟化容器">Docker虚拟化容器</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>Docker是一种虚拟化容器技术，开发者可以将应用服务封装到Docker容器中，随后再根据需要进行Docker容器的部署，这样就可以快速地实现项目的发布，也降低了运维人员的环境部署困难程度。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>在传统项目开发过程中经常会出现这样一些问题。项目开发者根据业务需求开发项目代码，而后将成品代码交由运维人员进行生产环境的服务搭建。一位资深的运维人员可以快速、清晰地明白开发者的运行环境，但如果是一些初级运维人员则可能弄不清楚项目的运行环境，甚至有一些冷门的服务根本不会部署，这样就需要不断与开发人员沟通。一旦沟通出现问题，开发人员将不得不自己去进行项目部署。正是在这样的背景下，Docker虚拟化技术产生了。Docker的Logo采用了一种集装箱的设计风格，而其应用效果也正如集装箱一样，每一个Docker容器都可以运行各自的服务，而后被封装起来不会互相影响（每一个集装箱都是独立的）。</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p>Docker是一个开源的应用容器引擎，开发者可以打包他们的应用及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，从而实现虚拟化。容器完全使用沙箱机制，相互之间不会有任何接口。Docker官方网站为<a rel="noreferrer noopener" href="https://www.docker.com/" target="_blank">https://www.docker.com/</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Docker采用的是C/S的处理结构，需要有客户端与服务端。一个完整的Docker架构（见图15-2）由以下5个部分组成。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"align":"center","sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/Y2021M12/screenshots11.png" alt="[Image]"/></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:list -->
+<ul><li>Docker Client客户端：Docker的开发环境，可以有多种操作系统支持。</li><li>Docker Daemon守护进程：Docker的服务端进程。</li><li>Docker Image镜像：一台主机中可以存放多个Docker镜像，每一个Docker镜像都是一组服务。</li><li>Docker Container容器：提供一个独立的运行系统，可以实现组件部署。</li><li>Docker Registry仓库：Docker提供有DockerHub公共仓库，进行镜像统一管理。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Docker容器通过Docker镜像来创建，容器与镜像的关系类似于面向对象编程中对象与类之间的关系。<br>Docker镜像=类；Docker容器=对象。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Docker安装</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Docker可以在各个主流操作系统上进行安装与配置，并且生成的镜像对于所有的系统都是适用的。本例为了方便，将直接使用Ubuntu系统进行Docker的安装与使用。Docker要求Ubuntu系统的内核版本高于3.10，可以通过如下命令查看当前的内核版本。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>uname -r</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>要安装docker，先更新一下本地软件库，然后进行安装：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>apt-get update
+apt-get -y install docker.io</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>安装完成后，启动docker服务：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>systemctl start docker</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:heading -->
+<h2>Docker配置与使用</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>安装了Docker工具后，开发者就可以直接在本地进行Docker镜像的使用了。Docker镜像可以直接通过DockerHub进行抓取，随后启动Docker镜像即可实现虚拟化处理。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>获取并使用Docker镜像</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Docker中所有可以使用的虚拟操作系统都是通过Docker镜像定义的。刚刚完成安装的Docker主机不存在镜像，可以直接通过DockerHub抓取镜像，已经抓取到的镜像则可以直接运行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在Linux系统中有一个/bin/echo命令，该命令的主要功能是对输入的数据进行回显处理。本例将利用Docker容器实现这一命令，即</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>docker run ubuntu /bin/echo &quot;Hello world!&quot;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p>Docker的所有命令都是以docker开头的，要运行Docker镜像（会产生Docker容器）就以docker开头执行命令。这样将直接运行名称为ubuntu的镜像文件，由于此镜像文件并不存在于本地，所以会通过DockerHub进行镜像抓取，而后再执行镜像中的/bin/echo命令。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>除了可以在外部直接执行Docker镜像之外，也可以进入镜像中进行执行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:codemirror-blocks/code-block {"mode":"shell","mime":"text/x-sh"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>docker run -i -t ubuntu</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+
+<!-- wp:paragraph -->
+<p><code>-i</code>命令表示在新容器中指定一个终端；<code>-t</code>命令表示允许直接对容器内的终端进行交互操作处理。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>镜像启动之后，会自动分配一个镜像启动容器的ID，此编号是唯一的，并且一个镜像可以启动多个容器。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果要退出使用的终端，可以按Ctrl + D快捷键。退出之后，还可以通过Docker给出的命令查看当前正在运行的容器。如果要想查询详细的Docker进程信息，则可以使用<code>docker ps -a</code>的参数来运行。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-12-10T07:02:00+09:00">
+      金 10 12月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - OpenCvSharp解迷宫：《塞尔达传说旷野之息》洛美岛</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p324.html" rel="bookmark"
+         title="Permalink to OpenCvSharp解迷宫：《塞尔达传说旷野之息》洛美岛">OpenCvSharp解迷宫：《塞尔达传说旷野之息》洛美岛</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>《塞尔达传说旷野之息》东北角有一座迷宫，外部看上去是这样的：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d61a.jpg" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>最早还没有开这边塔的时候，地图上没有信息，进去也找不到路，后来开了塔可以打开地图看到迷宫：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"width":840,"height":472,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d5e0.jpg" alt="[Image]" width="840" height="472"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>这迷宫有个问题：不能确定终点。目的地是在中间上方的大方块处，但是连通这个大方块的通路有好几条。起始点是地图最下方的小缺口，同样是通向多个方向有通路。虽然迷宫不是很大，但是起点终点都不能完全确定，走起来还是要费一番功夫的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>作为程序员，当然要想到用技术手段解决，迷宫嘛，就是找通路，dfs和bfs都可以。连通区域用dfs，找最短路用bfs。处理图像可以用.NET的Bitmap诸方法，或者使用open CV，在C#当中，通过Nuget包管理器可以找到OpenCvSharp4 ，是C#风格的open CV，这样可以将openCV对图像处理的强大功能与C#与用户交互结合起来，编写一个易用的探迷宫程序。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>C#建立一个WinForm窗体工程，通过Nuget导入OpenCvSharp4。建立全局变量Mat src用来表示我们的迷宫。窗体的Load方法先将src初始化，并将之加载控件上（控件的BackgroudImageLayout提前设置为Stretch）：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Mat src;
+private void Form1_Load(object sender, EventArgs e)
+{
+    src = Cv2.ImRead(@&quot;lomesima.jpg&quot;);
+    pictureBoxIpl1.BackgroundImage= BitmapConverter.ToBitmap(src);
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样运行之后原图片就显示在了主控件上。先对其做一些基本的处理：裁剪，二值化、平滑。首先定位到图片的像素，我们需要的是迷宫区域，定位了它的左上和右下坐标，就可以用SubMat方法裁剪下我们需要的 (100,520) 到 (360,920) 区域：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void Form1_Load(object sender, EventArgs e)
+{
+    src = Cv2.ImRead(@&quot;lomesima.jpg&quot;);
+    src=src.SubMat(100,520,360,920);
+    pictureBoxIpl1.BackgroundImage= BitmapConverter.ToBitmap(src);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样得到了彩色的地图（深棕色与棕色，以及不重要的蓝色标记）</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d6c9.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>接下来将迷宫转成二值图，可以使用LUT变换，LUT需要一个映射表lut[]，它是一个长度为256的数组，表示将像素值为k的像素映射为lut[k]，在opencv中如果图像是三通道的，则lut[]也需要是三通道，如果是图像灰度图单通道，则lut[]就是单通道。我们最终是进行二值化，不需要色彩信息，可以用单通道，就先将src转成灰度：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>然后选一个数值作为分界，灰度大于这个分界值则为255，小于则为0。经过测试（加一个trackbar控件，其Value值作为这个分界值，动态地看到用各数值的效果）选取57作为分界，这样可以看到二值化的迷宫轮廓。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Mat lut_g2bw;
+private void init_lut()
+{
+    int seprateVal = 57;
+    IntPtr p;
+    p = Marshal.AllocHGlobal(256);
+    for (int i = 0; i &amp;lt; seprateVal; i++)
+    {
+        Marshal.WriteByte(p, i, 0);
+    }
+    for (int i = seprateVal; i &amp;lt; 256; i++)
+    {
+        Marshal.WriteByte(p, i, 255);
+    }
+    lut_g2bw = new Mat(1, 256, MatType.CV_8U, p);
+    Marshal.FreeHGlobal(p);
+}
+private void Form1_Load(object sender, EventArgs e)
+{
+    src = Cv2.ImRead(@&quot;lomesima.jpg&quot;);
+    src=src.SubMat(100,520,360,920);
+    init_lut();
+    Cv2.LUT(src, lut_g2bw, src);
+    pictureBoxIpl1.BackgroundImage= BitmapConverter.ToBitmap(src);
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d683.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>二值化之后出现了一些条纹，这是游戏中打开地图自然附带的游戏效果。这些条纹既不美观，重要的是也可能影响探路，比如最上方一些黑色斑点就可能认为是墙，而有的墙上可能因为有白色条纹而误认为是通路。可以通过加入尺寸为5的中值平滑解决：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Cv2.MedianBlur(src, src,5);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>图片效果会好很多</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d64d.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>迷宫的路径已经很清楚了，接下来就是先探一下从起点出发有哪些区域是连通着的，编写一个dfs：从鼠标点击的位置开始深度搜索所有可达的区域，可达的区域可以画一个'+'作为标记。是这样的效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab4406ce272128a6ad35b6.gif" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>鼠标点击一个起点，从起点开始会朝上下左右各个方向探路，若新方向上的坐标是白色区域，那么就打一个点，并且在这个点继续向各方向探路。每到一个新点进行探路前进的方向可以是随机的也可以是固定的，图上是随机进行的，对总体影响不大。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>既然有鼠标与控件交互，图片可以直接通过Bitmap读取颜色而不需要再转成openCV的Mat。这里有一个线性映射：鼠标点击的位置是控件的位置，而图片某点的坐标是图片尺寸，由于最开始在控件上设定了BackgroudImageLayout是Stretch，图片是拉伸占满控件的，就需要将点击的坐标映射成图片的位置坐标使用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>MouseEventArgs me = (MouseEventArgs)e;
+int x=me.X,y=me.Y;
+int w = pictureBoxIpl1.Width, h = pictureBoxIpl1.Height;
+Bitmap p = (Bitmap)pictureBoxIpl1.BackgroundImage;
+int pw = p.Width, ph = p.Height;
+int cx = x * pw / w, cy = y * ph / h;</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>x和y是鼠标事件的坐标，w和h是控件的宽高，pw,ph是图片的宽高，x*pw/w就是鼠标点击位置对应实际图片的位置cx，类似地cy是图上y的位置。用 p.GetPixel(cx, cy) 可以获取控件上x,y位置的像素值。dfs的时候并不需要对每个点都探路，可以按照间隔为_step进行搜索。dir是设定的Point[]数组用以表示接下来走的方向，取值为(0,-1),(0,1),(-1,0),(1,0)。drawCross()是用来标记的，在(x,y)位置画一个'+'符号。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void drawCross(ref Graphics gr,int x,int y)
+{
+    int _ll = 7, _ww = 2;
+    gr.DrawLine(new Pen(Brushes.Red, _ww), x - _ll, y, x + _ll, y);
+    gr.DrawLine(new Pen(Brushes.Red, _ww), x, y - _ll, x, y + _ll);
+}
+private void PictureBoxIpl1_Click(object sender, EventArgs e)
+{
+    MouseEventArgs me = (MouseEventArgs)e;
+    int x=me.X,y=me.Y;
+    int w = pictureBoxIpl1.Width, h = pictureBoxIpl1.Height;
+    Bitmap p = (Bitmap)pictureBoxIpl1.BackgroundImage;
+    int pw = p.Width, ph = p.Height;
+    int cx = x * pw / w, cy = y * ph / h;
+    var gr = pictureBoxIpl1.CreateGraphics();
+    drawCross(ref gr, x, y);
+    for (int i = 0; i &amp;lt; 900; i++)
+    {
+        isvisited[i] = new byte[900];
+    }
+    int idx = 0;
+    for (int dx = -1; dx &amp;lt;= 1; dx++)
+    {
+        for (int dy = -1; dy &amp;lt;= 1; dy++)
+        {
+            if (dx == 0 &amp;amp;&amp;amp; dy == 0)
+            {
+                continue;
+            }
+            if (dx * dy ==0)
+            {
+                dir[idx].X = dx;
+                dir[idx].Y = dy;
+                idx++;
+            }
+        }
+    }
+    dfs(ref p, x, y, ref gr);
+}
+private int rgb2gray(Color x)
+{
+    int R = x.R, G = x.G, B = x.B;
+    return (R * 30 + G * 59 + B * 11 + 50) / 100;
+}
+private void dfs(ref Bitmap p,int x,int y,ref Graphics gr)
+{
+    int _step = 8;
+    int pw = p.Width, ph = p.Height;
+    int w = pictureBoxIpl1.Width, h = pictureBoxIpl1.Height;
+    int cx = x * pw / w, cy = y * ph / h;
+    if (rgb2gray(p.GetPixel(cx, cy))&amp;gt;150)
+    {
+        Random rnd = new Random();
+        var startIdx = rnd.Next();
+        isvisited[x][y] = 1;
+        drawCross(ref gr, x, y);
+        for(int i=0;i&amp;lt;8;i++)
+        {
+            int dx =  dir[(startIdx + i) % 4].X,dy = dir[(startIdx + i) % 4].Y;
+            if (isvisited[x + _step * dx][y + _step * dy] == 0)
+            {
+                dfs(ref p, x + _step * dx, y + _step * dy, ref gr);
+            }
+        }
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>已经将从起点开始的所有可达通路都标记出来，看出只有1条路是连到终点处的。接下来可以用bfs找最短路径。使用一个qNode结构保存坐标和路径（起点到当前坐标的所有路径），队列中的元素是qNode类型。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private void bfs(ref Bitmap p, int s_x, int s_y,ref Graphics gr)
+{
+    System.Drawing.Point[] pfarr;
+    int _step = 12;
+    int pw = p.Width, ph = p.Height;
+    int w = pictureBoxIpl1.Width, h = pictureBoxIpl1.Height;
+    int x , y , cx , cy ;
+    Random rnd = new Random();
+    queue Q1 = new queue();
+    qNode curr;
+    curr.x = s_x;
+    curr.y = s_y;
+    curr.path = String.Format(&quot;{0},{1}&quot;, curr.x, curr.y);
+    isvisited[s_x][s_y] = 1;
+    Q1.enqueue(curr);
+    while(!Q1.isEmpty())
+    {
+        curr = Q1.dequeue();
+        x = curr.x;
+        y = curr.y;
+        var oldPath = curr.path;
+        cx = x * pw / w;
+        cy = y * ph / h;
+        if (192 &amp;lt; cx &amp;amp;&amp;amp; cx &amp;lt; 372 &amp;amp;&amp;amp;
+        149 &amp;lt; cy &amp;amp;&amp;amp; cy &amp;lt; 391)
+        {
+            string[] posPair = oldPath.Split(';');
+            pfarr = new System.Drawing.Point[posPair.Length];
+            for(int k=0;k&amp;lt;posPair.Length;k++)
+            {
+                string[] pos = posPair[k].Split(',');
+                pfarr[k].X = Convert.ToInt32(pos[0]);
+                pfarr[k].Y = Convert.ToInt32(pos[1]);
+            }
+            gr.DrawCurve(new Pen(Brushes.Red,3), pfarr,0.6f);
+            return;
+        }
+        var startIdx = rnd.Next();
+        for (int i = 0; i &amp;lt; 4; i++)
+        {
+            int dx = dir[(startIdx + i) % 4].X, dy = dir[(startIdx + i) % 4].Y;
+            if (isvisited[x + _step * dx][y + _step * dy] == 0)
+            {
+                cx = x * pw / w;
+                cy = y * ph / h;
+                if (rgb2gray(p.GetPixel(cx, cy)) &amp;gt; 150)
+                {
+                    isvisited[x][y] = 1;
+                    curr.x = x + _step * dx;
+                    curr.y = y + _step * dy;
+                    curr.path = oldPath + String.Format(&quot;;{0},{1}&quot;, curr.x, curr.y);
+                    Q1.enqueue(curr);
+                }
+            }
+        }
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>但是实际只能对比较短的有效，总路程太长用bfs会消耗很多时间还没有运行出结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:video {"id":337} -->
+<figure class="wp-block-video"><video controls src="http://www.malic.xyz/wp-content/uploads/20200112_164942-00_00_01.30-00_00_17.mp4"></video></figure>
+<!-- /wp:video -->
+<!-- wp:paragraph -->
+<p>即使得到了最短路也非常慢。不妨退一步，未必去找最短路，只要它是一条通路就行。从之前用dfs找出的那个唯一终点开始，探到中间的白色大矩形即结束。用带状态的dfs输出这个路径试一下，这次打标记用markHere()画个小圆点：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>{
+    gr.DrawEllipse(new Pen(Brushes.Gold, 3), x - 2, y - 2, 4, 4);
+}
+private bool dfs_withPath(ref Bitmap p, int x, int y, ref Graphics gr)
+{
+    int _step = 9;
+    int pw = p.Width, ph = p.Height;
+    int w = pictureBoxIpl1.Width, h = pictureBoxIpl1.Height;
+    int cx = x * pw / w, cy = y * ph / h;
+    if (193 &amp;lt; cx &amp;amp;&amp;amp; cx &amp;lt; 374 &amp;amp;&amp;amp;
+    149 &amp;lt; cy &amp;amp;&amp;amp; cy &amp;lt; 395)
+    {
+        return true;
+    }
+    if (rgb2gray(p.GetPixel(cx, cy)) &amp;gt; 150)
+    {
+        Random rnd = new Random();
+        var startIdx = rnd.Next();
+        isvisited[x][y] = 1;
+        for (int i = 0; i &amp;lt; 8; i++)
+        {
+            int dx = dir[(startIdx + i) % 4].X, dy = dir[(startIdx + i) % 4].Y;
+            if (isvisited[x + _step * dx][y + _step * dy] == 0)
+            {
+                bool res = dfs_withPath(ref p, x + _step * dx, y + _step * dy, ref gr);
+                if (res)
+                {
+                    markHere(ref gr, x , y );
+                    return res;
+                }
+            }
+        }
+    }
+    return false;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>由于是随机探路，并且dfs并不一定到最短最短路，dfs的话只要这个路径最终能达到目的地就会返回true而将所经过的所有位置都打上标记，并且有些时候可能绕远路。为了省去那些远路，可以重复多次运行，看那些必经之路，则可以得到一个“较优解”。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43eace272128a6ac07ad.png" alt="[Image]"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>找到这条路之后去游戏中发现迷宫只是俯视图，有一些铁箱子的通路，图上表现不出来。图上的位置可以跳到上层，里边有骑士之剑和骑士之盾。实际入口应该是在图上点对称的那边，移开铁箱子上楼梯才可以。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-01-12T07:15:45+09:00">
+      日 12 1月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 有理数系的线性代数运算程序(2) 线性方程组</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p857.html" rel="bookmark"
+         title="Permalink to 有理数系的线性代数运算程序(2) 线性方程组">有理数系的线性代数运算程序(2) 线性方程组</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>要解一个线性方程组： \( AX=B \) ,其中</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>[latex ]A=\begin{bmatrix}<br />a_{11} &amp; a_{12} &amp; a_{13} \\<br /> a_{21} &amp; a_{22} &amp; a_{23} \\ <br /> a_{31} &amp; a_{32} &amp; a_{33} \\ <br />\end{bmatrix} ,B = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix} [/latex]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先将A化为上三角矩阵，然后逐行将A化成单位阵，在这个变换过程中，B随A的变换同时等价变换，当A是E时，就可以得出运算结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private static void swapLine(ref List&lt;RationalNumber&gt; Mat, ref List&lt;RationalNumber&gt; Vect,int N,int k1,int k2)
+{
+  RationalNumber tmp;
+  tmp = Vect[k1];
+  Vect[k1] = Vect[k2];
+  Vect[k2] = tmp;
+  for (int i=0;i&lt;N;i++)
+  {
+    tmp = Mat[k1 * N + i];
+    Mat[k1 * N + i] = Mat[k2 * N + i];
+    Mat[k2 * N + i] = tmp;
+  }
+}
+private static void upperTriangularWithAugmented_Line(ref List&lt;RationalNumber&gt; Mat, ref List&lt;RationalNumber&gt; Vect, int N, int i)
+{
+  int k1, k2;
+  for (k1 = i + 1; k1 &lt; N; k1++)
+  {
+    RationalNumber rate = Mat[k1 * N + i] / Mat[i * N + i];
+    Vect[k1] = Vect[k1] - rate * Vect[i];
+    for (k2 = i; k2 &lt; N; k2++)
+    {
+      Mat[k1 * N + k2] = Mat[k1 * N + k2] - rate * Mat[i * N + k2];
+    }
+  }
+}
+private static bool upperTriangularWithAugmented(ref List&lt;RationalNumber&gt; Mat, ref List&lt;RationalNumber&gt; Vect,int N)
+{
+  bool allLineZero = true;
+  for(int i=0;i&lt;N;i++)
+  {
+    for(int k1=i;k1&lt;N;k1++)
+    {
+      if (!(Mat[k1 * N + i] == 0))
+      {
+        swapLine(ref Mat, ref Vect, N, k1, i);
+        allLineZero = false;
+        break;
+      }
+    }
+    if (allLineZero)
+    {
+      break;
+    }
+    else
+    {
+      upperTriangularWithAugmented_Line(ref Mat,ref Vect, N, i);
+    }
+  }
+  return allLineZero;
+}
+private static string Mat2LaTeX(ref List&lt;RationalNumber&gt; Mat, ref List&lt;RationalNumber&gt; Vect,int N)
+{
+  string msg = @&quot;\pmatrix{&quot;;
+  for(int i=0;i&lt;N;i++)
+  {
+    if(i&gt;0)
+    {
+      msg += @&quot;\\&quot;;
+    }
+    for(int j=0;j&lt;N;j++)
+    {
+      if(j&gt;0)
+      {
+        msg += @&quot;&amp;&quot;;
+      }
+      msg += Mat[i * N + j].ToLaTeX();
+    }
+  }
+  msg += &quot;}X=&quot;;
+  msg += @&quot;\pmatrix{&quot;;
+  for(int i=0;i&lt;N;i++)
+  {
+    if (i &gt; 0)
+      msg += @&quot;\\&quot;;
+    msg += Vect[i].ToLaTeX();
+  }
+  msg += &quot;}&quot;;
+  return msg;
+}
+private static string Vect2LaTeX(ref List&lt;RationalNumber&gt; Vect,int N)
+{
+  string msg = @&quot;\pmatrix{&quot;;
+  for(int i=0;i&lt;N;i++)
+  {
+    if(i&gt;0)
+    {
+      msg += @&quot;\\&quot;;
+    }
+    msg += Vect[i].ToLaTeX();
+  }
+  msg += &quot;}&quot;;
+  return msg;
+}
+private static void identityMatrix(ref List&lt;RationalNumber&gt; Mat, ref List&lt;RationalNumber&gt; Vect,int N)
+{
+  int i, j;
+  for(i=N-1;i&gt;=0;i--)
+  {
+    RationalNumber rate = 1 / Mat[i * N + i];
+    Vect[i] = rate * Vect[i];
+    Mat[i * N + i] = new RationalNumber(1);
+    for( j=0;j&lt;i;j++)
+    {
+      Vect[j] = Vect[j] - Vect[i] * Mat[j * N + i];
+      Mat[j * N + i] = new RationalNumber(0);
+    }
+  }
+}
+public static string linearEquation(ref List&lt;RationalNumber&gt; Mat,ref List&lt;RationalNumber&gt; Vect)
+{
+  int N = 1;
+  while(Mat.Count&gt;=(N+1)*(N+1))
+  {
+    N++;
+  }
+  if (Vect.Count &gt;= N)
+  {
+    upperTriangularWithAugmented(ref Mat, ref Vect,N);
+    string latex_line1 = Mat2LaTeX(ref Mat, ref Vect, N);
+    identityMatrix(ref Mat, ref Vect, N);
+    Vect2LaTeX(ref Vect, N);
+    return latex_line1 +&quot;,X=&quot;+ Vect2LaTeX(ref Vect, N); ;
+  }
+  else
+  {
+    return @&quot;SyntexError&quot;;
+  }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>计算结果返回的是LaTex形式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link" href="http://www.malic.xyz/post-855/">上一节：有理数类</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-09T07:01:44+09:00">
+      月 09 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

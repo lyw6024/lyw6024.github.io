@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [更新中] 平衡搜索树：AVL树，伸展树、红黑树和B+树</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1157.html" rel="bookmark"
+         title="Permalink to [更新中] 平衡搜索树：AVL树，伸展树、红黑树和B+树">[更新中] 平衡搜索树：AVL树，伸展树、红黑树和B+树</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>二叉搜索树按有序的方式插入并建树的过程会退化为链表，此时搜索就时间复杂度达O(N)，采取几种动态形式则可调整二叉搜索树使之平衡，从而不那么容易退化成链表。最简单的想法是尽量使树的左右两子树的高度相对平衡，这就是AVL树。而在搜索时“查找过的结点可能较频繁地再次查找”，将刚刚查找到的结点调整到树根，这就是伸展树。而相比AVL树适当的舍弃一点左右子树的平衡性，同时减少调平衡时旋转次数从而提高效率即是红黑树。而为了方便全部数据的读取，常用在数据库上的一种树则是B+树。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先，给出二分搜索树的C语言实现</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>二分搜索树</h2>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+typedef int  ElementType ;
+struct TreeNode;
+typedef struct TreeNode *Position;
+typedef struct TreeNode *BinSearchTree;
+struct TreeNode
+{
+    ElementType Element;
+    BinSearchTree lChild,rChild;
+};
+BinSearchTree insert(ElementType x, BinSearchTree T);
+Position find(ElementType x,BinSearchTree T);
+BinSearchTree delete(ElementType x,BinSearchTree T);
+Position find(ElementType x,BinSearchTree T)
+{
+    if(T==NULL)
+        return NULL;
+    if(x&lt; T-&gt;Element)
+        return find(x,T-&gt;lChild);
+    else if(x==T-&gt;Element)
+        return T;
+    else
+        return find(x,T-&gt;rChild);
+}
+BinSearchTree insert(ElementType x,BinSearchTree T)
+{
+    if(T==NULL)
+    {
+        T= malloc(sizeof(struct TreeNode));
+        if(T==NULL)
+        {
+            printf(&quot;ERROR. Out of space.\n&quot;);
+            return NULL;
+        }
+        else
+        {
+            T-&gt;Element = x;
+            T-&gt;lChild = NULL;
+            T-&gt;rChild = NULL;
+        }
+    }
+    else
+    {
+        if(x&lt;T-&gt;Element)
+        {
+            T-&gt;lChild = insert(x,T-&gt;lChild);
+        }
+        else if(x&gt; T-&gt;Element)
+        {
+            T-&gt;rChild = insert(x,T-&gt;rChild);
+        }
+    }
+    return T;
+}
+Position findMin(BinSearchTree T)
+{
+    if(T==NULL)
+        return NULL;
+    else
+    {
+        if(T-&gt;lChild==NULL)
+            return T;
+        else
+            return findMin(T-&gt;lChild);
+    }
+}
+BinSearchTree delete(ElementType x,BinSearchTree T)
+{
+    Position TempCell;
+    if(T==NULL)
+    {
+        printf(&quot;ERROR. Element Not Found.\n&quot;);
+        return NULL;
+    }
+    else
+    {
+        if(x&lt; T-&gt;Element)
+        {
+            T-&gt;lChild = delete(x,T-&gt;lChild);
+        }
+        else if(x&gt; T-&gt;Element)
+        {
+            T-&gt;rChild = delete(x,T-&gt;rChild);
+        }
+        else
+        {
+            if(T-&gt;lChild &amp;&amp; T-&gt;rChild)
+            {
+                TempCell = findMin(T-&gt;rChild);
+                T-&gt;Element = TempCell-&gt;Element;
+                T-&gt;rChild = delete(T-&gt;Element,T-&gt;rChild);
+            }
+            else
+            {
+                TempCell = T;
+                if(T-&gt;lChild==NULL)
+                    T=T-&gt;rChild;
+                else if(T-&gt;rChild ==NULL)
+                    T=T-&gt;lChild;
+                free(TempCell);
+            }
+        }
+    }
+    return T;
+}
+void prefix_traversal(BinSearchTree T)
+{
+    if(T!=NULL)
+    {
+        printf(&quot;%d,&quot;,T-&gt;Element);
+        prefix_traversal(T-&gt;lChild);
+        prefix_traversal(T-&gt;rChild);
+    }
+}
+void infix_traversal(BinSearchTree T)
+{
+    if(T!=NULL)
+    {
+        infix_traversal(T-&gt;lChild);
+        printf(&quot;%d,&quot;,T-&gt;Element);
+        infix_traversal(T-&gt;rChild);
+    }
+}
+void postfix_traversal(BinSearchTree T)
+{
+    if(T!=NULL)
+    {
+        postfix_traversal(T-&gt;lChild);
+        postfix_traversal(T-&gt;rChild);
+        printf(&quot;%d,&quot;,T-&gt;Element);
+    }
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>AVL树</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>AVL树要解决的是树不平衡的问题，find操作与二叉搜索树一致。常规的二叉搜索树直接根据结点大小进行插入，如果是有序插入，则树会完全的偏向一边，退化成链表，效率无法得到保证。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>typedef int  ElementType ;
+struct TreeNode;
+typedef struct TreeNode *Position;
+typedef struct TreeNode *AVLTree;
+struct TreeNode
+{
+    ElementType element;
+    AVLTree lChild,rChild;
+    int height;
+};
+AVLTree insert(ElementType x, AVLTree T);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>要使查找树不容易退化成链表，我们给搜索树加一个限制：任何结点的左右子树的高度差不能大于1。要达到这样的目的，需要调整树的结构。AVL树采取“旋转结点”的方式进行：插入结点x之后，g是首个发现不平衡的结点（左右子树高度差为2），p是g的子结点并且是x的祖先结点。根据x,p,g的位置关系，将分别有多种处理方式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>旋转结点</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>例如x插入之后A首先不平衡，x在B的右侧树上，B是A的右子结点，此时这三个树是处在“右偏”的关系上。此时只需要将A与B一次旋转，使B是A的父结点即可，\( A_L \)仍是A的左子树， \( B_R \) 仍是B的右子树，原来的 \( B_L \) 其值在A到B之间，现在B的左子树是A，则 \( B_L \) 成为A的右子树。这种模式只需要旋转1次，称为（RR-单旋）</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1194,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-46.png" alt="[Image]" class="wp-image-1194"/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>在插入结点x，x是首个不平衡的结点的左子树的左子树，与这种方式处理方法是对称的 （LL-单旋） 。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Position SingleRotateWithLeft(Position K2)
+{
+    Position K1 = K2-&gt;lChild;
+    K2-&gt;lChild = K1-&gt;rChild;
+    K1-&gt;rChild = K2;
+    K2-&gt;height = max(getHeight(K2-&gt;lChild),getHeight(K2-&gt;rChild));
+    K1-&gt;height = max(getHeight(K1-&gt;lChild),getHeight(K1-&gt;rChild));
+}
+Position SingleRotateWithRight(Position K2)
+{
+    Position K1 = K2-&gt;rChild;
+    K2-&gt;rChild = K1-&gt;lChild;
+    K1-&gt;lChild = K2;
+    K2-&gt;height = max(getHeight(K2-&gt;lChild),getHeight(K2-&gt;rChild));
+    K1-&gt;height = max(getHeight(K1-&gt;lChild),getHeight(K1-&gt;rChild));
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>另一种模式，如果插入结点x，A是首个不平衡的结点，B是A的左子结点，x在B的右子树（记为C）上。这时就将C作为根，B和A分别作为C的左右子结点。实质上这种方式进行了两次单旋的组合，这种形式则称为LR-双旋。对称地还有RL双旋，不再赘述。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"id":1197,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-47.png" alt="[Image]" class="wp-image-1197"/></figure>
+<!-- /wp:image -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Position DoubleRotateWithLeft(Position K3)
+{
+    K3-&gt;lChild = SingleRotateWithRight(K3-&gt;lChild);
+    return SingleRotateWithLeft(K3);
+}
+Position DoubleRotateWithRight(Position K3)
+{
+    K3-&gt;rChild = SingleRotateWithLeft(K3-&gt;rChild);
+    return SingleRotateWithRight(K3);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>插入结点</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有了旋转之后，在插入结点时判断一下当前插入的是否仍保持平衡，不平衡时则进行一下相应的旋转。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>int getHeight(AVLTree T)
+{
+    if (T==NULL)
+        return 0;
+    return 1+max(getHeight(T-&gt;lChild),getHeight(T-&gt;rChild));
+}
+AVLTree insert(ElementType x,AVLTree T)
+{
+    if(T==NULL)
+    {
+        T= malloc(sizeof(struct TreeNode));
+        if(T==NULL)
+        {
+            printf(&quot;ERROR. Out of space.\n&quot;);
+            return NULL;
+        }
+        else
+        {
+            T-&gt;element = x;
+            T-&gt;lChild = NULL;
+            T-&gt;rChild = NULL;
+        }
+    }
+    else
+    {
+        if(x&lt;T-&gt;element)
+        {
+            T-&gt;lChild = insert(x,T-&gt;lChild);
+            if(getHeight(T-&gt;lChild) - getHeight(T-&gt;rChild) ==2)
+            {
+                if(x&lt;T-&gt;lChild-&gt;element)
+                    T=SingleRotateWithLeft(T);
+                else
+                    T=DoubleRotateWithLeft(T);
+            }
+        }
+        else if(x&gt; T-&gt;element)
+        {
+            T-&gt;rChild = insert(x,T-&gt;rChild);
+            if(getHeight(T-&gt;rChild) - getHeight(T-&gt;lChild)==2)
+            {
+                if(x&gt; T-&gt;rChild-&gt;element)
+                    T= SingleRotateWithRight(T);
+                else
+                    T= DoubleRotateWithRight(T);
+            }
+        }
+    }
+    return T;
+}
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>删除结点</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>AVL树的删除比较复杂，如果操作不是特别多，可以采取懒惰删除的方法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>伸展树</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>伸展树不需要保留高度或者平衡信息，在一定程度上节省了空间。伸展树的目标是在连续M次对树的操作最多花费\( O(M \log N) \)的时间。虽然不能排除存在任意一次操作花费 \( O(N) \)的可能性，但效果也是保证了不会出现最坏的输入序列。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>伸展树的基本思想是：当一个节点被访问以后，就经过一系列AVL树的旋转操作将这个结点放在根上。尤其是当一个结点比较深的时候，将它调整到根的过程也将这条路径上的所有结点进行了调整，使这条路径上的所有节点的访问时间都减少，也就是同时伴有平衡这棵树的作用。研究表明，一个节点被访问过之后，它在不久再次访问的情况是非常频繁的。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>插入结点</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3>删除结点</h3>
+<!-- /wp:heading -->
+<!-- wp:heading -->
+<h2>红黑树</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>  [mathjax]   C++的STL中，map, set结构，以及C#的sortedDictionary的内部都使用的是红黑树。红黑树也是一种平衡的二叉树，为什么实际的系统中更多地使用红黑树而不是AVL树呢?</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>红黑树的结点，有三个指针：父结点、左子树、右子树，以及一个表示结点的值和一个表示结点颜色。先摆出红黑树定义：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"ordered":true} -->
+<ol><li>红黑树中每个结点必然是红或黑的一种颜色</li><li>根结点是黑色</li><li>每个叶子结点（红黑树中叶子结点都是空指针，即外部结点）都是黑色</li><li>如果结点是红色，那么它的子结点都必须是黑色</li><li>每个结点到它的一个子孙结点的单条路径上必然包含同样数量的黑色结点</li></ol>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>给出定义：黑结点高度，是指一个结点x到叶子结点的黑色结点的数量，用<code>bh(x)</code>表示。<code>bh(Tree) = bh(root)</code></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>引理：N个结点的红黑树的高度最大为 \( 2 \ln {(N+1) }\)。可以看到红黑树并不比AVL树更“平衡”，但它的效率比较高。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先来证明一下这个引理：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于每个结点x，x的子树上所有内部结点的数量  \( \text{sizeof}(x)  \leq 2^{\text{bf}(x)}-1 \) ，显然对这空树是正确的。假设对所有x都满足\( \text{h}(x) \leq k \)，则对满足 \( h(x)=k+1 \)的结点bh(child)根据x的红黑不同而可能为bh(x)或bh(x)-1.由于\( \text h (child)\leq k \) ,则 \( \text{sizeof}(child) \geq 2^{\text{bf}(child)}-1 \geq 2^{\text{bh}(x)-1}-1\).<br />而\( \text{sizeof}(x)= 1 + 2\cdot \text{sizeof}(child) \geq    2^{\text{bh}(x)} -1 \)<br />这样则可知，\( \text{sizeof}(root) \geq  2^{\text{bh}(root)} -1 \) <br />接下来要证明 \( \text{bh}(tree) \geq \frac{\text h(tree)}{2} \)。由于每个红结点的子结点必须都是黑结点，所以任意一条从根到叶子的简单路径必然至少有一半的黑结点（这儿不含根结点）。<br />综合 \( \text{sizeof}(tree) \geq  2^{\text{bh}(tree)} -1 \)  与 \( \text{bh}(tree) \geq \frac{\text h(tree)}{2} \) 可知\(   \text{sizeof}(tree) \geq  2^{ \text h(tree) /2}-1\) 证毕。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>插入结点</h3>
+<!-- /wp:heading -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-03-19T01:53:15+09:00">
+      木 19 3月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

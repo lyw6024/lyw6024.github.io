@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - [voj] 2019热身赛02</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p4088.html" rel="bookmark"
+         title="Permalink to [voj] 2019热身赛02">[voj] 2019热身赛02</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="https://vjudge.net/contest/279443" target="_blank">https://vjudge.net/contest/279443</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>A.无关数的平方和 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>对3或5的整除可以直接判断，若数字不能被3或5整除再逐位判断，对于数字用3和5都判断是无关后就是无关数，用它的平方累加即可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>可以提前在本地算出所有小于300的平方数算出存入数组。交题的时候不用判断是否是无关数，而是直接从数组中进行累加就可以（这种技巧叫作“打表”）。当然本题运算量不大，遍历每个数都判断是否是3和5的无关数也一般不会超时。<br><a href="http://p.malic.xyz/E34e/" target="_blank" rel="noreferrer noopener">查看A题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>B.幸运数字 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>这个题其实要找规律。找到规律就O(1)，找不到规律可能运算超时。枚举几个数就会发现，大于17的所有正整数都是Alice认为的幸运数字。如果有一个幸运数字x的其中一个加数是7，那么将它换成4+4，这样x+1也是幸运数字，并且每出现7个4就将其换成4个7，每个7又可以换成4+4，如此可以归纳地证明任意一个大于17的正整数都是幸运数字。所以，只需要判断输入的数x是否是小于等于17的那几个“不幸运数” [1,2,3,5,6,9,10,13,17]即可。<br><a href="http://p.malic.xyz/XQwc/" target="_blank" rel="noreferrer noopener">查看B题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>C.牛拴绳 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>拴牛桩所处的位置可能在庄稼地的南北方向，或者东西方向，或者在四角，可以分别对这些情况判断，若在南北方向时，则计算y到y1与y到y2，若在东西方向则计算x到x1与x到x2，在四角时计算(x,y)到四个顶点的距离，输出计算出的最小值即可<br><a href="http://p.malic.xyz/r5wf/">查看C题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>D.牛吃药 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>固定一个方向比如逆时针。枚举M个点，对每个点计算到逆时针接下来k个药的最短距离，枚举一遍后输出其最小值即可。如果将各坐标按四条边排序，就将二维转换成一维。<br><a href="http://p.malic.xyz/FzPf/">查看D题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>E.牛吃草 </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>二维动态规划。若从顶部向下N层计算，共有2<sup>N</sup>条路径，求其最小值，这样的计算量不可接受。<br>如果使用贪心，可能错过全局最优。比如</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">7
+0 8
+100 0 0
+</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>第二步选择了大的8号，但是后边有更大的100，这时贪心将会错过这个最优解。<br>考虑简单情形，如果只有两行，那么最优的方案是a[0][0]+max(a[1][0],a[1][1])，即a[0][0]必须走，下一步选择品质更大的那一棵牧草。<br>三层的情况，从下边的倒数第二层开始计算，选择了品质更大的那棵就将其更新到当前的品质中，即a[i][j]+=max(a[i+1][j],a[i+1][j+1])<br>当倒数第二层更新后，它的数值表示从当前点到最后的最大品质，再向上一行，同样计算，累加的是下层点到终点的最优解，直到到达顶点，这样每个结点只遍历一次，顶点a[0][0]的数值就是最优解。<br><a rel="noreferrer noopener" href="http://cc.malic.xyz/solutions/c2_solution/pE_display.html" target="_blank">查看动画演示</a><br>思考：如何输出最优路径<br><a href="http://p.malic.xyz/GrZb/">查看E题参考代码</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>F.n点游戏&nbsp;&nbsp;动态规划</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>一维的动态规划。<br>若用f(n)表示计算n所需最少1的个数，对于n=1-5的情形，f(n)=n。<br>举几个例子，n=6时,6=2*3，所以f(6)=f(2)+f(3)=5，对于n=9，由于9=3*3,所以f(9)=f(3)+f(3)，要计算f(27)，因为27=3*9，所以f(27)=f(3)+f(9)，但计算f(9)还要计算f(9)=f(3)*f(3)，这样计算的话会出现许多重复，刚才f(9)已经计算出来了，我们可以直接将其保存下来，将f()改为数组d[]，从1开始向N计算d[i]的值即可。对于任何数字i>1，d[i]=d[i-1]+1，然后我们再检查是否有两个数字x,y相乘等于i，若有就尝试d[x]+d[y]是否小于当前d[i]，若小于就更新d[i]。计算d[i]后依照此法再计算d[i+1]，直到计算出d[N].<br><a href="http://p.malic.xyz/DNad/">查看F题参考代码</a></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2022-04-07T06:16:21+09:00">
+      木 07 4月 2022
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - C# 异步编程Task的使用</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1957.html" rel="bookmark"
+         title="Permalink to C# 异步编程Task的使用">C# 异步编程Task的使用</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p> 基于任务的异步编程模型 (TAP) 提供了异步代码的抽象化。 你只需像往常一样将代码编写为一连串语句即可。 就如每条语句在下一句开始之前完成一样，你可以流畅地阅读代码。 编译器将执行若干转换，因为其中一些语句可能会开始运行并返回表示正在运行中的 Task。 当然BackgroundWorker对象也很容易使用，可以控制其开始、暂停、结束，以及更新进度，但每次使用BackgroundWorker都要编写很多Handler，而使用编写Task相对就简单一些，首先为了演示Task的创建、暂停与继续功能，创建一个winForm项目，放一个progressbar和两个button，其中progressbar用来展示对GUI的控制，button分别表示Task的暂停和继续。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>例1：Task对控件的操作</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>声明一个Task为task1，定义它是一个从1到100的循环，为了体现它的耗时，每次循环停200ms。编写出程序：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public partial class Form1 : Form
+{
+    Task task1;
+    public Form1()
+    {
+        InitializeComponent();
+        task1 = new Task(
+            () =&gt;
+            {
+                for(int i=1;i&lt;=100;i++)
+                {
+                    progressbar1.Value = i;
+                    System.Threading.Thread.Sleep(200);
+                }
+            }
+            );
+        task1.Start();
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>但是一运行就会报错：</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">System.InvalidOperationException:“线程间操作无效: 从不是创建控件“progressBar1”的线程访问它。”</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>这是因为Task是在新线程上创始的，不能从非主线程上对控件进行修改。要在Task的异步操作中对主线程修改，需要使用Invoke。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先声明一个委托函数，它接受一个int类型作为参数，无返回值，然后使用invoke调用这个委托函数，就可以在Task异步操作上对控件进行修改：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public partial class Form1 : Form
+{
+    Task task1;
+    delegate void myMethodDelegate(int x);
+    public Form1()
+    {
+        InitializeComponent();
+        myMethodDelegate progressUpdate = new myMethodDelegate(outputResult);
+        task1 = new Task(
+            () =&gt;
+            {
+                for(int i=1;i&lt;=100;i++)
+                {
+                    Invoke(progressUpdate, i);
+                    System.Threading.Thread.Sleep(200);
+                }
+            }
+            );
+        task1.Start();
+    }
+}
+private void outputResult(int x)
+{
+    progressBar1.Value = x;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样progressBar1就会由于task1的进行而在自动地增加数值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来为task1添加暂停功能，这需要使用一个<code>ManualResetEvent</code>对象,在可以暂停的地方使用WaitOne()使Task可以接受等待，使用Reset()则使之进入等待状态，用Set()恢复正常执行。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>public partial class Form1 : Form
+{
+    Task task1;
+    delegate void myMethodDelegate(int x);
+    ManualResetEvent resetEvent = new ManualResetEvent(true);
+    public Form1()
+    {
+        InitializeComponent();
+        myMethodDelegate progressUpdate = new myMethodDelegate(outputResult);
+        task1 = new Task(
+            () =&gt;
+            {
+                for(int i=1;i&lt;=100;i++)
+                {
+                    resetEvent.WaitOne();
+                    Invoke(progressUpdate, i);
+                    System.Threading.Thread.Sleep(200);
+                }
+            }
+            );
+        task1.Start();
+    }
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>为暂停按钮编写Click事件，以使Task暂停：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>resetEvent.Reset();</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>为继续按钮编写Click事件，恢复Task的执行：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>resetEvent.Set();</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>例2：异步访问Web</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 使用 <code>async/await</code> 功能可以更轻松直观地编写异步程序。 你可以编写类似于同步代码的异步代码，并让编译器处理异步代码通常需要的疑难回调函数和延续。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>建立winForm工程，需要1个button用于控制和一个listbox用于显示结果。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>为显示对比，先实现同步方式的对Web访问，首先要实现如下方法：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul><li><code>SumPageSizes</code>，从&nbsp;<code>SetUpURLList</code>&nbsp;获取网页 URL 列表并随后调用&nbsp;<code>GetURLContents</code>&nbsp;和&nbsp;<code>DisplayResults</code>&nbsp;以处理每个 URL。</li><li><code>SetUpURLList</code>，生成并返回 Web 地址列表。</li><li><code>GetURLContents</code>，下载每个网站的内容并将内容作为字节数组返回。</li><li><code>DisplayResults</code>，显示每个 URL 的字节数组中的字节数。</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>实现如下：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private List&lt;string&gt; SetUpURLList()
+{
+    return new List&lt;string&gt;
+    {
+        &quot;https://www.malic.xyz&quot;,
+        &quot;http://cc.malic.xyz&quot;,
+        &quot;https://www.sohu.com/&quot;,
+        &quot;https://www.163.com/&quot;,
+        &quot;https://www.taobao.com/&quot;,
+        &quot;http://example.webscraping.com/&quot;
+    };
+}
+private void SumPageSizes()
+{
+    // Make a list of web addresses.
+    List&lt;string&gt; urlList = SetUpURLList();
+    var total = 0;
+    foreach (var url in urlList)
+    {
+        // GetURLContents returns the contents of url as a byte array.
+        byte[] urlContents = GetURLContents(url);
+        DisplayResults(url, urlContents);
+        // Update the total.
+        total += urlContents.Length;
+    }
+    // Display the total count for all of the web addresses.
+    resultsTextBox.Text += $&quot;\r\n\r\nTotal bytes returned:  {total}\r\n&quot;;
+}
+private byte[] GetURLContents(string url)
+{
+    // The downloaded resource ends up in the variable named content.
+    var content = new MemoryStream();
+    // Initialize an HttpWebRequest for the current URL.
+    var webReq = (HttpWebRequest)WebRequest.Create(url);
+    // Send the request to the Internet resource and wait for
+    // the response.
+    // Note: you can't use HttpWebRequest.GetResponse in a Windows Store app.
+    using (WebResponse response = webReq.GetResponse())
+    {
+        // Get the data stream that is associated with the specified URL.
+        using (Stream responseStream = response.GetResponseStream())
+        {
+            // Read the bytes in responseStream and copy them to content.
+            responseStream.CopyTo(content);
+        }
+    }
+    // Return the result as a byte array.
+    return content.ToArray();
+}
+private void DisplayResults(string url, byte[] content)
+{
+    // Display the length of each website. The string format
+    // is designed to be used with a monospaced font, such as
+    // Lucida Console or Global Monospace.
+    var bytes = content.Length;
+    // Strip off the &quot;https://&quot;.
+    var displayURL = url.Replace(&quot;https://&quot;, &quot;&quot;).Replace(&quot;http://&quot;,&quot;&quot;);
+    resultsTextBox.Text += $&quot;\n{displayURL,-58} {bytes,8}&quot;;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>为button编写Click事件：</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>listBox1.Items.Clear();
+SumPageSizesAsync();
+listBox1.Items.Add(&quot;Control returned to btn&quot;);</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>点击按钮后会开始访问列出的那些网页，等到显示计数需要几秒钟时间。 与此同时，在等待请求的资源下载时，UI 线程处于被阻止状态。 因此，选择“启动”按钮后，将无法移动、最大化、最小化显示窗口，甚至也无法关闭显示窗口。 在字节计数开始显示之前，这些操作都会失败。 如果网站没有响应，将不会指示哪个网站失败。 甚至停止等待和关闭程序也会很困难。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>要将同步解决方案转换为异步解决方案，最佳着手点在<code> GetURLContents </code>中，因为对<code> HttpWebRequest</code> 方法 <code>GetResponse</code> 的调用以及对 <code>Stream</code> 方法 <code>CopyTo</code> 的调用是应用程序访问 Web 的位置。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>首先将GetURLContents函数中调用的方法从 <code>GetResponse</code> 更改为基于任务的异步 <code>GetResponseAsync</code> 方法。 GetResponseAsync 返回 Task。 在这种情况下，任务返回变量 TResult 具有类型 WebResponse。 该任务是在请求的任务已下载且任务已完成运行后，生成实际 WebResponse 对象的承诺。要从任务检索 WebResponse 值，请将 await 运算符应用到对 GetResponseAsync 的调用，如下列代码所示。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>using (WebResponse response = await webReq.GetResponseAsync())</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>await 运算符将当前方法 GetURLContents 的执行挂起，直到完成等待的任务为止。 同时，控制权返回给当前方法的调用方。 在此示例中，当前方法是 GetURLContents，调用方是 SumPageSizes。 任务完成时，承诺的 WebResponse 对象作为等待的任务的值生成，并分配给变量 response。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> 因为在上一步中添加了 <code>await</code> 运算符，所以会发生编译器错误。 该运算符仅可在使用 async 修饰符标记的方法中使用。按照约定与较好的编码习惯，应当为异步函数在函数名上后缀"Async"，那么我们将GetURLContents函数改名为GetURLContentsAsync</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private async Task&lt;byte[]&gt; GetURLContentsAsync(string url)
+{
+    // The downloaded resource ends up in the variable named content.
+    var content = new System.IO.MemoryStream();
+    // Initialize an HttpWebRequest for the current URL.
+    var webReq = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+    // Send the request to the Internet resource and wait for
+    // the response.
+    using (System.Net.WebResponse response = await webReq.GetResponseAsync())
+    {
+        // Get the data stream that is associated with the specified url.
+        using (System.IO.Stream responseStream = response.GetResponseStream())
+        {
+            // Read the bytes in responseStream and copy them to content.
+            await responseStream.CopyToAsync(content);
+            // The previous statement abbreviates the following two statements.
+            // CopyToAsync returns a Task, not a Task&lt;T&gt;.
+            //Task copyTask = responseStream.CopyToAsync(content);
+            // When copyTask is completed, content contains a copy of
+            // responseStream.
+            //await copyTask;
+        }
+    }
+    // Return the result as a byte array.
+    return content.ToArray();
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样修改后 <code>GetURLContents</code> 到异步方法的转换完成。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>接下来再将将 SumPageSizes 转换为异步方法，与GetURLContents类似</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private async Task SumPageSizesAsync()
+{
+    List&lt;string&gt; urlList = SetUpURLList();
+    System.Net.Http.HttpClient client =
+        new System.Net.Http.HttpClient() { MaxResponseContentBufferSize = 1000000 };
+    var total = 0;
+    foreach (var url in urlList)
+    {
+        byte[] urlContents = await GetURLContentsAsync(url);
+        // The previous line abbreviates the following two assignment statements.
+        // GetURLContentsAsync returns a Task&lt;T&gt;. At completion, the task
+        // produces a byte array.
+        //Task&lt;byte[]&gt; getContentsTask = GetURLContentsAsync(url);
+        //byte[] urlContents = await getContentsTask;
+        DisplayResults(url, urlContents);
+        // Update the total.
+        total += urlContents.Length;
+    }
+    // Display the total count for all of the websites.
+    listBox1.Items.Add($&quot;Total bytes returned:  {total}&quot;);
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>最后，由于点击button会调用await异步方法，则也需要将button的click函数添加async的签名。 要防止意外重新进入操作，在启动操作前先禁用此按钮，然后当操作完成后再恢复按钮。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>private async void button1_Click(object sender, EventArgs e)
+{
+    button1.Enabled = false;
+    listBox1.Items.Clear();
+    await SumPageSizesAsync();
+    listBox1.Items.Add(&quot;Control returned to btn&quot;);
+    button1.Enabled = true;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>这样异步的修改就完成了。可以看到，当访问web时，UI不会处于停止，可以自由地拖动、缩放等。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>另外，在.NET Framework 4.5 及更高版本提供了许多可供使用的异步方法。 其中一个是 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/system.net.http.httpclient">HttpClient</a> 方法 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/system.net.http.httpclient.getbytearrayasync#System_Net_Http_HttpClient_GetByteArrayAsync_System_String_">GetByteArrayAsync(String)</a>，它可以来替代自定义创建的 <code>GetURLContentsAsync</code> 方法。 </p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-07-15T07:08:52+09:00">
+      水 15 7月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

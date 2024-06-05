@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 2021年ECNU软工考研复试机试(E组)</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p3125.html" rel="bookmark"
+         title="Permalink to 2021年ECNU软工考研复试机试(E组)">2021年ECNU软工考研复试机试(E组)</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>共3题，一个小时，按测试点给分，总分将作为复试结果的综合评价参考（不计入复试总分）</p></blockquote>
+<!-- /wp:quote -->
+<!-- wp:paragraph -->
+<p>[mathjax]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>1.骑车路线 </h2>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li> 单点时限: 2.0sec内存限制:512 MB </li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p> Tomislav最近发现自己的身材完全走样了，她走楼梯都变得很累。一天早上她起来以后，她决定恢复姣好的身材。她最喜欢的运动是骑自行车，因此她决定在本地的小山上做一次旅行。<br />她骑自行车的路线可以描述为N个数字的数列，每个数字表示每一段路地海拔高度。Tomislav最感兴趣的是最长的高度一直上升的子序列，她称这一段路为爬坡， Tomislav只想考虑这段爬坡的高度差(即开始和最后的数字的差距)，而不是什么路程长度。<br />一段爬坡路被定义为至少两个连续的上升数列。例如，我们考虑如下路线数列12 3 5 7 10 6 1 11,这里有两个爬坡，第一个爬坡(3 5 7 10)的高度差是7，第二个爬坡的高度差是10 (1 11)。<br />帮助Tomislav计算高度差最大的爬坡的高度差。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> 输入格式 </h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 第一行是一个正整数 \( N (1 \leq N \leq 1000) \)描述了路线数列。<br />第二行有\( N \)个正整数，每个正整数\( P_i (1 \leq P_i \leq 1000) \)表示相应路段的海拔高度。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3> 输出格式 </h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p> 所有爬坡中的最大高度差，如果路线数列里面没有爬坡，就输出0。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>样例1</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5
+1 2 1 4 6</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>5</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>样例2</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>6
+10 8 8 6 4 3</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>0</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>提示</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>\(40\%\)数据保证 \( N \leq 50 \)</li><li>对于 \( 100\% \)数据保证 \( N \leq 1000  \)</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2>2.最长美丽子串</h2>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>单点时限: 1.0sec内存限制:512 MB</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>给定长度为n的字符串S,定义其子字符串为S中连续的字符所组成的字符串。<br />若个字符串的每一个字符都独一 无二，那么我们称这样的字符串是美丽的，例如abc是美丽的，但是abb不是美丽的。请输出S的最长美丽子串的长度。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>输入格式</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>一行一个字符串S<br /></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>输出格式</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>一行一个整数，表示答案。<br /></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>样例1</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>abcddbcd</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>4</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>样例2</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>aaaa</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>1</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>样例3</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>aabbcc</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:codemirror-blocks/code-block {"mode":"null","mime":"text/plain"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>2</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading {"level":3} -->
+<h3>提示</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>样例一中最长美丽字串为abcd，长度为4<br />样例二中最长美丽字串为a，长度为1<br />样例一中最长美丽字串为ab和bc，长度为2</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>数据规定</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>\(30\% \) ：S长度  \( [1,100] \)</li><li>\(60\% \) ：S长度  \( [1,10000] \)</li><li>\(100\% \) ：S长度 \( [1,100000] \)</li></ul>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2>3.中位数</h2>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>单点时限: 1.0 sec内存限制: 512 MB</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>给定\( n \)个数 \( A_1, A_2 , \cdots ,   A_n \) (保证\( n\)为奇数)和\(s\)，你可以任意修改其中的某些数，但每次修改会有代价，代价定义为:若将\(x\)修改为\(y\),则此次代价为\(|x – y| \)。<br />求最少花费多少代价使得修改后所有数的中位数为\(s\)。<br />\(A_1, A_2, \cdots , A_n\)的中位数定义为:将A_i从小到大排序后的第\( \frac{n}{2} \)+ 1项(\( n\)为奇数)。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>输入格式</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>第一行两个整数 \(n,s \)。<br />第二行\(n\)个整数，表示 \( A_1, A_2, \cdots , A_n \) </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>输出格式</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>输出一个整数，表示使序列的中位数变为s的最小代价。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>样例</h3>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":4} -->
+<h4>input</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>5 3<br />0 0 0 3 5</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":4} -->
+<h4>output</h4>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>3</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>提示</h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li>对于\( 20\% \) 数据：\( n \leq 20\)</li><li>对于 \( 40\% \) 数据：\( n \leq 1000\)</li><li>另外对于\( 30\% \) 数据：满足对于任意 \( i \in [1,n] , A_i=0 \)</li><li>对于所有数据，满足 \( 1 \leq n \leq 10^5 \)且n为奇数，\( 0 \leq s，A_i \leq 10^8 \)，且n个数中有超过 \( \frac{n}{2} \)个元素为0</li></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2021-03-30T05:28:04+09:00">
+      火 30 3月 2021
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

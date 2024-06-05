@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 计算几何 - 三角形的内心、垂心，AGC39-D题分析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p276.html" rel="bookmark"
+         title="Permalink to 计算几何 - 三角形的内心、垂心，AGC39-D题分析">计算几何 - 三角形的内心、垂心，AGC39-D题分析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>这次Grand赛只会做A题。此D题在比赛时会写朴素的分别计算内心坐标并累加求平均，数据量一大就TLE，要结合几何关系把内心的计算转为坐标的线性运算，既降低了时间复杂度，又减少了浮点计算量。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>对于三角形ABC来说，三个顶点的坐标已知。三角形的内心就是三角形内切圆的圆心，它到三角形三边的距离相等。三角形的内心与顶点坐标的关系式为：</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>x=(|BC|*x[A]+|AC|*x[B]+|AB|*x[C])/(|BC|+|AC|+|AB|)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p> y=(|BC|*y[A]+|AC|*y[B]+|AB|*y[C])/(|BC|+|AC|+|AB|) </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>本问题若用此法，则需要将所有可能的组合列出，时间复杂度为O(N^3)，只能过一部分测试点。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>本题特殊在于，所用三点均是单位圆上的点，要从单位圆上入手，相当于外接三角形的圆心是(0,0),半径为1是辅助条件。对于单位圆上的三点A,B,C来说，记A'为BC不含点A的弧的中点，B'与C'同理。这样，三角形ABC的内心I与三角形A'B'C'的垂心就重合（证明可根据圆周角定理，注意到A,I,A'是在同一条直线上）。三角形的垂心H，重心G，外心O都依H,G,O的顺序在一条直线上(欧拉线  <br /><a href="https://mathtrain.jp/euler_line">https://mathtrain.jp/euler_line</a>  )，并且有|HG|:|GO|=2:1恒成立。而已证ABC的内心与A'B'C'的垂心H重合，所以只需要求A'B'C'的垂心H，又A'B'C'的外边O就是单位圆的圆心(0,0),只需要计算A'B'C'重心坐标即可。三角形重心坐标就是三个顶点坐标的平均值，这样可知G的坐标，就不难计算垂心H。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>A'坐标与B,C的选法以及A,B,C的相对位置有关的，而和A的具体位置无关（A与A'分别在直线BC的两侧）。因此，对于A'的每个选择，可以通过找到对A'坐标的对最终答案的贡献，最后全加起来就可以计算出结果。 时间复杂度为O(N^2)。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2019-10-05T15:55:08+09:00">
+      土 05 10月 2019
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

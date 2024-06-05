@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 百练C++测试：六题简析</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1286.html" rel="bookmark"
+         title="Permalink to 百练C++测试：六题简析">百练C++测试：六题简析</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>[mathjax] [malicTOC]</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>A:找和最接近但不超过K的两个元素</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>序列a中有N个整数，从中找出两个数，使两数之和最接近K但不超过K。\( (1&lt;N&lt;1000,0 \le K \le2000,0 \le a_i \le 1000) \)， 输出数据为最接近但不超过K的 两数之和。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>此题数据量很小，遍历数组的所有两数之和即可。时间复杂度主要在排序上，为\( O(N^2 \log(N)) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::sort;
+using std::binary_search;
+int main(void)
+{
+    int i,N,K;
+    int *a,*p;
+    scanf(&quot;%d&quot;,&amp;N);
+    a=new int [N];
+    p=new int [N*(N-1)];
+    scanf(&quot;%d&quot;,&amp;K);
+    for(i=0;i&lt;N;i++)
+    {
+        scanf(&quot;%d&quot;,a+i);
+    }
+    int idx=0;
+    for(i=0;i&lt;N;i++)
+    {
+        for(int j=i+1;j&lt;N;j++)
+        {
+            p[idx++]=a[i]+a[j];
+        }
+    }
+    sort(p,p+idx);
+    for(i=0;i&lt;K;i++)
+    {
+        if(binary_search(p,p+idx,K-i))
+        {
+            printf(&quot;%d\n&quot;,K-i);
+            break;
+        }
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>B:附近编号最大的城市</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有N座城市编号为1到N，给出N座城市之间的直接距离，在所有与城市1到距离不超过K的城市中，输出编号最大的城市</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>单源最短路，可以用Dijkstra算法也可以用Folyd算法，本题不需要保存路径所以用Folyd简便一点。求出城市1到所有城市的最短距离，然后从城市编号N倒序遍历，若有城市的最短距离小于K则输出这个城市编号并结束程序。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::min;
+#define MAXN 12
+int N,K;
+int edge[MAXN][MAXN];
+int main(void)
+{
+    scanf(&quot;%d&quot;,&amp;N);
+    scanf(&quot;%d&quot;,&amp;K);
+    for(int i=0;i&lt;N;i++)
+    {
+        for(int j=0;j&lt;N;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;(edge[i][j]));
+        }
+    }
+    for(int t =0;t&lt;N;t++)
+    {
+        for(int i=1;i&lt;N;i++)
+        {
+            edge[0][i] = min(edge[0][i],edge[0][t]+edge[t][i]);
+        }
+    }
+    int i;
+    for(i=N-1;i&gt;=0;i--)
+    {
+        if(edge[0][i]&lt;=K)
+        {
+            break;
+        }
+    }
+    printf(&quot;%d\n&quot;,i+1);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>C:硬币问题</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>有N种硬币，每种硬币的数量不限。已知各硬币的重量w和面值p，在总重量不超过C的情况下，计算最大可能的金额。\( (N\le 100, C \le 1000,0&lt;w, p \le100) \)</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>此题用贪心算法：计算已知硬币的"金额/重量"之比。把金额重量比最高者尽量多地利用，若剩下的重量不足以再取得，就从不大于剩余重量的硬币中尽量多的利用金额重量比最高的，直至没有硬币可用。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::sort;
+struct cNode
+{
+    int w,p;
+    double r;
+    bool operator&lt;(const cNode o)
+    {
+        return r&lt;o.r;
+    }
+};
+int main(void)
+{
+    int N,R,i;
+    int *a;
+    cNode *coins;
+    scanf(&quot;%d&quot;,&amp;N);
+    scanf(&quot;%d&quot;,&amp;R);
+    coins = new cNode [N];
+    a = new int [N];
+    for(int i=0;i&lt;N;i++)
+    {
+        scanf(&quot;%d&quot;,a+i);
+    }
+    for(int i=0;i&lt;N;i++)
+    {
+        coins[i].w = a[i];
+        scanf(&quot;%d&quot;,&amp;(coins[i].p));
+        coins[i].r = coins[i].w * 1.0/coins[i].p;
+    }
+    sort(coins,coins+N);
+    int sumPrice = 0;
+    for(i=0;i&lt;N;i++)
+    {
+        sumPrice += (R/coins[i].w) * coins[i].p;
+        R = R % coins[i].w;
+    }
+    printf(&quot;%d\n&quot;,sumPrice);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>D:制作蛋糕</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>制作一个香蕉蛋糕需要2个单位的香蕉，250个单位的面粉，75个单位的糖，100个单位的黄油。<br />制作一个巧克力蛋糕需要75个单位的可可粉，200个单位的面粉，150个单位的糖，150个单位的黄油。<br />一个香蕉蛋糕可以卖出400元，<br />一个巧克力蛋糕可以卖出450元。<br />为了避免蛋糕变质，每种蛋糕至多只能制作100个。 已知每种原料的数量， 计算利用这些原料最多可以卖多少钱。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>此题流程复杂但算法容易，整理好逻辑再写程序。一种方案是：先把所有原料用来做香蕉蛋糕，看看最多能做多少，再看剩下的原料能做多少巧克力蛋糕。由于巧克力蛋糕比香蕉蛋糕卖得贵，就反复试验：少做一个香蕉蛋糕余下来的原料能否做成巧克力蛋糕，若能就把香蕉蛋糕换成巧克力蛋糕，若不能则就按照这个香蕉蛋糕和巧克力蛋糕的数量进行售卖。稍复杂的情况是若原料能做超过100个香蕉蛋糕，则尝试做巧克力蛋糕之后要再检查能否做成香蕉蛋糕，不然可能原料是够做100个香蕉蛋糕的实际却因为换成了巧克力蛋糕而少做了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::min;
+int banana,flour,sugar,butter,choc;
+int howManyBananaCakeToMake()
+{
+    int v = min(banana/2,flour/250);
+    v=min(v,sugar/75);
+    v=min(v,butter/100);
+    return v;
+}
+int howManyChocCakeToMake()
+{
+    int v = min(choc/75,flour/250);
+    v=min(v,sugar/150);
+    v=min(v,butter/150);
+    return v;
+}
+void makeBananaCake(int c)
+{
+    banana -= 2*c;
+    flour -= 250 *c;
+    sugar -=75*c;
+    butter -=100*c;
+}
+void makeChockCake(int c)
+{
+    choc -= 75*c;
+    flour -= 250*c;
+    sugar -= 150*c;
+    butter -= 150*c;
+}
+int main(void)
+{
+    scanf(&quot;%d&quot;,&amp;flour);
+    scanf(&quot;%d&quot;,&amp;banana);
+    scanf(&quot;%d&quot;,&amp;sugar);
+    scanf(&quot;%d&quot;,&amp;butter);
+    scanf(&quot;%d&quot;,&amp;choc);
+    int num_bananas,num_choc;
+    num_bananas = howManyBananaCakeToMake();
+    if(num_bananas&gt;100)
+    {
+        makeBananaCake(100);
+        num_bananas=100;
+        num_choc = howManyChocCakeToMake();
+        if(num_choc&gt;=100)
+        {
+            printf(&quot;%d\n100\n100\n&quot;,100*400+100*450);
+            return 0;
+        }
+        while(1)
+        {
+            makeBananaCake(-1);
+            if(howManyBananaCakeToMake()==0)
+            {
+                break;
+            }
+            num_bananas-=1;
+            makeChockCake(1);
+            num_choc+=1;
+            if(howManyBananaCakeToMake()==1)
+            {
+                makeBananaCake(1);
+                num_bananas+=1;
+            }
+        }
+        printf(&quot;%d\n&quot;,num_bananas*400+num_choc*450);
+        printf(&quot;%d\n%d\n&quot;,num_bananas,num_choc);
+    }
+    else
+    {
+        makeBananaCake(num_bananas);
+        num_choc = howManyChocCakeToMake();
+        makeChockCake(num_choc);
+        while(1)
+        {
+            makeBananaCake(-1);
+            if(howManyChocCakeToMake()==0)
+            {
+                break;
+            }
+            makeChockCake(1);
+            num_bananas-=1;
+            num_choc+=1;
+        }
+        printf(&quot;%d\n&quot;,num_bananas*400+num_choc*450);
+        printf(&quot;%d\n%d\n&quot;,num_bananas,num_choc);
+    }
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>E:最短路</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>N座城市编号从1到N，已知所有城市间的直线距离，求1号城市到N号城市的最短路程。输出途经的城市编号。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>单源最短路径并且要输出路径，用Dijkstra算法。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#define MAXN 12
+int N;
+int dist[MAXN],path[MAXN],S[MAXN];
+int G[MAXN][MAXN];
+void dijkstra(int v0)
+{
+    int i,j,k;
+    for(i=0;i&lt;N;i++)
+    {
+        dist[i]=G[v0][i];
+        S[i]=0;
+        if(i!=v0)
+        {
+            path[i] = v0;
+        }
+        else
+        {
+            path[i] = -1;
+        }
+    }
+    S[v0] = 1;
+    dist[v0]=0;
+    for(i=0;i&lt;N-1;i++)
+    {
+        int minVal = 0x7FFFFFF,u=v0;
+        for(j=0;j&lt;N;j++)
+        {
+            if(!S[j] &amp;&amp; dist[j]&lt;minVal)
+            {
+                u=j;
+                minVal = dist[j];
+            }
+        }
+        S[u] = 1;
+        for(k=0;k&lt;N;k++)
+        {
+            if(!S[k] &amp;&amp; dist[u]+G[u][k] &lt; dist[k])
+            {
+                dist[k] = dist[u] + G[u][k];
+                path[k] = u;
+            }
+        }
+    }
+}
+int main(void)
+{
+    int i,j;
+    scanf(&quot;%d&quot;,&amp;N);
+    for(i=0;i&lt;N;i++)
+    {
+        for(j=0;j&lt;N;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;G[i][j]);
+        }
+    }
+    dijkstra(0);
+    int shortest[MAXN];
+    int k = 0;
+    shortest[k] = N-1;
+    while(path[shortest[k]]!=0)
+    {
+        k++;
+        shortest[k] = path [shortest[k-1] ];
+    }
+    k++;
+    shortest[k]=0;
+    printf(&quot;%d\n&quot;,dist[N-1]);
+    for(j=k;j&gt;0;j--)
+    {
+        printf(&quot;%d &quot;,1+shortest[j]);
+    }
+    printf(&quot;%d\n&quot;,1+shortest[0]);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:heading -->
+<h2>F:木材切割</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>一根长度为N的木材切成M段，每段都是整数。长度为L的一段木材售价为P[L]。给出所有的P[]，试计算一种切割方案，使这一根木头的售价最高。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>搜索</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-c++src"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using std::max;
+#define MAXN 102
+int comb[MAXN];
+int ppc[MAXN];
+int profits=0;
+int N,M;
+void genComb(int n,int m)
+{
+    if(n&lt;1)
+        return ;
+    if(m==2)
+    {
+        for(int i=1;i&lt;n;i++)
+        {
+            comb[0]=i;
+            comb[1]=n-i;
+        }
+        int S=0;
+        for(int k=0;k&lt;M;k++)
+        {
+            S += ppc[comb[k]];
+        }
+        profits = max(profits,S);
+        return ;
+    }
+    for(int i = 1;i&lt;=n-m;i++)
+    {
+        comb[m-1] = i;
+        genComb(n-i,m-1);
+    }
+}
+int main(void)
+{
+    int n,m;
+    scanf(&quot;%d&quot;,&amp;N);
+    scanf(&quot;%d&quot;,&amp;M);
+    for(int k=1;k&lt;=N;k++)
+    {
+        scanf(&quot;%d&quot;,ppc+k);
+    }
+    n=N;
+    m=M;
+    profits = 0;
+    genComb(n,m);
+    printf(&quot;%d\n&quot;,profits);
+    return 0;
+}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-05T14:09:30+09:00">
+      日 05 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

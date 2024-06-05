@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - 检测图片中前景区域面积占比</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p2163.html" rel="bookmark"
+         title="Permalink to 检测图片中前景区域面积占比">检测图片中前景区域面积占比</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>OpenCV对于图像处理是非常重要的工具，现在有个小模块需要实现这样的功能：探测扫描的文档中表格区域占总页面的多少比例。最初想用HOG等检测器扫描定位表格，但是工作量比较大，并且文档的检测仅用传统的图像特征来检测出错较多。而传统图像法对图片进行一些预处理就可以比较快速而相对准确地检测到非背景的区域。</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2169,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-139.png" alt="[Image]" class="wp-image-2169"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>像这样已经提取出了照片与表格的图（这是PDF转换步骤进行的，文字提取到了另一层上）。实现方法为如下的步骤：</p>
+<!-- /wp:paragraph -->
+<!-- wp:list {"ordered":true} -->
+<ol><li>边缘提取</li><li>反色</li><li>图片腐蚀（即加粗黑色），kernal size = 5x5</li><li>连通区域上色</li><li>以1为阈值进行二值化</li><li>图片膨胀操作（黑色变细），kernalsize比5x5要大一些，这样前景的表格就成为一个连续的白色区域</li><li>FindContours查找轮廓，并输出每个轮廓的像素数/总像素数即为每个轮廓的面积比</li></ol>
+<!-- /wp:list -->
+<!-- wp:paragraph -->
+<p>上图作为输入最后处理的效果如下所示：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":2170,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-140.png" alt="[Image]" class="wp-image-2170"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>完整的程序如下，OpenCV的版本为C#的OpenCvSharp v4.0.30319</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csharp","theme":"material"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>Mat src;
+src = Cv2.ImRead(@&quot;blankSample.png&quot;).CvtColor(ColorConversionCodes.BGR2GRAY);
+src.ConvertTo(src, MatType.CV_8U);
+Cv2.Canny(src, src, 0, 255, 3, false);
+Cv2.BitwiseNot(src, src);
+Cv2.Erode(src, src,
+    Cv2.GetStructuringElement(MorphShapes.Rect, new OpenCvSharp.Size(5, 5)));
+Mat background = new Mat(src.Size(), MatType.CV_8U);
+Cv2.ConnectedComponents(src, background, PixelConnectivity.Connectivity8);
+background.ConvertTo(background, MatType.CV_8U);
+Cv2.Threshold(background, background, 1, 255, ThresholdTypes.Binary);
+Cv2.Dilate(background, background,
+    Cv2.GetStructuringElement(MorphShapes.Rect, new OpenCvSharp.Size(30, 30)));
+OpenCvSharp.Point[][] points;
+OpenCvSharp.HierarchyIndex[] h1;
+Cv2.FindContours(background,out points, out h1, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
+Console.WriteLine(points.Length);
+</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>接下来将介绍这些函数的用法</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>边缘提取</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>OpenCV中边缘提取也有多种算法，这里使用效果较好的Canny算子进行。Canny前2个参数分别是输入和输出Mat，第3个参数和第4个参数分别是检测上下限，低于下限与高于上限的像素不认为是边缘，第5个参数是Sobel的Kernal Size，默认值即3。由于图像的</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>反色</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>图像已经处理成为了灰度图，反色操作使用bitwiseNot即可实现。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>图片腐蚀/膨胀</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Erode是腐蚀，但是它的效果是将黑色变粗，这可能和我们直觉相违背：腐蚀应该是变得更细，就像钢铁腐蚀越来越小。站在图像的角度，对于灰度图，白色值为255，黑色值为0，腐蚀的话就是将较大的值的区域进行“ 腐蚀 ”，白色区域减小了，则相应黑色的区域就变粗了。 <br />相应地Dilate是膨胀，白色区域膨胀后，黑色区域就变细了。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>腐蚀和膨胀函数的参数类似，这里以Erode为例，前两个参数是输入Mat和输出Mat，第3个参数是Kernal，使用Cv2.GetStructuringElement可以指定Rect,Cross,Ellipse作为Kernal的形状，Size则指定Kernal的尺寸。 膨胀操作的Kernal size需要大一些，从而保证不仅能够把表格的细黑线完全消去，还要让文档中的图片区域相近部分合并到同一个块。 </p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>连通区域</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>ConnectedComponents只有两个必选参数，即一个输入Mat一个输出Mat。输出Mat的尺寸与输入Mat的尺寸一致，输出Mat的各值为0到N-1的整数，相同的连通区域用同一个整数表示，其中背景总是用0来表示，如果此时将这个输出Mat展示出来，多个不同的连续区域将显示为不同的灰阶。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>阈值变换</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Threshold可以非常方便地把图片转换为二值图，Threshold接受5个参数：输入Mat,输出Mat,阈值,调整值,变换类型。将变换类型设为Binary则可以把图片中所有大于阈值的像素全部置为调整值。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>上一步当中经过连通区域的变换，背景已经变换为0，所以像素值在为1以上的区域则是前景，于是可以将前景变换为白色255。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>检测轮廓数</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>使用FindContours可以对二值图进行轮廓数的提取，传入的参数有输入Mat，二维点集保存区域轮廓，拓扑信息结构，检索方式，轮廓近似模式。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>这里必要的就是前2个参数，以out方式传入 <code>OpenCvSharp.Point[][] contours</code>，执行后contours.Length为轮廓数，contours[i]为第i个轮廓的四角坐标， contours[i][0]到 contours[i][3] 即四角的Point，通过各坐标Point的X与Y之差就可以算出一个轮廓中的像素数，根据整个src的width与Height之积可知全图的像素数，两值相除即知面积比。</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-08-05T09:45:26+09:00">
+      水 05 8月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>

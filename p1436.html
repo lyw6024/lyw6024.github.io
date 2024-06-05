@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>faint - LaTeX的列举环境</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+
+
+
+
+
+</head>
+
+<body>
+        <header>
+          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
+            <div class="container" id="navigation_menu">
+              <div class="navbar-header">
+              <hgroup><h1><a class="navbar-brand" href="lyw6024.github.io/">faint</a></h1></hgroup>
+              </div>
+        <ul>
+        </ul>
+            </div>
+          </nav>
+        </header>
+
+        <div id="content" class="site-content grid-container full">
+          <div class="container grid-x grid-margin-x">
+              <div class="cell small-2"></div>
+              <div id="primary" class="cell small-8 content-area">
+              <main>
+<article class="post-content">
+  <header class="entry-header">
+    <h2 class="entry-title">
+      <a href="lyw6024.github.io/p1436.html" rel="bookmark"
+         title="Permalink to LaTeX的列举环境">LaTeX的列举环境</a></h2>
+ 
+  </header>
+  <div class="entry-content">
+  <!-- wp:paragraph -->
+<p>LaTeX中的列举项有 itemize, enumerate和description.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>itemize就是无序列表的枚举条目。item后可以加选项表示一个条目之前的标记符号，默认是黑点。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{itemize}
+\item
+Deep learning-based solution for table detection
+\item
+Deep learning-based solution for table structure recognition
+\item[+]
+Present another proof for the efficacy of fine-tuning
+deep neural networks
+\end{itemize}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1437,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-71.png" alt="[Image]" class="wp-image-1437"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>enumerate 则是有序列表的枚举条目。如果要指定格式，则要先引用 <code>\usepackage{enumerate}</code>（不要指定格式可以不导入，就按默认格式）</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{enumerate}
+\item
+Deep learning-based solution for table detection
+\item
+Deep learning-based solution for table structure recognition
+\item
+Present another proof for the efficacy of fine-tuning
+deep neural networks
+\end{enumerate}
+\begin{enumerate}[(1)]
+\item
+Deep learning-based solution for table detection
+\item
+Deep learning-based solution for table structure recognition
+\item
+Present another proof for the efficacy of fine-tuning
+deep neural networks
+\end{enumerate}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1438,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-72.png" alt="[Image]" class="wp-image-1438"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>description 是描述类型，一般是对于较长文本的列举。显示的效果是首行向前突出。</p>
+<!-- /wp:paragraph -->
+<!-- wp:codemirror-blocks/code-block {"mode":"stex","mime":"text/x-latex"} -->
+<div class="wp-block-codemirror-blocks-code-block code-block"><pre>\begin{description}
+\item
+We present a deep learning-based solution for table
+detection, where the domain of general purpose object
+detectors is adapted to the highly different realm of
+document images. Transfer learning is performed by
+carefully fine-tuning a pre-trained model of Faster RCNN
+by Ren et al. [6] for the detection of tables in
+documents.
+\item
+Furthermore, we present a deep learning-based solution
+for table structure recognition (i.e. the identification of
+rows, columns, and cells) where again the general purpose
+domain is adapted and transfer leaning is performed
+by augmenting and fine-tuning an FCN semantic segmentation
+model by Shelhamer et al. [7] pre-trained on Pascal
+VOC 2011 [8].
+\item
+We present another proof for the efficacy of fine-tuning
+deep neural networks even when source and target domains
+are highly dissimilar and the target training set is
+rather small.
+\end{description}</pre></div>
+<!-- /wp:codemirror-blocks/code-block -->
+<!-- wp:paragraph -->
+<p>效果：</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {"align":"center","id":1439,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-73.png" alt="[Image]" class="wp-image-1439"/></figure></div>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>[TABS_R id=1738]</p>
+<!-- /wp:paragraph -->
+  </div>
+  <footer>
+    <p>Published: <time datetime="2020-04-17T09:36:14+09:00">
+      金 17 4月 2020
+    </time></p>
+    <address>
+      By           <a href="lyw6024.github.io/author/malic.html">malic</a>
+    </address>
+    <p>
+        Category: <a href="lyw6024.github.io/category/all.html">All</a>
+    </p>
+  </footer>
+  </article>
+              </main>
+              </div>
+              <div class="cell small-2"></div>
+          </div>
+        </div>
+        <footer>
+                <address>
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address>
+        </footer>
+</body>
+</html>
