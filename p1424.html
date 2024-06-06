@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 开源数据可视化工具falcon</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="开源工具" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -54,28 +58,28 @@
 <p>安装并运行程序，首先就是连接数据库，如果待分析的数据在数据库就可以连接进行分析（mysql 8暂时似乎无法连接），或者Database Type选csv填写CSV文件的URL</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1425,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-64.png" alt="[Image]" class="wp-image-1425"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-64.png"  class="wp-image-1425"/></figure>
 <!-- /wp:image -->
 <!-- wp:image {"id":1426,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-65.png" alt="[Image]" class="wp-image-1426"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-65.png"  class="wp-image-1426"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>连接成功后，在QUERY标签中可以看到数据库中的数据。左侧列表中列出了数据表，csv文件的数据表就的表名就是'?'。上方可以执行SQL语句，下方是数据内容以及相应的展示形式。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1427,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-66.png" alt="[Image]" class="wp-image-1427"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-66.png"  class="wp-image-1427"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>如果将展示形式切换到CHART，可以将数据按这些类型可视化展示</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1429,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-68.png" alt="[Image]" class="wp-image-1429"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-68.png"  class="wp-image-1429"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>例如，数据中展示的是1987年1月到7月的每天最高与最低温，画成折线图。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1431,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-70-1024x555.png" alt="[Image]" class="wp-image-1431"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-70-1024x555.png"  class="wp-image-1431"/></figure>
 <!-- /wp:image -->
   </div>
   <footer>
@@ -88,11 +92,17 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/kai-yuan-gong-ju.html">开源工具</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -102,4 +112,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

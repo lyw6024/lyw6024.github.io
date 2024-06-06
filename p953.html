@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 字典序：生成下一个排列</title>
         <meta charset="utf-8" />
@@ -7,12 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="数学" />
+    <meta name="tags" content="算法与数据结构" />
+    <meta name="tags" content="排列组合" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +26,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +35,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -42,13 +50,10 @@
   </header>
   <div class="entry-content">
   <!-- wp:paragraph -->
-<p> [mathjax] </p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
 <p>用字典序生成排列，一个排列若按字典序，可以设计如下的树，例如N=4，根结点有4个子树，按顺序将这四个树的结点值排好。每个子树又有3个子树，其结点的值是父结点所不含有的那些值。直到将N层建好，则依次就是字典序的排列。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":954,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-10.png" alt="[Image]" class="wp-image-954"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-10.png"  class="wp-image-954"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>按照字典序的规则，已知一个N的排列 \( p_1,p_2,...p_N \)，求下一个排列的算法如下描述：</p>
@@ -140,11 +145,19 @@ int main(void)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/shu-xue.html">数学</a>
+            <a href="/tag/suan-fa-yu-shu-ju-jie-gou.html">算法与数据结构</a>
+            <a href="/tag/pai-lie-zu-he.html">排列组合</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -154,4 +167,13 @@ int main(void)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

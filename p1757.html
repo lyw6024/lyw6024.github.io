@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - markdown快速使用手册</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
+    <meta name="tags" content="Markdown" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,7 +50,7 @@
 <p>vs code的插件是非常丰富，像markdown这样使用广泛的标记型语言，vs code上自然少不了它的插件。利用 <code>Markdown All in One </code>插件在VS Code中写markdown比typora还要爽，它能够以代码编辑的同时分屏即时预览效果，而不需要切换代码和预览模式。在VS Code中还可以同时使用其它插件来找到更适合自己喜欢的输入模式（例如VS Code的Vim插件，则能够以vim输入模式编辑markdown）。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1758,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-114-1024x555.png" alt="[Image]" class="wp-image-1758"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-114-1024x555.png"  class="wp-image-1758"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>当然了，不论是用Typora还是VS Code的markdown插件还是其它markdown编辑器，其语法都是一致的。接下来将介绍markdown一些最常用的标记。</p>
@@ -69,7 +74,7 @@
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1760,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-116.png" alt="[Image]" class="wp-image-1760"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-116.png"  class="wp-image-1760"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>还可以用'#' 作为前缀表示这一行的文字是标题，'#'的个数可以由1到6，分别表示一级标题到六级标题</p>
@@ -90,7 +95,7 @@ FOR可以嵌套使用，但不能交叉。
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1761,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-117.png" alt="[Image]" class="wp-image-1761"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-117.png"  class="wp-image-1761"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>文本格式</h2>
@@ -119,7 +124,7 @@ FOR可以嵌套使用，但不能交叉。
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1762,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-118.png" alt="[Image]" class="wp-image-1762"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-118.png"  class="wp-image-1762"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>列表</h2>
@@ -147,7 +152,7 @@ FOR可以嵌套使用，但不能交叉。
     </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1764,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-119.png" alt="[Image]" class="wp-image-1764"/><figcaption>即使代码中在宋代前写的是99，markdown也会按顺序自动索引（此特性因环境设置而异）</figcaption></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-119.png"  class="wp-image-1764"/><figcaption>即使代码中在宋代前写的是99，markdown也会按顺序自动索引（此特性因环境设置而异）</figcaption></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>引用块与代码块</h2>
@@ -166,7 +171,7 @@ FOR可以嵌套使用，但不能交叉。
 &gt; 此去何时见也？襟袖上、空惹啼痕。伤情处，高城望断，灯火已黄昏。</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1765,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-120.png" alt="[Image]" class="wp-image-1765"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-120.png"  class="wp-image-1765"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>行内代码可以使用前后各1个重音符号 （'`'）包括起来。</p>
@@ -196,7 +201,7 @@ class totalRank : IComparer&lt;student&gt;
 ```</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1766,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-121.png" alt="[Image]" class="wp-image-1766"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-121.png"  class="wp-image-1766"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>超链接</h2>
@@ -224,7 +229,7 @@ class totalRank : IComparer&lt;student&gt;
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1767,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-122.png" alt="[Image]" class="wp-image-1767"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-122.png"  class="wp-image-1767"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>图片</h2>
@@ -247,10 +252,10 @@ http://www.malic.xyz/archives/1771
 <p>使用base64唯一的问题就是base64字符串太长，而markdown又不支持读取多文件内容，这样的话，最好还是将base64以引用链接的形式写在文章末尾。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1769,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-123.png" alt="[Image]" class="wp-image-1769"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-123.png"  class="wp-image-1769"/></figure>
 <!-- /wp:image -->
 <!-- wp:image {"id":1770,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-124.png" alt="[Image]" class="wp-image-1770"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-124.png"  class="wp-image-1770"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>表格</p>
@@ -275,7 +280,7 @@ http://www.malic.xyz/archives/1771
 | 单元格单元格 | 单元格单元格 | 单元格单元格 |</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1773,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-125.png" alt="[Image]" class="wp-image-1773"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-125.png"  class="wp-image-1773"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>数学公式</h2>
@@ -335,7 +340,7 @@ CH&lt;sub&gt;4&lt;/sub&gt;+2 O&lt;sub&gt;2&lt;/sub&gt; = CO&lt;sub&gt;2&lt;/sub&
 &lt;/table&gt;</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1774,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-126.png" alt="[Image]" class="wp-image-1774"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-126.png"  class="wp-image-1774"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading {"level":3} -->
 <h3>折叠内容</h3>
@@ -350,7 +355,7 @@ Content
 &lt;/details&gt;</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":1854,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-127.png" alt="[Image]" class="wp-image-1854"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-127.png"  class="wp-image-1854"/></figure></div>
 <!-- /wp:image -->
   </div>
   <footer>
@@ -363,11 +368,18 @@ Content
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+            <a href="/tag/markdown.html">Markdown</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -377,4 +389,13 @@ Content
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

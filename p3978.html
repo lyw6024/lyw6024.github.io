@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 数字图像处理——图像减法的应用例1</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="OnlineJudge题解" />
+    <meta name="tags" content="图像处理" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -54,7 +59,7 @@
 <p>对于Image对象，可以使用getpixel()函数得到其通道的数值，这样我们先做处理，不论是三通道还是四通道，都统一成三通道，三通道的就认为alpha为255，返回其(R,G,B)数值，这样再生成np.array()，就可以做减法。再利用PIL的fromarray()，可将数组转换为图形显示出来。两图完全相同的部分数值是0，显示为黑色，而有差异的部分就可以看到显示出图样，是一个单词的形式</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":674} -->
-<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/dippic1-300x177.png" alt="[Image]" class="wp-image-674"/></figure>
+<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/dippic1-300x177.png"  class="wp-image-674"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>原题目给出输入数据的范围 1 &lt;= n &lt;= 7，这与我们破解的图片显示出的单词“HACKING”是一致的，那么这个题目也就可以解决了，此题用python3可以只用一句解决：</p>
@@ -96,11 +101,18 @@ res.show()</pre>
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>
+            <a href="/tag/tu-xiang-chu-li.html">图像处理</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -110,4 +122,13 @@ res.show()</pre>
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

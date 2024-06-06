@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - C#自制控件：以扇形图控件为例</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="C#" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -48,7 +53,7 @@
 <p>在VS2019中，新建一个项目属性为“Windows窗体控件库”的项目。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2241,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-141.png" alt="[Image]" class="wp-image-2241"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-141.png"  class="wp-image-2241"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>这时出现了没有窗口边框的控件编辑界面，这时可以将工具箱中的多个工具拖到编辑界面上。 </p>
@@ -127,16 +132,16 @@ private void whenValueChange()
 <p>在主窗体中测试自定义控件的功能，添加引用之后可以看到工具箱中会出现新定义的控件，将之放在窗体中，控件的属性与事件中可以分别看到自定义的public字段以及相应委托函数。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2245,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-142.png" alt="[Image]" class="wp-image-2245"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-142.png"  class="wp-image-2245"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:image {"align":"center","id":2246,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-143.png" alt="[Image]" class="wp-image-2246"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-143.png"  class="wp-image-2246"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p> 再利用一个TrackBar用来调整自定义控件的Rate数值，并为trackBar1编写当trackBar1的数值修改时，让Rate跟随trackBar1的value。可以看到自定义控件的图形发生了变化。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2247,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-144.png" alt="[Image]" class="wp-image-2247"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-144.png"  class="wp-image-2247"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>根据这些基本的对控件的控制方法，可以根据需要扩展到更丰富的功能。</p>
@@ -152,11 +157,18 @@ private void whenValueChange()
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/c.html">C#</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -166,4 +178,13 @@ private void whenValueChange()
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

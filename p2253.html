@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 搜索算法III：启发式搜索</title>
         <meta charset="utf-8" />
@@ -7,11 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="算法与数据结构" />
+    <meta name="tags" content="OnlineJudge题解" />
+    <meta name="tags" content="C++" />
 
 </head>
 
@@ -20,7 +24,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +33,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -163,7 +169,7 @@ int main(void)
 <p>输出结果如下所示</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2296,"width":150,"height":368,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://www.malic.xyz/wp-content/uploads/image-148.png" alt="[Image]" class="wp-image-2296" width="150" height="368"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://www.malic.xyz/wp-content/uploads/image-148.png"  class="wp-image-2296" width="150" height="368"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>可以看出搜索的结点非常多，即使是完全反方向的那些结点也全部搜索到了。启发式搜索则一定程度上少搜索一些绕远路的结点（但也不能完全不搜索，因为可能直线距离的近路是“死胡同”，怎么设计就看评估函数\(H(X)\)的好坏）。</p>
@@ -281,7 +287,7 @@ int main(void)
 <p>这时的搜索顺序是这样的</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2325,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-149.png" alt="[Image]" class="wp-image-2325"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-149.png"  class="wp-image-2325"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>可以看出，启发式搜索会尽量地朝向终点的方向去搜索，不会向“南辕北辙”的路走，减少了搜索的结点。</p>
@@ -297,11 +303,19 @@ int main(void)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/suan-fa-yu-shu-ju-jie-gou.html">算法与数据结构</a>
+            <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>
+            <a href="/tag/c.html">C++</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -311,4 +325,13 @@ int main(void)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

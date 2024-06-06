@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - LaTeX基本文档组件：标题、章节、目录、页面版式</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
+    <meta name="tags" content="LaTeX" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -60,7 +65,7 @@
 <p>。这儿的LaTeX前边加了一个back-slash符号'\'，由于它本身是关键字，LaTeX就会将之转换成相应格式。如果不加'\'符号而是直接使用单词LaTeX，生成的就是字母LaTeX。<br />在配好的环境中生成文档，就可以看到现在已经有了一个只有Hello,LaTeX的文档。（使用pdflatex和xelatex都可以）</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1110,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-33.png" alt="[Image]" class="wp-image-1110"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-33.png"  class="wp-image-1110"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>段落</h2>
@@ -94,7 +99,7 @@
 <p>第5至13行，虽然一句一行，但编译出的文档只占了1段，与Word不同，并不是分别一句一段。在一个空白行之后才会分段</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1111,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-34.png" alt="[Image]" class="wp-image-1111"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-34.png"  class="wp-image-1111"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>标题</h2>
@@ -125,7 +130,7 @@
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1112,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-35.png" alt="[Image]" class="wp-image-1112"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-35.png"  class="wp-image-1112"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>分节和目录</h2>
@@ -166,7 +171,7 @@
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1113,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-36.png" alt="[Image]" class="wp-image-1113"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-36.png"  class="wp-image-1113"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>这样就可以开始进行多层次分节文档编辑了。</p>
@@ -175,7 +180,7 @@
 <p>若要生成目录，可以使用命令 \tableofcontents 生成一个目录，这只对当前自动编号的章节起作用。<strong>注意，要正确生成目录需要编译两次！</strong><br /></p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1114,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-37.png" alt="[Image]" class="wp-image-1114"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-37.png"  class="wp-image-1114"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>页面布局与版式</h2>
@@ -210,11 +215,18 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+            <a href="/tag/latex.html">LaTeX</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -224,4 +236,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

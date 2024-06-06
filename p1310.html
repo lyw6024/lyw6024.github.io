@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - ZFNet:卷积神经网络的理解和可视化</title>
         <meta charset="utf-8" />
@@ -7,12 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="机器学习" />
+    <meta name="tags" content="论文解读" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +25,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +34,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -41,13 +48,7 @@
  
   </header>
   <div class="entry-content">
-  <!-- wp:paragraph -->
-<p>[malicTOC]</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>[mathjax]</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
+  <!-- wp:heading -->
 <h2>一、ZFNet简介</h2>
 <!-- /wp:heading -->
 <!-- wp:heading {"level":3} -->
@@ -66,7 +67,7 @@
 <ul><li>LeNet: 最早用于数字识别的CNN</li><li>AlexNet: 比LeNet层数多，用多层小卷积叠加来替换单个的大卷积</li><li>ZF Net: 2013 ILSVRC冠军</li><li>GoogleNet: 2014 ILSVRC 冠军</li><li>VGG Net: 2014 ILSVRC赛中的一个算法模型，效率比GoogleNet低</li><li>ResNet: 2015 ILSVRC冠军。结构修正以适应更深层次的CNN训练</li></ul>
 <!-- /wp:list -->
 <!-- wp:image {"align":"center","id":1315,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-50.png" alt="[Image]" class="wp-image-1315"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-50.png"  class="wp-image-1315"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:heading {"level":3} -->
 <h3>1.3 ZFNet最大研究意义</h3>
@@ -156,7 +157,7 @@
 <p>&nbsp;我们知道，池化是不可逆的过程，然而我们可以通过记录池化过程中，最大激活值得坐标位置。然后在反池化的时候，只把池化过程中最大激活值所在的位置坐标的值激活，其它的值置为0，当然这个过程只是一种近似，因为我们在池化的过程中，除了最大值所在的位置，其它的值也并不是为0的。刚好最近几天看到文献：《Stacked What-Where Auto-encoders》，里面有个反卷积示意图画的比较好，所有就截下图，用这篇文献的示意图进行讲解：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1316,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-51.png" alt="[Image]" class="wp-image-1316"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-51.png"  class="wp-image-1316"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>以上面的图片为例，上面的图片中左边表示pooling过程，右边表示unpooling过程。假设我们pooling块的大小是3*3，采用max&nbsp;pooling后，我们可以得到一个输出神经元其激活值为9，pooling是一个下采样的过程，本来是3*3大小，经过pooling后，就变成了1*1大小的图片了。而upooling刚好与pooling过程相反，它是一个上采样的过程，是pooling的一个反向运算，当我们由一个神经元要扩展到3*3个神经元的时候，我们需要借助于pooling过程中，记录下最大值所在的位置坐标(0,1)，然后在unpooling过程的时候，就把(0,1)这个像素点的位置填上去，其它的神经元激活值全部为0。</p>
@@ -183,7 +184,7 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp; 这里我打算下一篇博客仔细讲一下卷积转置。最后可视化网络结构如下：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1319,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-52.png" alt="[Image]" class="wp-image-1319"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-52.png"  class="wp-image-1319"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>&nbsp; &nbsp; &nbsp; &nbsp; 网络的整个过程，从右边开始：输入图片-》卷积-》Relu-》最大池化-》得到结果特征图-》反池化-》Relu-》反卷积。到了这边，可以说我们的算法已经学习完毕了，其实很好理解，我们可以用两个过程来描述：</p>
@@ -201,7 +202,7 @@
 <p>上面2.3中的图片并不是ZFNet网络的结构，上面的2.3是进行特征可视化的步骤图，特征可视化的目的就是为了改进原来的网络，适当调整原来的CNN网络（论文中是适当调整AlexNet）。原来的ZFNet是下图所示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1320,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-53-1024x504.png" alt="[Image]" class="wp-image-1320"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-53-1024x504.png"  class="wp-image-1320"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>从上面可以看出，ZFNet相较于AlexNet的改进主要在两点：</p>
@@ -231,7 +232,7 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp; 每个特征单独投影到像素空间揭露了不同的结构能刺激不同的一个给定的特征图，因此展示了它对于变形的输入内在的不变性。下图即在一个已经训练好的网络中可视化后的图。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1332,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p3.png" alt="[Image]" class="wp-image-1332"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p3.png"  class="wp-image-1332"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>由上图可以看到第二层应对角落和其他边缘或者颜色的结合；</p>
@@ -255,7 +256,7 @@
 <p>外表突然的变化导致图像中的一个变换即产生了最强烈的激活。模型的底层在少数几个epoches就能收敛聚集，然而上层在一个相当多的epoches(40-50)之后才能有所变化，这显示了让模型完全训练到完全收敛的必要性。可以由下图看到颜色对比度都逐步增强。作者给我们显示了，在网络训练过程中，每一层学习到的特征是怎么变化的，上面每一整张图片是网络的某一层特征图，然后每一行有8个小图片，分别表示网络epochs次数为：1、2、5、10、20、30、40、64的特征图：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1321,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-54-1024x173.png" alt="[Image]" class="wp-image-1321"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-54-1024x173.png"  class="wp-image-1321"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>结果：(1)仔细看每一层，在迭代的过程中的变化，出现了sudden&nbsp;jumps;(2)从层与层之间做比较，我们可以看到，低层在训练的过程中基本没啥变化，比较容易收敛，高层的特征学习则变化很大。这解释了低层网络的从训练开始，基本上没有太大的变化，因为梯度弥散嘛。(3)从高层网络conv5的变化过程，我们可以看到，刚开始几次的迭代，基本变化不是很大，但是到了40~50的迭代的时候，变化很大，因此我们以后在训练网络的时候，不要着急看结果，看结果需要保证网络收敛。</p>
@@ -270,13 +271,13 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp;一般来说，小的变化对于模型的第一层都有非常大的影响，但对于最高层的影响却几乎没有。对于图像的平移、尺度、旋转的变化来说，网络的输出对于平移和尺度变化都是稳定的，但却不具有旋转不变性，除非目标图像时旋转对称的。下图为分别对平移，尺度，旋转做的分析图。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1322,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-55-1024x172.png" alt="[Image]" class="wp-image-1322"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-55-1024x172.png"  class="wp-image-1322"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:image {"align":"center","id":1323,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-56-1024x168.png" alt="[Image]" class="wp-image-1323"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-56-1024x168.png"  class="wp-image-1323"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:image {"align":"center","id":1324,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-57-1024x173.png" alt="[Image]" class="wp-image-1324"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-57-1024x173.png"  class="wp-image-1324"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p></p>
@@ -306,7 +307,7 @@
 <p>&nbsp; &nbsp; &nbsp; 可能看到现在，我们一直存在一个疑问，那就是，整个模型它自己清楚目标在图像中的具体位置吗？可以用实验来证明一下，即用一个灰色小方块来挡住图像中的目标，然后再观测输出的分类情况来分析，如下图：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1328,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p1-1024x585.png" alt="[Image]" class="wp-image-1328"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p1-1024x585.png"  class="wp-image-1328"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>&nbsp; &nbsp; &nbsp; 上图为对三个不同的测试图片中的不同位置用灰色小方块进行掩盖后，观测分类输出的改变情况。</p>
@@ -327,7 +328,7 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp;为了更进一步探究在深度模型中如何对同一类物体的不同图像进行一致性分析。对五张小狗（同一类）的不同图片的不同区域进行掩盖，然后进行分析观察探究深度模型是对一类物体的那部分进行一致性分析的过程。如下图</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1329,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p2-1024x572.png" alt="[Image]" class="wp-image-1329"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/p2-1024x572.png"  class="wp-image-1329"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[latex]\epsilon^l_i = x^l_i- \bar x ^l _i[/latex]</p>
@@ -342,7 +343,7 @@
 <p>为<strong>汉明距离</strong>，即汉明距离是一个概念，它表示两个（相同长度）字对应位不同的数量，我们以d（x,y）表示两个字x,y之间的汉明距离。对两个字符串进行异或运算，并统计结果为1的个数，那么这个数就是汉明距离。所以得到的值越小，则有更好的一致性。下图对第5层和第7层的特征图中为2，3，4列以及其他随机遮挡情况进行分析的Delta的得分情况，得分越低代表有更好的一致性。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1325,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-58-1024x342.png" alt="[Image]" class="wp-image-1325"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-58-1024x342.png"  class="wp-image-1325"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>由上图可以观察到，在第5层随机遮挡的情况比其他眼睛鼻子被遮挡的情况一致性分析较差，而第7层中，这四类却都差不多，<strong>那是因为底层判别的是一类物体共有的部分，而高层判别的是类别中不同的品种这种更高维的部分了</strong>。<br />&nbsp;</p>
@@ -364,11 +365,18 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+            <a href="/tag/lun-wen-jie-du.html">论文解读</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -378,4 +386,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

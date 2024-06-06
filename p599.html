@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - [机械迷城] 利用bfs解开谜局</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="游戏" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,7 +49,7 @@
 <p>在玩机械迷城，出现了这样一个谜局：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":900,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/2020030508420300-FD9C2C2EDC9ABCBFF4553C95203A203B-1024x576.jpg" alt="[Image]" class="wp-image-900"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/2020030508420300-FD9C2C2EDC9ABCBFF4553C95203A203B-1024x576.jpg"  class="wp-image-900"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>有7个位置，其中六个有棋子，一个为空，只允许两种走法：按棋子的方向向前走到一个空位；跳过1个相对方向的棋子到空位。可以将问题建模为：1表示向下，0表示空位，2表示向上，这样就是长度为7，仅含"012"的字符串，通过适当的变化从"1110222"变到"2220111"。而每次移动棋子可以描述成字符串的替换：1向下走和2向上走就是分别为"10"替换为"01","02"替换为"20"；跳一格是"120"替换为"021"，"012"替换为"210"。将整个过程进行BFS，由于我们要知道走法，所以需要将整个路径保存下来。</p>
@@ -101,7 +105,7 @@ for i in res.split(&quot;;&quot;):
 <p>可以关注0的位置就可以知道应该移动哪一步棋子，这样就解出了这个小谜局</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":902,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/2020030508434100-FD9C2C2EDC9ABCBFF4553C95203A203B-1024x576.jpg" alt="[Image]" class="wp-image-902"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/2020030508434100-FD9C2C2EDC9ABCBFF4553C95203A203B-1024x576.jpg"  class="wp-image-902"/></figure>
 <!-- /wp:image -->
   </div>
   <footer>
@@ -114,11 +118,17 @@ for i in res.split(&quot;;&quot;):
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/you-xi.html">游戏</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -128,4 +138,13 @@ for i in res.split(&quot;;&quot;):
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

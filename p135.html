@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - Atcoder [Sep.7th] D题 Face Produces Unhappiness</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="OnlineJudge题解" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -54,7 +58,7 @@
 <p>建个模型，在下图中人的方向用箭头表示。图中，连续的同向的人我们用1个箭头表示。同时为了省去对边界的特别处理，再假设待计算的N人左侧有无数个面向右的人，而右侧有无数个面向左的人。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":249} -->
-<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/pDA-1024x131.png" alt="[Image]" class="wp-image-249"/></figure>
+<figure class="wp-block-image"><img src="http://www.malic.xyz/wp-content/uploads/pDA-1024x131.png"  class="wp-image-249"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>此题目标是计算愉快的人，但我们反其道而行之，计算那些不愉快的有几人（相邻两人面对面的情况）。也就是说，我们的优化目标是上图中红点更少。每个红点上都有两个不愉快的人。当然，若这个红点位于最左边或最右边，则就只有一个不愉快的人（因为在队伍外边的人不进行计算）。</p>
@@ -99,11 +103,17 @@ int main(void){
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -113,4 +123,13 @@ int main(void){
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

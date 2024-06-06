@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - OpenCvSharp解迷宫：《塞尔达传说旷野之息》洛美岛</title>
         <meta charset="utf-8" />
@@ -7,11 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="图像处理" />
+    <meta name="tags" content="游戏" />
 
 </head>
 
@@ -20,7 +24,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +33,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,13 +51,13 @@
 <p>《塞尔达传说旷野之息》东北角有一座迷宫，外部看上去是这样的：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d61a.jpg" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d61a.jpg" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>最早还没有开这边塔的时候，地图上没有信息，进去也找不到路，后来开了塔可以打开地图看到迷宫：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"width":840,"height":472,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large is-resized"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d5e0.jpg" alt="[Image]" width="840" height="472"/></figure>
+<figure class="wp-block-image size-large is-resized"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d5e0.jpg"  width="840" height="472"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>这迷宫有个问题：不能确定终点。目的地是在中间上方的大方块处，但是连通这个大方块的通路有好几条。起始点是地图最下方的小缺口，同样是通向多个方向有通路。虽然迷宫不是很大，但是起点终点都不能完全确定，走起来还是要费一番功夫的。</p>
@@ -86,7 +92,7 @@ private void Form1_Load(object sender, EventArgs e)
 <p>这样得到了彩色的地图（深棕色与棕色，以及不重要的蓝色标记）</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d6c9.png" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d6c9.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>接下来将迷宫转成二值图，可以使用LUT变换，LUT需要一个映射表lut[]，它是一个长度为256的数组，表示将像素值为k的像素映射为lut[k]，在opencv中如果图像是三通道的，则lut[]也需要是三通道，如果是图像灰度图单通道，则lut[]就是单通道。我们最终是进行二值化，不需要色彩信息，可以用单通道，就先将src转成灰度：</p>
@@ -126,7 +132,7 @@ private void Form1_Load(object sender, EventArgs e)
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d683.png" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d683.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>二值化之后出现了一些条纹，这是游戏中打开地图自然附带的游戏效果。这些条纹既不美观，重要的是也可能影响探路，比如最上方一些黑色斑点就可能认为是墙，而有的墙上可能因为有白色条纹而误认为是通路。可以通过加入尺寸为5的中值平滑解决：</p>
@@ -138,13 +144,13 @@ private void Form1_Load(object sender, EventArgs e)
 <p>图片效果会好很多</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d64d.png" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43b6ce272128a6a9d64d.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>迷宫的路径已经很清楚了，接下来就是先探一下从起点出发有哪些区域是连通着的，编写一个dfs：从鼠标点击的位置开始深度搜索所有可达的区域，可达的区域可以画一个'+'作为标记。是这样的效果：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab4406ce272128a6ad35b6.gif" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab4406ce272128a6ad35b6.gif" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>鼠标点击一个起点，从起点开始会朝上下左右各个方向探路，若新方向上的坐标是白色区域，那么就打一个点，并且在这个点继续向各方向探路。每到一个新点进行探路前进的方向可以是随机的也可以是固定的，图上是随机进行的，对总体影响不大。</p>
@@ -345,7 +351,7 @@ private bool dfs_withPath(ref Bitmap p, int x, int y, ref Graphics gr)
 <p>由于是随机探路，并且dfs并不一定到最短最短路，dfs的话只要这个路径最终能达到目的地就会返回true而将所经过的所有位置都打上标记，并且有些时候可能绕远路。为了省去那些远路，可以重复多次运行，看那些必经之路，则可以得到一个“较优解”。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43eace272128a6ac07ad.png" alt="[Image]"/></figure>
+<figure class="wp-block-image size-large"><img src="https://pic.imgdb.cn/item/60ab43eace272128a6ac07ad.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>找到这条路之后去游戏中发现迷宫只是俯视图，有一些铁箱子的通路，图上表现不出来。图上的位置可以跳到上层，里边有骑士之剑和骑士之盾。实际入口应该是在图上点对称的那边，移开铁箱子上楼梯才可以。</p>
@@ -361,11 +367,19 @@ private bool dfs_withPath(ref Bitmap p, int x, int y, ref Graphics gr)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/tu-xiang-chu-li.html">图像处理</a>
+            <a href="/tag/you-xi.html">游戏</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -375,4 +389,13 @@ private bool dfs_withPath(ref Bitmap p, int x, int y, ref Graphics gr)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

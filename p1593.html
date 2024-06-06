@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - C#中的HTTP操作</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="C#" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -247,7 +252,7 @@ h1.Dispose();</pre></div>
 <p>接下来为了演示POST请求的方法，将以《用Python编写网络爬虫》一书提供的测试网站 ：<code><a href="http://example.webscraping.com/places/default/user/login">http://example.webscraping.com/places/default/user/login</a> </code> 为示例，自己注册后，进行模拟登录系统。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1596,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-108.png" alt="[Image]" class="wp-image-1596"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-108.png"  class="wp-image-1596"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>进入我们要登入的网站，检查这个登录的表单，可以发现除了图中有的这些条目，还有display:none;的一组数据，这些是网站用来验证用户的，如果C#模拟登录只传输电子邮件和密码，是不能登录成功的，我们需要把form中所有input条目都撮出来。在C#中，我们可以先请求到这个网页，用正则表达式将&lt;input /&gt;字段的内容提取出来：</p>
@@ -466,11 +471,18 @@ private static string HttpPostData(
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/c.html">C#</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -480,4 +492,13 @@ private static string HttpPostData(
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

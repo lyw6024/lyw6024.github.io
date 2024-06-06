@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 2020笔试编程题两则浅析</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="OnlineJudge题解" />
+    <meta name="tags" content="求职" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -63,7 +68,7 @@
 <p>化学上有一种有机物的构形，叫作“手性”，即如果一个碳原子连接四个不同的基团，它有两种排列形式，呈现镜像关系，就像人的两只手，两只手的组成形式完全一样，又不能通过平移将两手重合。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2137,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-133.png" alt="[Image]" class="wp-image-2137"/><figcaption> 手性分子示例 </figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-133.png"  class="wp-image-2137"/><figcaption> 手性分子示例 </figcaption></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>由于基团的连接完全一样，若要描述手性的这种特征，还指定旋转方向描述。化学上对于手性分子的描述暂且不表。此题我们根据骰子的“手性”，规定一种骰子的命名方式：总是使1在上顶面，1周围的四个面中最小号旋转到前面，那么剩余的四个面也就被确定了下来。若分别记上下，左右，前后为记号ud,lr,fb，可以将骰子编号ufldbr（这样骰子编号最大值是136542，最小值123456，当然只要u和f分别是最高和次高位即可，剩余4位任意排列）。根据骰子编号，当且仅当骰子编号完全一致时才认为两个骰子是同一类。</p>
@@ -216,7 +221,7 @@ int main(void)
 <p>将这两个点如果视为两个向量，就是两个向量之和 \((x,y) \)，在横坐标\(x\)大于T的时候使\(y\)尽量小，所以应当先选择那些斜率比较低的，即向量的\( y/x \)尽量小。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2133,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-132.png" alt="[Image]" class="wp-image-2133"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-132.png"  class="wp-image-2133"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>建立两个列表分别保存午餐和晚餐，输入后根据\( \frac{热量}{美味值} \)排序，为了防止除0，只吃1餐的情况单独使用1重循环做判断，然后是二重循环计算午餐+晚餐的情况。<br />虽然是二重循环，但是平均时间是排序的\( O(N \cdot \log{N}) \)，平凡情况下这个二重循环大概是\( O(\min\{N,M\}) \)的，因为我们只需要找到首个\( y/x \)最小并且 \(x_i+x_j \geq T\)的向量就能够退出循环。</p>
@@ -316,11 +321,18 @@ int main(void)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>
+            <a href="/tag/qiu-zhi.html">求职</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -330,4 +342,13 @@ int main(void)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

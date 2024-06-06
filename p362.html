@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - Eular路径：Atcoder-E, Jigsaw 题解</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="OnlineJudge题解" />
+    <meta name="tags" content="图论" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,7 +50,7 @@
 <p>有N块拼图碎片，每块拼图碎片都是分为三部分：左侧、中间和右侧三块，每块的宽度都是1，中间一块高度为H，左侧块高度为A,右侧块的高度为B,左侧块到底部距离是C，右侧块到底部的距离D，如下图示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="https://atcoder.jp/img/agc017/2b6cd7f4500d3621bc18de407f167522.png" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="https://atcoder.jp/img/agc017/2b6cd7f4500d3621bc18de407f167522.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>现在Alice想把这些拼图碎片拼起来放在拼图板里。拼图时要按照如下原则：<br /> 所有N块碎片必须全用上<br /> 每块拼图碎片中间一块的底部都靠在拼图板的底边上，拼图碎片不能旋转或翻转<br /> 每块碎片的左侧或右侧的块的底部必须接触拼图板底边或者接触其它拼图块右侧或左侧的顶边。</p>
@@ -142,11 +147,18 @@ int main()
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>
+            <a href="/tag/tu-lun.html">图论</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -156,4 +168,13 @@ int main()
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

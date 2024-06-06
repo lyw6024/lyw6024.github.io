@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 解读Blind Image Blur Estimation via DL</title>
         <meta charset="utf-8" />
@@ -7,11 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="机器学习" />
+    <meta name="tags" content="论文解读" />
+    <meta name="tags" content="图像处理" />
 
 </head>
 
@@ -20,7 +24,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +33,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -69,10 +75,10 @@
 <p class="md-end-block">要恢复原来清晰图像，主要是要解决在图像劣化模型的信息不足的问题。现有的方法通常是将整个图像的模糊核建立一个统一模型，先执行核估计，再进行非盲去卷积。这是一种标准的过程了。 有一种经典盲去卷积方法涉及在最大后验估计中改进图像先验，在文献中常使用的有稀疏先验和边缘先验。这些算法通常是用期望最大化步骤，进一步更新模糊核的估计，再更新清晰图像。虽然这种基于图像先验的方法可以成功的估计模糊核并计算清晰图像，但它存在一定的限制，稀疏先验主要是它能应用在小区域。边缘先验是取决于图像内容，如果图像同质的就很容易失败。本文提出基于FFT的学习先验用于Blur Kernal 估计，频域特征和深层体系结构解决了一些自然图像块中没有边缘的。另外，本文提出的方法虽然是基于patch,但相比稀疏先验，此法也仍可以处理更大的patch。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/uk8H-heqpwqz2414339.jpg" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/uk8H-heqpwqz2414339.jpg" /></figure>
 <!-- /wp:image -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/BXVM-heqpwqz2414465.jpg" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://n.sinaimg.cn/translate/80/w440h440/20180629/BXVM-heqpwqz2414465.jpg" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph {"className":"md-end-block"} -->
 <p class="md-end-block">另外，图像的局部模糊的可能更常见<span class="md-image md-img-loaded" contenteditable="false" data-src="http://n.sinaimg.cn/translate/80/w440h440/20180629/uk8H-heqpwqz2414339.jpg"></span><span class="md-image md-img-loaded" contenteditable="false" data-src="http://n.sinaimg.cn/translate/80/w440h440/20180629/BXVM-heqpwqz2414465.jpg"></span></p>
@@ -158,7 +164,7 @@
 </div>
 <!-- /wp:html -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?%20\frac{1}{1+e^{-t}}" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?%20\frac{1}{1+e^{-t}}" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>其中sigma是 <span class="md-inline-math"><span id="MathJax-Element-16-Frame" class="MathJax_SVG" tabindex="-1"></span><span class="md-math-after-sym">​</span></span></p>
@@ -336,7 +342,7 @@
 <p>如图示，GNN由输入层，隐藏层，非标准化输出单元，求和单元和归一化输出组成。GRNN使用one-pass学习算法进行训练，不需要迭代。训练聚类质心作为求和单元的权重的一部分。假设训练向量是X，训练目标是Y，在pattern层中每个隐藏单元对应于输入样本。从图案层到求和层，每个权重是输入样本的目标。目标求和式可以表达为</p>
 <!-- /wp:paragraph -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?\hat{Y}=\frac%20{\sum_{i=1}^{n}{Y_i%20exp({-\frac{D_i^2}{2\sigma^2}}})}%20{\sum_{i=1}^{n}{%20exp({-\frac{D_i^2}{2\sigma^2}}})}" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?\hat{Y}=\frac%20{\sum_{i=1}^{n}{Y_i%20exp({-\frac{D_i^2}{2\sigma^2}}})}%20{\sum_{i=1}^{n}{%20exp({-\frac{D_i^2}{2\sigma^2}}})}" /></figure>
 <!-- /wp:image -->
 <!-- wp:html -->
 <div id="mathjax-n100" class="mathjax-block md-end-block md-math-block md-rawblock" contenteditable="true" spellcheck="false">
@@ -344,7 +350,7 @@
 </div>
 <!-- /wp:html -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?D_i^2=(X-X_i)^T(X-X_i)" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://latex.codecogs.com/gif.latex?D_i^2=(X-X_i)^T(X-X_i)" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph {"className":"md-end-block"} -->
 <p class="md-end-block">其中<span class="md-inline-math"><span id="MathJax-Element-17-Frame" class="MathJax_SVG" tabindex="-1"></span><span class="md-math-after-sym">​</span></span>, sigma是扩散参数</p>
@@ -423,11 +429,19 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+            <a href="/tag/lun-wen-jie-du.html">论文解读</a>
+            <a href="/tag/tu-xiang-chu-li.html">图像处理</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -437,4 +451,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

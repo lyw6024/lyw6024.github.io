@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - spring実戦：ユーザーの名前の更新する</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="网页开发" />
+    <meta name="tags" content="Java" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -71,7 +76,7 @@
 <p>この後、ページを更新して、ログイン後の画面左にあるメニューに「ログイン名更新」のリンクを追加した。 </p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083301.png" alt="[Image]"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083301.png" /></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[/collapse]</p>
@@ -149,10 +154,10 @@ function showSuccessAlert()
 <p>ここに「文字化け」がある場合は、通常、エンコードの問題だ。このとき、「rename.html」を右クリックし、propertiesを選択して、[Text file encoding]で[Other : UTF-8]を選択する。 [Apply and Close]をクリックして解決する。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","width":760,"height":146,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083317.png" alt="[Image]" width="760" height="146"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083317.png"  width="760" height="146"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:image {"align":"center","width":744,"height":171,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083342.png" alt="[Image]" width="744" height="171"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 083342.png"  width="744" height="171"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[/collapse]</p>
@@ -256,10 +261,10 @@ function showSuccessAlert()
 <p>このようにして、ユーザー名の変更が実現された。検索ページで検索して確認できる。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112303.png" alt="[Image]"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112303.png" /></figure></div>
 <!-- /wp:image -->
 <!-- wp:image {"align":"center","sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112327.png" alt="[Image]"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://malic-imgbed.oss-cn-shanghai.aliyuncs.com/img/Screenshot 2021-10-06 112327.png" /></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[/collapse]</p>
@@ -275,11 +280,18 @@ function showSuccessAlert()
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wang-ye-kai-fa.html">网页开发</a>
+            <a href="/tag/java.html">Java</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -289,4 +301,13 @@ function showSuccessAlert()
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

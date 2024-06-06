@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 检测图片中前景区域面积占比</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="图像处理" />
+    <meta name="tags" content="C#" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,7 +50,7 @@
 <p>OpenCV对于图像处理是非常重要的工具，现在有个小模块需要实现这样的功能：探测扫描的文档中表格区域占总页面的多少比例。最初想用HOG等检测器扫描定位表格，但是工作量比较大，并且文档的检测仅用传统的图像特征来检测出错较多。而传统图像法对图片进行一些预处理就可以比较快速而相对准确地检测到非背景的区域。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2169,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-139.png" alt="[Image]" class="wp-image-2169"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-139.png"  class="wp-image-2169"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>像这样已经提取出了照片与表格的图（这是PDF转换步骤进行的，文字提取到了另一层上）。实现方法为如下的步骤：</p>
@@ -57,7 +62,7 @@
 <p>上图作为输入最后处理的效果如下所示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2170,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-140.png" alt="[Image]" class="wp-image-2170"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-140.png"  class="wp-image-2170"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>完整的程序如下，OpenCV的版本为C#的OpenCvSharp v4.0.30319</p>
@@ -141,11 +146,18 @@ Console.WriteLine(points.Length);
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/tu-xiang-chu-li.html">图像处理</a>
+            <a href="/tag/c.html">C#</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -155,4 +167,13 @@ Console.WriteLine(points.Length);
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

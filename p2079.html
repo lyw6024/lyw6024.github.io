@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - pixiJS界面渲染与交互动作</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="网页开发" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -205,7 +209,7 @@ function setup() {
 <p>所谓css sprite就是将所有素材都放在一张大图上，而使用的素材则是这个大图的一块区域，这样只要大图加载完成，那么所有素材也就加载完成。如下图示，为jQuery-ui的图标</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2080,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-131.png" alt="[Image]" class="wp-image-2080"/><figcaption>图片256x240，每个图标为16x16</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-131.png"  class="wp-image-2080"/><figcaption>图片256x240，每个图标为16x16</figcaption></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p> Pixi内置了一个通用的<code>Rectangle</code>对象 (<code>PIXI.Rectangle</code>)，他是一个用于定义矩形形状的通用对象。他需要一些参数，前两个参数定义了<code>x</code>&nbsp;和<code>y</code>轴坐标位置，后两个参数定义了矩形的<code>width</code>&nbsp;和&nbsp;<code>height</code> 。</p>
@@ -514,11 +518,17 @@ function onDragMove(event) {
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wang-ye-kai-fa.html">网页开发</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -528,4 +538,13 @@ function onDragMove(event) {
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

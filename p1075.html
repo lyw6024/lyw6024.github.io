@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 人脸68特征点定位</title>
         <meta charset="utf-8" />
@@ -7,11 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="机器学习" />
+    <meta name="tags" content="图像处理" />
+    <meta name="tags" content="C#" />
+    <meta name="tags" content="人脸识别" />
 
 </head>
 
@@ -20,7 +26,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +35,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -97,16 +105,16 @@ private void draw68points()
 <p>效果如图示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1076,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-25.png" alt="[Image]" class="wp-image-1076"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-25.png"  class="wp-image-1076"/></figure>
 <!-- /wp:image -->
 <!-- wp:image {"id":1081,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-29.png" alt="[Image]" class="wp-image-1081"/><figcaption> （这张图的判定存在问题，由于此图不是完全正脸，所以右侧外轮廓定位在了错误的位置。） </figcaption></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-29.png"  class="wp-image-1081"/><figcaption> （这张图的判定存在问题，由于此图不是完全正脸，所以右侧外轮廓定位在了错误的位置。） </figcaption></figure>
 <!-- /wp:image -->
 <!-- wp:image {"id":1079,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-27.png" alt="[Image]" class="wp-image-1079"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-27.png"  class="wp-image-1079"/></figure>
 <!-- /wp:image -->
 <!-- wp:image {"id":1080,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-28.png" alt="[Image]" class="wp-image-1080"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-28.png"  class="wp-image-1080"/></figure>
 <!-- /wp:image -->
   </div>
   <footer>
@@ -119,11 +127,21 @@ private void draw68points()
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+            <a href="/tag/tu-xiang-chu-li.html">图像处理</a>
+            <a href="/tag/c.html">C#</a>
+            <a href="/tag/ren-lian-shi-bie.html">人脸识别</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -133,4 +151,13 @@ private void draw68points()
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

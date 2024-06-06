@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - LaTeX排版基本概念</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
+    <meta name="tags" content="LaTeX" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -76,7 +81,7 @@ This is \bfseries bold face style.
 \end{document}</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"id":1127,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-38.png" alt="[Image]" class="wp-image-1127"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-38.png"  class="wp-image-1127"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>LaTeX也支持自定义命令，这类似于宏替换，就是给原有的一个或多个命令起新名字，并将参数代入：</p>
@@ -195,19 +200,19 @@ This is \bfseries bold face style.
 <p>有10个字符被赋予了特殊用途，需要使用相应命令才可输出：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1136,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-39.png" alt="[Image]" class="wp-image-1136"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-39.png"  class="wp-image-1136"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>&lt;,&gt;,|被定义为了数学符号，只能在数学模式中使用。若要在普通文本中使用，也要用相应命令：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1137,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-40.png" alt="[Image]" class="wp-image-1137"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-40.png"  class="wp-image-1137"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>其它的一些特殊字符</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1138,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-41.png" alt="[Image]" class="wp-image-1138"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-41.png"  class="wp-image-1138"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[TABS_R id=1738]</p>
@@ -223,11 +228,18 @@ This is \bfseries bold face style.
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+            <a href="/tag/latex.html">LaTeX</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -237,4 +249,13 @@ This is \bfseries bold face style.
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

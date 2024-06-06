@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 高性能共轭梯度基准测试High-performance conjugate-gradient benchmark</title>
         <meta charset="utf-8" />
@@ -7,12 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="信息技术" />
+    <meta name="tags" content="论文解读" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +25,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +34,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -45,7 +52,7 @@
 <blockquote class="wp-block-quote"><p><a href="https://cn.bing.com/academic/profile?id=47a2702c7f9889973aa8118c5417b20f&amp;encoded=0&amp;v=paper_preview&amp;mkt=zh-cn">&gt;&gt;论文链接&lt;&lt;</a></p></blockquote>
 <!-- /wp:quote -->
 <!-- wp:paragraph -->
-<p>  [mathjax]  今天要讨论的是关于超级计算机的评价指标。对于超级计算机，我们最关心的是它的计算能力。而对于超级计算机，评价计算能力的标准，对超级计算机的发展起到一个非常重要的导向作用。其实并没有一个标准能够完全反映计算机系统的全部性能，往往只是代表它其中的一个方面，比如数据处理性能，系统软件性能 ，定点性能，浮点性能，或者科学工程计算的性能等等。</p>
+<p> 今天要讨论的是关于超级计算机的评价指标。对于超级计算机，我们最关心的是它的计算能力。而对于超级计算机，评价计算能力的标准，对超级计算机的发展起到一个非常重要的导向作用。其实并没有一个标准能够完全反映计算机系统的全部性能，往往只是代表它其中的一个方面，比如数据处理性能，系统软件性能 ，定点性能，浮点性能，或者科学工程计算的性能等等。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>我们今天的讨论的就是一个科学工程计算方面的性能。</p>
@@ -84,7 +91,7 @@
 <p>构造一个三维偏微分方程模型.每个维度上 \( (n_x \times P_x) \times  (n_y \times P_y) \times   (n_z \times P_z)  \)，其中 \( n_x \times  n_y  \times   n_z   \) 是局部子网格的维数，分别分配给MPI（消息传递接口）进程，  \( P_x \times   P_y  \times    P_z   \)  是MPI进程空间的配置数，在HPCG的配置阶段设定。m组n次迭代。一组的运算如下算法所示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://sage.cnpereading.com/filestore///SAGE/HPC/2016/HPC_2016_30_1.r2017-09-16/unzip//10.1177_1094342015593158-table1.png" alt="[Image]"/></figure>
+<figure class="wp-block-image"><img src="http://sage.cnpereading.com/filestore///SAGE/HPC/2016/HPC_2016_30_1.r2017-09-16/unzip//10.1177_1094342015593158-table1.png" /></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>三维的网格点(i,j,k)的求解，它的值取决于周围26个点的值。这样的运算系统主要是为执行计算内核使用。但要知道基准测试不是要对此问题计算精确解，因为最大迭代次数在基准测试中是固定的，不需要收敛到解。作为验证的话可以使用问题的频谱特性和前置共轭梯度算法。</p>
@@ -117,19 +124,19 @@
 <p>下图的结果展示了初期测试的数值比较。上图是半对数刻度（横纵是对数刻度，纵轴是线性的），下图是对数刻度（横纵轴都是对数刻度）。HPL预测的与峰值Peak数值上比较接近，大多数高性能计算机的专家都认同这个观点。但在结点数增多的时候，HPL与Peak的增长率上偏离会增多。虽然在数值上HPCG的绝对值会低很多，但是HPCG的增长比例与峰值是一致的。这是多方面因素以及其数值的记法有关，其中比较常见的因素就是所谓“内存墙”。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="http://sage.cnpereading.com/filestore///SAGE/HPC/2016/HPC_2016_30_1.r2017-09-16/unzip//10.1177_1094342015593158-fig1.png" alt="[Image]"/><figcaption> 32个节点或512 MPI进程上运行HPCG和HPL </figcaption></figure>
+<figure class="wp-block-image"><img src="http://sage.cnpereading.com/filestore///SAGE/HPC/2016/HPC_2016_30_1.r2017-09-16/unzip//10.1177_1094342015593158-fig1.png" /><figcaption> 32个节点或512 MPI进程上运行HPCG和HPL </figcaption></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>这是2016年提出的指标，现在可以到<a href="https://www.top500.org/">top500.org</a>看到，已经采纳了这个指标</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1067,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-23.png" alt="[Image]" class="wp-image-1067"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-23.png"  class="wp-image-1067"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>现在的评价单位已经变成了TFlops/s</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1068,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-24.png" alt="[Image]" class="wp-image-1068"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-24.png"  class="wp-image-1068"/></figure>
 <!-- /wp:image -->
   </div>
   <footer>
@@ -142,11 +149,18 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/xin-xi-ji-zhu.html">信息技术</a>
+            <a href="/tag/lun-wen-jie-du.html">论文解读</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -156,4 +170,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

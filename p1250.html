@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - django：数据收集与统计可视化的简单设计</title>
         <meta charset="utf-8" />
@@ -7,11 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="程序设计" />
+    <meta name="tags" content="网页开发" />
+    <meta name="tags" content="django" />
+    <meta name="tags" content="highcharts" />
+    <meta name="tags" content="Python" />
 
 </head>
 
@@ -20,7 +27,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +36,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -48,7 +57,7 @@
 <p>大头菜实际上就是芜菁，日语中叫作 カブ ，与日语中的股份一词“<ruby>株<rt>かぶ</rt></ruby>” 同音，这个游戏机制确实有点像只有1支股的股票交易。</p>
 <!-- /wp:html -->
 <!-- wp:image {"align":"center","id":1253,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/无标题.png" alt="[Image]" class="wp-image-1253"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/无标题.png"  class="wp-image-1253"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>switch肯定没有API，数据只能手动输入。现在要设计一个统计系统，就是将历来的大头菜数据都收集起来，每周日进行归档。</p>
@@ -60,7 +69,7 @@
 <p>效果展示：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1302,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-49-1024x517.png" alt="[Image]" class="wp-image-1302"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-49-1024x517.png"  class="wp-image-1302"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>django是MVC开发模式，初始化一个django项目之后，urls.py当中定义的是各种url访问入口，views.py定义的是各种处理函数代表控制器(C)，Models.py当中定义的是数据模型(M)，一般在template文件夹下的各个模板文件代表视图(V).</p>
@@ -322,11 +331,22 @@ def saveData(request):
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/cheng-xu-she-ji.html">程序设计</a>
+            <a href="/tag/wang-ye-kai-fa.html">网页开发</a>
+            <a href="/tag/django.html">django</a>
+            <a href="/tag/highcharts.html">highcharts</a>
+            <a href="/tag/python.html">Python</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -336,4 +356,13 @@ def saveData(request):
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

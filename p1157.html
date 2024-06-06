@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - [更新中] 平衡搜索树：AVL树，伸展树、红黑树和B+树</title>
         <meta charset="utf-8" />
@@ -7,12 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="算法与数据结构" />
+    <meta name="tags" content="TODO" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +25,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +34,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -218,7 +225,7 @@ AVLTree insert(ElementType x, AVLTree T);</pre></div>
 <p>例如x插入之后A首先不平衡，x在B的右侧树上，B是A的右子结点，此时这三个树是处在“右偏”的关系上。此时只需要将A与B一次旋转，使B是A的父结点即可，\( A_L \)仍是A的左子树， \( B_R \) 仍是B的右子树，原来的 \( B_L \) 其值在A到B之间，现在B的左子树是A，则 \( B_L \) 成为A的右子树。这种模式只需要旋转1次，称为（RR-单旋）</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1194,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-46.png" alt="[Image]" class="wp-image-1194"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-46.png"  class="wp-image-1194"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>在插入结点x，x是首个不平衡的结点的左子树的左子树，与这种方式处理方法是对称的 （LL-单旋） 。</p>
@@ -246,7 +253,7 @@ Position SingleRotateWithRight(Position K2)
 <p>另一种模式，如果插入结点x，A是首个不平衡的结点，B是A的左子结点，x在B的右子树（记为C）上。这时就将C作为根，B和A分别作为C的左右子结点。实质上这种方式进行了两次单旋的组合，这种形式则称为LR-双旋。对称地还有RL双旋，不再赘述。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1197,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-47.png" alt="[Image]" class="wp-image-1197"/></figure>
+<figure class="wp-block-image size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-47.png"  class="wp-image-1197"/></figure>
 <!-- /wp:image -->
 <!-- wp:codemirror-blocks/code-block {"mode":"clike","mime":"text/x-csrc"} -->
 <div class="wp-block-codemirror-blocks-code-block code-block"><pre>Position DoubleRotateWithLeft(Position K3)
@@ -344,7 +351,7 @@ AVLTree insert(ElementType x,AVLTree T)
 <h2>红黑树</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>  [mathjax]   C++的STL中，map, set结构，以及C#的sortedDictionary的内部都使用的是红黑树。红黑树也是一种平衡的二叉树，为什么实际的系统中更多地使用红黑树而不是AVL树呢?</p>
+<p>   C++的STL中，map, set结构，以及C#的sortedDictionary的内部都使用的是红黑树。红黑树也是一种平衡的二叉树，为什么实际的系统中更多地使用红黑树而不是AVL树呢?</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>红黑树的结点，有三个指针：父结点、左子树、右子树，以及一个表示结点的值和一个表示结点颜色。先摆出红黑树定义：</p>
@@ -378,11 +385,18 @@ AVLTree insert(ElementType x,AVLTree T)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/suan-fa-yu-shu-ju-jie-gou.html">算法与数据结构</a>
+            <a href="/tag/todo.html">TODO</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -392,4 +406,13 @@ AVLTree insert(ElementType x,AVLTree T)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

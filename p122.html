@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 一种随机抽样的算法</title>
         <meta charset="utf-8" />
@@ -7,12 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="数学" />
+    <meta name="tags" content="算法与数据结构" />
+    <meta name="tags" content="Python" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +26,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +35,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -42,7 +50,7 @@
   </header>
   <div class="entry-content">
   <!-- wp:paragraph -->
-<p>[mathjax]有一个很常见的问题：从\(  N \)个互不相同的数，随机选取 \( M(M&lt;N)  \) 个数字.比如在一组N个样品当中选择其中M个进行破坏性测试。</p>
+<p>有一个很常见的问题：从\(  N \)个互不相同的数，随机选取 \( M(M&lt;N)  \) 个数字.比如在一组N个样品当中选择其中M个进行破坏性测试。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p>朴素的想法是，输出 \(  M \) 次随机数，在每次输出存于一个表中，每次准备输出时看一下这次要输出的随机数是否以前出现过，若出现过就再生成一个随机数，若没出现过就存入这个表并输出它。这个方法在M远小于 \(  N \) 的时候是很灵的，按概率来算一般执行  \(  M \)  次就可以获得  \(  M \)  个不同的随机数。但是当 \(  N \) 与M都很大，并且  \(  M \)  和 \(  N \) 相差并不很大的时候，比如从整个公司1000人当中挑随机选850人，当已经选出849人之后，只有151/1000的概率能选出一个之前未出现过的随机数，并且每次出现一个随机数要与之前849个数作比较以检查是否之前出现过，这样可能花的时间更长，下面介绍一种仅与总样本数N有关的抽样方法，这是《编程珠玑》上所讨论过的一种算法。在工程上还算实用。</p>
@@ -79,11 +87,19 @@ for i in range(N):
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/shu-xue.html">数学</a>
+            <a href="/tag/suan-fa-yu-shu-ju-jie-gou.html">算法与数据结构</a>
+            <a href="/tag/python.html">Python</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -93,4 +109,13 @@ for i in range(N):
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

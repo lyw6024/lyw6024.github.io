@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 谷歌地球引擎(GEE)使用导论</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="工程" />
+    <meta name="tags" content="GEE" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -51,13 +56,13 @@
 <p>进入其主界面，上方是代码区，下边是地图。我们可以用地图左上角的工具绘制几何图形作为ROI，然后编写代码进行计算。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1717,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-110-1024x555.png" alt="[Image]" class="wp-image-1717"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-110-1024x555.png"  class="wp-image-1717"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>代码左边的Docs当中列出了GEE中的数据类型，很多是对基础数据类型如字符串、数字、数组的二次封装，展开后还可以看到支持的方法。Docs中也列出GEE支持的Algorithm，可以方便地对数据或图像进行处理。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1718,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-111.png" alt="[Image]" class="wp-image-1718"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-111.png"  class="wp-image-1718"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>上方的中间就是输入Script的地方，右侧将显示结果，print的内容将展示在右侧的Console中。数据展示在Tasks标签，可以将运行数据点击Run并导出到<a href="https://drive.google.com/" target="_blank" rel="noreferrer noopener" aria-label="（在新窗口打开）">谷歌云盘</a>中.</p>
@@ -83,11 +88,18 @@
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/gong-cheng.html">工程</a>
+            <a href="/tag/gee.html">GEE</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -97,4 +109,13 @@
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

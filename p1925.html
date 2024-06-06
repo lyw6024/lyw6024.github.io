@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - LaTeX中使用bib文件组织自己的文献库</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
+    <meta name="tags" content="LaTeX" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -195,7 +200,7 @@ Database file #1: myBibliography.bib
 <p>相比上一次的 <code>main.aux</code>，在读入 BibTeX 之后，LaTeX 向 <code>aux</code> 文件写入了更多的信息。这里 <code>\bibcite{baz}{1}</code> 将 <code>baz</code> 这一参考文献标记（label）与参考文献编号（数字 1）绑定起来了。 接下来，我们看看 <code>dvi</code> 文件的内容：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1926,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-128.png" alt="[Image]" class="wp-image-1926"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-128.png"  class="wp-image-1926"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p> 不难发现，由于读入了 <code>main.bbl</code> 文件，参考文献列表已经正确展现出来了。然而，正文中依然有一个问号。 实际上，LaTeX 需要 <code>aux</code> 文件中的 <code>\bibcite</code> 命令，将参考文献标记与参考文献编号关联起来，从而在 <code>tex</code>文件中的 <code>\cite</code> 命令位置填上正确的参考文献编号。我们注意到，在我们第二次执行 LaTeX 命令编译之前，<code>main.aux</code> 文件中是没有这些信息的，直到编译完成，这些信息才被正确写入。因此，第二次执行 LaTeX 命令时，LaTeX 还不能填入正确的文献编号，于是就写入了一个问号作为占位符。 解决这个问题的办法也很简单——此时 <code>aux</code> 文件中已经有了需要的信息，再编译一遍就好了。</p>
@@ -207,7 +212,7 @@ Database file #1: myBibliography.bib
 <p>如果没有意外，此时的 <code>main.dvi</code> 文件应该看起来一切正常了。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":1927,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-129.png" alt="[Image]" class="wp-image-1927"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-129.png"  class="wp-image-1927"/></figure>
 <!-- /wp:image -->
 <!-- wp:heading {"level":3} -->
 <h3>总结</h3>
@@ -229,11 +234,18 @@ Database file #1: myBibliography.bib
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+            <a href="/tag/latex.html">LaTeX</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -243,4 +255,13 @@ Database file #1: myBibliography.bib
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

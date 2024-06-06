@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 优选法与黄金分割</title>
         <meta charset="utf-8" />
@@ -7,12 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="数学" />
+    <meta name="tags" content="C++" />
+    <meta name="tags" content="Racket" />
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +26,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +35,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -42,9 +50,6 @@
   </header>
   <div class="entry-content">
   <!-- wp:paragraph -->
-<p>[mathjax]</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
 <p>优选的方法非常常见，易于解决，不太容易引起人们注意。但在研究人员看来，对产品的质量与优选息息相关：蒸馒头时放多少碱好?放多了会发苦，放少了面发不起来。某种高分子材料的改性剂用料比例是多少会达到最好的效果? 抽象成数学问题，其实就是单峰函数求极值。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
@@ -57,19 +62,19 @@
 <p>那么，为什么是以\( \phi=0.618 \)作为比例进行分割?我们以比例W作为分割比，假定函数在区间\( [0,1] \) 内有唯一极值，那么按W会将区间分为三部分：\( [0,1-W),[1-W,W),[W,1] \) 。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1456,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-79.png" alt="[Image]" class="wp-image-1456"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-79.png"  class="wp-image-1456"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>采取优选法就是为了减少试验次数。如果第1次通过试验舍弃了[W,1]区间，那么接下来将在[0,W]区间中在 \( W(1-W) \) 与 \( W^2 \) 两点进行试验。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1457,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-80.png" alt="[Image]" class="wp-image-1457"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-80.png"  class="wp-image-1457"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>将上次试验的数据重复利用就能够减少试验次数，即 \( 1-W = W^2 \)。当然如果第1次实验舍弃了\( [0,1-W) \)区间，得到的结论是类似的\(W = 1-W+W(1-W) \)，化简后同样得到方程  \( 1-W = W^2 \) ：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1458,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-81.png" alt="[Image]" class="wp-image-1458"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="http://www.malic.xyz/wp-content/uploads/image-81.png"  class="wp-image-1458"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>这个方程\( 1-W = W^2 \)的大于0的解就是\( \frac{\sqrt{5}-1}{2}\)，\( \phi = 0.618 \) 就是 \( \frac{\sqrt{5}-1}{2}\) 的三位小数近似。在应用时可根据需要，取0.6, 0.62, 0.618等值。采取这个“黄金分割比”的原因就是它可以利用上次试验的结果，从而减少了总试验的次数。</p>
@@ -151,11 +156,19 @@ int main(void)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/shu-xue.html">数学</a>
+            <a href="/tag/c.html">C++</a>
+            <a href="/tag/racket.html">Racket</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -165,4 +178,13 @@ int main(void)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

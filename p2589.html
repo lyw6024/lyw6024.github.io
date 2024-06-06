@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - LaTeX中图表公式编号问题及计数器</title>
         <meta charset="utf-8" />
@@ -7,11 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
+    <meta name="tags" content="LaTeX" />
 
 </head>
 
@@ -20,7 +23,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +32,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -48,7 +53,7 @@
 <p>\( \LaTeX \)不仅对章节进行编号，同时也能够自动对图、表、公式，以及脚注等进行编号，其中图、表、公式的编号是在<code>\begin{}\end{}</code>对应的块中加入<code>\label{}</code>，这样编译出来的文档就会自动按照出现顺序将之分别编号。其底层实现是调用了内置的计数器。LaTeX中内置计数器的名称与相应环境名是一致的（除enum的四层计数器）</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2597,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-154.png" alt="[Image]" class="wp-image-2597"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-154.png"  class="wp-image-2597"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>例如</p>
@@ -63,7 +68,7 @@ a^2+b^2=c^2
 <p>则会展现为如下图示的形式</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2590,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-151.png" alt="[Image]" class="wp-image-2590"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-151.png"  class="wp-image-2590"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>若将documentclass设为book格式，那么公式标号将会以章为单位分隔：</p>
@@ -92,7 +97,7 @@ a^2+b^2=c^2
 \end{document}</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":2591,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-152.png" alt="[Image]" class="wp-image-2591"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-152.png"  class="wp-image-2591"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>如果要将公式编号的格式进行调整，比如像word的公式编号默认格式那样，为<code>(C-E)</code>的形式，当然LaTeX也可以实现。公式的编号计数器名为<code>equation</code>，在每个公式之后出现时可以使用<code>\theequation</code>命令显式表示，使用\renewcommand命令将\theequation改为需要的格式，例如在导言区加入</p>
@@ -104,7 +109,7 @@ a^2+b^2=c^2
 <p>则编译出来的公式就是(C-E)形式：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2592,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-153.png" alt="[Image]" class="wp-image-2592"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-153.png"  class="wp-image-2592"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>类似地，可以将<code>\thefigure</code>和<code>\thetable</code>进行renewcommand，从而将默认的<code>C.F</code>与<code>C.T</code>标号分别改为了<code>C-F</code>,<code>C-T</code>形式。</p>
@@ -124,7 +129,7 @@ a^2+b^2=c^2
 <p>不论是自定义计数器还是默认的，都可以使用如下命令操作计数器：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2598,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-155.png" alt="[Image]" class="wp-image-2598"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-155.png"  class="wp-image-2598"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:heading -->
 <h2>计数器的显示形式</h2>
@@ -133,7 +138,7 @@ a^2+b^2=c^2
 <p>计数器存在默认的形式，除enumii和mpfootnote是小写英文字母，enumiv是大写英文字母，其它的默认计数器格式都是阿拉伯数字，可以使用如下命令指定计数器的显示方式：</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":2599,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-156.png" alt="[Image]" class="wp-image-2599"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-156.png"  class="wp-image-2599"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>[TABS_R id=1738]</p>
@@ -149,11 +154,18 @@ a^2+b^2=c^2
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+            <a href="/tag/latex.html">LaTeX</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -163,4 +175,13 @@ a^2+b^2=c^2
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

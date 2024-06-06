@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 锦标赛排序：多路归并</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="算法与数据结构" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -51,7 +55,7 @@
 <p>一棵赢者树分为内部节点和外部节点。外部节点就是原始的数据，内部节点指向外部节点索引（比如外部节点的数组下标），一般为了便于计算，我们将外部节点的数据量扩展为2的整数幂，内部结点的最底一层可以首先初始化为对应的外部节点索引。每个内部节点表示一场“比赛”，节点的值是左右子结点的“赢方”，对于数值型数字，我们可以定义数值更小的那个为胜（当然也可以定义数值更大的胜，或者其它规则，如何规定胜应当按需要而定），为了保证扩展的结点不影响比赛结果，当定义小者为胜时，我们可以将外部结点扩展出的结点是所有外部结点不可能达到的较大数值（例如int类型的最大值<code>0x7FFFFFFF</code>)，这样无论怎么比，都不会有扩展出来的结点参与到比赛当中。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"id":2385,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-150-1024x484.png" alt="[Image]" class="wp-image-2385"/></figure>
+<figure class="wp-block-image size-large"><img src="https://www.malic.xyz/wp-content/uploads/image-150-1024x484.png"  class="wp-image-2385"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>由于内部结点保存的是外部节点的索引，所以利用索引对数据比较，最终的胜者将出现在根节点，也就是最小值的下标。而赢者树存在这样一个特点，当决出比赛胜负后，如果参赛者进行了更换，那么只需要将参赛者所在的路径进行重赛，就能保证仍然是赢者树，也就是每次重赛的代价只有\( O(\log N )\) （N是外部结点的数目）， 重赛的过程也与堆排序的上滤相似。</p>
@@ -392,11 +396,17 @@ int main(void)
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/suan-fa-yu-shu-ju-jie-gou.html">算法与数据结构</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -406,4 +416,13 @@ int main(void)
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>

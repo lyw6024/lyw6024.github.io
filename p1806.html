@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
           <title>faint - 用DOT画流程图</title>
         <meta charset="utf-8" />
@@ -7,11 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
+        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
         <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
 
 
 
 
+    <meta name="tags" content="文字处理" />
 
 </head>
 
@@ -20,7 +22,7 @@
           <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
             <div class="container" id="navigation_menu">
               <div class="navbar-header">
-              <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
+                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
               </div>
         <ul>
         </ul>
@@ -29,10 +31,12 @@
         </header>
 
         <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-margin-x">
-              <div class="cell small-2"></div>
-              <div id="primary" class="cell small-8 content-area">
+          <div class="container grid-x grid-padding-x">
+              <div class="cell medium-1 large-1"></div>
+              <div id="primary" class="cell medium-10 large-10 content-area">
               <main>
+<div id="content" class="site-content" style="display: block;padding-top:32px;">
+  <main id="main" role="main">
 <article class="post-content">
   <header class="entry-header">
     <h2 class="entry-title">
@@ -65,9 +69,7 @@ a-&gt;b;
 <p>这样就生成了graph1.png如下图示。如graph1.gv所示描述的，就是a指向b的一个图。</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1809,"width":83,"height":155,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized">
-<img src="https://www.malic.xyz/wp-content/uploads/output.png" alt="[Image]" class="wp-image-1809" width="83" height="155"/>
-</figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://www.malic.xyz/wp-content/uploads/output.png"  class="wp-image-1809" width="83" height="155"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>多加几个结点：</p>
@@ -88,7 +90,7 @@ execute -&gt; compare;
 <p>就得到了这样的图</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {"align":"center","id":1810,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-1.png" alt="[Image]" class="wp-image-1810"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-1.png"  class="wp-image-1810"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>再复杂一点，结点可以变换一下格式，即添加参数。</p>
@@ -115,7 +117,7 @@ a-&gt;c [label=&quot;a to c&quot;];
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":1812,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-2.png" alt="[Image]" class="wp-image-1812"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-2.png"  class="wp-image-1812"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>对于结点有一种特殊的shape，即record(和Mrecord，区别在于Mrecord是圆角的）,它可以表示一组数据。当shape=record(或Mrecord)时，label需要为以下格式: 由竖线分开的标签，其中标签可以直接是文本，也可以是带<code>'&lt;&gt;'</code>标记的文本。如果带有<code>'&lt;&gt;'</code>标记，若绘制边时明确指定标记指向，可以使用<code>结点名:标记</code>表示。</p>
@@ -137,7 +139,7 @@ R1:R -&gt; R21:tree;
  }</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":1813,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-3.png" alt="[Image]" class="wp-image-1813"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-3.png"  class="wp-image-1813"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>上图绘制的是一个树的数据结构示意图，它是从上向下布局的。如果要变换一下方式，比如从左开始布局，或者从底向上布局，则可以通过声明<code>rankdir</code>,属性值有TB,BT,LR,RL，分别为自上向下(默认)、从底向上、从左到右、从右到左。</p>
@@ -171,7 +173,7 @@ e3-&gt;e53;
  }</pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":1814,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-4.png" alt="[Image]" class="wp-image-1814"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/output-4.png"  class="wp-image-1814"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>使用subgraph将声明一个子图，可以作为一个局部使用，subgraph的图名必须以cluster为前缀，使用方法相似，不再赘述。</p>
@@ -203,7 +205,7 @@ process:f4 -&gt; procn;
 </pre></div>
 <!-- /wp:codemirror-blocks/code-block -->
 <!-- wp:image {"align":"center","id":1807,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/p3-1.png" alt="[Image]" class="wp-image-1807"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://www.malic.xyz/wp-content/uploads/p3-1.png"  class="wp-image-1807"/></figure></div>
 <!-- /wp:image -->
 <!-- wp:paragraph -->
 <p>以上就是DOT画图的基本方法。更多具体的参数及用法可以参考<a href="http://graphviz.org/pdf/dotguide.pdf" target="_blank" rel="noreferrer noopener" aria-label="dotguide文档（在新窗口打开）">dotguide文档</a>。</p>
@@ -219,11 +221,17 @@ process:f4 -&gt; procn;
     <p>
         Category: <a href="/category/all.html">All</a>
     </p>
+    <p>
+        Tags:
+            <a href="/tag/wen-zi-chu-li.html">文字处理</a>
+    </p>
   </footer>
   </article>
+  </main>
+</div>
               </main>
               </div>
-              <div class="cell small-2"></div>
+              <div class="cell medium-1 large-1"></div>
           </div>
         </div>
         <footer>
@@ -233,4 +241,13 @@ process:f4 -&gt; procn;
                 </address>
         </footer>
 </body>
+
+<!-- Compressed JavaScript -->
+<script src="theme/js/vendor/jquery.js"></script>
+<script src="theme/js/vendor/what-input.js"></script>
+<script src="theme/js/vendor/foundation.min.js"></script>
+<script src="theme/js/app.js"></script>
+<script>
+  $(document).foundation();
+</script>
 </html>
