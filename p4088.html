@@ -32,7 +32,7 @@
 			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 		});
 		</script>
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -167,39 +167,62 @@
 <p>一维的动态规划。<br>若用f(n)表示计算n所需最少1的个数，对于n=1-5的情形，f(n)=n。<br>举几个例子，n=6时,6=2*3，所以f(6)=f(2)+f(3)=5，对于n=9，由于9=3*3,所以f(9)=f(3)+f(3)，要计算f(27)，因为27=3*9，所以f(27)=f(3)+f(9)，但计算f(9)还要计算f(9)=f(3)*f(3)，这样计算的话会出现许多重复，刚才f(9)已经计算出来了，我们可以直接将其保存下来，将f()改为数组d[]，从1开始向N计算d[i]的值即可。对于任何数字i>1，d[i]=d[i-1]+1，然后我们再检查是否有两个数字x,y相乘等于i，若有就尝试d[x]+d[y]是否小于当前d[i]，若小于就更新d[i]。计算d[i]后依照此法再计算d[i+1]，直到计算出d[N].<br><a href="http://p.malic.xyz/DNad/">查看F题参考代码</a></p>
 <!-- /wp:paragraph -->
 	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 木 07 4月 2022. Tags: <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>, </h6>
+	<h6>Written by <a href="/author/malic.html">malic</a> 
+		in <a href="/category/all.html">All</a> 
+on 木 07 4月 2022. 
+		Tags: 
+		<a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a> 
+</h6>
 </article>
 
 <hr/>
 						</div>
 						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									<li><a href="https://getpelican.com/">Pelican</a></li>
-									<li><a href="https://www.python.org/">Python.org</a></li>
-								</ul>
-							</div>
+<!-- Sidebar -->
+<aside class="medium-3 hide-for-small-only columns">
+    <div class="panel">
+        <h5>Links</h5>
+        <ul class="side-nav">
+            <li><a href="https://getpelican.com/">Pelican</a></li>
+            <li><a href="https://www.python.org/">Python.org</a></li>
+        </ul>
+    </div>
 
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="tag-cloud">
-								</ul>
-							</div>
+    <div class="panel">
+        <h5>联系我</h5>
+
+        <ul class="side-nav">
+            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
+            <li>QQ:602451067</li>
+            <li>Wechat:lyw7241</li>
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h5>#</h5>
+        <div class="panel-body">
+        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
+        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
+        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h5>Tags</h5>
+        <ul class="tag-cloud">
+        </ul>
+    </div>
 
 
-							<div class="panel">
-								<h5>Social</h5>
-								<ul class="side-nav">
-									<li><a href="#">Another social link</a></li>
-									<li><a href="#">You can add links in your config file</a></li>
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
+    <div class="panel">
+        <h5>Social</h5>
+        <ul class="side-nav">
+            <li><a href="#">Another social link</a></li>
+            <li><a href="#">You can add links in your config file</a></li>
+        </ul>
+    </div>
+</aside>
+<!-- End Sidebar -->					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -214,8 +237,8 @@
 			</div><!--off-canvas inner-->
 		</div><!--off-canvas wrap-->
 
-		<script src="/theme/js/jquery.js"></script>
 		<script src="/theme/js/foundation.min.js"></script>
+		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
 		</script>

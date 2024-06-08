@@ -32,7 +32,7 @@
 			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 		});
 		</script>
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -152,39 +152,62 @@
 <p>生成这个序列，N最大是50，要生成第50个书柜中的完整的顺序串，是一个1.3×10<sup>11</sup>位的字符串，每个字符占1字节的话，需要11.7GB来存储这个字符串。即便将a,b两状态压缩成1bit，也仍需要1.47GB。显然不可行。<br>记第N个书柜中的摆放形式是b[N]，则N>1时，b[N]=b[N-2].b[N-1]（这里'.'运算表示字符串的直接连接），并且b[N]的长度F[N]等于b[N-1]的长度与b[N-2]的长度之和，即F[N]=F[N-2]+F[N-1]。要求b[N]的第k个字符，只需要看k和F[N-2]的关系。若k不大于F[N-2]，说明b[N]的第k本就是b[N-2]的第k本，否则它就是b[N-1]的第k-F[N-2]本。<br>这样可以一直从N向下计算到N=0或1时书柜中只有1本书，若是b[0]则输出'a'，若是b[1]则输出'b'。<br><a href="http://p.malic.xyz/4Nbc/" data-type="URL" data-id="http://p.malic.xyz/4Nbc/" target="_blank" rel="noreferrer noopener">参考代码(C++)</a></p>
 <!-- /wp:paragraph -->
 	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 木 07 4月 2022. Tags: <a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a>, </h6>
+	<h6>Written by <a href="/author/malic.html">malic</a> 
+		in <a href="/category/all.html">All</a> 
+on 木 07 4月 2022. 
+		Tags: 
+		<a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a> 
+</h6>
 </article>
 
 <hr/>
 						</div>
 						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									<li><a href="https://getpelican.com/">Pelican</a></li>
-									<li><a href="https://www.python.org/">Python.org</a></li>
-								</ul>
-							</div>
+<!-- Sidebar -->
+<aside class="medium-3 hide-for-small-only columns">
+    <div class="panel">
+        <h5>Links</h5>
+        <ul class="side-nav">
+            <li><a href="https://getpelican.com/">Pelican</a></li>
+            <li><a href="https://www.python.org/">Python.org</a></li>
+        </ul>
+    </div>
 
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="tag-cloud">
-								</ul>
-							</div>
+    <div class="panel">
+        <h5>联系我</h5>
+
+        <ul class="side-nav">
+            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
+            <li>QQ:602451067</li>
+            <li>Wechat:lyw7241</li>
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h5>#</h5>
+        <div class="panel-body">
+        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
+        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
+        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h5>Tags</h5>
+        <ul class="tag-cloud">
+        </ul>
+    </div>
 
 
-							<div class="panel">
-								<h5>Social</h5>
-								<ul class="side-nav">
-									<li><a href="#">Another social link</a></li>
-									<li><a href="#">You can add links in your config file</a></li>
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
+    <div class="panel">
+        <h5>Social</h5>
+        <ul class="side-nav">
+            <li><a href="#">Another social link</a></li>
+            <li><a href="#">You can add links in your config file</a></li>
+        </ul>
+    </div>
+</aside>
+<!-- End Sidebar -->					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -199,8 +222,8 @@
 			</div><!--off-canvas inner-->
 		</div><!--off-canvas wrap-->
 
-		<script src="/theme/js/jquery.js"></script>
 		<script src="/theme/js/foundation.min.js"></script>
+		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
 		</script>
