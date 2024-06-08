@@ -1,52 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="en">
-<head>
-          <title>faint - RAII: Resource Acquisition Is Initialization</title>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>faint! - malic自留地</title>
+		<meta name="description" content="">
+		<meta name="author" content="malic">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">faint!&nbsp;-&nbsp;malic自留地</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="/category/all.html">All</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="https://getpelican.com/">Pelican</a></li>
+							<li><a href="https://www.python.org/">Python.org</a></li>
 
 
 
+						<li><label>Social</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>	
+				</aside>
 
-    <meta name="tags" content="程序设计" />
-    <meta name="tags" content="TODO" />
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">faint! - malic自留地</a></h1>
+						</li>
+					</ul>
 
-</head>
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="/category/all.html">All</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/about.html">About</a></li>                                    
+                                                                                                                                          
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/moyu.html">moyu</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
 
-<body>
-        <header>
-          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
-            <div class="container" id="navigation_menu">
-              <div class="navbar-header">
-                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
-              </div>
-        <ul>
-        </ul>
-            </div>
-          </nav>
-        </header>
-
-        <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-padding-x">
-              <div class="cell medium-1 large-1"></div>
-              <div id="primary" class="cell medium-10 large-10 content-area">
-              <main>
-<div id="content" class="site-content" style="display: block;padding-top:32px;">
-  <main id="main" role="main">
-<article class="post-content">
-  <header class="entry-header">
-    <h2 class="entry-title">
-      <a href="/p2383.html" rel="bookmark"
-         title="Permalink to RAII: Resource Acquisition Is Initialization">RAII: Resource Acquisition Is Initialization</a></h2>
- 
-  </header>
-  <div class="entry-content">
-  <!-- wp:paragraph -->
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>RAII: Resource Acquisition Is Initialization</h2>
+	<!-- wp:paragraph -->
 <p>RAII是由C++之父 Bjarne Stroustrup 提出的一项概念，即资源获取即初始化。 它利用栈对象在离开作用域后自动析构的语言特点，将受限资源的生命周期绑定到该对象上，当对象析构时以达到自动释放资源的目的。 由于内存资源是很宝贵的，在C/C++中使用裸指针往往需要程序员手动分配和手动释放，但是如果一个对象在使用时参与过程非常多，可能造成同一对象的多次分配或多次释放而导致程序错误或内存泄漏。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
@@ -61,45 +115,58 @@
 <!-- wp:paragraph -->
 <p>::TODO</p>
 <!-- /wp:paragraph -->
-  </div>
-  <footer>
-    <p>Published: <time datetime="2020-08-31T10:43:30+09:00">
-      月 31 8月 2020
-    </time></p>
-    <address>
-      By           <a href="/author/malic.html">malic</a>
-    </address>
-    <p>
-        Category: <a href="/category/all.html">All</a>
-    </p>
-    <p>
-        Tags:
-            <a href="/tag/cheng-xu-she-ji.html">程序设计</a>
-            <a href="/tag/todo.html">TODO</a>
-    </p>
-  </footer>
-  </article>
-  </main>
-</div>
-              </main>
-              </div>
-              <div class="cell medium-1 large-1"></div>
-          </div>
-        </div>
-        <footer>
-                <address>
-                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                </address>
-        </footer>
-</body>
+	<hr/>
+	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 月 31 8月 2020. Tags: <a href="/tag/cheng-xu-she-ji.html">程序设计</a>, <a href="/tag/todo.html">TODO</a>, </h6>
+</article>
 
-<!-- Compressed JavaScript -->
-<script src="theme/js/vendor/jquery.js"></script>
-<script src="theme/js/vendor/what-input.js"></script>
-<script src="theme/js/vendor/foundation.min.js"></script>
-<script src="theme/js/app.js"></script>
-<script>
-  $(document).foundation();
-</script>
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://getpelican.com/">Pelican</a></li>
+									<li><a href="https://www.python.org/">Python.org</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>

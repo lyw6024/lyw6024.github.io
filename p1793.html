@@ -1,51 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="en">
-<head>
-          <title>faint - 进程与线程(1)：基本问题、进程控制、进程通信</title>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>faint! - malic自留地</title>
+		<meta name="description" content="">
+		<meta name="author" content="malic">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">faint!&nbsp;-&nbsp;malic自留地</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="/category/all.html">All</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="https://getpelican.com/">Pelican</a></li>
+							<li><a href="https://www.python.org/">Python.org</a></li>
 
 
 
+						<li><label>Social</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>	
+				</aside>
 
-    <meta name="tags" content="操作系统" />
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">faint! - malic自留地</a></h1>
+						</li>
+					</ul>
 
-</head>
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="/category/all.html">All</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/about.html">About</a></li>                                    
+                                                                                                                                          
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/moyu.html">moyu</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
 
-<body>
-        <header>
-          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
-            <div class="container" id="navigation_menu">
-              <div class="navbar-header">
-                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
-              </div>
-        <ul>
-        </ul>
-            </div>
-          </nav>
-        </header>
-
-        <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-padding-x">
-              <div class="cell medium-1 large-1"></div>
-              <div id="primary" class="cell medium-10 large-10 content-area">
-              <main>
-<div id="content" class="site-content" style="display: block;padding-top:32px;">
-  <main id="main" role="main">
-<article class="post-content">
-  <header class="entry-header">
-    <h2 class="entry-title">
-      <a href="/p1793.html" rel="bookmark"
-         title="Permalink to 进程与线程(1)：基本问题、进程控制、进程通信">进程与线程(1)：基本问题、进程控制、进程通信</a></h2>
- 
-  </header>
-  <div class="entry-content">
-  <!-- wp:paragraph -->
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>进程与线程(1)：基本问题、进程控制、进程通信</h2>
+	<!-- wp:paragraph -->
 <p>为了使参与并发执行的每个程序（及其数据）都能并发执行，在操作系统中必须为之配置一个专门的数据结构，称为进程控制块（Process Control Block, PCB）。系统利用PCB来描述进程的基本情况和活动过程，进而控制和管理进程。由程序段、相关数据段、PCB就构成了进程实体。</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
@@ -108,44 +163,58 @@
 <!-- wp:list -->
 <ul><li>共享存储器系统<ul><li>相互通信的进程共享某些数据结构或共享存储区，进程之间利用这些空间进行通信。</li></ul></li><li>管道通信<ul><li>向管道(共享文件)提供输入的发送进程(写进程)以字符流形式将大量的数据送入管道，接收管道输出的接收进程(读进程)从管道中读数据。为协调双方通信，管道必须能够：互斥、同步、确定对方是否存在。</li></ul></li><li>消息传递系统<ul><li>以格式化的消息为单位，将数据封装在消息中，并利用OS提供的一组通信命令（原语）在进程间消息传递。</li></ul></li><li>客户机-服务器系统<ul><li>网络环境上的主流通信方式，主要有套接字、远程过程调用和远程方法调用。</li></ul></li></ul>
 <!-- /wp:list -->
-  </div>
-  <footer>
-    <p>Published: <time datetime="2020-06-15T14:27:00+09:00">
-      月 15 6月 2020
-    </time></p>
-    <address>
-      By           <a href="/author/malic.html">malic</a>
-    </address>
-    <p>
-        Category: <a href="/category/all.html">All</a>
-    </p>
-    <p>
-        Tags:
-            <a href="/tag/cao-zuo-xi-tong.html">操作系统</a>
-    </p>
-  </footer>
-  </article>
-  </main>
-</div>
-              </main>
-              </div>
-              <div class="cell medium-1 large-1"></div>
-          </div>
-        </div>
-        <footer>
-                <address>
-                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                </address>
-        </footer>
-</body>
+	<hr/>
+	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 月 15 6月 2020. Tags: <a href="/tag/cao-zuo-xi-tong.html">操作系统</a>, </h6>
+</article>
 
-<!-- Compressed JavaScript -->
-<script src="theme/js/vendor/jquery.js"></script>
-<script src="theme/js/vendor/what-input.js"></script>
-<script src="theme/js/vendor/foundation.min.js"></script>
-<script src="theme/js/app.js"></script>
-<script>
-  $(document).foundation();
-</script>
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://getpelican.com/">Pelican</a></li>
+									<li><a href="https://www.python.org/">Python.org</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>

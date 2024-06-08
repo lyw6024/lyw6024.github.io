@@ -1,91 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="en">
-<head>
-          <title>faint - vjudge上支持Haskell与Racket的OJ</title>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>faint! - malic自留地</title>
+		<meta name="description" content="">
+		<meta name="author" content="malic">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">faint!&nbsp;-&nbsp;malic自留地</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="/category/all.html">All</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="https://getpelican.com/">Pelican</a></li>
+							<li><a href="https://www.python.org/">Python.org</a></li>
 
 
 
+						<li><label>Social</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>	
+				</aside>
 
-    <meta name="tags" content="函数式编程" />
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">faint! - malic自留地</a></h1>
+						</li>
+					</ul>
 
-</head>
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="/category/all.html">All</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/about.html">About</a></li>                                    
+                                                                                                                                          
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/moyu.html">moyu</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
 
-<body>
-        <header>
-          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
-            <div class="container" id="navigation_menu">
-              <div class="navbar-header">
-                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
-              </div>
-        <ul>
-        </ul>
-            </div>
-          </nav>
-        </header>
-
-        <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-padding-x">
-              <div class="cell medium-1 large-1"></div>
-              <div id="primary" class="cell medium-10 large-10 content-area">
-              <main>
-<div id="content" class="site-content" style="display: block;padding-top:32px;">
-  <main id="main" role="main">
-<article class="post-content">
-  <header class="entry-header">
-    <h2 class="entry-title">
-      <a href="/p3014.html" rel="bookmark"
-         title="Permalink to vjudge上支持Haskell与Racket的OJ">vjudge上支持Haskell与Racket的OJ</a></h2>
- 
-  </header>
-  <div class="entry-content">
-  <!-- wp:table {"hasFixedLayout":true,"className":"is-style-regular"} -->
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>vjudge上支持Haskell与Racket的OJ</h2>
+	<!-- wp:table {"hasFixedLayout":true,"className":"is-style-regular"} -->
 <figure class="wp-block-table is-style-regular"><table class="has-fixed-layout"><thead><tr><th class="has-text-align-center" data-align="center"> 名称 </th><th class="has-text-align-center" data-align="center"> Haskell </th><th class="has-text-align-center" data-align="center"> Racket(Scheme)</th></tr></thead><tbody><tr><td class="has-text-align-center" data-align="center"> 51Node </td><td class="has-text-align-center" data-align="center"> [fa tag="fa-check"] </td><td class="has-text-align-center" data-align="center">[fa tag=" fa-times"] </td></tr><tr><td class="has-text-align-center" data-align="center">Aizu</td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"]</td><td class="has-text-align-center" data-align="center">[fa tag=" fa-times"] </td></tr><tr><td class="has-text-align-center" data-align="center"> AtCoder </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"] <br>ver= GHC 8.8.3</td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"] <br>ver= 7.6</td></tr><tr><td class="has-text-align-center" data-align="center"> CodeChef&nbsp; </td><td class="has-text-align-center" data-align="center">  [fa tag="fa-check"] <br>ver= GHC 8.0.1 </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"] </td></tr><tr><td class="has-text-align-center" data-align="center"> CodeForces&nbsp; </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"] <br>ver= GHC 8.10.1  </td><td class="has-text-align-center" data-align="center">[fa tag=" fa-times"]  </td></tr><tr><td class="has-text-align-center" data-align="center"> EOlymp&nbsp; </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"] </td><td class="has-text-align-center" data-align="center">[fa tag=" fa-times"] </td></tr><tr><td class="has-text-align-center" data-align="center"> HackerRank&nbsp; </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"]  </td><td class="has-text-align-center" data-align="center">[fa tag="fa-check"]  </td></tr><tr><td class="has-text-align-center" data-align="center"> HRBUST&nbsp; </td><td class="has-text-align-center" data-align="center"> [fa tag="fa-check"]   </td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-times"]   </td></tr><tr><td class="has-text-align-center" data-align="center"> Kattis&nbsp; </td><td class="has-text-align-center" data-align="center"> [fa tag="fa-check"]   </td><td class="has-text-align-center" data-align="center"> [fa tag=" fa-times"]   </td></tr><tr><td class="has-text-align-center" data-align="center"> LibreOJ&nbsp; </td><td class="has-text-align-center" data-align="center">  [fa tag="fa-check"] <br>ver=Haskell 2010    </td><td class="has-text-align-center" data-align="center"> [fa tag=" fa-times"]    </td></tr><tr><td class="has-text-align-center" data-align="center"> LightOJ&nbsp; </td><td class="has-text-align-center" data-align="center">  [fa tag="fa-check"] <br>ver= GHC 8.0.2  </td><td class="has-text-align-center" data-align="center"> [fa tag=" fa-times"]   </td></tr><tr><td class="has-text-align-center" data-align="center"> OpenJ_Bailian </td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-check"] <br>ghc8.6.5 </td><td class="has-text-align-center" data-align="center">  [fa tag="fa-check"] <br>ver= 6.5  </td></tr><tr><td class="has-text-align-center" data-align="center">SGU</td><td class="has-text-align-center" data-align="center"> [fa tag="fa-check"] <br>ver= GHC 8.10.1  </td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-times"]    </td></tr><tr><td class="has-text-align-center" data-align="center"> SPOJ&nbsp; </td><td class="has-text-align-center" data-align="center">   [fa tag="fa-check"] <br>ver= GHC 8.4.4   </td><td class="has-text-align-center" data-align="center">   [fa tag="fa-check"] <br>ver= 7.0</td></tr><tr><td class="has-text-align-center" data-align="center"> URAL&nbsp; </td><td class="has-text-align-center" data-align="center">  [fa tag="fa-check"] <br>ver= GHC 7.6</td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-times"]   </td></tr><tr><td class="has-text-align-center" data-align="center">其它</td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-times"]   </td><td class="has-text-align-center" data-align="center">  [fa tag=" fa-times"]   </td></tr></tbody></table></figure>
 <!-- /wp:table -->
-  </div>
-  <footer>
-    <p>Published: <time datetime="2022-04-13T12:15:00+09:00">
-      水 13 4月 2022
-    </time></p>
-    <address>
-      By           <a href="/author/malic.html">malic</a>
-    </address>
-    <p>
-        Category: <a href="/category/all.html">All</a>
-    </p>
-    <p>
-        Tags:
-            <a href="/tag/han-shu-shi-bian-cheng.html">函数式编程</a>
-    </p>
-  </footer>
-  </article>
-  </main>
-</div>
-              </main>
-              </div>
-              <div class="cell medium-1 large-1"></div>
-          </div>
-        </div>
-        <footer>
-                <address>
-                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                </address>
-        </footer>
-</body>
+	<hr/>
+	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 水 13 4月 2022. Tags: <a href="/tag/han-shu-shi-bian-cheng.html">函数式编程</a>, </h6>
+</article>
 
-<!-- Compressed JavaScript -->
-<script src="theme/js/vendor/jquery.js"></script>
-<script src="theme/js/vendor/what-input.js"></script>
-<script src="theme/js/vendor/foundation.min.js"></script>
-<script src="theme/js/app.js"></script>
-<script>
-  $(document).foundation();
-</script>
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://getpelican.com/">Pelican</a></li>
+									<li><a href="https://www.python.org/">Python.org</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>

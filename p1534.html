@@ -1,52 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="en">
-<head>
-          <title>faint - ICDAR 2019 表格结构识别综述</title>
-        <meta charset="utf-8" />
-        <meta name="generator" content="Pelican" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/foundation.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/wp-embed-template.min.css" />
-        <link rel="stylesheet" type="text/css" href="theme/css/style.css" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>faint! - malic自留地</title>
+		<meta name="description" content="">
+		<meta name="author" content="malic">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">faint!&nbsp;-&nbsp;malic自留地</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="/category/all.html">All</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="https://getpelican.com/">Pelican</a></li>
+							<li><a href="https://www.python.org/">Python.org</a></li>
 
 
 
+						<li><label>Social</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>	
+				</aside>
 
-    <meta name="tags" content="机器学习" />
-    <meta name="tags" content="论文解读" />
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">faint! - malic自留地</a></h1>
+						</li>
+					</ul>
 
-</head>
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="/category/all.html">All</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/about.html">About</a></li>                                    
+                                                                                                                                          
+                                                                                                          
+····                                                                                                                                       
+                                     <li><a href="/pages/moyu.html">moyu</a></li>                                    
+                                                                                                                                          
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
 
-<body>
-        <header>
-          <nav id="site-navigation" class="main-navigation navbar-fixed-top navbar-left" role="navigation">
-            <div class="container" id="navigation_menu">
-              <div class="navbar-header">
-                <hgroup><h1><a class="navbar-brand" href="/">faint</a></h1></hgroup>
-              </div>
-        <ul>
-        </ul>
-            </div>
-          </nav>
-        </header>
-
-        <div id="content" class="site-content grid-container full">
-          <div class="container grid-x grid-padding-x">
-              <div class="cell medium-1 large-1"></div>
-              <div id="primary" class="cell medium-10 large-10 content-area">
-              <main>
-<div id="content" class="site-content" style="display: block;padding-top:32px;">
-  <main id="main" role="main">
-<article class="post-content">
-  <header class="entry-header">
-    <h2 class="entry-title">
-      <a href="/p1534.html" rel="bookmark"
-         title="Permalink to ICDAR 2019 表格结构识别综述">ICDAR 2019 表格结构识别综述</a></h2>
- 
-  </header>
-  <div class="entry-content">
-  <!-- wp:paragraph -->
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>ICDAR 2019 表格结构识别综述</h2>
+	<!-- wp:paragraph -->
 <p>表格作为一种有效的数据组织与展现方法被广泛应用，也成为各类文档中常见的页面对象。随着文档数目的爆炸性增长，如何高效地从文档中找到表格并获取内容与结构信息即表格识别，成为了一个亟待解决的问题。ICDAR是一个专注于文档分析与识别问题的国际学术会议，已经连续多届设置了表格识别专题。在今年的ICDAR 2019会议上，有不少研究者在表格检测与结构识别等领域做出了新的贡献，使其有了新的进展。本课题组梳理了该会议中有关表格识别的16篇论文，总结该领域当前的研究进展与挑战。同时，值得注意的是，该会议也举办了关于表格检测与结构识别的比赛，我们对参赛队伍使用的方法与结果进行了一些讨论。 </p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
@@ -172,45 +226,58 @@
 <!-- wp:list -->
 <ul><li>E. Koci, M. Thiele, O. Romero, and W.Lehner, "A Genetic-based Search for Adaptive Table Recognition in Spreadsheets," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li><li> J.-L. Meunier and H. Déjean,"Table Rows Segmentation," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> C. Tensmeyer, V. I. Morariu, B. Price,S. Cohen, and T. Martinez, "Deep Splitting and Merging for Table Structure Decomposition," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li><li> S. A. Siddiqui, I. A. Fateh, S. T. R.Rizvi, A. Dengel, and S. Ahmed, "DeepTabStR: Deep Learning based TableStructure Recognition," in the 15th IAPRInternational Conference on Document Analysis and Recognition, 2019.</li><li> W. Xue, Q. Li, and D. Tao,"ReS2TIM: Reconstruct Syntactic Structures from Table Images," in the 15th IAPR International Conference onDocument Analysis and Recognition, 2019.</li><li> S. A. Siddiqui, P. I. Khan, A. Dengel,and S. Ahmed, "Rethinking Semantic Segmentation for Table Structure Recognition in Documents," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> S. R. Qasim, H. Mahmood, and F.Shafait, "Rethinking Table Recognition using Graph Neural Networks,"in the 15th IAPR International Conferenceon Document Analysis and Recognition, 2019.</li><li> S. A. Khan, S. M. D. Khalid, M. A.Shahzad, and F. Shafait, "Table Structure Extraction with Bi-directional Gated Recurrent Unit Networks," in the15th IAPR International Conference on Document Analysis and Recognition,2019.</li><li> S. Paliwal, V. D, R. Rahul, M. Sharma,and L. Vig, "TableNet: Deep Learning model for end-to-end Table detectionand Tabular data extraction from Scanned Document Images," in the 15th IAPR International Conference on Document Analysis and Recognition, 2019.</li></ul>
 <!-- /wp:list -->
-  </div>
-  <footer>
-    <p>Published: <time datetime="2020-04-21T05:16:00+09:00">
-      火 21 4月 2020
-    </time></p>
-    <address>
-      By           <a href="/author/malic.html">malic</a>
-    </address>
-    <p>
-        Category: <a href="/category/all.html">All</a>
-    </p>
-    <p>
-        Tags:
-            <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
-            <a href="/tag/lun-wen-jie-du.html">论文解读</a>
-    </p>
-  </footer>
-  </article>
-  </main>
-</div>
-              </main>
-              </div>
-              <div class="cell medium-1 large-1"></div>
-          </div>
-        </div>
-        <footer>
-                <address>
-                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                </address>
-        </footer>
-</body>
+	<hr/>
+	<h6>Written by <a href="/author/malic.html">malic</a> in <a href="/category/all.html">All</a> on 火 21 4月 2020. Tags: <a href="/tag/ji-qi-xue-xi.html">机器学习</a>, <a href="/tag/lun-wen-jie-du.html">论文解读</a>, </h6>
+</article>
 
-<!-- Compressed JavaScript -->
-<script src="theme/js/vendor/jquery.js"></script>
-<script src="theme/js/vendor/what-input.js"></script>
-<script src="theme/js/vendor/foundation.min.js"></script>
-<script src="theme/js/app.js"></script>
-<script>
-  $(document).foundation();
-</script>
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://getpelican.com/">Pelican</a></li>
+									<li><a href="https://www.python.org/">Python.org</a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>
