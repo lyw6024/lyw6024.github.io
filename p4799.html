@@ -53,7 +53,7 @@
 					<ul class="off-canvas-list">
 						<li><a href="">Home</a></li>
 						<li><label>Categories</label></li>
-							<li ><a href="/category/all.html">All</a></li>
+							<li class="active"><a href="/category/all.html">All</a></li>
 
 						<li><label>Links</label></li>
 							<li><a href="https://getpelican.com/">Pelican</a></li>
@@ -77,7 +77,7 @@
 
 					<section class="top-bar-section">
 						<ul class="left">
-								<li ><a href="/category/all.html">All</a></li>
+								<li class="active"><a href="/category/all.html">All</a></li>
 						</ul>
                         <ul class="right">                                                                                                                                           
                                                                                                           
@@ -98,96 +98,70 @@
 					<div class="row">
 						<!-- Main Content -->
 						<div class="medium-9 small-12 columns" role="content">
-
 <article>
-	<h3><a href="/p1957.html">C# 异步编程Task的使用</a></h3>
+	<h2>python读取wp sqlite转为rst</h2>
+	<p>Talk is cheap, show the code.</p>
+<pre class="code literal-block">
+#!/usr/bin/python
+
+import sqlite3
+
+def writeFile(row):
+    fp = open(&quot;D:/project/code/202406/faint/content/posts/p{}.rst&quot;.format(row[0]),&quot;w&quot;,encoding=&quot;UTF-8&quot;)
+    fp.write(&quot;==================================================================================================\n&quot;)
+    fp.write(&quot;{}\n&quot;.format(row[1]))
+    fp.write(&quot;==================================================================================================\n\n&quot;)
+    fp.write(&quot;:author: malic\n&quot;)
+    fp.write(&quot;:date: {}\n&quot;.format(row[2]))
+    fp.write(&quot;:slug: p{}\n&quot;.format(row[0]))
+    fp.write(&quot;:category: All\n&quot;)
+    fp.write(&quot;:tags: {}\n&quot;.format(row[4]))
+    fp.write(&quot;:summary: ...\n\n&quot;)
+    fp.write(&quot;.. raw:: html\n\n&quot;)
+    ctx = row[5].split(&quot;\n&quot;)
+    for line in ctx:
+        fp.write(&quot;\t{}\n&quot;.format(line))
+    fp.close()
+
+conn = sqlite3.connect(r'D:\archive\server\wordpress_playground\wp-content\database\.ht.sqlite')
+c = conn.cursor()
+cursor = c.execute(&quot;&quot;&quot;
+SELECT
+    wp_posts.ID as post_id --0
+    , wp_posts.post_title as title --1
+    , wp_posts.post_date_gmt as date --2
+    , wp_posts.post_name as slug --3
+    , group_concat(wp_terms1.name) AS post_tag --4
+    , wp_posts.post_content as html  --5
+FROM
+    wp_posts
+    LEFT JOIN wp_term_relationships
+        ON wp_posts.ID = wp_term_relationships.object_id
+    left JOIN wp_term_taxonomy
+        ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+    LEFT JOIN wp_terms wp_terms1
+        ON wp_term_taxonomy.term_id = wp_terms1.term_id
+    -- AND wp_term_taxonomy.taxonomy = 'category'
+where
+    wp_posts.post_type = 'post'
+    AND wp_posts.post_status = 'publish'
+GROUP BY
+    ID
+&quot;&quot;&quot;)
+
+for row in cursor:
+    writeFile(row)
+
+conn.close()
+</pre>
+
+	<hr/>
 	<h6>Written by <a href="/author/malic.html">malic</a> 
-in <a href="/category/all.html">All</a> 
-on 水 15 7月 2020. 
-		Tags: 		<a href="/tag/cheng-xu-she-ji.html">程序设计</a> &nbsp;
-		<a href="/tag/c.html">C#</a> &nbsp;
-</h6>
-	<p class="first last">...</p>
-
-		<p class="continue"><a href="/p1957.html">Continue reading &raquo;</a></p>
+		in <a href="/category/all.html">All</a> 
+on 日 09 6月 2024.</h6>
 </article>
-<hr />
-<article>
-	<h3><a href="/p1938.html">为wordpress文章添加折叠区块</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-in <a href="/category/all.html">All</a> 
-on 水 15 7月 2020. 
-		Tags: 		<a href="/tag/wang-ye-kai-fa.html">网页开发</a> &nbsp;
-</h6>
-	<p class="first last">...</p>
 
-		<p class="continue"><a href="/p1938.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="/p1925.html">LaTeX中使用bib文件组织自己的文献库</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-in <a href="/category/all.html">All</a> 
-on 月 13 7月 2020. 
-		Tags: 		<a href="/tag/wen-zi-chu-li.html">文字处理</a> &nbsp;
-		<a href="/tag/latex.html">LaTeX</a> &nbsp;
-</h6>
-	<p class="first last">...</p>
-
-		<p class="continue"><a href="/p1925.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="/p1922.html">windows中关于WLAN的command</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-in <a href="/category/all.html">All</a> 
-on 月 13 7月 2020. 
-		Tags: 		<a href="/tag/windowscao-zuo.html">Windows操作</a> &nbsp;
-</h6>
-	<p class="first last">...</p>
-
-		<p class="continue"><a href="/p1922.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="/p1887.html">南昌大学2020线性代数期末试题</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-in <a href="/category/all.html">All</a> 
-on 木 09 7月 2020. 
-		Tags: 		<a href="/tag/shu-xue.html">数学</a> &nbsp;
-</h6>
-	<p class="first last">...</p>
-
-		<p class="continue"><a href="/p1887.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-
-
-<div class="row" style="margin-bottom: -1.25em;">
-	<div class="small-12 columns text-center">
-		<div class="pagination-centered">
-			<ul class="pagination">
-				<li class="arrow"><a href="/index32.html">&larr; Previous</a></li>
-
-				<li class=""><a href="/index.html">1</a></li>
-				<li class=""><a href="/index2.html">2</a></li>
-				<li class=""><a href="/index18.html">18</a></li>
-				<li class=""><a href="/index26.html">26</a></li>
-				<li class=""><a href="/index30.html">30</a></li>
-				<li class=""><a href="/index32.html">32</a></li>
-				<li class="current"><a href="/index33.html">33</a></li>
-				<li class=""><a href="/index34.html">34</a></li>
-				<li class=""><a href="/index36.html">36</a></li>
-				<li class=""><a href="/index40.html">40</a></li>
-				<li class=""><a href="/index48.html">48</a></li>
-				<li class=""><a href="/index63.html">63</a></li>
-
-				<li class="arrow"><a href="/index34.html">Next &rarr;</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-
+<hr/>
 						</div>
 						<!-- End Main Content -->
 <!-- Sidebar -->
