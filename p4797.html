@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>ローカル線＝「国民に大負担」 100年前に問題予測 “我田引鉄”に斬りかかった男の主張とは</h2>
-	<div class="section" id="section-2">
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>ローカル線＝「国民に大負担」 100年前に問題予測 “我田引鉄”に斬りかかった男の主張とは</h2>
+			<div class="section" id="section-2">
 <h2>近年、突然出てきた問題ではない</h2>
 <p>ローカル線の見直しが加速しています。JR東日本、JR西日本は2022年に輸送密度2000人以下の路線別収支を相次いで公表し、地域のニーズに合致した持続可能な交通機関とするため、路線の改廃を含めた議論を呼びかけました。</p>
 <p>こうした流れを受けて2023年に地域公共交通活性化再生法が改正され、国は全自治体に地域公共交通計画作成の努力義務を課し、ローカル鉄道の再構築について事業者と地域が話し合う「再構築協議会」の仕組みが創設されました。</p>
@@ -125,60 +112,16 @@
 <p>人々の生活に「交通」は欠かせませんが、必ずしもそれが「鉄道」でなければならないわけではありません。ローカル線の見直し論は国鉄民営化の結果という声もありますが、本当に使いやすい交通機関は何かという議論は、はるか昔からあり、その論点も今に通じるものだったという事実は示唆に富んでいるように思えます。</p>
 </div>
 
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 月 03 6月 2024.</h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -197,6 +140,21 @@ on 月 03 6月 2024.</h6>
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

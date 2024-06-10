@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>都市传说：华师大枣阳路门的前世</h2>
-	<!-- wp:quote -->
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>都市传说：华师大枣阳路门的前世</h2>
+			<!-- wp:quote -->
 <blockquote class="wp-block-quote"><p>2020年10月，华东师大69年校庆之际，学校方面进行了枣阳路门的开门仪式。相关的新闻也可以看到诸多媒体报道此事，有的媒体关于这件事情起的标题是「重起枣阳路大门」。既然是重起校门，那必然是曾经使用过且后来又被关闭了。那是发生了什么让原有的校门关闭呢，这当中有市政规划，有商业纠纷，甚至有人命在其中。</p><p>这件事情十几年前的校友大概都有所耳闻，但需要说明的是，每个人所讲的话都有其主观性，未必都能完全还原事情的全貌，我也不例外，更何况我不是当时的亲历者，只是从校友那里听到此事的情节。只是说这件事情是存在的，但一些具体情节为了讲述的完整性需要有所加工。我姑妄言之，您姑妄听之，就当是根据这个事件改编的文学作品好了。</p></blockquote>
 <!-- /wp:quote -->
 
@@ -143,63 +130,19 @@
 <!-- wp:paragraph -->
 <p>2019年，金沙江路枣阳路上的KFC也关店了（后来那儿变成了一家包子铺）。至此，那条华师大的后街已经完全“泯然众街矣”。虽然2020年10月华师大重起了这个校门，但社会环境已经不再允许枣阳路变成往日的后街了，所以还是去环球港比较好。</p>
 <!-- /wp:paragraph -->
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 火 28 6月 2022. 
-		Tags: 
-		<a href="/tag/za-tan.html">杂谈</a> 
+				Tags: 
+				<a href="/tag/za-tan.html">杂谈</a> 
 </h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -218,6 +161,21 @@ on 火 28 6月 2022.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

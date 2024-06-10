@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>Android studio的Gradle环境配置</h2>
-	<!-- wp:paragraph -->
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>Android studio的Gradle环境配置</h2>
+			<!-- wp:paragraph -->
 <p>没做过Java的工程，做Java系的项目的时候首先要搞依赖管理，不管是Maven还是Gradle，由于国内局域网众所周知的原因要配置很多东西才能正常使用，十分麻烦。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
@@ -126,63 +113,19 @@
 <!-- wp:paragraph -->
 <p>下载到中途也可能出现<code>ERROR: SSL peer shut down incorrectly</code>的问题，在设置中Appearence &amp; Behavior -> System Settings -> Android SDK -> SDK Update sites，下方的“Force https:// sources to be fetched using http://”复选框进行选中，确认此修改，等待下载完成，则将Gradle中所带的依赖包完成了同步。</p>
 <!-- /wp:paragraph -->
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 火 01 12月 2020. 
-		Tags: 
-		<a href="/tag/gong-cheng.html">工程</a> 
+				Tags: 
+				<a href="/tag/gong-cheng.html">工程</a> 
 </h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -201,6 +144,21 @@ on 火 01 12月 2020.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

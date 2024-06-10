@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>利用XPath筛选XML/HTML标签</h2>
-	<!-- wp:paragraph -->
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>利用XPath筛选XML/HTML标签</h2>
+			<!-- wp:paragraph -->
 <p> XPath是一个 W3C 标准，它使用路径表达式在 XML 文档中进行导航 。通过XPath对HTML信息进行筛选也非常有效。XML和HTML的DOM节点是一种树的结构，可以使用筛选器对其内容进行选择。例如Python可以用<code>lxml</code>，C#可以使用<code>HtmlAgilityPack</code>，都能用XPath非常方便地对HTML文件进行筛选提取。</p>
 <!-- /wp:paragraph -->
 <!-- wp:heading -->
@@ -168,63 +155,19 @@
 <!-- wp:table -->
 <figure class="wp-block-table"><table class=""><tbody><tr><th>运算符</th><th>描述</th><th>实例</th><th>返回值</th></tr><tr><td>|</td><td>计算两个节点集</td><td>//book | //cd</td><td>返回所有拥有 book 和 cd 元素的节点集</td></tr><tr><td>+</td><td>加法</td><td>6 + 4</td><td>10</td></tr><tr><td>-</td><td>减法</td><td>6 - 4</td><td>2</td></tr><tr><td>*</td><td>乘法</td><td>6 * 4</td><td>24</td></tr><tr><td>div</td><td>除法</td><td>8 div 4</td><td>2</td></tr><tr><td>=</td><td>等于</td><td>price=9.80</td><td>如果 price 是 9.80，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>!=</td><td>不等于</td><td>price!=9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.80，则返回 false。</td></tr><tr><td>&lt;</td><td>小于</td><td>price&lt;9.80</td><td>如果 price 是 9.00，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>&lt;=</td><td>小于或等于</td><td>price&lt;=9.80</td><td>如果 price 是 9.00，则返回 true。如果 price 是 9.90，则返回 false。</td></tr><tr><td>&gt;</td><td>大于</td><td>price&gt;9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.80，则返回 false。</td></tr><tr><td>&gt;=</td><td>大于或等于</td><td>price&gt;=9.80</td><td>如果 price 是 9.90，则返回 true。如果 price 是 9.70，则返回 false。</td></tr><tr><td>or</td><td>或</td><td>price=9.80 or price=9.70</td><td>如果 price 是 9.80，则返回 true。如果 price 是 9.50，则返回 false。</td></tr><tr><td>and</td><td>与</td><td>price&gt;9.00 and price&lt;9.90</td><td>如果 price 是 9.80，则返回 true。如果 price 是 8.50，则返回 false。</td></tr><tr><td>mod</td><td>计算除法的余数</td><td>5 mod 2</td><td>1</td></tr></tbody></table></figure>
 <!-- /wp:table -->
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 金 01 5月 2020. 
-		Tags: 
-		<a href="/tag/gong-cheng.html">工程</a> 
+				Tags: 
+				<a href="/tag/gong-cheng.html">工程</a> 
 </h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -243,6 +186,21 @@ on 金 01 5月 2020.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

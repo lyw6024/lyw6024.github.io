@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,27 +82,27 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>Posts Tagged With 'OnlineJudge题解'</h2>
-								</div>
-							</div>
 
-<article>
-	<h3><a href="/p3978.html">数字图像处理——图像减法的应用例1</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
+<!-- Main Content -->
+<div class="medium-9 small-12 columns" role="content">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Posts Tagged With 'OnlineJudge题解'</h2>
+		</div>
+	</div>
+	<article>
+		<h3><a href="/p3978.html">数字图像处理——图像减法的应用例1</a></h3>
+		<h6>Written by <a href="/author/malic.html">malic</a> 
 in <a href="/category/all.html">All</a> 
 on 日 25 11月 2018. 
-		Tags: 		<a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a> &nbsp;
-		<a href="/tag/tu-xiang-chu-li.html">图像处理</a> &nbsp;
+			Tags: 			<a href="/tag/onlinejudgeti-jie.html">OnlineJudge题解</a> &nbsp;
+			<a href="/tag/tu-xiang-chu-li.html">图像处理</a> &nbsp;
 </h6>
-	<p class="first last">...</p>
+		<p class="first last">...</p>
 
-		<p class="continue"><a href="/p3978.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
+			<p class="continue"><a href="/p3978.html">Continue reading &raquo;</a></p>
+	</article>
+	<hr />
 
 
 <div class="row" style="margin-bottom: -1.25em;">
@@ -136,9 +122,8 @@ on 日 25 11月 2018.
 		</div>
 	</div>
 </div>
-
-						</div>
-						<!-- End Main Content -->
+	</div>
+<!-- End Main Content -->
 <!-- Sidebar -->
 <aside class="medium-3 hide-for-small-only columns">
     <div class="panel">
@@ -202,6 +187,21 @@ on 日 25 11月 2018.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

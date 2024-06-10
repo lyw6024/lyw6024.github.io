@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,35 +82,34 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>Posts Tagged With 'highcharts'</h2>
-								</div>
-							</div>
 
-<article>
-	<h3><a href="/p1250.html">django：数据收集与统计可视化的简单设计</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
+<!-- Main Content -->
+<div class="medium-9 small-12 columns" role="content">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Posts Tagged With 'highcharts'</h2>
+		</div>
+	</div>
+	<article>
+		<h3><a href="/p1250.html">django：数据收集与统计可视化的简单设计</a></h3>
+		<h6>Written by <a href="/author/malic.html">malic</a> 
 in <a href="/category/all.html">All</a> 
 on 金 03 4月 2020. 
-		Tags: 		<a href="/tag/gong-cheng.html">工程</a> &nbsp;
-		<a href="/tag/cheng-xu-she-ji.html">程序设计</a> &nbsp;
-		<a href="/tag/wang-ye-kai-fa.html">网页开发</a> &nbsp;
-		<a href="/tag/django.html">django</a> &nbsp;
-		<a href="/tag/highcharts.html">highcharts</a> &nbsp;
-		<a href="/tag/python.html">Python</a> &nbsp;
+			Tags: 			<a href="/tag/gong-cheng.html">工程</a> &nbsp;
+			<a href="/tag/cheng-xu-she-ji.html">程序设计</a> &nbsp;
+			<a href="/tag/wang-ye-kai-fa.html">网页开发</a> &nbsp;
+			<a href="/tag/django.html">django</a> &nbsp;
+			<a href="/tag/highcharts.html">highcharts</a> &nbsp;
+			<a href="/tag/python.html">Python</a> &nbsp;
 </h6>
-	<p class="first last">...</p>
+		<p class="first last">...</p>
 
-		<p class="continue"><a href="/p1250.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
+			<p class="continue"><a href="/p1250.html">Continue reading &raquo;</a></p>
+	</article>
+	<hr />
 
-
-						</div>
-						<!-- End Main Content -->
+	</div>
+<!-- End Main Content -->
 <!-- Sidebar -->
 <aside class="medium-3 hide-for-small-only columns">
     <div class="panel">
@@ -188,6 +173,21 @@ on 金 03 4月 2020.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>「Suicaでお願いします」と言ってICOCAで決済する理由　交通系ICカードあるある</h2>
-	<!-- wp:paragraph -->
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>「Suicaでお願いします」と言ってICOCAで決済する理由　交通系ICカードあるある</h2>
+			<!-- wp:paragraph -->
 <p>今や全国で多種多様に使われている交通系ICカード。関東ではSuica、関西ではICOCAと、地域によって主流となるカードも異なります。そんな交通系ICカードの使い方に関する投稿が、今X上で話題になっています。投稿したのは、鉄道系YouTuberとして活動しているMiyaco/みやこネット旅行研究所さん（@MiyacoNet_plus）。 当ポストには2024年4月11日時点で5900件を超えるいいねが集まり、「自分も同じです！」「共感しました」といった多くのコメントが寄せられています。 記事の中では、モバイルICOCAを使ったお得な決済方法についても詳しく解説していますので、ぜひ最後までチェックしてみてくださいね。</p>
 <!-- /wp:paragraph -->
 
@@ -123,63 +110,19 @@
 <!-- wp:paragraph -->
 <p> resource: <a href="https://news.yahoo.co.jp/articles/8b8983ff2f0fadfaa279b74c2cf77024affa6f16?page=2">https://news.yahoo.co.jp/articles/8b8983ff2f0fadfaa279b74c2cf77024affa6f16?page=2</a></p>
 <!-- /wp:paragraph -->
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 木 11 4月 2024. 
-		Tags: 
-		<a href="/tag/za-tan.html">杂谈</a> 
+				Tags: 
+				<a href="/tag/za-tan.html">杂谈</a> 
 </h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -198,6 +141,21 @@ on 木 11 4月 2024.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

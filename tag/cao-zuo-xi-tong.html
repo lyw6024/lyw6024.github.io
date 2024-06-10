@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,57 +82,56 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>Posts Tagged With '操作系统'</h2>
-								</div>
-							</div>
 
-<article>
-	<h3><a href="/p2052.html">利用内存映射文件实现进程间图片轮播</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
+<!-- Main Content -->
+<div class="medium-9 small-12 columns" role="content">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Posts Tagged With '操作系统'</h2>
+		</div>
+	</div>
+	<article>
+		<h3><a href="/p2052.html">利用内存映射文件实现进程间图片轮播</a></h3>
+		<h6>Written by <a href="/author/malic.html">malic</a> 
 in <a href="/category/all.html">All</a> 
 on 土 18 7月 2020. 
-		Tags: 		<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
-		<a href="/tag/windowscao-zuo.html">Windows操作</a> &nbsp;
+			Tags: 			<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
+			<a href="/tag/windowscao-zuo.html">Windows操作</a> &nbsp;
 </h6>
-	<p class="first last">...</p>
+		<p class="first last">...</p>
 
-		<p class="continue"><a href="/p2052.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="/p2011.html">OS/Linux相关面试常见题目</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
+			<p class="continue"><a href="/p2052.html">Continue reading &raquo;</a></p>
+	</article>
+	<hr />
+	<article>
+		<h3><a href="/p2011.html">OS/Linux相关面试常见题目</a></h3>
+		<h6>Written by <a href="/author/malic.html">malic</a> 
 in <a href="/category/all.html">All</a> 
 on 土 18 7月 2020. 
-		Tags: 		<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
-		<a href="/tag/linux.html">Linux</a> &nbsp;
-		<a href="/tag/qiu-zhi.html">求职</a> &nbsp;
+			Tags: 			<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
+			<a href="/tag/linux.html">Linux</a> &nbsp;
+			<a href="/tag/qiu-zhi.html">求职</a> &nbsp;
 </h6>
-	<p class="first last">...</p>
+		<p class="first last">...</p>
 
-		<p class="continue"><a href="/p2011.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-<article>
-	<h3><a href="/p1793.html">进程与线程(1)：基本问题、进程控制、进程通信</a></h3>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
+			<p class="continue"><a href="/p2011.html">Continue reading &raquo;</a></p>
+	</article>
+	<hr />
+	<article>
+		<h3><a href="/p1793.html">进程与线程(1)：基本问题、进程控制、进程通信</a></h3>
+		<h6>Written by <a href="/author/malic.html">malic</a> 
 in <a href="/category/all.html">All</a> 
 on 月 15 6月 2020. 
-		Tags: 		<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
+			Tags: 			<a href="/tag/cao-zuo-xi-tong.html">操作系统</a> &nbsp;
 </h6>
-	<p class="first last">...</p>
+		<p class="first last">...</p>
 
-		<p class="continue"><a href="/p1793.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
+			<p class="continue"><a href="/p1793.html">Continue reading &raquo;</a></p>
+	</article>
+	<hr />
 
-
-						</div>
-						<!-- End Main Content -->
+	</div>
+<!-- End Main Content -->
 <!-- Sidebar -->
 <aside class="medium-3 hide-for-small-only columns">
     <div class="panel">
@@ -210,6 +195,21 @@ on 月 15 6月 2020.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>

@@ -18,20 +18,6 @@
 		<!-- Feeds -->
 
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
 		<script type="text/javascript" src="/theme/js/jquery.js"></script>
 	</head>
 	<body>
@@ -96,11 +82,12 @@
 				<!-- Main Page Content and Sidebar -->
 				<section class="main-section">
 					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-<article>
-	<h2>王勉《我爱的女孩》（脱口秀大会第3季）简析</h2>
-	<!-- wp:paragraph -->
+	<!-- Main Content -->
+	<div class="medium-12 small-12 columns" role="content">
+							
+		<article>
+			<h2>王勉《我爱的女孩》（脱口秀大会第3季）简析</h2>
+			<!-- wp:paragraph -->
 <p>王勉的脱口秀经常把音乐融入到作品当中，不过对他的作品看得不多，他第2季的演出视频只看过1次。单说这次演出，按照这个台词以唱的形式是比较合适的，假设如果照这个词进行“诗歌朗诵”，虽然语气、停顿等也可以与歌唱类似地做控制，但对于脱口秀来说读诗歌的方式很难带动观众的情绪，而如果把这个台本做成相近意思但普通自然连贯的语言，又很难将歌词中这个“独白”角色加入到表演当中，而导致语义转折上打折扣，有几个包袱抖不起来。</p>
 <!-- /wp:paragraph -->
 <p><iframe style="width: 100%; height: 500px; max-width: 100%；align:center; padding:20px 0;" src="//player.bilibili.com/player.html?aid=414042015&amp;bvid=BV1gV411z7VC&amp;cid=218082050&amp;page=1" frameborder="no" scrolling="no" allowfullscreen="allowfullscreen"> </iframe></p>
@@ -125,63 +112,19 @@
 <!-- wp:paragraph -->
 <p>除了王勉的这次表演，本季其它的作品也有很多非常有现实意义的，像Rock吐槽Bilibili的低素质弹幕，张博洋吐槽演员抄网络段子来当自己的作品等等。不像第2季的指定话题的形式，演员可以通过自己的观察来描述一件自己相对熟悉的事情，演出会内容更加地贴近大家的生活，受到大家的欢迎。</p>
 <!-- /wp:paragraph -->
-	<hr/>
-	<h6>Written by <a href="/author/malic.html">malic</a> 
-		in <a href="/category/all.html">All</a> 
+			<hr/>
+			<h6>Written by <a href="/author/malic.html">malic</a> 
+				in <a href="/category/all.html">All</a> 
 on 水 05 8月 2020. 
-		Tags: 
-		<a href="/tag/shu-dong.html">树洞</a> 
+				Tags: 
+				<a href="/tag/shu-dong.html">树洞</a> 
 </h6>
-</article>
+		</article>
 
-<hr/>
-						</div>
-						<!-- End Main Content -->
-<!-- Sidebar -->
-<aside class="medium-3 hide-for-small-only columns">
-    <div class="panel">
-        <h5>Links</h5>
-        <ul class="side-nav">
-            <li><a href="https://getpelican.com/">Pelican</a></li>
-            <li><a href="https://www.python.org/">Python.org</a></li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>联系我</h5>
-
-        <ul class="side-nav">
-            <li>Email:<a href="mailto:rabdxyz@gmail.com">rabdxyz@gmail.com</a></li>
-            <li>QQ:602451067</li>
-            <li>Wechat:lyw7241</li>
-        </ul>
-    </div>
-
-    <div class="panel">
-        <h5>#</h5>
-        <div class="panel-body">
-        <p>如果我有一千万，<br>我就可以买一栋房子。<br>我有一千万吗？<br>没有，所以我并没有房子。</p>
-        <p>如果我有一双翅膀，<br>我就能飞。<br>我有翅膀吗？<br>没有，所以我并不能飞。</p>
-        <p>如果把太平洋的水全部倒出，<br>也浇不灭我对你爱的火花。<br>太平洋的水能全部倒出吗？<br>不能，所以我并不爱你。</p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <h5>Tags</h5>
-        <ul class="tag-cloud">
-        </ul>
-    </div>
-
-
-    <div class="panel">
-        <h5>Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">Another social link</a></li>
-            <li><a href="#">You can add links in your config file</a></li>
-        </ul>
-    </div>
-</aside>
-<!-- End Sidebar -->					</div>
+		<hr/>
+</div>
+<!-- End Main Content -->
+					</div>
 
 					<!-- Footer -->
 					<footer class="row">
@@ -200,6 +143,21 @@ on 水 05 8月 2020.
 		<script src="/theme/js/vendor/what-input.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'],['\(','\)'] ],
+				displayMath: [ ['$$', '$$'], ['\[','\]']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
 		</script>
 	</body>
 </html>
