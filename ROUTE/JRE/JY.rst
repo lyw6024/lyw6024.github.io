@@ -6,7 +6,7 @@
     <table class="mw-collapsible mw-made-collapsible" style="padding:0; font-size:90% !important;margin:.5em 0 1em 35px !important;clear:right;position:relative;background-color:#f9f9f9;border:solid 1px #808080" cellpadding="0" cellspacing="0">
 
     <tbody><tr>
-    <th style="padding:.2em; text-align:center; vertical-align:center; color:white; background-color: #9acd32"><button type="button" class="mw-collapsible-toggle mw-collapsible-toggle-default mw-collapsible-toggle-expanded" aria-expanded="true" tabindex="0"><span class="mw-collapsible-text">隠す</span></button><span style="font-size:110%; padding:0 5px;">停車場・施設・接続路線</span>
+    <th style="padding:.2em; text-align:center; vertical-align:center; color:white; background-color: #9acd32"><span style="font-size:110%; padding:0 5px;">停車場・施設・接続路線</span>
     </th></tr>
     <tr>
     <td style="padding:0 .5em">
@@ -214,7 +214,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td style="padding:0;" colspan="2"><span style="font-size:80%;"><a href="JR-JOJS.html">横須賀線</a></span>
+    <td style="padding:0;" colspan="2"><span style="font-size:80%;">横須賀線</span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">
@@ -662,7 +662,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td style="padding:0;" colspan="2"><span style="font-size:80%;"><a href="JR-JOJS.html">品鶴線（横須賀線）</a></span>
+    <td style="padding:0;" colspan="2"><span style="font-size:80%;">品鶴線（横須賀線）</span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">
@@ -3342,7 +3342,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td style="padding:0;" colspan="2"><span style="font-size:80%;"><a href="JR-JOJS.html">横須賀線</a></span>
+    <td style="padding:0;" colspan="2"><span style="font-size:80%;">横須賀線</span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">
@@ -3935,7 +3935,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td colspan="2"><span style="font-size:80%;">3:東海道線　4:<a href="JR-JOJS.html">横須賀線</a></span>
+    <td colspan="2"><span style="font-size:80%;">3:東海道線　4:横須賀線</span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">

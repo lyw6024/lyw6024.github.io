@@ -1,0 +1,1040 @@
+東京さくらトラム（都電荒川線）
+===================================================
+
+.. raw:: html
+
+    <table class="mw-collapsible mw-made-collapsible" style="width:{{{width}}}; padding:0; font-size:90% !important;margin:.5em 0 1em 35px !important;clear:right;position:relative;background-color:#f9f9f9;border:solid 1px #808080" cellpadding="0" cellspacing="0">
+
+    <tbody><tr>
+    <th style="padding:.2em; text-align:center; vertical-align:center; color:white; background-color: #ee86a7"><span style="font-size:110%; padding:0 5px;">停留場・施設・接続路線</span>
+    </th></tr>
+    <tr>
+    <td style="padding:0 .5em">
+    <p>数字は都電の系統番号
+    </p>
+    </td></tr>
+    <tr>
+    <td><div style="text-align:right; font-size:90%; padding-right:.5em">凡例</div>
+    </td></tr>
+    <tr>
+    <td style="text-align:center;">
+    <table cellpadding="0" cellspacing="0" style="background-color: ; line-height: 1.2em; border: none; width: auto; text-align: left; margin:.5em;">
+
+    <tbody><tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東京地下鉄：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_of_Tokyo_Metro_Hibiya_Line.svg/20px-Logo_of_Tokyo_Metro_Hibiya_Line.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_of_Tokyo_Metro_Hibiya_Line.svg/40px-Logo_of_Tokyo_Metro_Hibiya_Line.svg.png 2x" data-file-width="400" data-file-height="400"></span> 日比谷線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/20px-BSicon_tSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/40px-BSicon_tSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/20px-BSicon_tBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/40px-BSicon_tBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/20px-BSicon_tSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/40px-BSicon_tSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">三ノ輪駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexBHFq + HUB"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/e/e9/BSicon_HUB.svg/20px-BSicon_HUB.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/e/e9/BSicon_HUB.svg/40px-BSicon_HUB.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexBHFq + HUB"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uexBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/44/BSicon_uexBHFq.svg/20px-BSicon_uexBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/44/BSicon_uexBHFq.svg/40px-BSicon_uexBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">←<i>21／21・31</i>→</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uKBHFa + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/20px-BSicon_HUBe.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/40px-BSicon_HUBe.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uKBHFa + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uKBHFa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1f/BSicon_uKBHFa.svg/20px-BSicon_uKBHFa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1f/BSicon_uKBHFa.svg/40px-BSicon_uKBHFa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">0.0
+    </td>
+    <td colspan="2">SA 01 三ノ輪橋停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">0.3
+    </td>
+    <td colspan="2">SA 02 荒川一中前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">0.6
+    </td>
+    <td colspan="2">SA 03 荒川区役所前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">1.0
+    </td>
+    <td colspan="2">SA 04 荒川二丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">1.4
+    </td>
+    <td colspan="2">SA 05 荒川七丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">京成：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Number_prefix_Keisei.svg/20px-Number_prefix_Keisei.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Number_prefix_Keisei.svg/40px-Number_prefix_Keisei.svg.png 2x" data-file-width="512" data-file-height="512"></span> 本線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/20px-BSicon_STRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/40px-BSicon_STRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZu" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/20px-BSicon_umKRZu.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/40px-BSicon_umKRZu.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="BHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/0c/BSicon_BHFq.svg/20px-BSicon_BHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/0c/BSicon_BHFq.svg/40px-BSicon_BHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">町屋駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/20px-BSicon_HUBaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/40px-BSicon_HUBaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBtr"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/BSicon_HUBtr.svg/20px-BSicon_HUBtr.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/BSicon_HUBtr.svg/40px-BSicon_HUBtr.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBtr"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">1.8
+    </td>
+    <td colspan="2">SA 06 町屋駅前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/20px-BSicon_tSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/40px-BSicon_tSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/20px-BSicon_umKRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/40px-BSicon_umKRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/20px-BSicon_HUBe.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/40px-BSicon_HUBe.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/20px-BSicon_tBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/40px-BSicon_tBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東京地下鉄：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/2/24/Logo_of_Tokyo_Metro_Chiyoda_Line.svg/20px-Logo_of_Tokyo_Metro_Chiyoda_Line.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/24/Logo_of_Tokyo_Metro_Chiyoda_Line.svg/40px-Logo_of_Tokyo_Metro_Chiyoda_Line.svg.png 2x" data-file-width="400" data-file-height="400"></span> 千代田線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">2.2
+    </td>
+    <td colspan="2">SA 07 町屋二丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">2.5
+    </td>
+    <td colspan="2">SA 08 東尾久三丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"><span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Nippori-Toneri_Liner_symbol.svg/20px-Nippori-Toneri_Liner_symbol.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Nippori-Toneri_Liner_symbol.svg/40px-Nippori-Toneri_Liner_symbol.svg.png 2x" data-file-width="170" data-file-height="171"></span> 日暮里・舎人ライナー</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/59/BSicon_uSTRq.svg/20px-BSicon_uSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/59/BSicon_uSTRq.svg/40px-BSicon_uSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uKRZu" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/47/BSicon_uKRZu.svg/20px-BSicon_uKRZu.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/47/BSicon_uKRZu.svg/40px-BSicon_uKRZu.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f1/BSicon_uBHFq.svg/20px-BSicon_uBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f1/BSicon_uBHFq.svg/40px-BSicon_uBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">熊野前駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/20px-BSicon_HUBaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/40px-BSicon_HUBaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBrf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/BSicon_HUBrf.svg/20px-BSicon_HUBrf.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/BSicon_HUBrf.svg/40px-BSicon_HUBrf.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBrf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">3.1
+    </td>
+    <td colspan="2">SA 09 熊野前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">3.5
+    </td>
+    <td colspan="2">SA 10 宮ノ前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">3.8
+    </td>
+    <td colspan="2">SA 11 小台停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">4.1
+    </td>
+    <td colspan="2">SA 12 荒川遊園地前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">4.6
+    </td>
+    <td colspan="2">SA 13 荒川車庫前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uKDSTaq" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/54/BSicon_uKDSTaq.svg/20px-BSicon_uKDSTaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/54/BSicon_uKDSTaq.svg/40px-BSicon_uKDSTaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uABZgr+r" src="//upload.wikimedia.org/wikipedia/commons/thumb/e/e3/BSicon_uABZgr%2Br.svg/20px-BSicon_uABZgr%2Br.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/e/e3/BSicon_uABZgr%2Br.svg/40px-BSicon_uABZgr%2Br.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2">荒川電車営業所 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">5.0
+    </td>
+    <td colspan="2">SA 14 梶原停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">5.5
+    </td>
+    <td colspan="2">SA 15 栄町停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTR+l" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f1/BSicon_hSTR%2Bl.svg/20px-BSicon_hSTR%2Bl.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f1/BSicon_hSTR%2Bl.svg/40px-BSicon_hSTR%2Bl.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/BSicon_hSTRq.svg/20px-BSicon_hSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/BSicon_hSTRq.svg/40px-BSicon_hSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">JR東：<span typeof="mw:File"><img alt="東北新幹線" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Shinkansen_jre.svg/20px-Shinkansen_jre.svg.png" decoding="async" width="13" height="12" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Shinkansen_jre.svg/40px-Shinkansen_jre.svg.png 2x" data-file-width="512" data-file-height="489"></span> 東北新幹線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/20px-BSicon_hSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/40px-BSicon_hSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STR+l" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/5b/BSicon_STR%2Bl.svg/20px-BSicon_STR%2Bl.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/5b/BSicon_STR%2Bl.svg/40px-BSicon_STR%2Bl.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">JR東：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/1/16/JR_JK_line_symbol.svg/20px-JR_JK_line_symbol.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/16/JR_JK_line_symbol.svg/40px-JR_JK_line_symbol.svg.png 2x" data-file-width="170" data-file-height="170"></span> 京浜東北線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/20px-BSicon_hSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/40px-BSicon_hSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STR" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/20px-BSicon_STR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/40px-BSicon_STR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">王子駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBrg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/aa/BSicon_HUBrg.svg/20px-BSicon_HUBrg.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/aa/BSicon_HUBrg.svg/40px-BSicon_HUBrg.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBrg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/20px-BSicon_HUBq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/40px-BSicon_HUBq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="hSTR + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/20px-BSicon_HUBq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/40px-BSicon_HUBq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="hSTR + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="hSTR"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/20px-BSicon_hSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/40px-BSicon_hSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="BHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/76/BSicon_BHF.svg/20px-BSicon_BHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/76/BSicon_BHF.svg/40px-BSicon_BHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">6.0
+    </td>
+    <td colspan="2">SA 16 王子駅前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/20px-BSicon_HUBe.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/BSicon_HUBe.svg/40px-BSicon_HUBe.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBe"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/20px-BSicon_tBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/40px-BSicon_tBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/20px-BSicon_umKRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/40px-BSicon_umKRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hKRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b8/BSicon_hKRZt.svg/20px-BSicon_hKRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b8/BSicon_hKRZt.svg/40px-BSicon_hKRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="KRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/04/BSicon_KRZt.svg/20px-BSicon_KRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/04/BSicon_KRZt.svg/40px-BSicon_KRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東京地下鉄：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Logo_of_Tokyo_Metro_Namboku_Line.svg/20px-Logo_of_Tokyo_Metro_Namboku_Line.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Logo_of_Tokyo_Metro_Namboku_Line.svg/40px-Logo_of_Tokyo_Metro_Namboku_Line.svg.png 2x" data-file-width="400" data-file-height="400"></span> 南北線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="ueABZgr" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/BSicon_ueABZgr.svg/20px-BSicon_ueABZgr.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/BSicon_ueABZgr.svg/40px-BSicon_ueABZgr.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/20px-BSicon_hSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/1b/BSicon_hSTR.svg/40px-BSicon_hSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STR" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/20px-BSicon_STR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/40px-BSicon_STR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">←<i>27（赤羽線）</i></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/BSicon_hSTRq.svg/20px-BSicon_hSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/BSicon_hSTRq.svg/40px-BSicon_hSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZh" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7b/BSicon_umKRZh.svg/20px-BSicon_umKRZh.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/7b/BSicon_umKRZh.svg/40px-BSicon_umKRZh.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="hSTRr" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_hSTRr.svg/20px-BSicon_hSTRr.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_hSTRr.svg/40px-BSicon_hSTRr.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STR" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/20px-BSicon_STR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/BSicon_STR.svg/40px-BSicon_STR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/20px-BSicon_STRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/40px-BSicon_STRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZu" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/20px-BSicon_umKRZu.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/40px-BSicon_umKRZu.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/20px-BSicon_STRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/40px-BSicon_STRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STRr" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/62/BSicon_STRr.svg/20px-BSicon_STRr.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/62/BSicon_STRr.svg/40px-BSicon_STRr.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="ueABZgl" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_ueABZgl.svg/20px-BSicon_ueABZgl.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_ueABZgl.svg/40px-BSicon_ueABZgl.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTR+r" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/02/BSicon_uexSTR%2Br.svg/20px-BSicon_uexSTR%2Br.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/02/BSicon_uexSTR%2Br.svg/40px-BSicon_uexSTR%2Br.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/20px-BSicon_HUBaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/40px-BSicon_HUBaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexBHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexBHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uexBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/BSicon_uexBHF.svg/20px-BSicon_uexBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/BSicon_uexBHF.svg/40px-BSicon_uexBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">6.5
+    </td>
+    <td colspan="2">SA 17 飛鳥山停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRl" src="//upload.wikimedia.org/wikipedia/commons/thumb/e/e8/BSicon_uexSTRl.svg/20px-BSicon_uexSTRl.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/e/e8/BSicon_uexSTRl.svg/40px-BSicon_uexSTRl.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"><i>19</i>→</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">6.9
+    </td>
+    <td colspan="2">SA 18 滝野川一丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">7.3
+    </td>
+    <td colspan="2">SA 19 西ヶ原四丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"><span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Toei_Mita_line_symbol.svg/20px-Toei_Mita_line_symbol.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Toei_Mita_line_symbol.svg/40px-Toei_Mita_line_symbol.svg.png 2x" data-file-width="400" data-file-height="400"></span> 三田線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/20px-BSicon_tBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/40px-BSicon_tBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/20px-BSicon_umKRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/40px-BSicon_umKRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/20px-BSicon_tSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/40px-BSicon_tSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">西巣鴨駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/20px-BSicon_HUBlf.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/40px-BSicon_HUBlf.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/BSicon_uTBHFx.svg/20px-BSicon_uTBHFx.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/BSicon_uTBHFx.svg/40px-BSicon_uTBHFx.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">7.7
+    </td>
+    <td colspan="2">SA 20 新庚申塚停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">←<i>18・41</i>→</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">7.9
+    </td>
+    <td colspan="2">SA 21 庚申塚停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">8.4
+    </td>
+    <td colspan="2">SA 22 巣鴨新田停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">JR東：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/0/04/JR_JY_line_symbol.svg/20px-JR_JY_line_symbol.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/04/JR_JY_line_symbol.svg/40px-JR_JY_line_symbol.svg.png 2x" data-file-width="170" data-file-height="170"></span> 山手線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="BHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="BHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/0c/BSicon_BHFq.svg/20px-BSicon_BHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/0c/BSicon_BHFq.svg/40px-BSicon_BHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZu" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/20px-BSicon_umKRZu.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/4e/BSicon_umKRZu.svg/40px-BSicon_umKRZu.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="STRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/20px-BSicon_STRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_STRq.svg/40px-BSicon_STRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">大塚駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/20px-BSicon_HUBlf.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/40px-BSicon_HUBlf.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="leer + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/20px-BSicon_HUBq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_HUBq.svg/40px-BSicon_HUBq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexKBHFaq + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexKBHFaq + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uexKBHFaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_uexKBHFaq.svg/20px-BSicon_uexKBHFaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/36/BSicon_uexKBHFaq.svg/40px-BSicon_uexKBHFaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">8.9
+    </td>
+    <td colspan="2">SA 23 大塚駅前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"><i>16</i>→</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">9.4
+    </td>
+    <td colspan="2">SA 24 向原停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東京地下鉄：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Logo_of_Tokyo_Metro_Y%C5%ABrakuch%C5%8D_Line.svg/20px-Logo_of_Tokyo_Metro_Y%C5%ABrakuch%C5%8D_Line.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Logo_of_Tokyo_Metro_Y%C5%ABrakuch%C5%8D_Line.svg/40px-Logo_of_Tokyo_Metro_Y%C5%ABrakuch%C5%8D_Line.svg.png 2x" data-file-width="400" data-file-height="400"></span> 有楽町線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/20px-BSicon_HUBa.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BSicon_HUBa.svg/40px-BSicon_HUBa.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHFq + HUBa"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHFq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/20px-BSicon_tBHFq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/68/BSicon_tBHFq.svg/40px-BSicon_tBHFq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="umKRZt" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/20px-BSicon_umKRZt.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/2b/BSicon_umKRZt.svg/40px-BSicon_umKRZt.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/20px-BSicon_tSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_tSTRq.svg/40px-BSicon_tSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東池袋駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/20px-BSicon_HUBlf.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/71/BSicon_HUBlf.svg/40px-BSicon_HUBlf.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq + HUBlf"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uexSTRq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uTBHFx"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/BSicon_uTBHFx.svg/20px-BSicon_uTBHFx.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/BSicon_uTBHFx.svg/40px-BSicon_uTBHFx.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">10.0
+    </td>
+    <td colspan="2">SA 25 東池袋四丁目停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">←<i>17</i>→</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">10.2
+    </td>
+    <td colspan="2">SA 26 都電雑司ヶ谷停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTR+r" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/55/BSicon_tSTR%2Br.svg/20px-BSicon_tSTR%2Br.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/55/BSicon_tSTR%2Br.svg/40px-BSicon_tSTR%2Br.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">東京地下鉄：<span typeof="mw:File"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Logo_of_Tokyo_Metro_Fukutoshin_Line.svg/20px-Logo_of_Tokyo_Metro_Fukutoshin_Line.svg.png" decoding="async" width="13" height="13" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Logo_of_Tokyo_Metro_Fukutoshin_Line.svg/40px-Logo_of_Tokyo_Metro_Fukutoshin_Line.svg.png 2x" data-file-width="400" data-file-height="400"></span> 副都心線</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/20px-BSicon_HUBaq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/BSicon_HUBaq.svg/40px-BSicon_HUBaq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="tBHF + HUBaq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="tBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/27/BSicon_tBHF.svg/20px-BSicon_tBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/27/BSicon_tBHF.svg/40px-BSicon_tBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td><div style="position: relative; width: x20px;">
+    <div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/20px-BSicon_HUBeq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BSicon_HUBeq.svg/40px-BSicon_HUBeq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><div style="position: absolute; left: 0px; top: 0px; padding: 0;"><span class="mw-default-size" typeof="mw:File"><span title="uBHF + HUBeq"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/20px-BSicon_.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/BSicon_.svg/40px-BSicon_.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div><span class="mw-default-size" typeof="mw:File"><span title="uBHF"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span></span></div>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">10.7
+    </td>
+    <td colspan="2">SA 27 鬼子母神前停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/56/BSicon_tSTR.svg/20px-BSicon_tSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/56/BSicon_tSTR.svg/40px-BSicon_tSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">雑司が谷駅</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="tSTRr" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/70/BSicon_tSTRr.svg/20px-BSicon_tSTRr.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/70/BSicon_tSTRr.svg/40px-BSicon_tSTRr.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/20px-BSicon_uSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BSicon_uSTR.svg/40px-BSicon_uSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">11.2
+    </td>
+    <td colspan="2">SA 28 学習院下停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uhKRZWae" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f7/BSicon_uhKRZWae.svg/20px-BSicon_uhKRZWae.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f7/BSicon_uhKRZWae.svg/40px-BSicon_uhKRZWae.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">神田川</span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;background-color:transparent;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTRq" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/20px-BSicon_uexSTRq.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BSicon_uexSTRq.svg/40px-BSicon_uexSTRq.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="ueABZg+r" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/BSicon_ueABZg%2Br.svg/20px-BSicon_ueABZg%2Br.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/BSicon_ueABZg%2Br.svg/40px-BSicon_ueABZg%2Br.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">←<i>15</i></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uBHF" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/20px-BSicon_uBHF.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BSicon_uBHF.svg/40px-BSicon_uBHF.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">11.7
+    </td>
+    <td colspan="2">SA 29 面影橋停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uKBHFxe" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BSicon_uKBHFxe.svg/20px-BSicon_uKBHFxe.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BSicon_uKBHFxe.svg/40px-BSicon_uKBHFxe.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">12.2
+    </td>
+    <td colspan="2">SA 30 早稲田停留場 <span style="font-size:80%;"></span>
+    </td></tr>
+    <tr>
+    <td style="padding:0;white-space:nowrap;text-align: center;">
+    <table cellspacing="0" cellpadding="0" style="padding:0;margin:0 auto !important;width:fit-content !important;">
+
+    <tbody><tr>
+    <td><span class="mw-default-size" typeof="mw:File"><img alt="uexSTR" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/6e/BSicon_uexSTR.svg/20px-BSicon_uexSTR.svg.png" decoding="async" width="20" height="20" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/6e/BSicon_uexSTR.svg/40px-BSicon_uexSTR.svg.png 1.5x" data-file-width="500" data-file-height="500"></span>
+    </td>
+    <td style="width:20px; min-width:20px;">
+    </td></tr></tbody></table>
+    </td>
+    <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
+    </td>
+    <td colspan="2"><span style="font-size:80%;">↓<i>15・39</i></span>
+    </td></tr></tbody></table>
+    </td></tr>
+
+
+
+    </tbody></table>
+
+.. END

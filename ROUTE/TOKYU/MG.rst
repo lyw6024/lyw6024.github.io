@@ -5,7 +5,7 @@
 
     <table class="mw-collapsible collapsed mw-made-collapsible" cellspacing="0" cellpadding="0" style="clear:right;margin-top:0;margin-bottom:1em;margin-left:1em;empty-cells:show;border-collapse:collapse;font-size:95%;background:#F9F9F9;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2); -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2); -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);">
     <tbody><tr>
-    <th style="color:#fff;background:#009cd2;text-align:center;padding:5px"><button type="button" class="mw-collapsible-toggle mw-collapsible-toggle-default" aria-expanded="true" tabindex="0"><span class="mw-collapsible-text">隠す</span></button><div><div style="white-space:nowrap;margin-right:55px;margin-left:55px;font-size:90%;">停車場・施設・接続路線</div></div>
+    <th style="color:#fff;background:#009cd2;text-align:center;padding:5px"><div><div style="white-space:nowrap;margin-right:55px;margin-left:55px;font-size:90%;">停車場・施設・接続路線</div></div>
     </th></tr>
     <tr>
     <td style="line-height:normal;padding:4px 5px"><div class="selfreference noprint" style="text-align:right;font-size:90%;">凡例</div>

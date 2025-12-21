@@ -6,7 +6,7 @@
     <table class="mw-collapsible mw-made-collapsible" style="padding:0; font-size:90% !important;margin:.5em 0 1em 35px !important;clear:right;position:relative;background-color:#f9f9f9;border:solid 1px #808080" cellpadding="0" cellspacing="0">
 
     <tbody><tr>
-    <th style="padding:.2em; text-align:center; vertical-align:center; color:white; background-color: #00ac9a"><button type="button" class="mw-collapsible-toggle mw-collapsible-toggle-default" aria-expanded="true" tabindex="0"><span class="mw-collapsible-text">隠す</span></button><span style="font-size:110%; padding:0 5px;">停車場・施設・接続路線</span>
+    <th style="padding:.2em; text-align:center; vertical-align:center; color:white; background-color: #00ac9a"><span style="font-size:110%; padding:0 5px;">停車場・施設・接続路線</span>
     </th></tr>
 
 
@@ -490,7 +490,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td colspan="2"><span style="font-size:80%;"><a href="JC.html">JR東：中央急行線（快速線）</a></span>
+    <td colspan="2"><span style="font-size:80%;">JR東：中央急行線（快速線）</span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">
