@@ -490,7 +490,7 @@
     </td>
     <td style="text-align:right;vertical-align:middle;padding:0 .5em;font-size:80%;">
     </td>
-    <td colspan="2"><span style="font-size:80%;">JR東：中央急行線（快速線）</span>
+    <td colspan="2"><span style="font-size:80%;"><a href="JC.html">JR東：中央急行線（快速線）</a></span>
     </td></tr>
     <tr>
     <td style="padding:0;white-space:nowrap;text-align:center;line-height:1.2">
