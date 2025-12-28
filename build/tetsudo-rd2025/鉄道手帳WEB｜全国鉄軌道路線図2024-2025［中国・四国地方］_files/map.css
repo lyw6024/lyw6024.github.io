@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+* {
+    box-sizing:border-box;
+}
+
+* a.nolink {
+    pointer-events: none;
+}
+
+#maparea {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.leaflet-touch .leaflet-bar a {
+    width:50px;
+    height:50px;
+    line-height:50px;
+    font-size:2em;
+}
+
+.leaflet-touch .leaflet-control-zoom-in,
+.leaflet-touch .leaflet-control-zoom-out {
+    font-size:35px!important;
+}
+
+input#mapbtn {
+    display:none;
+}
+
+label#maplabel {
+    display:block;
+    width:11vh;
+    height:11vh;
+    border-radius:3px;
+    border:2px solid #333;
+    position:fixed;
+    top:10px;
+    right:10px;
+    cursor:pointer;
+    z-index:9999;
+}
+
+label#maplabel img {
+    width:100%;
+    height:auto;
+}
+
+label#maplabel:hover {
+    border:3px solid #fff;
+}
+
+#maplink {
+    position:fixed;
+    top:calc(11.6vh + 10px);
+    right:-100vw;
+    z-index:9999;
+    max-height:50vh;
+    width:11vh;
+    padding:0;
+    margin:0;
+    transition:0.5s;
+}
+
+#maplink li {
+    list-style-type:none;
+    margin-bottom:0.6vh;
+}
+
+#maplink li a {
+    display:block;
+    background-color:#175373;
+    border-radius:3px;
+    border:1px solid #000;
+}
+
+#maplink li.sub_region a {
+    background-color:#8899ad;
+}
+
+#maplink li.hokkaido a.nolink,
+#maplink li.hokkaido a:hover {
+    background-color:#7ac8f3;
+}
+#maplink li.tohoku a.nolink,
+#maplink li.tohoku a:hover {
+    background-color:#8183c5;
+}
+#maplink li.kantokoshinetsu a.nolink,
+#maplink li.kantokoshinetsu a:hover {
+    background-color:#ec7aab;
+}
+#maplink li.kinkichubu a.nolink,
+#maplink li.kinkichubu a:hover {
+    background-color:#fad181;
+}
+#maplink li.chugokushikoku a.nolink,
+#maplink li.chugokushikoku a:hover {
+    background-color:#d3e179;
+}
+#maplink li.kyushu a.nolink,
+#maplink li.kyushu a:hover {
+    background-color:#92c897;
+}
+
+#maplink li a.nolink,
+#maplink li a:hover {
+    border:2px solid #000;
+}
+
+#maplink li img {
+    display:block;
+    width:100%;
+}
+
+input#mapbtn:checked~#maplink {
+    right:10px;
+}
+
+/*レスポンシブ用設定*/
+@media screen and (max-width:767px) {
+    img {
+        max-width:100%;
+    }
+}
